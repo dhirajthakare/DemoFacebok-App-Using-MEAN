@@ -1,0 +1,36 @@
+<div *ngIf="request">
+    <div *ngIf="request.user_Friends != '' "  class="">
+
+        <div class="row">
+            <div  *ngFor="let item of request.user_Friends" class="col-md-3 card" >
+                <div>
+                    <div  [routerLink]="'/profile/'+item.user_id.userToken" style="height: 220px;" class="col-md-12">
+                        <img class="col-md-12" style="object-fit: contain;height: 220px;" [src]="item.user_id.profileUrl ? 'http://localhost:2000'+item.user_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                    </div>
+                    <hr>
+                    <div  [routerLink]="'/profile/'+item.user_id.userToken" class="col-md-12">
+                        <h4 class="text-center">{{item.user_id.name}}</h4>
+                        <!-- <p class="text-center">2 mutuar friend</p> -->
+                    </div>
+                    <div class="col-md-12 mb-2">
+                       <button class="btn btn-primary col-md-10 offset-md-1" (click)="acceptRequest(item.user_id._id)">Confirm</button>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                         <button style="background-color: rgb(231, 223, 223);" class="btn btn-muted col-md-10 offset-md-1" (click)="rejectRequest(item.user_id._id)">Delete</button>
+                     </div>
+                </div>
+            </div>
+           
+    
+        </div>
+        
+    
+    </div>
+    <div *ngIf="request.user_Friends == '' " >
+
+            <img style="height: 510px;width: 100%;" src="http://localhost:2000/assets/images/null_states_people_gray_wash.svg" alt="">
+            <p class="text-center">You Dont Have Requests</p>
+    </div>
+</div>
+
+

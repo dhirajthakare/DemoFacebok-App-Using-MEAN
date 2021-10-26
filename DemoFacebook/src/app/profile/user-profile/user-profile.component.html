@@ -1,0 +1,93 @@
+
+<div *ngIf="prealoader" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+<div>
+    <div>
+      
+      <div *ngIf="data && currentUser && friendsId">
+        <div  *ngIf="data._id != currentUser._id && !friendsId.includes(currentUser._id) " class="row">
+            <div class=" col-md-12 mt-3 py-2">
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <div class=" float-start">
+                                    <h3>Do you know him/her?</h3>
+                                    <p>To see what he shares with friends, send him a friend request.</p>
+                         
+                                </div>
+                                <div style="margin-top: 2%;">
+                                    <li *ngIf="data._id != currentUser._id" (click)="sendRequest(data._id,currentUser._id)" class="mx-1 pe-4  btn-primary float-end btn list-inline-item"> <i class="btn text-light" [class]=" friendsId.includes(currentUser._id) ? 'fa fa-user':'fa fa-user-plus'" aria-hidden="true"></i> {{friendsId.includes(currentUser._id) ? ' Friend ':' Add Friend '}}</li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               </div>
+          </div>
+      </div>
+    
+    </div>
+    <div class="row">
+        <div class="col-md-5  py-2">
+            <app-profile-intro></app-profile-intro>
+                
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <div>
+                            <h4 class="float-start">Photos</h4>
+                        <a routerLink="photos" class=" float-end"> See All Photos</a><br><br>
+                        </div>
+                       <div class="row">
+                                <div class="col-md-4 mt-2" *ngFor="let item of AllCurrentUserPost" >
+                                    <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.postUrl ? 'http://localhost:2000'+item.postUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+    
+                                </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <div>
+                            <h4 class="float-start">Friends</h4>
+                        <a routerLink="friends" class=" float-end"> See All Friends</a><br><br>
+                        </div>
+                       <div *ngIf="userFriends" class="row">
+                           <div *ngFor="let item of userFriends"  class="col-md-4 mt-2">
+                            <a style="text-decoration: none;color: black;" [href]="'/profile/'+item.friend_id.userToken" class="col-md-12">
+                                <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt=""><br>
+                                <p>{{item.friend_id.name}}</p>
+                            </a>
+                           </div>
+                           
+    
+                        </div>
+                        
+                    </div>
+                </div>
+        </div>
+    
+        <div class="col-md-7   py-2">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class=" float-start">Posts</h4>
+                        <p class=" float-end"><i class="fa fa-filter" aria-hidden="true"></i> Filter</p>
+                    </div>
+                </div>
+            </div>
+           <div *ngIf="data && currentUser">
+            <app-createpost *ngIf="data._id==currentUser._id"></app-createpost>
+           </div>
+            <app-post></app-post>
+        </div>
+        
+       
+    </div>
+   
+</div>
+

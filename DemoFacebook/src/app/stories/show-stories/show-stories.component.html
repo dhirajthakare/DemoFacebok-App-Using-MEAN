@@ -1,0 +1,24 @@
+        <div *ngIf="data._id == loginUserId"  style="cursor: pointer;"  routerLink="/stories/create" class=" card col-3 ">
+        <a class=""><img style=" object-fit: contain; "
+            height="200" width="100%" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" ></a>
+        <div class="card-footer">
+            <p class=" text-primary text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>
+           <p class="text-center"> create Story</p>
+        </div>
+    </div>
+   
+    <div *ngFor="let item of userstory" class=" card col-3">
+        <a class="" [href]="'http://localhost:2000'+item.storyUrl"><img style=" object-fit: contain; "
+                height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
+        <div  class="card-footer">
+           <p class="text-center"> "{{item.user_id.name }}"</p>
+        </div>
+    </div>
+    <div *ngFor="let item of userFriensStory" class=" card col-3">
+        <a class="" [href]="'http://localhost:2000'+item.storyUrl"><img style=" object-fit: contain; "
+                height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
+        <div  class="card-footer">
+           <p class="text-center"> "{{item.user_id.name }}"</p>
+        </div>
+    </div>
+    

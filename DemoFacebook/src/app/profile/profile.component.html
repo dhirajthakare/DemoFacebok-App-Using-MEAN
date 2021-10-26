@@ -1,0 +1,26 @@
+<div class="container-fluid d-flex flex-column  overflow-auto">
+    <div  class="col-12 py-2">
+       <app-header ></app-header>   
+    </div>
+    <div class="row flex-grow-1 overflow-hidden">
+        <div class="col-md-2 mh-100 overflow-auto py-2">
+            
+        </div>
+    
+        <div class="col-md-8 mh-100 overflow-auto py-2">
+            <app-profile-header></app-profile-header>
+            <router-outlet ></router-outlet>
+        </div>
+         <div class="col-md-2 mh-100 overflow-auto py-2"> 
+            
+    </div>
+   
+</div>
+<div class="row flex-shrink-0 bg-light">
+    <div class="col-12 py-2">
+        <p class="text-center">Footer ...</p>
+    </div>
+</div>
+<app-search-user-result   [style]="{ position: 'absolute', top: '13%', left: '0%', backgroundColor:'white',width:'330px' }"></app-search-user-result>
+</div>
+<!-- <app-search-user-result   [style]="{ position: 'absolute', top: '13%', left: '0%', backgroundColor:'white',width:'330px' }"></app-search-user-result> -->

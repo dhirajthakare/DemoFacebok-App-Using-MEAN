@@ -1,0 +1,99 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { MainComponent } from './main/main.component';
+import { CreateAndLoginComponent } from './create-and-login/create-and-login.component';
+import { HeaderComponent } from './main/header/header.component';
+import { ContentBodyComponent } from './main/content-body/content-body.component';
+import { SidebarComponent } from './main/sidebar/sidebar.component';
+import { Sidebar2Component } from './main/sidebar2/sidebar2.component';
+import { ErrorComponent } from './error/error.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
+import { UserProfileComponent } from './profile/user-profile/user-profile.component';
+import { PostComponent } from './post/post.component';
+import { CreatepostComponent } from './createpost/createpost.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { SearchUserResultComponent } from './search-user-result/search-user-result.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { FriendsComponent } from './friends/friends.component';
+import { FriendsSidebarComponent } from './friends/friends-sidebar/friends-sidebar.component';
+import { AllFriendsComponent } from './friends/all-friends/all-friends.component';
+import { HomeComponent } from './friends/home/home.component';
+import { FriendsRequestsComponent } from './friends/friends-requests/friends-requests.component';
+import { StoriesComponent } from './stories/stories.component';
+import { CreatestoriesComponent } from './stories/createstories/createstories.component';
+import { ShowStoriesComponent } from './stories/show-stories/show-stories.component';
+import { AllPhotosComponent } from './profile/all-photos/all-photos.component';
+import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
+import { UserFriendsComponent } from './profile/user-friends/user-friends.component';
+import { ProfileIntroComponent } from './profile/profile-intro/profile-intro.component';
+import { AboutProfileComponent } from './profile/about-profile/about-profile.component';
+import { ProfileStoryArchiveComponent } from './profile/profile-story-archive/profile-story-archive.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { AllSearchResultComponent } from './search-results/all-search-result/all-search-result.component';
+import { SearchResultSidebarComponent } from './search-results/search-result-sidebar/search-result-sidebar.component';
+import { SearchPostComponent } from './search-results/search-post/search-post.component';
+import { SearchPeopleComponent } from './search-results/search-people/search-people.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MessangerComponent } from './profile/messanger/messanger.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    MainComponent,
+    HeaderComponent,
+    CreateAndLoginComponent,
+    ContentBodyComponent,
+    SidebarComponent,
+    Sidebar2Component,
+    ErrorComponent,
+    ProfileComponent,
+    UserProfileComponent,
+    PostComponent,
+    CreatepostComponent,
+    SearchUserResultComponent,
+    FriendsComponent,
+    FriendsSidebarComponent,
+    AllFriendsComponent,
+    HomeComponent,
+    FriendsRequestsComponent,
+    StoriesComponent,
+    CreatestoriesComponent,
+    ShowStoriesComponent,
+    AllPhotosComponent,
+    ProfileHeaderComponent,
+    UserFriendsComponent,
+    ProfileIntroComponent,
+    AboutProfileComponent,
+    ProfileStoryArchiveComponent,
+    SearchResultsComponent,
+    AllSearchResultComponent,
+    SearchResultSidebarComponent,
+    SearchPostComponent,
+    SearchPeopleComponent,
+    MessangerComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    PickerModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MatDialogModule
+  
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MessangerComponent
+  ]
+})
+export class AppModule { }

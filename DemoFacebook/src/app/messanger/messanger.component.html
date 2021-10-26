@@ -1,0 +1,70 @@
+ <!-- messanger  -->
+
+ <div *ngIf="messangerdisplayBox" class=" col-md-6 mb-5">
+    <div class="modal-dialog modal-dialog-scrollable  modal-lg" >
+        <div class="modal-content" >
+
+<div class="row">
+        <div style="border-bottom: 1px solid rgb(207, 205, 205);">
+        <div class="d-flex">
+            <a ><img height="42" width="42" style="border-radius: 21px;object-fit: cover;" [src]=" 'http://localhost:8000/images/userdefault.png'" alt="hell"></a>
+            <a *ngIf="userId" style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  routerLike="/facebook"><h6 class="">mayur thakare</h6></a>
+        </div>
+    </div>
+</div>
+
+<div  style="height:400px; " class=" modal-body">
+<div style=" margin-left: 35%;" class=" ">
+    <a style=" text-decoration: none;" [href]="profileUrl ? 'http://localhost:8000/'+profileUrl : 'http://localhost:8000/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100" [src]="profileUrl ? 'http://localhost:8000/'+profileUrl : 'http://localhost:8000/images/userdefault.png'" alt="">
+        <h5 *ngIf="cname" style=" color:black ;">{{cname.substr(0,15)}}</h5>
+
+    </a>
+</div>
+<p class="text-center" >Facebook</p>
+<p class="text-center" >You're friends on Facebook</p>
+<p class="text-center" >Lives in Nasik</p>
+
+<div *ngIf="allmessage" class="row">
+            <!-- Reciever Message-->
+    <div *ngFor="let item of allmessage">
+        
+        <div *ngIf="item.sender_id != friendId" class="media col-8 offset-4 ml-auto">
+            <div class="media-body">
+              <div class="bg-primary rounded py-2 px-3 mb-2">
+                <p class="text-small mb-0 text-white">{{item.message}}</p>
+              </div>
+              <p class="small text-muted">12:00 PM | Aug 13</p>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Sender Message-->
+        <div *ngIf="item.sender_id != userId" class="media col-8 "><img [src]="profileUrl ? 'http://localhost:8000/'+profileUrl : 'http://localhost:8000/images/userdefault.png'" style="object-fit: cover;" alt="user" width="50" class="rounded-circle">
+          <div class="media-body ml-3">
+            <div class="bg-light rounded py-2 px-3">
+              <p class="text-small mb-0 text-muted">{{item.message}}</p>
+            </div>
+            <p class="small text-muted">12:00 PM | Aug 13</p>
+          </div>
+        </div>
+       </div>
+    </div>
+</div>
+
+ 
+
+ <div class="row">
+        <div class="d-flex col-md-12">
+            <div class="input-group">
+                <input #sendmessage [(ngModel)]="chatMessage"  (keyup.enter)="sendmsg(sendmessage.value)"
+                style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
+                placeholder="Write a Comment...">
+                <span style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
+            </div>
+    </div>
+ </div>
+
+  </div>
+</div>
+</div>
+</div>
+
