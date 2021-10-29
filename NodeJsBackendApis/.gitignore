@@ -10,4 +10,5 @@ speed-measure-plugin*.json
 /assets/profileCoverStorage
 /assets/profileUpload
 /assets/storyStorage
+.env
 

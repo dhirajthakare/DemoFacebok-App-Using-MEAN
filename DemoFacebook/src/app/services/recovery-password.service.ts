@@ -10,7 +10,7 @@ export class RecoveryPasswordService {
     private http:HttpClient
   ) { }
 
-  sendMailUrl="http://localhost:2000/testmail/";
+  sendMailUrl="http://localhost:2000/sendmail/";
   checkOtpUrl = "http://localhost:2000/checkopt/";
   changePasswordUrl = "http://localhost:2000/changepassword/";
 
