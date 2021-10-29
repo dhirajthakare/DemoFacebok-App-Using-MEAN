@@ -3,6 +3,7 @@ const route = express.Router();
 const service = require('../services/service');
 const controller = require('../controller/controller')
 const fileuploadeController = require('../controller/fileUploadeController');
+const { Router } = require('express');
 
 route.get('/',controller.home);
 
@@ -52,6 +53,12 @@ route.post('/allfriendspost' ,controller.allFriendsPosts);
 route.post('/sendmessage' ,controller.sendmsg);
 route.get('/getmessage/:uid/:fid' ,controller.getusermessage);
 
+// send Mail
+
+
+route.get('/testmail/:email' ,controller.sendtestmail);
+route.post('/checkopt' , controller.checkOtpCode);
+route.post('/changepassword' , controller.changePassword);
 
 
 

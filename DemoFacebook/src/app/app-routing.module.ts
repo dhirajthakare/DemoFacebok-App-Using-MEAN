@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountCreateLoginComponent } from './create-and-login/account-create-login/account-create-login.component';
 import { CreateAndLoginComponent } from './create-and-login/create-and-login.component';
+import { EnterNewPasswordComponent } from './create-and-login/enter-new-password/enter-new-password.component';
+import { EnterRecoverCodeComponent } from './create-and-login/enter-recover-code/enter-recover-code.component';
+import { FindYourAccountPageComponent } from './create-and-login/find-your-account-page/find-your-account-page.component';
+import { RecoverComponent } from './create-and-login/recover/recover.component';
 import { ErrorComponent } from './error/error.component';
 import { AllFriendsComponent } from './friends/all-friends/all-friends.component';
 import { FriendsRequestsComponent } from './friends/friends-requests/friends-requests.component';
@@ -26,7 +31,14 @@ import { CreatestoriesComponent } from './stories/createstories/createstories.co
 import { StoriesComponent } from './stories/stories.component';
 
 const routes: Routes = [
-  {path:'' , component:CreateAndLoginComponent},
+  {path:'' , component:CreateAndLoginComponent , children:[
+      {path:'' , component:AccountCreateLoginComponent },
+      {path:'recover' , component:RecoverComponent, children:[
+      {path:'' , component:FindYourAccountPageComponent},
+      {path:'code' , component:EnterRecoverCodeComponent},
+      {path:'password' , component:EnterNewPasswordComponent},
+    ] },
+  ]},
   {
   path:'facebook' , component:MainComponent , children:[
   {path:'header' , component:HeaderComponent},

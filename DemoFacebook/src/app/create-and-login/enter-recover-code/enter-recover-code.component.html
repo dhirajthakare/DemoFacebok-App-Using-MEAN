@@ -1,0 +1,31 @@
+<div style="margin: 5% 5%"  class="col-12">
+    <div class="row">
+        <div class="card col-md-4 offset-4 ">
+            <div class="modal-header">
+                    <h2>Enter security code </h2> 
+            </div>
+            <div class="modal-body">
+                <div *ngIf="errorCode" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Fail!</strong> The number that you've entered doesn't match your code. Please try again.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                <div class="col-md-12">
+                    <p>Please check your emails for a message with your code. Your code is 8 numbers long. ({{Email}}) </p>
+                </div>
+
+                    <input #CodeId type="text" name="code" id="code" placeholder="Enter code " class=" form-control form-control-lg">
+                  
+
+            </div>
+            <div class="modal-footer">
+                
+                <ul class="list-inline">
+                    <li  class="float-end btn btn-primary list-inline-item" (click)="checkCode(CodeId.value)" >Continue</li>
+                    <li  style="background-color: rgb(228, 222, 230);" class="float-end btn list-inline-item text-dark mx-2" routerLink="/recover">Cancel</li>
+                    <li  style="background-color: rgb(228, 222, 230);" class="float-end btn  list-inline-item text-primary mx-2">Didn't get a code ? </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

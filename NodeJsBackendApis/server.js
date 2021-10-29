@@ -14,7 +14,9 @@ const port = 2000 || process.env.PORT
 
 app.use('/assets',express.static('assets'))
 
-const connect = require('./server/database/dbconfig')
+const connect = require('./server/database/dbconfig');
+
+const Mailconnect = require('./server/database/mailConnection');
 
 const router = require('./server/routes/routes')
 app.use(router);

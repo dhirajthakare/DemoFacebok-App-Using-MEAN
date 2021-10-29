@@ -41,6 +41,11 @@ import { SearchPostComponent } from './search-results/search-post/search-post.co
 import { SearchPeopleComponent } from './search-results/search-people/search-people.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MessangerComponent } from './profile/messanger/messanger.component';
+import { FindYourAccountPageComponent } from './create-and-login/find-your-account-page/find-your-account-page.component';
+import { AccountCreateLoginComponent } from './create-and-login/account-create-login/account-create-login.component';
+import { EnterRecoverCodeComponent } from './create-and-login/enter-recover-code/enter-recover-code.component';
+import { EnterNewPasswordComponent } from './create-and-login/enter-new-password/enter-new-password.component';
+import { RecoverComponent } from './create-and-login/recover/recover.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +82,11 @@ import { MessangerComponent } from './profile/messanger/messanger.component';
     SearchPostComponent,
     SearchPeopleComponent,
     MessangerComponent,
+    FindYourAccountPageComponent,
+    AccountCreateLoginComponent,
+    EnterRecoverCodeComponent,
+    EnterNewPasswordComponent,
+    RecoverComponent,
   ],
   imports: [
     BrowserModule,

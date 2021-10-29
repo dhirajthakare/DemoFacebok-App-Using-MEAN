@@ -27,7 +27,7 @@ export class FriendsRequestsComponent implements OnInit {
   request:any;
   ngOnInit(): void {
     console.log(this.CheckUserLike("dhiraj"));
-    
+
     this.userservice.currentLoginUser.subscribe( (res: any) =>{
       console.log(res);
       this.data=res;
@@ -71,8 +71,8 @@ export class FriendsRequestsComponent implements OnInit {
 
   hasMatch:any;
   CheckUserLike(ids:any){
-    this.hasMatch =false;
 
+    this.hasMatch =false;
   for (let index = 0; index < this.myjson.length; ++index) {
 
     let json = this.myjson[index];

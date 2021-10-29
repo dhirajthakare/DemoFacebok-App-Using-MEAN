@@ -3,13 +3,13 @@
         <div style="height: 400px;width: 100%;">
             <a style=" text-decoration: none;" [href]=" currentUser.user_info ? 'http://localhost:2000'+currentUser.user_info.CoverPhoto : ''">  <div [style]="currentUser.user_info ? 'background-image: url('+'http://localhost:2000'+ currentUser.user_info.CoverPhoto+')':'background-color: white;'"  style="height: 300px;width: 100%; background-position: center; background-size: cover;background-repeat: no-repeat; "> 
         
-                <div style="padding-top: 210px; margin-left: 35%;" class=" ">
+                <div style="padding-top: 210px; margin-left: 42%;" class=" ">
                     <a style=" text-decoration: none;" [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="160" width="160" [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
       
                     </a>
                     
                 </div>
-                <h3 *ngIf="currentUser" style=" color:black ; margin-left: 38%;">{{currentUser.name.substr(0,15)}}</h3>
+                <h2 *ngIf="currentUser" style=" color:black ; text-align: center;">{{currentUser.name.substr(0,15)}}</h2>
 
             </div>
 
@@ -208,18 +208,18 @@
     
                     <div class="d-flex">
                         <a class=" mx-2"  ><img height="38" width="38" style="border-radius: 21px;object-fit: cover;" [src]=" currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" ></a>
-                        <a *ngIf="currentUser" style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  ><h6 class="">{{currentUser.name.substr(0,15)}}</h6></a>
+                        <a *ngIf="currentUser" style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  ><h5 class="">{{currentUser.name.substr(0,15)}}</h5></a>
                     </div>
                 </div>
          </div>
     
         <div  style="height:400px; " class=" modal-body">
-            <div style=" margin-left: 35%;" class=" ">
+            <div style=" margin-left: 39%;" class=" ">
                 <a style=" text-decoration: none;" [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100" [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
-                    <h5 *ngIf="currentUser" style=" color:black ;">{{currentUser.name.substr(0,15)}}</h5>
-    
+                   
                 </a>
             </div>
+            <h3 *ngIf="currentUser" class="text-center" style=" color:black ;">{{currentUser.name.substr(0,15)}}</h3>
             <div *ngIf="currentUser">
                 <p class="text-center" >Facebook</p>
             <p class="text-center" >On facebook {{currentUser.created_at | date:'medium'}}</p>

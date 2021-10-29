@@ -8,6 +8,7 @@ var commentModal = require('../model/comments');
 var storyModal = require('../model/stories');
 var friendsModal = require('../model/friends_users');
 var MessangerModal = require('../model/messnger');
+var transport = require('../database/mailConnection')
 
 
 
@@ -51,6 +52,7 @@ exports.createAcc = (req,res)=>{
     send.save(). then((responce)=>{
         res.json("Data Inserted Successfully");
      }).catch((err)=>{
+         console.log(err);
          res.status(400).json("Somthing Wrong Please try Again"+err);
      })
 }
@@ -610,6 +612,88 @@ MessangerModal.find({$or:[{sender_id:req.params.fid,receiver_id:req.params.uid},
 })
 }
 
+
+// find Account 
+
+// exports.findAccond = (req,res)=>{
+//     usermodal.find({email:req.params.email}).then(responce=>{
+//         console.log(responce);
+//     })
+// }
+
+
+// Send Mail Recovery 
+exports.sendtestmail = (req,res)=>{
+
+    usermodal.findOne({email:req.params.email}).then(responce=>{
+        if(responce){
+
+         var  otpCode = randomNum(10000000, 99999999);  
+    var mailOptions = {
+        from: 'dhiraj9900@gmail.com',
+        to: req.params.email,
+        subject: otpCode+` is your Facebook account recovery code
+        `,
+        html: `
+        <div style="margin-left: 33%; width: 33%; ">
+  <div>
+      <h1 style="font-weight: 600; color: rgb(63, 63, 241);">Facebook</h1>
+      <hr>
+      <p>Hi `+responce.name+` ,</p>
+      <p style="line-height: 20px;">
+We received a request to reset your Facebook password.
+Enter the following password reset code:
+      </p>
+
+      <div style="background-color: rgb(202, 220, 231); color: black; border: 1px solid blue;border-radius: 10px;  letter-spacing: 1px; width:35%"><h3 style="font-weight: 600; text-align:center">`+otpCode+`</h3></div>
+ <br> <p>Alternatively, you can directly change your password.</p> <br>
+ <a href="http://localhost:4200" style="text-decoration: none;"><div style="background-color:rgb(63, 63, 241) ; color: white; border: 1px solid rgb(70, 70, 245);  letter-spacing: 1px;border-radius: 5px;"><h3 style="text-align: center;font-weight: 500;">Change Password</h3></div></a>
+
+  </div>
+</div>
+        
+        `
+    }
+   transport.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            res.status(400).json("Somthing wrong Please try Again");
+        }
+        else {
+            console.log("Email has been send from node js", info);
+            res.json({message:"Recovery Email Send Succefully ",recoveryCode:otpCode});
+        }
+});
+
+        }else{
+            res.status(400).json("Your search did not return any results. Please try again with other information");
+        }
+    }).catch(err=>{
+        console.log(err);
+        res.status(400).json("Somthing wrong while check mail ");
+    })
+
+}
+
+exports.checkOtpCode = (req,res)=>{
+    if(req.body.serverOtp == req.body.userOtp){
+        res.json("Given Code is Accepted ");
+    }else{
+        res.status(400).json("The number that you've entered doesn't match your code. Please try again.");
+    }
+}
+
+exports.changePassword = (req,res)=>{
+    cipher = crypto.createCipher(algo,key);
+    const encryptedPass = cipher.update(req.body.password,'utf8','hex')+cipher.final('hex');
+    usermodal.updateOne({email:req.body.email},{$set:{
+        password:encryptedPass
+    }}).then(responce=>{
+        res.json(" Password Updated Succeessfully ");
+    }).catch(err=>{
+        res.status(400).json("Somthing wrong while update record ")
+    })
+}
 
 
 exports.findAllUsers = (req,res)=>{
