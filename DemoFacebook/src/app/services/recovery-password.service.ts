@@ -15,8 +15,8 @@ export class RecoveryPasswordService {
   changePasswordUrl = "http://localhost:2000/changepassword/";
 
 
-  sendRecoveryMail(email:any){
-    return this.http.get(this.sendMailUrl+email);
+  sendRecoveryMail(data:any){
+    return this.http.post(this.sendMailUrl,data);
   }
 
   checkOtp(data:any){

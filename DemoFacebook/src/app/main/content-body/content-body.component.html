@@ -119,7 +119,7 @@
 
                 <hr>
                 <div class="row">
-                    <button (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,data._id)"
+                    <button [disabled]="likestarted" (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,data._id)"
                         class=" btn col"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
                     <button (click)="addcomment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
                         Comment</button>
@@ -172,7 +172,7 @@
                                         <input  (focus)="onFocus()" #comment (keyup.enter)="createcomment(comment,item)"
                                         style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
                                         placeholder="Write a Comment..."  [(ngModel)]="addComments">
-                                        <span (click)="toggleEmojiPicker3()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
+                                        <span (click)="commentToggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +286,7 @@
                                     <input *ngIf="data" formControlName='status'  class="form-control "
                                     type="text" name="status" id="status" (focus)="onFocus()"
                                     placeholder="What's on your mind , {{data.name.substr(0,7)}} ?" aria-label="Search" [(ngModel)]="addstatus">
-                                    <span (click)="toggleEmojiPicker1()"  class=" input-group-text">😀</span>
+                                    <span (click)="createPostToggleEmojiPicker()"  class=" input-group-text">😀</span>
                                 </div>
                             </div>
 
@@ -314,7 +314,7 @@
                     </form>
                 </div>
             </div>
-            <emoji-mart  *ngIf="showEmojiPicker1" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
+            <emoji-mart  *ngIf="createPostEmojiPicker" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
 
 
         </div>
@@ -377,7 +377,7 @@
                                     <input *ngIf="data" formControlName='status' class="form-control "
                                     type="text" name="status" id="status1"
                                     placeholder="What's on your mind , {{data.name.substr(0,7)}} ?" aria-label="Search" (focus)="onFocus()">
-                                    <span (click)="toggleEmojiPicker2()"  class=" input-group-text">🙂</span>
+                                    <span (click)="UpdateTogglePostEmojiPicker()"  class=" input-group-text">🙂</span>
                                 </div>
 
                             </div>
@@ -408,7 +408,7 @@
                 </div>
 
             </div>
-            <emoji-mart  *ngIf="showEmojiPicker2" (emojiSelect)="addEmojiUP($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
+            <emoji-mart  *ngIf="UpdatePostEmojiPicker" (emojiSelect)="addEmojiUP($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
 
         </div>
     </div>
@@ -494,5 +494,5 @@
 </div>
 </div>
 
-<emoji-mart *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '30%', right: '25%' }"></emoji-mart>
-<emoji-mart *ngIf="showEmojiPicker3" (emojiSelect)="addEmojiUPOnComment($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '30%', right: '25%' }"></emoji-mart>
+<emoji-mart *ngIf="commentEmojiPicker2" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '30%', right: '25%' }"></emoji-mart>
+<emoji-mart *ngIf="commentEmojiPicker" (emojiSelect)="addEmojiUPOnComment($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '30%', right: '25%' }"></emoji-mart>

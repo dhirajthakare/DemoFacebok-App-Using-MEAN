@@ -15,12 +15,7 @@ var transport = require('../database/mailConnection')
 
 const crypto = require("crypto");
 const jwtToken = require("jsonwebtoken");
-const { rmdirSync } = require('fs');
 const userinformations = require('../model/userinformations');
-const { model } = require('mongoose');
-const { populate } = require('../model/users');
-const { json } = require('body-parser');
-const { send } = require('process');
 const messnger = require('../model/messnger');
 const path = require('path');
 const key = "password";
@@ -316,7 +311,7 @@ exports.createstory = (req,res)=>{
     var send  = new storyModal({
         storyText:req.body.status,
         user_id:req.body.user_id,
-        storyUrl:"/storyStorage/"+file.filename
+        storyUrl:"/assets/storyStorage/"+file.filename
 
     })
 
@@ -625,13 +620,13 @@ MessangerModal.find({$or:[{sender_id:req.params.fid,receiver_id:req.params.uid},
 // Send Mail Recovery 
 exports.sendtestmail = (req,res)=>{
 
-    usermodal.findOne({email:req.params.email}).then(responce=>{
+    usermodal.findOne({email:req.body.emails}).then(responce=>{
         if(responce){
 
          var  otpCode = randomNum(10000000, 99999999);  
     var mailOptions = {
         from: 'dhiraj9900@gmail.com',
-        to: req.params.email,
+        to: req.body.emails,
         subject: otpCode+` is your Facebook account recovery code
         `,
         html: `
@@ -647,7 +642,7 @@ Enter the following password reset code:
 
       <div style="background-color: rgb(202, 220, 231); color: black; border: 1px solid blue;border-radius: 10px;  letter-spacing: 1px; width:35%"><h3 style="font-weight: 600; text-align:center">`+otpCode+`</h3></div>
  <br> <p>Alternatively, you can directly change your password.</p> <br>
- <a href="http://localhost:4200" style="text-decoration: none;"><div style="background-color:rgb(63, 63, 241) ; color: white; border: 1px solid rgb(70, 70, 245);  letter-spacing: 1px;border-radius: 5px;"><h3 style="text-align: center;font-weight: 500;">Change Password</h3></div></a>
+ <a href="http://localhost:4200/recover/password?Email=`+req.body.hashEmails+`" style="text-decoration: none;"><div style="background-color:rgb(63, 63, 241) ; color: white; border: 1px solid rgb(70, 70, 245);  letter-spacing: 1px;border-radius: 5px;"><h3 style="text-align: center;font-weight: 500;">Change Password</h3></div></a>
 
   </div>
 </div>
@@ -660,7 +655,7 @@ Enter the following password reset code:
             res.status(400).json("Somthing wrong Please try Again");
         }
         else {
-            console.log("Email has been send from node js", info);
+            // console.log("Email has been send from node js", info);
             res.json({message:"Recovery Email Send Succefully ",recoveryCode:otpCode});
         }
 });
@@ -669,7 +664,7 @@ Enter the following password reset code:
             res.status(400).json("Your search did not return any results. Please try again with other information");
         }
     }).catch(err=>{
-        console.log(err);
+        // console.log(err);
         res.status(400).json("Somthing wrong while check mail ");
     })
 

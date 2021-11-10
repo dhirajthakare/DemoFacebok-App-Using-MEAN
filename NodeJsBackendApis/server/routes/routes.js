@@ -57,7 +57,7 @@ route.get('/getmessage/:uid/:fid' ,controller.getusermessage);
 route.post('/testmail' ,service.sendtestmail);
 
 
-route.get('/sendmail/:email' ,controller.sendtestmail);
+route.post('/sendmail' ,controller.sendtestmail);
 route.post('/checkopt' , controller.checkOtpCode);
 route.post('/changepassword' , controller.changePassword);
 

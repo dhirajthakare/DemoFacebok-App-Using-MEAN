@@ -19,10 +19,16 @@ export class FindYourAccountPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  hashEmail:any;
   sendrecoveryMail(email:any){
     console.log(email);
-    this.recoverpass.sendRecoveryMail(email).subscribe(res=>{
+    this.hashEmail = btoa(email);
+
+    let dataf = {
+      emails:email,
+      hashEmails :this.hashEmail
+    }
+    this.recoverpass.sendRecoveryMail(dataf).subscribe(res=>{
       console.log(res);
       let respo:any = res;
       this.toast.success(respo.message,"Success!");

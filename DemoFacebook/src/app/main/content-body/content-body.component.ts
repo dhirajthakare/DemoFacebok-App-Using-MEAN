@@ -151,7 +151,9 @@ export class ContentBodyComponent implements OnInit {
     })
   }
 
+  likestarted:boolean=false;
   onlike(post_id:any,user_id:any){
+    this.likestarted=true
 
     let fdata = {
       "post_photo_id":post_id,
@@ -159,6 +161,7 @@ export class ContentBodyComponent implements OnInit {
       "userclick_id":this.data._id
     }
     this.post.likeorUnlike(fdata).subscribe(res=>{
+      this.likestarted=false
       this.getUserFriendsPosts();
       console.log(res);
     })
@@ -231,6 +234,7 @@ export class ContentBodyComponent implements OnInit {
       this.comment.push(item._id);
     }
     this.addComments='';
+    this.commentEmojiPicker=false
     // this.comment=item.id;
     // this.comment =! this.comment;
   }
@@ -335,26 +339,26 @@ userstory:any;
 
   onFocus() {
     console.log('focus');
-    this.showEmojiPicker = false;
-    this.showEmojiPicker1 = false;
-    this.showEmojiPicker2 = false;
-    this.showEmojiPicker3 = false;
+    this.commentEmojiPicker2 = false;
+    this.createPostEmojiPicker = false;
+    this.UpdatePostEmojiPicker = false;
+    this.commentEmojiPicker = false;
 
   }
 
 
   //Emoji for Create Post 
   addstatus:any = "";
-  showEmojiPicker:boolean=false;
-  showEmojiPicker1:boolean=false;
+  commentEmojiPicker2:boolean=false;
+  createPostEmojiPicker:boolean=false;
 
   toggleEmojiPicker() {
-    console.log(this.showEmojiPicker);
-    this.showEmojiPicker = !this.showEmojiPicker;
+    console.log(this.commentEmojiPicker2);
+    this.commentEmojiPicker2 = !this.commentEmojiPicker2;
   }
-  toggleEmojiPicker1() {
-    console.log(this.showEmojiPicker);
-    this.showEmojiPicker1 = !this.showEmojiPicker1;
+  createPostToggleEmojiPicker() {
+    console.log(this.commentEmojiPicker2);
+    this.createPostEmojiPicker = !this.createPostEmojiPicker;
   }
   addEmoji(event:any){
     const addstatus = this.addstatus;
@@ -367,47 +371,43 @@ userstory:any;
 
     }
     )
-    // this.showEmojiPicker = false;
-    // showEmojiPicker1:boolean=false;
+    // this.commentEmojiPicker2 = false;
+    // createPostEmojiPicker:boolean=false;
   }
 
   
   // EMoji For Update Post 
-  showEmojiPicker2:boolean=false;
+  UpdatePostEmojiPicker:boolean=false;
 
-  toggleEmojiPicker2() {
-    console.log(this.showEmojiPicker);
-    this.showEmojiPicker2 = !this.showEmojiPicker2;
+  UpdateTogglePostEmojiPicker() {
+    console.log(this.commentEmojiPicker2);
+    this.UpdatePostEmojiPicker = !this.UpdatePostEmojiPicker;
   }
   addEmojiUP(event:any){
-    const addstatus = this.addstatus;
-    console.log(event.emoji.native);
-    const text = addstatus+event.emoji.native;
-
-    this.addstatus = text;
+   
     this.UpdatePost.patchValue({
       'status':this.UpdatePost.get('status')?.value+event.emoji.native
 
     }
     )
-    // this.showEmojiPicker2 = false;
+    // this.UpdatePostEmojiPicker = false;
   }
 
 
   //Emoji for comments 
   addComments:any="";
-  showEmojiPicker3:boolean=false;
+  commentEmojiPicker:boolean=false;
 
-  toggleEmojiPicker3() {
-    console.log(this.showEmojiPicker);
-    this.showEmojiPicker3 = !this.showEmojiPicker3;
+  commentToggleEmojiPicker() {
+    console.log(this.commentEmojiPicker2);
+    this.commentEmojiPicker = !this.commentEmojiPicker;
   }
   addEmojiUPOnComment(event:any){
     const addComments = this.addComments
     const text = addComments+event.emoji.native;
     this.addComments = text;
    
-    // this.showEmojiPicker3 = false;
+    // this.commentEmojiPicker = false;
   }
   
   friends:any;

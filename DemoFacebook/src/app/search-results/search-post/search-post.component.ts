@@ -16,7 +16,7 @@ export class SearchPostComponent implements OnInit {
 
   box:any;
   allpost:any;
-  style=`height: 240px; background-image: url('http://localhost:8000/images/userdefault.png');background-size: cover; background-position: center;`;
+  style=`height: 240px; background-image: url('http://localhost:2000/assets/images/userdefault.png');background-size: cover; background-position: center;`;
   ngOnInit(): void {
 
     this.friendship.serchbox.subscribe(res=>{

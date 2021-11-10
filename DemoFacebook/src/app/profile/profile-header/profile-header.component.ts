@@ -176,7 +176,7 @@ if(this.file){
 //  message Session
 
 @ViewChild('sendmessage') sendMessageInput : ElementRef | any
-chatMessage:any;
+chatMessage:any='';
 sendmsg(value:any){
 console.log(value)
 
@@ -196,6 +196,8 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
   this.getAllMessage();
   this.chatMessage = '';
   this.sendMessageInput.nativeElement.focus();
+  this.messageEmojiPicker=false;
+
 })
   }
 
@@ -246,7 +248,18 @@ this.continuousgetmessage.unsubscribe();
   //     this.messanger.friendname = this.currentUser.name;
   //     this.messanger.messangerdisplayBox.next(true);
   // }
+addMessangerEmoji(event:any){
+    console.log(event.emoji.native);
 
+    this.chatMessage = this.chatMessage+event.emoji.native
+  }
+
+  messageEmojiPicker:boolean=false;
+ 
+ 
+   updatePostToggleEmojiPicker() {
+     this.messageEmojiPicker = !this.messageEmojiPicker;
+   }
   ngOnDestroy(){
     // this.continuousgetmessage.unsubscribe();
   }

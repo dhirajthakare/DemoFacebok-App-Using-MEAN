@@ -80,14 +80,16 @@ export class PostComponent implements OnInit {
   }
     
   
-
+  likestarted:boolean=false;
   onlike(post_id:any,user_id:any){
+    this.likestarted=true
     let fdata = {
       "post_photo_id":post_id,
       "user_id":user_id,
       "userclick_id":this.data._id
     }
     this.post.likeorUnlike(fdata).subscribe(res=>{
+      this.likestarted=false
       this.oninitgetdata();
       console.log(res);
     })
@@ -199,7 +201,7 @@ export class PostComponent implements OnInit {
 
     console.log(this.comment);
     this.addComments='';
-    this.showEmojiPicker3=false;
+    this.commentEmojiPicker=false;
     // this.comment=item.id;
     // this.comment =! this.comment;
   }
@@ -262,11 +264,11 @@ export class PostComponent implements OnInit {
   }
 
  
-   showEmojiPicker2:boolean=false;
+   updatePostEmojiPicker:boolean=false;
  
  
-   toggleEmojiPicker2() {
-     this.showEmojiPicker2 = !this.showEmojiPicker2;
+   updatePostToggleEmojiPicker() {
+     this.updatePostEmojiPicker = !this.updatePostEmojiPicker;
    }
    // toggleEmojiPicker1(item:any) {
    //   console.log(item);
@@ -275,8 +277,8 @@ export class PostComponent implements OnInit {
    // }
    onFocus() {
 
-     this.showEmojiPicker2 = false;
-     this.showEmojiPicker3=false;
+     this.updatePostEmojiPicker = false;
+     this.commentEmojiPicker=false;
  
    }
  
@@ -294,17 +296,17 @@ export class PostComponent implements OnInit {
 
    //Emoji for comments 
   addComments:any="";
-  showEmojiPicker3:boolean=false;
+  commentEmojiPicker:boolean=false;
 
-  toggleEmojiPicker3() {
-    this.showEmojiPicker3 = !this.showEmojiPicker3;
+  commentToggleEmojiPicker() {
+    this.commentEmojiPicker = !this.commentEmojiPicker;
   }
   addEmojiUPOnComment(event:any){
     const addComments = this.addComments
     const text = addComments+event.emoji.native;
     this.addComments = text;
    
-    // this.showEmojiPicker3 = false;
+    // this.commentEmojiPicker = false;
   }
 
   CheckUserLike(json:any, ids:any){

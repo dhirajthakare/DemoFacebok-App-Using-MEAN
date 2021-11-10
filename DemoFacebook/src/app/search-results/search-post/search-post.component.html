@@ -9,9 +9,9 @@
             <div class="row">
                 <div *ngFor="let item of allpost" class="col-md-4" >
                     <div style="border: 1px solid rgb(219, 216, 216);" class="my-2">
-                        <div   [style]="item.postUrl ? 'height: 240px; background-image: url(http://localhost:8000/'+item.postUrl+');background-size: cover; background-position: center;' : 'height: 240px; background-image: url(http://localhost:8000/images/userdefault.png);background-size: cover; background-position: center;' " class="col-md-12">
+                        <div   [style]="item.postUrl ? 'height: 240px; background-image: url(http://localhost:2000'+item.postUrl+');background-size: cover; background-position: center;' : 'height: 240px; background-image: url(http://localhost:2000/assets/images/userdefault.png);background-size: cover; background-position: center;' " class="col-md-12">
                             <!-- <img class="col-md-12" style="object-fit: cover;display: block;height: 100%;width: 100%;" [src]="item.postUrl ?'http://localhost:8000/'+item.postUrl :'http://localhost:8000/images/userdefault.png'" alt=""> -->
-                            <h5 [routerLink]="'/profile/'+item.postuser.userToken" style="padding-top: 200px;color: white;" class="text-center"> {{item.postuser.name}} </h5>
+                            <h5 [routerLink]="'/profile/'+item.postUser.userToken" style="padding-top: 200px;color: black; font-weight: 600;" class="text-center"> {{item.postUser.name}} </h5>
 
                         </div>
                     

@@ -71,7 +71,7 @@
 
             <hr>
             <div class="row">
-                <button (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,data._id) "
+                <button [disabled]="likestarted" (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,data._id) "
                     class=" btn col"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
                 <button (click)="addcomment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
                     Comment</button>
@@ -80,7 +80,7 @@
 
             </div>
             <hr>
-            <div style="height: 110px;" *ngIf="checkpostid==item._id" class="row mt-md-5 overflow-auto ">
+            <div style="height: 110px;"  *ngIf="comment.includes(item._id)" class="row mt-md-5 overflow-auto ">
 
                 <div *ngFor="let comments of item.postcomment" class="row">
                     <div style="font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;"
@@ -118,19 +118,19 @@
                                     alt="hell">
                             </a>
                         </div>
-                        <div *ngIf="checkpostid==item._id" class="col-md-11 mt-md-2">
+                        <div  class="col-md-11 mt-md-2">
                             <div class="d-flex col-md-12">
                                 <div class="input-group">
                                     <input  (focus)="onFocus()" #comment (keyup.enter)="createcomment(comment,item)"
                                     style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
                                     placeholder="Write a Comment..."  [(ngModel)]="addComments">
-                                    <span (click)="toggleEmojiPicker3()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
+                                    <span (click)="commentToggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <emoji-mart *ngIf="showEmojiPicker3" (emojiSelect)="addEmojiUPOnComment($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '15%', right: '5%' }"></emoji-mart>
+                <emoji-mart *ngIf="commentEmojiPicker" (emojiSelect)="addEmojiUPOnComment($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '15%', right: '5%' }"></emoji-mart>
 
 
             </div>
@@ -234,7 +234,7 @@
                                     <input *ngIf="currentUser" formControlName='status' class="form-control "
                                     type="text" name="status" id="status1"
                                     placeholder="What's on your mind , {{currentUser.name.substr(0,7)}} ?" aria-label="Search" (focus)="onFocus()">
-                                    <span (click)="toggleEmojiPicker2()"  class=" input-group-text">🙂</span>
+                                    <span (click)="updatePostToggleEmojiPicker()"  class=" input-group-text">🙂</span>
                                 </div>
 
                             </div>
@@ -265,7 +265,7 @@
                 </div>
 
             </div>
-            <emoji-mart  *ngIf="showEmojiPicker2" (emojiSelect)="addEmojiUP($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
+            <emoji-mart  *ngIf="updatePostEmojiPicker" (emojiSelect)="addEmojiUP($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
 
         </div>
     </div>
