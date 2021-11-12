@@ -13,7 +13,7 @@
             <div class="modal-footer">
                 
                 <ul class="list-inline">
-                    <li  class="float-end btn btn-primary list-inline-item" (click)="sendrecoveryMail(EmailID.value)">Search</li>
+                    <li class="float-end list-inline-item"> <button  class="btn btn-primary" (click)="sendrecoveryMail(EmailID.value)" [disabled]="SendMail">Search</button> </li>
                     <li  style="background-color: rgb(228, 222, 230);" class="float-end btn list-inline-item text-dark mx-2" routerLink="">Cancel</li>
                 </ul>
             </div>

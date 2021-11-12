@@ -23,7 +23,7 @@ var transport = nodemailer.createTransport({
 
     
      var mailOptions = {
-          from: 'dhiraj9900@gmail.com',
+          from: 'deskbook@gmail.com',
           to: 'dhiraj9900@gmail.com',
           subject: 'test',
           html: `hi

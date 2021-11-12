@@ -20,7 +20,9 @@ export class FindYourAccountPageComponent implements OnInit {
   ngOnInit(): void {
   }
   hashEmail:any;
+  SendMail=false;
   sendrecoveryMail(email:any){
+    this.SendMail=true;
     console.log(email);
     this.hashEmail = btoa(email);
 
@@ -29,6 +31,8 @@ export class FindYourAccountPageComponent implements OnInit {
       hashEmails :this.hashEmail
     }
     this.recoverpass.sendRecoveryMail(dataf).subscribe(res=>{
+      this.SendMail=false;
+
       console.log(res);
       let respo:any = res;
       this.toast.success(respo.message,"Success!");
@@ -37,6 +41,8 @@ export class FindYourAccountPageComponent implements OnInit {
         Email:btoa(email)
       }});
     },err=>{
+      this.SendMail=false;
+
       let errp:any = err;
       this.toast.error(errp.error,"Fail!");
       console.log(err);

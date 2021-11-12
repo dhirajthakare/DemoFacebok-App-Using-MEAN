@@ -625,12 +625,25 @@ exports.sendtestmail = (req,res)=>{
 
          var  otpCode = randomNum(10000000, 99999999);  
     var mailOptions = {
-        from: 'dhiraj9900@gmail.com',
+        from: 'deskbook@gmail.com',
         to: req.body.emails,
         subject: otpCode+` is your Facebook account recovery code
         `,
         html: `
-        <div style="margin-left: 33%; width: 33%; ">
+        <html>
+        <head>
+        <style>
+        @media(min-width: 800px){
+            #recoverCard {
+                margin-left: 33%; 
+                width: 33%;
+            }
+        }
+        
+        </style>
+        </head>
+        <body>
+        <div id="recoverCard" >
   <div>
       <h1 style="font-weight: 600; color: rgb(63, 63, 241);">Facebook</h1>
       <hr>
@@ -646,6 +659,8 @@ Enter the following password reset code:
 
   </div>
 </div>
+        </body>
+        </html>
         
         `
     }
