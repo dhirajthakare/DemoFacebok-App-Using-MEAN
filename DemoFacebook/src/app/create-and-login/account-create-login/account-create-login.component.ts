@@ -45,7 +45,6 @@ onSubmit(){
   console.log(this.createAccountForm.value);
  
   this.service.createAcc(this.createAccountForm.value).subscribe((res)=>{
-    this.loginForm.reset();
     console.log(res);
     this.regsuccess="Successfully Created Account ";
     this.storeallerrors=null;

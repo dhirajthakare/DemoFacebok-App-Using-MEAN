@@ -418,6 +418,7 @@ userstory:any;
 this.friend.getUseFriends(this.data._id).subscribe(res=>{
       this.friends=res;
       console.log(this.friends);
+      this.friendsId=[];
 
       if(this.friends){
         this.friends=this.friends.user_Friends;
@@ -438,6 +439,7 @@ this.friend.getUseFriends(this.data._id).subscribe(res=>{
   
   getUserFriendsPosts(){
     this.friend.getAllFriendsPost(this.friendsId).subscribe(res=>{
+      this.allPosts='';
       this.allPosts=res;
       console.log(this.allPosts);
 
