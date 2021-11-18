@@ -55,19 +55,17 @@ exports.createAcc = (req,res)=>{
 
 // Updated Account 
 exports.updateAccount =(req,res)=>{
-    const file = req.file;
-    
-    if(!file){
-        const error = new error('no file')
-        error.httpStatusCode=400
-        return next(error)
+    var file = req.file;
+    var filename;
+    if(file){
+        filename = "/assets/profileupload/"+file.filename;
     }
     
     
     usermodal.updateOne({_id:req.params.id} , {$set:{
         name:req.body.fname+"  "+req.body.lname,
         birthOfDate:req.body.birthOfDate,
-        profileUrl: "/assets/profileupload/"+file.filename,
+        profileUrl:filename,
         gender: req.body.gender
 
     }} ).then(responce=>{

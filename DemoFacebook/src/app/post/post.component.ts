@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
     private toastr:ToastrService
   ) { }
 
-
+  Loader =true;
   allPosts:any;
   data:any;
   url:any;
@@ -41,6 +41,7 @@ export class PostComponent implements OnInit {
   @ViewChild('postUpdateModalClose') postUpdateModalClose:any;
 
   ngOnInit(): void {
+    this.Loader=true
     this.userservice.currentLoginUser.subscribe( (res: any) =>{
       console.log(res);
       this.data=res;
@@ -69,9 +70,11 @@ export class PostComponent implements OnInit {
   datasubtitle:any;
   getpost(){
     this.datasubtitle = this.userservice.getCurrentUserPost(this.currentUser._id,this.data._id).subscribe((res)=>{
+      this.Loader = false
         this.allPosts=res;
       console.log(res);
     },err=>{
+      this.Loader = false
       console.log(err);
     })
 

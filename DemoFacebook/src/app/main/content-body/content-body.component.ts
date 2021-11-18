@@ -44,8 +44,10 @@ export class ContentBodyComponent implements OnInit {
 
   data:any;
   url:any;
+  Loader = true;
+
   ngOnInit(): void {
-    
+    this.Loader= true;
       this.userservice.currentLoginUser.subscribe( (res: any) =>{
         console.log(res);
         this.data=res;
@@ -422,8 +424,10 @@ this.friend.getUseFriends(this.data._id).subscribe(res=>{
 
       if(this.friends){
         this.friends=this.friends.user_Friends;
+        console.log("user "+this.data._id);
         this.friendsId.push(this.data._id);
       for(let i=0;i<this.friends.length;i++){
+        console.log("friend "+this.friends[i].friend_id._id);
         this.friendsId.push(this.friends[i].friend_id._id);
       }
       console.log(this.friendsId);
@@ -438,12 +442,15 @@ this.friend.getUseFriends(this.data._id).subscribe(res=>{
 
   
   getUserFriendsPosts(){
+    // this.Loader= true;
     this.friend.getAllFriendsPost(this.friendsId).subscribe(res=>{
+      this.Loader= false;
       this.allPosts='';
       this.allPosts=res;
       console.log(this.allPosts);
 
     },err=>{
+      this.Loader= false;
       console.log(err);
     })
   }

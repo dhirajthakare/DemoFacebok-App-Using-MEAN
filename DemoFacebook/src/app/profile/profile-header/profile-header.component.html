@@ -1,3 +1,7 @@
+
+<div *ngIf="!currentUser&&!data" style="margin-top: 5%;"  class=" text-center">
+    <img  src="../../assets/loader.gif" alt="">
+</div>
 <div *ngIf="currentUser&&data">
     <div>
         <div style="height: 400px;width: 100%;">
@@ -240,10 +244,10 @@
                       </div>
                       <div class="row">
                         <!-- Sender Message-->
-                    <div *ngIf="item.sender_id != data._id" class="media col-8 "><img [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" style="object-fit: cover;" alt="user" width="30" class="rounded-circle">
+                    <div *ngIf="item.sender_id != data._id" class="media col-8 "><img [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" style="object-fit: cover; border-radius: 18px;" alt="user" width="36"  height="36" >
                       <div class="media-body ml-3">
-                        <div class="bg-light rounded py-2 px-3">
-                          <p class="text-small mb-0 text-muted">{{item.message}}</p>
+                        <div style="background-color: aliceblue;" class=" rounded py-2 px-3">
+                          <p class="text-small mb-0 text-dark">{{item.message}}</p>
                         </div>
                         <p class="small text-muted">{{item.created_at | date:'medium'}}</p>
                       </div>
