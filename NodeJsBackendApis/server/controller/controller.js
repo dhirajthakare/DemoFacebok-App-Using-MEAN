@@ -29,27 +29,78 @@ exports.home = (req,res)=>{
 
 
 // Create Account 
-exports.createAcc = (req,res)=>{
+exports.createAcc = async (req,res)=>{
      
-    cipher = crypto.createCipher(algo,key);
-    const encryptedPass = cipher.update(req.body.password,'utf8','hex')+cipher.final('hex');
-
-    const send  = new usermodal({
-    name:req.body.fname+'  '+req.body.lname,
-    email:req.body.email,
-    password:encryptedPass,
-    birthOfDate:req.body.birthOfDate,
-    gender:req.body.gender,
-    profileUrl:req.body.profileUrl,
-    userToken:req.body.fname +'.'+req.body.lname+randomNum(100000, 999999),
+    try{
+        AccontValid(req.body);
+        useravailable  = await usermodal.findOne({email:req.body.email});
+        if(!useravailable){
+            cipher = crypto.createCipher(algo,key);
+        const encryptedPass = cipher.update(req.body.password,'utf8','hex')+cipher.final('hex');
     
-    });
-    send.save(). then((responce)=>{
-        res.json("Data Inserted Successfully");
-     }).catch((err)=>{
-         console.log(err);
-         res.status(400).json("Somthing Wrong Please try Again"+err);
-     })
+        const send  = await new usermodal({
+        name:req.body.fname+'  '+req.body.lname,
+        email:req.body.email,
+        password:encryptedPass,
+        birthOfDate:req.body.birthOfDate,
+        gender:req.body.gender,
+        profileUrl:req.body.profileUrl,
+        userToken:req.body.fname +'.'+req.body.lname+randomNum(100000, 999999),
+        
+        }).save();
+        if(send){
+            res.json("Account Created Successfully");
+        }else{
+            res.status.json("Something wrong while Create Account");
+        }
+        }else{
+            res.status(400).json("User Already Avilable ");
+        }
+    }
+    catch(err){
+        res.status(400).json(err);
+        // console.log(err);
+    }
+}
+ 
+function AccontValid(res){
+    var errormessage = {} ;
+
+    let regName = /^[a-zA-z][a-zA-Z _]{2,15}$/;
+    let regemail=/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    let passReg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+    if(res.fname=="" || !regName.test(res.fname) ){
+        errormessage.fname = "Your first name is not acceptable ";
+    } if(res.lname=="" || !regName.test(res.lname) ){
+        errormessage.lname = "Your last name is not acceptable";
+    } if(res.email=="" || !regemail.test(res.email) ){
+        errormessage.email="Your email is invalid";
+    }  if(res.password=="" || !passReg.test(res.password) ){
+        errormessage.password = "Password Should be betweent 8-15 character which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"
+    } if(res.gender==""){
+        errormessage.gender = "Gender should be selected"
+    }
+
+var dob = new Date(res.birthOfDate);
+var month_diff = Date.now() - dob.getTime();
+    var age_dt = new Date(month_diff); 
+    var year = age_dt.getUTCFullYear();
+    var age = Math.abs(year - 1970);
+    // console.log(age);
+    if(age < 12 ){
+        errormessage.birthOfDate = "Your age must be atleast 12 year";
+    }else if(!res.birthOfDate){
+        errormessage.birthOfDate = "Birthday is required";
+    }
+    if(Object.entries(errormessage).length === 0){
+        // console.log("right")
+    }else{
+        throw errormessage;
+
+    }
+
+    
+     
 }
 
 

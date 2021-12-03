@@ -16,6 +16,7 @@ import { ProfileComponent } from '../profile.component';
 })
 export class ProfileHeaderComponent implements OnInit,AfterViewInit,OnDestroy {
 
+    chatAudio = new Audio('../../assets/Realme 7 Pro ! Notification ! Tone.mp3')
   constructor(
     private userservice:UsermiddlewareService,
     private fb:FormBuilder,
@@ -225,6 +226,10 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
     let intervaldata = interval(5000);
 
     this.continuousgetmessage = intervaldata.subscribe(res=>{
+      // var obj = JSON.parse(this.allmessage);
+      var length = Object.keys(this.allmessage).length;
+      // console.log(obj);
+      console.log(length) 
       this.getAllMessage();
       this.sendMessageInput.nativeElement.focus();
       console.log(this.i++);

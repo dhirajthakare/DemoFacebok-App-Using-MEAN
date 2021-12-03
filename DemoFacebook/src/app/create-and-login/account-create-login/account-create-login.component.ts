@@ -26,6 +26,7 @@ constructor(
 sessionerror:any
 ngOnInit(): void {
   this.sessionerror=localStorage.getItem('error');
+  console.log(this.sessionerror);
      
 }
 
