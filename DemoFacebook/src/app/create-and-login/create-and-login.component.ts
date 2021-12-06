@@ -17,7 +17,7 @@ export class CreateAndLoginComponent implements OnInit {
   
   ngOnInit(): void {
       if(localStorage.getItem('loggedin')=="true"){
-        this.router.navigate(['/facebook']);
+        this.router.navigate(['/deskbook']);
 
       }
     

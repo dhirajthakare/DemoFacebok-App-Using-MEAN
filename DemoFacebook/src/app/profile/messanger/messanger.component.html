@@ -23,8 +23,8 @@
             </a>
         </div>
         <div *ngIf="currentUser">
-            <p class="text-center" >Facebook</p>
-        <p class="text-center" >On facebook {{currentUser.created_at | date:'medium'}}</p>
+            <p class="text-center" >Deskbook</p>
+        <p class="text-center" >On deskbook {{currentUser.created_at | date:'medium'}}</p>
         <p  *ngIf="currentUser.user_info" class="text-center" >{{currentUser.user_info.homeTown ? currentUser.user_info.homeTown : 'Not Mention'}}</p>
         </div>
 

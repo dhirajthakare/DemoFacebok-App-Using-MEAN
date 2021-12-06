@@ -7,12 +7,12 @@
               <div class="collapse navbar-collapse" id="navbarScroll">
                <div class="col-md-3">
                <div class="row">
-                <div  routerLink="/facebook" class="col-md-2">
-                    <img height="50" width="50" src="http://localhost:2000/assets/images/faceloco2png.png" alt="image">
+                <div  routerLink="/deskbook" class="col-md-2">
+                    <img height="50" width="50" src="http://localhost:2000/assets/images/Desk1.png" alt="image">
                 </div>
                <div class="col-md-9 mt-md-2">
                 <form class="d-flex col-md-10">
-                    <input (focus)="onFocus()" (blur)="onblur()" (keyup)="searchFriends(searchFriend)" style="border-radius: 23px;" #searchFriend class="form-control me-2" type="search" placeholder="Search Facebook" aria-label="Search">
+                    <input (focus)="onFocus()" (blur)="onblur()" (keyup)="searchFriends(searchFriend)" style="border-radius: 23px;" #searchFriend class="form-control me-2" type="search" placeholder="Search Deskbook" aria-label="Search">
                   </form>
               
                </div>
@@ -21,7 +21,7 @@
                 <div class="col-md-6 ">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 " style="--bs-scroll-height: 100px;">
                         <li class="nav-item mx-md-5">
-                          <a  routerLink="/facebook" style="font-size: 23px;" class="nav-link active text-primary" aria-current="page" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i>
+                          <a  routerLink="/deskbook" style="font-size: 23px;" class="nav-link active text-primary" aria-current="page" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i>
                           </a>
                         </li>
                         <li class="nav-item mx-md-5">
@@ -50,7 +50,7 @@
                           <li [routerLink]="'/profile/'+data.userToken">
                             <div class="d-flex">
                                 <a ><img height="42" width="42" style="border-radius: 21px;object-fit: cover;" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="hell"></a>
-                                <a *ngIf="data" style="text-decoration: none; color: black;" class=" mt-2"  routerLike="/facebook"><p class="">{{data.name.substr(0,8)}}</p></a>
+                                <a *ngIf="data" style="text-decoration: none; color: black;" class=" mt-2"  routerLike="/deskbook"><p class="">{{data.name.substr(0,8)}}</p></a>
                             </div>
 
                           </li>
@@ -75,7 +75,7 @@
                               <i class="fa fa-caret-square-o-down fa-lg" aria-hidden="true"></i>  
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <li><a class="dropdown-item" routerLink="/facebook">home</a></li>
+                              <li><a class="dropdown-item" routerLink="/deskbook">home</a></li>
                               <li><a class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#createAccount">Update Profile
 
                               </a></li>

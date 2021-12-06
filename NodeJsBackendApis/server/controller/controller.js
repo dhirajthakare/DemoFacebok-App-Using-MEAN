@@ -676,7 +676,7 @@ exports.sendtestmail = (req,res)=>{
     var mailOptions = {
         from: 'deskbook@gmail.com',
         to: req.body.emails,
-        subject: otpCode+` is your Facebook account recovery code
+        subject: otpCode+` is your Deskbook account recovery code
         `,
         html: `
         <html>
@@ -694,11 +694,11 @@ exports.sendtestmail = (req,res)=>{
         <body>
         <div id="recoverCard" >
   <div>
-      <h1 style="font-weight: 600; color: rgb(63, 63, 241);">Facebook</h1>
+      <h1 style="font-weight: 600; color: rgb(63, 63, 241);">Deskbook</h1>
       <hr>
       <p>Hi `+responce.name+` ,</p>
       <p style="line-height: 20px;">
-We received a request to reset your Facebook password.
+We received a request to reset your Deskbook password.
 Enter the following password reset code:
       </p>
 

@@ -25,10 +25,10 @@
        <div class="col-12"> 
         <div class="row">
             <ul class="list-inline">
-                <li  [routerLink]="'/profile/'+currentUser.userToken"  class=" btn  list-inline-item " routerLike="/facebook">Posts</li>
+                <li  [routerLink]="'/profile/'+currentUser.userToken"  class=" btn  list-inline-item " routerLike="/deskbook">Posts</li>
                 <li routerLink="about"  class=" btn list-inline-item">About</li>
                 <li routerLink="photos" class=" btn list-inline-item">Photos</li>
-                <li routerLink="archive" class=" btn  list-inline-item" routerLike="/facebook">Story Archive</li>
+                <li routerLink="archive" class=" btn  list-inline-item" routerLike="/deskbook">Story Archive</li>
                 <li routerLink="friends" class=" btn list-inline-item">Friends</li>
                 <li class=" btn list-inline-item">Video</li>
                 <li *ngIf="friendsId.includes(currentUser._id) && data._id!=currentUser._id" style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><span  id="navbarDropdownMenuLink"  data-bs-toggle="dropdown" aria-expanded="false">
@@ -186,7 +186,7 @@
                     <div class=" modal-footer">
                             <div>
                                 <ul class="list-inline">
-                                    <li style="margin-right: 400px;" class="text-primary  list-inline-item" routerLike="/facebook">Update You information</li>
+                                    <li style="margin-right: 400px;" class="text-primary  list-inline-item" routerLike="/deskbook">Update You information</li>
                                     <li style="background-color: rgb(228, 222, 230);" class="mx-2 float-end btn list-inline-item" data-bs-dismiss="modal"> <strong> Cancel</strong></li>
                                     <li  class="mx-2  float-end  list-inline-item"><button type="submit" class="btn btn-primary" >save</button></li>
                             </ul>
@@ -225,8 +225,8 @@
             </div>
             <h3 *ngIf="currentUser" class="text-center" style=" color:black ;">{{currentUser.name.substr(0,15)}}</h3>
             <div *ngIf="currentUser">
-                <p class="text-center" >Facebook</p>
-            <p class="text-center" >On facebook {{currentUser.created_at | date:'medium'}}</p>
+                <p class="text-center" >Deskbook</p>
+            <p class="text-center" >On deskbook {{currentUser.created_at | date:'medium'}}</p>
             <p  *ngIf="currentUser.user_info" class="text-center" >{{currentUser.user_info.homeTown ? currentUser.user_info.homeTown : 'Not Mention'}}</p>
             </div>
     

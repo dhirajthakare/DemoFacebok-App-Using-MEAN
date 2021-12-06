@@ -40,7 +40,7 @@ const routes: Routes = [
     ] },
   ]},
   {
-  path:'facebook' , component:MainComponent , children:[
+  path:'deskbook' , component:MainComponent , children:[
   {path:'header' , component:HeaderComponent},
   {path:'' , component:ContentBodyComponent},
   {path:'sidebar' , component:SidebarComponent},
