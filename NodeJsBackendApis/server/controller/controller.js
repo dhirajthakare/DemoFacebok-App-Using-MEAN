@@ -667,7 +667,7 @@ MessangerModal.find({$or:[{sender_id:req.params.fid,receiver_id:req.params.uid},
 
 
 // Send Mail Recovery 
-exports.sendtestmail = (req,res)=>{
+exports.sendmail = (req,res)=>{
 
     usermodal.findOne({email:req.body.emails}).then(responce=>{
         if(responce){
