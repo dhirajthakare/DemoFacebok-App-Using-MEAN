@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommanValuesService } from 'src/app/services/comman-values.service';
 import { CreateloginserviceService } from 'src/app/services/createloginservice.service';
+import { AccountCreateDialogComponent } from './account-create-dialog/account-create-dialog.component';
 
 @Component({
   selector: 'app-account-create-login',
@@ -20,7 +22,8 @@ constructor(
   public service : CreateloginserviceService,
   private formbuilder : FormBuilder,
   private router : Router,
-   private comman:CommanValuesService
+  private comman:CommanValuesService ,
+  private dialog : MatDialog
 ) { }
 
 sessionerror:any
@@ -103,6 +106,13 @@ onlogin(){
 
   //  this.loginsuccess=null
  })
+}
+
+openAccountCreateDialog(){
+let diaRefrence = this.dialog.open(AccountCreateDialogComponent, { data:{
+  Name:'Dhiraj',
+  Sirname:'Thakare'
+}});
 }
 
 }
