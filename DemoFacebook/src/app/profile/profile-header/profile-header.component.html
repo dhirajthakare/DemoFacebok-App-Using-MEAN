@@ -43,9 +43,10 @@
                 <!-- <li class=" btn list-inline-item" >More</li> -->
                     <!-- <li style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><i class="btn fab fas fa-user-check text-dark"></i></li> -->
                     <li *ngIf="data._id==currentUser._id" data-bs-toggle="modal" data-bs-target="#editProfile" style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><i class="btn fa fa fa-edit text-dark" ></i>Edit Profile</li>
-                    <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" data-bs-toggle="modal" data-bs-target="#messagermodal" ><i class="btn fab fa-facebook-messenger text-dark" (click)="messangerClick()" > <strong> Message</strong></i></li>
+                    <!-- <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" data-bs-toggle="modal" data-bs-target="#messagermodal" ><i class="btn fab fa-facebook-messenger text-dark" (click)="messangerClick()" > <strong> Message</strong></i></li> -->
                     <!-- <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" (click)="OpenMessangerDia()"> <strong> Message</strong></li> -->
-    
+                    <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" (click)="OpenMessangerDia()"><i class="btn fab fa-facebook-messenger text-dark" > <strong> Message</strong></i></li>
+
                     <li *ngIf="data._id != currentUser._id "  (click)="friendsId.includes(currentUser._id) ? '':sendRequest(data._id,currentUser._id)" style="background-color: rgb(240, 255, 255);" class="mx-1 text-primary float-end btn list-inline-item"> <i class="btn fa text-primary"  [class]=" friendsId.includes(currentUser._id) ? 'fa fa-user':'fa fa-user-plus'"  aria-hidden="true"></i> {{friendsId.includes(currentUser._id) ? ' Friend ':' Add Friend '}}</li>
                 </ul>
         </div>

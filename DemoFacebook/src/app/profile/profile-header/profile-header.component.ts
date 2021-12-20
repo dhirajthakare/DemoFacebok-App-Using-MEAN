@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { interval, Subscription } from 'rxjs';
+import { ChatMessangerComponent } from 'src/app/chat-messanger/chat-messanger.component';
 import { FriendrelationshipService } from 'src/app/services/friendrelationship.service';
 import { MessangerService } from 'src/app/services/messanger.service';
 import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
@@ -268,8 +269,9 @@ addMessangerEmoji(event:any){
   }
 
   OpenMessangerDia(){
-    const matDiaref = this.matDia.open(MessangerComponent,{
-      width:'700px',
+    const matDiaref = this.matDia.open(ChatMessangerComponent,{
+      width:'500px',
+      height:'500px',
       data:{
         user_id:this.data._id,
         friend_id:this.currentUser._id

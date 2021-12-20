@@ -51,6 +51,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AccountCreateDialogComponent } from './create-and-login/account-create-login/account-create-dialog/account-create-dialog.component';
+import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { AccountCreateDialogComponent } from './create-and-login/account-create-
     EnterNewPasswordComponent,
     RecoverComponent,
     AccountCreateDialogComponent,
+    ChatMessangerComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,8 +110,7 @@ import { AccountCreateDialogComponent } from './create-and-login/account-create-
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    MatDialogModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent],
