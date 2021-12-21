@@ -12,7 +12,7 @@ var transport = require('../database/mailConnection')
 
 
 // welcome api
-exports.home = (req,res)=>{
+exports.home = async (req,res)=>{
     res.send("hello bro");
 }
 

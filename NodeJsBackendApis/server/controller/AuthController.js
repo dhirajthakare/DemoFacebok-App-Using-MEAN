@@ -46,49 +46,62 @@ exports.createAcc = async (req,res)=>{
 
 
 // Updated Account 
-exports.updateAccount =(req,res)=>{
-    var file = req.file;
-    var filename;
-    if(file){
-        filename = "/assets/profileupload/"+file.filename;
-    }
+exports.updateAccount = async (req,res)=>{
+    try{
+        var file = req.file;
+        var filename;
+        if(file){
+            filename = "/assets/profileupload/"+file.filename;
+        }
+        
+        
+          var updatedAcc = await usermodal.updateOne({_id:req.params.id} , {$set:{
+            name:req.body.fname+"  "+req.body.lname,
+            birthOfDate:req.body.birthOfDate,
+            profileUrl:filename,
+            gender: req.body.gender
     
+        }} );
     
-    usermodal.updateOne({_id:req.params.id} , {$set:{
-        name:req.body.fname+"  "+req.body.lname,
-        birthOfDate:req.body.birthOfDate,
-        profileUrl:filename,
-        gender: req.body.gender
-
-    }} ).then(responce=>{
-        usermodal.findOne({_id:req.params.id}).then(data=>{
+        if(updatedAcc){
+            var data = await usermodal.findOne({ _id:req.params.id })
             res.json(data);
-        })
-    }).catch(err=>{
-        res.status(400).json("Somthing Wrong Please try Again "+err);
-    })
+        }
+    }
+    catch(err){
+        res.status(400).json(err);
+
+    }
 
    }
 
 
 
    //Login Account 
-exports.loginUser = (req,res)=>{
+exports.loginUser = async (req,res)=>{
      
-   usermodal.findOne({email:req.body.email}).then((responce)=>{
+    try{
+        var data = await usermodal.findOne({email:req.body.email});
+
+        if(data){
 
          decipher = crypto.createDecipher(algo,key);
-         decryptedPass = decipher.update(responce.password,'hex','utf8')+decipher.final('utf8');
-        
-        if(decryptedPass == req.body.password){
-            res.json(responce);
+         decryptedPass = decipher.update(data.password,'hex','utf8')+decipher.final('utf8');
+         if(decryptedPass == req.body.password){
+            res.json(data);
         }else{
-            res.status(400).json("Password Is Invalid Please Try Agin");
+            throw " Password Is Invalid Please Try Agin ";
         }
-        // res.json(responce);
+        }else{
+            throw " Username Is Invalid ";
+        }
 
-   }).catch(err=>{
-       res.status(400).json("Username Is Invalid ");
-   })
+       
+    }
+    catch(err){
+        res.status(400).json(err);
+    }
+
+   
 }
 
