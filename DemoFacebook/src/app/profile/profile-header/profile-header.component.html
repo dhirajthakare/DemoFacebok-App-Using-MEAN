@@ -43,10 +43,7 @@
                 <!-- <li class=" btn list-inline-item" >More</li> -->
                     <!-- <li style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><i class="btn fab fas fa-user-check text-dark"></i></li> -->
                     <li *ngIf="data._id==currentUser._id" data-bs-toggle="modal" data-bs-target="#editProfile" style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><i class="btn fa fa fa-edit text-dark" ></i>Edit Profile</li>
-                    <!-- <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" data-bs-toggle="modal" data-bs-target="#messagermodal" ><i class="btn fab fa-facebook-messenger text-dark" (click)="messangerClick()" > <strong> Message</strong></i></li> -->
-                    <!-- <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" (click)="OpenMessangerDia()"> <strong> Message</strong></li> -->
                     <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"  style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item" (click)="OpenMessangerDia()"><i class="btn fab fa-facebook-messenger text-dark" > <strong> Message</strong></i></li>
-
                     <li *ngIf="data._id != currentUser._id "  (click)="friendsId.includes(currentUser._id) ? '':sendRequest(data._id,currentUser._id)" style="background-color: rgb(240, 255, 255);" class="mx-1 text-primary float-end btn list-inline-item"> <i class="btn fa text-primary"  [class]=" friendsId.includes(currentUser._id) ? 'fa fa-user':'fa fa-user-plus'"  aria-hidden="true"></i> {{friendsId.includes(currentUser._id) ? ' Friend ':' Add Friend '}}</li>
                 </ul>
         </div>
@@ -200,82 +197,5 @@
         </form>
         
         </div>
-    
-        <!-- messanger  -->
-        <!-- data-keyboard="false" data-backdrop="static" -->
-            <div style="margin-top: 80px;"  class="modal fade " id="messagermodal" tabindex="-1" aria-labelledby="messagermodalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" >
-                <div class="modal-dialog modal-dialog-scrollable" >
-                    <div class="modal-content" >
-    
-         <div class="row" style="height: 50px;">
-                    <div style="border-bottom: 1px solid rgb(207, 205, 205);">
-                        <span class="float-end m-3" #editModelClose data-bs-dismiss="modal" (click)="closemessanger()"><i class="fa fa-times"></i></span>
-    
-                    <div class="d-flex">
-                        <a class=" mx-2"  ><img height="38" width="38" style="border-radius: 21px;object-fit: cover;" [src]=" currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" ></a>
-                        <a *ngIf="currentUser" style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  ><h5 class="">{{currentUser.name.substr(0,15)}}</h5></a>
-                    </div>
-                </div>
-         </div>
-    
-        <div  style="height:400px; " class=" modal-body">
-            <div style=" margin-left: 39%;" class=" ">
-                <a style=" text-decoration: none;" [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100" [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
-                   
-                </a>
-            </div>
-            <h3 *ngIf="currentUser" class="text-center" style=" color:black ;">{{currentUser.name.substr(0,15)}}</h3>
-            <div *ngIf="currentUser">
-                <p class="text-center" >Deskbook</p>
-            <p class="text-center" >On deskbook {{currentUser.created_at | date:'medium'}}</p>
-            <p  *ngIf="currentUser.user_info" class="text-center" >{{currentUser.user_info.homeTown ? currentUser.user_info.homeTown : 'Not Mention'}}</p>
-            </div>
-    
-            <div *ngIf="allmessage" class="row">
-                        <!-- Reciever Message-->
-                <div *ngFor="let item of allmessage">
-                    
-                    <div *ngIf="item.sender_id != currentUser._id" class="media col-8 offset-4 ml-auto">
-                        <div class="media-body">
-                          <div class="bg-primary rounded py-2 px-3 mb-2">
-                            <p class="text-small mb-0 text-white">{{item.message}}</p>
-                          </div>
-                          <p class="small text-muted">{{item.created_at | date :'medium'}}</p>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <!-- Sender Message-->
-                    <div *ngIf="item.sender_id != data._id" class="media col-8 "><img [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" style="object-fit: cover; border-radius: 18px;" alt="user" width="36"  height="36" >
-                      <div class="media-body ml-3">
-                        <div style="background-color: aliceblue;" class=" rounded py-2 px-3">
-                          <p class="text-small mb-0 text-dark">{{item.message}}</p>
-                        </div>
-                        <p class="small text-muted">{{item.created_at | date:'medium'}}</p>
-                      </div>
-                    </div>
-                   </div>
-                </div>
-            </div>
-      
-             
-    
-             <div class="row">
-                    <div class="d-flex col-md-12">
-                        <div class="input-group">
-                            <input #sendmessage [(ngModel)]="chatMessage"  (keyup.enter)="sendmsg(sendmessage.value)"
-                            style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
-                            placeholder="Send Message...">
-                            <span (click)="updatePostToggleEmojiPicker()"  style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
-                        </div>
-                </div>
-             </div>
-    
-              </div>
-          </div>
-        </div>
-    <emoji-mart *ngIf="messageEmojiPicker"  (emojiSelect)="addMessangerEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '41%', right: '35%',width:'300px',height:'405px' }"></emoji-mart>
-    </div>
-        
-    
-    
+ 
 </div>

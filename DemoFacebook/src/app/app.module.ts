@@ -40,7 +40,6 @@ import { SearchResultSidebarComponent } from './search-results/search-result-sid
 import { SearchPostComponent } from './search-results/search-post/search-post.component';
 import { SearchPeopleComponent } from './search-results/search-people/search-people.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MessangerComponent } from './profile/messanger/messanger.component';
 import { FindYourAccountPageComponent } from './create-and-login/find-your-account-page/find-your-account-page.component';
 import { AccountCreateLoginComponent } from './create-and-login/account-create-login/account-create-login.component';
 import { EnterRecoverCodeComponent } from './create-and-login/enter-recover-code/enter-recover-code.component';
@@ -52,6 +51,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AccountCreateDialogComponent } from './create-and-login/account-create-login/account-create-dialog/account-create-dialog.component';
 import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
+import { MessangerComponent } from './chat-messanger/messanger/messanger.component';
 
 
 @NgModule({
@@ -88,7 +88,6 @@ import { ChatMessangerComponent } from './chat-messanger/chat-messanger.componen
     SearchResultSidebarComponent,
     SearchPostComponent,
     SearchPeopleComponent,
-    MessangerComponent,
     FindYourAccountPageComponent,
     AccountCreateLoginComponent,
     EnterRecoverCodeComponent,
@@ -96,6 +95,7 @@ import { ChatMessangerComponent } from './chat-messanger/chat-messanger.componen
     RecoverComponent,
     AccountCreateDialogComponent,
     ChatMessangerComponent,
+    MessangerComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,7 +115,6 @@ import { ChatMessangerComponent } from './chat-messanger/chat-messanger.componen
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    MessangerComponent,
     AccountCreateDialogComponent
   ]
 })
