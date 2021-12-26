@@ -4,6 +4,7 @@ import { FriendrelationshipService } from 'src/app/services/friendrelationship.s
 import { debounce , debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
 
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -40,5 +41,4 @@ export class SidebarComponent implements OnInit {
 
 
   }
-
 }

@@ -75,9 +75,11 @@ function AccontValid(res){
         errormessage.lname = "Your last name is not acceptable";
     } if(res.email=="" || !regemail.test(res.email) ){
         errormessage.email="Your email is invalid";
-    }  if(res.password=="" || !passReg.test(res.password) ){
-        errormessage.password = "Password Should be betweent 8-15 character which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"
-    } if(res.gender==""){
+    }  
+    // if(res.password=="" || !passReg.test(res.password) ){
+    //     errormessage.password = "Password Should be betweent 8-15 character which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character"
+    // } 
+    if(res.gender==""){
         errormessage.gender = "Gender should be selected"
     }
 
