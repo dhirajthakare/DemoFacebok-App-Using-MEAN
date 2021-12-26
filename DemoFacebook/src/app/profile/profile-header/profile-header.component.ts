@@ -3,10 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { interval, Subscription } from 'rxjs';
+import { ChatMessangerComponent } from 'src/app/chat-messanger/chat-messanger.component';
+import { MessangerComponent } from 'src/app/chat-messanger/messanger/messanger.component';
 import { FriendrelationshipService } from 'src/app/services/friendrelationship.service';
 import { MessangerService } from 'src/app/services/messanger.service';
 import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
-import { MessangerComponent } from '../messanger/messanger.component';
 import { ProfileComponent } from '../profile.component';
 
 @Component({
@@ -70,7 +71,6 @@ export class ProfileHeaderComponent implements OnInit,AfterViewInit,OnDestroy {
       });
       }
       
-      this.messagedisplay();
     });
   }
   
@@ -88,7 +88,6 @@ export class ProfileHeaderComponent implements OnInit,AfterViewInit,OnDestroy {
   
       }
       if(this.currentUser){
-        this.getAllMessage();
       }
     })
    
@@ -174,102 +173,14 @@ if(this.file){
   } 
 
 
-//  message Session
-
-@ViewChild('sendmessage') sendMessageInput : ElementRef | any
-chatMessage:any='';
-sendmsg(value:any){
-console.log(value)
-
-// let formdata = new FormData();
-// formdata.append('message',value);
-// formdata.append('sender_id',this.data.id);
-// formdata.append('receiver_id',this.currentUser.id);
-
-let dataf = {
-  "message":value,
-  "sender_id":this.data._id,
-  "receiver_id":this.currentUser._id,
-}
-
-this.messanger.sendmessage(dataf).subscribe(res=>{
-  console.log(res);
-  this.getAllMessage();
-  this.chatMessage = '';
-  this.sendMessageInput.nativeElement.focus();
-  this.messageEmojiPicker=false;
-
-})
-  }
-
-  allmessage :any;
-  getAllMessage(){
-    this.messanger.getmessage(this.data._id,this.currentUser._id).subscribe(res=>{
-      console.log(res);
-      this.allmessage=res;
-      // this.sendMessageInput.nativeElement.focus();
-
-    })
-  }
-  messangerdisplayBox:any
-  messagedisplay(){
-
-    this.messanger.messangerdisplayBox.subscribe(res=>{
-      this.messangerdisplayBox=res;
-    })
-  }
-
-  continuousgetmessage : Subscription | any;
-  public i:number = 0;
-  messangerClick(){
-
-    let intervaldata = interval(5000);
-
-    this.continuousgetmessage = intervaldata.subscribe(res=>{
-      // var length = Object.keys(this.allmessage).length;
-      // console.log(length)
-      this.getAllMessage();
-      this.sendMessageInput.nativeElement.focus();
-      console.log(this.i++);
-    })
-
-    setTimeout(() => {
-      this.sendMessageInput.nativeElement.focus();
-    }, 500);
-
-   
-  }
-
-  closemessanger(){
-this.continuousgetmessage.unsubscribe();
-  }
-  // messangerClick(){
-
-  //     this.messanger.friend_id=this.currentUser.id;
-  //     this.messanger.user_id = this.data.id;
-  //     this.messanger.profileUrl = this.currentUser.profileUrl;
-  //     this.messanger.friendname = this.currentUser.name;
-  //     this.messanger.messangerdisplayBox.next(true);
-  // }
-addMessangerEmoji(event:any){
-    console.log(event.emoji.native);
-
-    this.chatMessage = this.chatMessage+event.emoji.native
-  }
-
-  messageEmojiPicker:boolean=false;
- 
- 
-   updatePostToggleEmojiPicker() {
-     this.messageEmojiPicker = !this.messageEmojiPicker;
-   }
   ngOnDestroy(){
     // this.continuousgetmessage.unsubscribe();
   }
 
   OpenMessangerDia(){
     const matDiaref = this.matDia.open(MessangerComponent,{
-      width:'700px',
+      width:'500px',
+      height:'500px',
       data:{
         user_id:this.data._id,
         friend_id:this.currentUser._id

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
 import { AccountCreateLoginComponent } from './create-and-login/account-create-login/account-create-login.component';
 import { CreateAndLoginComponent } from './create-and-login/create-and-login.component';
 import { EnterNewPasswordComponent } from './create-and-login/enter-new-password/enter-new-password.component';
@@ -18,7 +19,6 @@ import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { Sidebar2Component } from './main/sidebar2/sidebar2.component';
 import { AboutProfileComponent } from './profile/about-profile/about-profile.component';
 import { AllPhotosComponent } from './profile/all-photos/all-photos.component';
-import { MessangerComponent } from './profile/messanger/messanger.component';
 import { ProfileStoryArchiveComponent } from './profile/profile-story-archive/profile-story-archive.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserFriendsComponent } from './profile/user-friends/user-friends.component';
@@ -57,7 +57,6 @@ const routes: Routes = [
     {path:'friends' , component:UserFriendsComponent},
     {path:'about' , component:AboutProfileComponent},
     {path:'archive' , component:ProfileStoryArchiveComponent},
-    {path:'messanger' , component:MessangerComponent},
 
   ] },
   {path:'friends',component:FriendsComponent, children:[
@@ -72,6 +71,7 @@ const routes: Routes = [
     {path:'peoples',component:SearchPeopleComponent},
 
   ]},
+  {path:'messanger',component:ChatMessangerComponent},
   // {path:':name' , component:ProfileComponent},
   {path:'**' , component:ErrorComponent},
 
