@@ -59,7 +59,7 @@
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createlike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getlikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getlikes =='' ">{{item.likeCounts}}</span> </p> -->
-                        <p (click)="onclick(item)" data-bs-toggle="modal" data-bs-target="#createlike"> <i
+                        <p (click)="likeDialog(item)"> <i
                                 class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getlikes,data._id) &&
                             item.likeCounts ==1 ? 'You' : CheckUserLike(item.getlikes,data._id) && item.likeCounts > 1 ? 'You And
                             '+(item.likeCounts - 1)+' Others ' : item.likeCounts }} </p>
@@ -149,43 +149,7 @@
     </div>
 </div>
 
-
-<!-- create like model -->
-
-<div style="margin-top: 140px;" class="modal fade" id="createlike" tabindex="-1" aria-labelledby="createlikeLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div *ngIf="moderdata" class="modal-header">
-                <p> <span class="m-3"> <strong> All </strong> {{moderdata.likeCounts}} </span> <span class="m-3"><i
-                            class="fa fa-thumbs-up text-primary" aria-hidden="true"></i>{{moderdata.likeCounts}} </span>
-                </p>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <!-- {{item.user|json}} -->
-            <div *ngIf="moderdata" class="modal-body" style="height: 350px;">
-                <ul *ngFor="let user of moderdata.getlikes" class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="d-flex">
-                            <a [href]="'/profile/'+user.userclick_id.userToken"
-                                [href]="user.userclick_id.profileUrl ? 'http://localhost:2000'+user.userclick_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img
-                                    height="38" width="38" style="border-radius: 19px;object-fit: cover;"
-                                    [src]="user.userclick_id.profileUrl ? 'http://localhost:2000'+user.userclick_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                    alt="hell"></a>
-                            <i class="fa fa-thumbs-up text-primary mt-4" aria-hidden="true"></i>
-                            <a [href]="'/profile/'+user.userclick_id.userToken" style="text-decoration: none; color: black;" class=" mt-2 mx-3" href="">
-                                <p class=""> {{user.userclick_id.name}}</p>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</div>
  
-
 <!-- Update Post   Modal -->
 <div class="modal fade mt-2" id="UpdatePost" tabindex="-1" aria-labelledby="UpdatePostLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
