@@ -1,11 +1,10 @@
 
-<!-- Create Post   Modal -->
+<!-- Create Post  -->
     <div class="">
         <div class="card">
             <div class="card-header">
                 <div class="text-end">
-                    <a class="text-secondary btn-close" #createPostModalClose mat-dialog-close></a>
-                    <!-- <button type="button" class="btn-close"  mat-dialog-close aria-label="Close"></button> -->
+                    <a class="text-secondary btn-close" mat-dialog-close></a>
                 </div>
                 <h4 class="text-center">Create Post </h4><br>
 
@@ -75,7 +74,7 @@
                     </form>
                 </div>
             </div>
-            <emoji-mart  *ngIf="showEmojiPicker1" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
+            <emoji-mart  *ngIf="createPostEmojiPicker" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
 
 
         </div>

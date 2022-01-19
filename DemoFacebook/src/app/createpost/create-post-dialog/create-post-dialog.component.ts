@@ -32,20 +32,14 @@ export class CreatePostDialogComponent implements OnInit {
   
 
   
-  @ViewChild('createPostModalClose') createPostModalClose: any;
   addstatus: any = this.data.addstatus;
-
-
   public createPost = this.fb.group({
     'status': '',
     'post': '',
     'id': ''
   });
 
-  updatepostsuccess: any;
-  updateposterr: any;
   imageSrc: any;
-  updatesrc: any;
   file: any;
   onFilePostChange(e: any) {
     if (e.target.files) {
@@ -94,12 +88,10 @@ export class CreatePostDialogComponent implements OnInit {
 
 
   // this is form Emoji Picker of Create Post 
-  showEmojiPicker1: boolean = false;
-
-
+  createPostEmojiPicker: boolean = false;
 
   toggleEmojiPicker1() {
-    this.showEmojiPicker1 = !this.showEmojiPicker1;
+    this.createPostEmojiPicker = !this.createPostEmojiPicker;
   }
 
   // toggleEmojiPicker1(item:any) {
@@ -109,8 +101,7 @@ export class CreatePostDialogComponent implements OnInit {
   // }
   onFocus() {
     console.log('focus');
-    this.showEmojiPicker1 = false;
-    this.commentEmojiPicker2 = false;
+    this.createPostEmojiPicker = false;
 
   }
 
@@ -126,13 +117,6 @@ export class CreatePostDialogComponent implements OnInit {
     // this.showEmojiPicker = false;
   }
 
-    //Emoji for Create Post 
-    commentEmojiPicker2: boolean = false;
-    createPostEmojiPicker: boolean = false;
-  
-    toggleEmojiPicker() {
-      console.log(this.commentEmojiPicker2);
-      this.commentEmojiPicker2 = !this.commentEmojiPicker2;
-    }
+
 
 }
