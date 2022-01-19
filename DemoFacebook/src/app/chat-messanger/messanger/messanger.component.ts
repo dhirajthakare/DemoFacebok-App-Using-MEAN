@@ -100,7 +100,7 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
   public i:number = 0;
   messangerClick(){
 
-    let intervaldata = interval(5000);
+    let intervaldata = interval(4000);
 
     this.continuousgetmessage = intervaldata.subscribe(res=>{
       // var length = Object.keys(this.allmessage).length;
