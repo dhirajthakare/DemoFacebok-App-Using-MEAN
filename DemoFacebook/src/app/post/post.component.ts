@@ -4,8 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreatePostService } from '../services/create-post.service';
+import { FriendrelationshipService } from '../services/friendrelationship.service';
+import { ShareServiceService } from '../services/share-service.service';
 import { UsermiddlewareService } from '../services/usermiddleware.service';
 import { LikeUserDialogComponent } from './like-user-dialog/like-user-dialog.component';
+
 
 @Component({
   selector: 'app-post',
@@ -23,8 +26,10 @@ export class PostComponent implements OnInit {
     private route: Router,
     private userservice: UsermiddlewareService,
     private toastr: ToastrService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private friend:FriendrelationshipService,
+    private sharedService : ShareServiceService
+    ) { }
 
   Loader = true;
   allPosts: any;
@@ -45,6 +50,16 @@ export class PostComponent implements OnInit {
   @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
 
   ngOnInit(): void {
+    this.sharedService.postSavedSource.subscribe(res => {
+      if(res){
+        this.getCurrentUserpost();
+        this.sharedService.postSavedSource.next(false)
+      }
+      console.log(res)
+    })
+
+
+    this.allPosts=[];
     console.log(this.PostLocation);
     this.Loader = true
     this.userservice.currentLoginUser.subscribe((res: any) => {
@@ -65,9 +80,11 @@ export class PostComponent implements OnInit {
     this.userservice.currentVisitedUser.subscribe((res: any) => {
       this.currentUser = res;
       console.log(res);
-      if (this.currentUser) {
+      if (this.currentUser || this.PostLocation=="Main") {
         this.getCurrentUserpost();
       }
+    
+
     })
 
   }
@@ -76,23 +93,47 @@ export class PostComponent implements OnInit {
   getCurrentUserpost() {
 
     if(this.PostLocation == "Profile"){
+      console.log(this.PostLocation)
+      console.log("Profile  Componant");
       this.datasubtitle = this.userservice.getCurrentUserPost(this.currentUser._id, this.data._id).subscribe((res) => {
         this.Loader = false
         this.allPosts = res;
         console.log(res);
+        
       }, err => {
         this.Loader = false
         console.log(err);
       })
-    }else{
+    }else if(this.PostLocation == "Main"){
+      console.log(this.PostLocation)
+      console.log("Main Componant");
+      this.getAllFriendsId();
 
 
     }
     
 
-
-
   }
+  friendsId:any;
+  getAllFriendsId(){
+
+    this.friend.userLoginFriendsId.subscribe(res=>{
+      this.friendsId = res;
+      if(this.friendsId){
+        this.friend.getAllFriendsPost(this.friendsId).subscribe(res => {
+          this.Loader = false;
+          this.allPosts = '';
+          this.allPosts = res;
+          console.log(this.allPosts);
+    
+        }, err => {
+          this.Loader = false;
+          console.log(err);
+        })
+      }
+    })
+
+    }
 
   likestarted: boolean = false;
   onlike(post_id: any, user_id: any) {

@@ -201,9 +201,9 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class=" input-group">
-                                    <input *ngIf="currentUser" formControlName='status' class="form-control "
+                                    <input *ngIf="data" formControlName='status' class="form-control "
                                     type="text" name="status" id="status1"
-                                    placeholder="What's on your mind , {{currentUser.name.substr(0,7)}} ?" aria-label="Search" (focus)="onFocus()">
+                                    placeholder="What's on your mind , {{data.name.substr(0,7)}} ?" aria-label="Search" (focus)="onFocus()">
                                     <span (click)="updatePostToggleEmojiPicker()"  class=" input-group-text">🙂</span>
                                 </div>
 

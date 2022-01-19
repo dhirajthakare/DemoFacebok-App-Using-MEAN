@@ -1,39 +1,40 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { concat } from 'rxjs';
-import { CreatePostService } from '../services/create-post.service';
-import { ShareServiceService } from '../services/share-service.service';
-import { UsermiddlewareService } from '../services/usermiddleware.service';
-import { CreatePostDialogComponent } from './create-post-dialog/create-post-dialog.component';
+import { CreatePostService } from 'src/app/services/create-post.service';
+import { ShareServiceService } from 'src/app/services/share-service.service';
+import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
 
 @Component({
-  selector: 'app-createpost',
-  templateUrl: './createpost.component.html',
-  styleUrls: ['./createpost.component.css']
+  selector: 'app-create-post-dialog',
+  templateUrl: './create-post-dialog.component.html',
+  styleUrls: ['./create-post-dialog.component.css']
 })
-export class CreatepostComponent implements OnInit {
+export class CreatePostDialogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
     private post: CreatePostService,
-    private route: Router,
-    private userservice: UsermiddlewareService,
-    private userss: UsermiddlewareService,
     private toastr: ToastrService,
-    private dialog: MatDialog,
-    private sharedService: ShareServiceService
-  ) { }
-  data: any;
-  ngOnInit(): void {
-    this.data = localStorage.getItem('accountHolder');
-    this.data = JSON.parse(this.data);
+    private sharedService: ShareServiceService,
+    private dialogRef : MatDialogRef<CreatePostDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
 
+
+  ) { }
+
+  ngOnInit(): void {
+    console.log(this.data);
   }
 
+  
+
+  
   @ViewChild('createPostModalClose') createPostModalClose: any;
+  addstatus: any = this.data.addstatus;
+
 
   public createPost = this.fb.group({
     'status': '',
@@ -78,7 +79,7 @@ export class CreatepostComponent implements OnInit {
       this.posterr = null;
       console.log(res);
       this.toastr.success(this.createpostsuccess, 'Success!');
-      this.createPostModalClose.nativeElement.click();
+      this.dialogRef.close(this.createPost.get('status')?.value);
       this.sharedService.postSavedSource.next(true)
     }, (err) => {
 
@@ -126,7 +127,6 @@ export class CreatepostComponent implements OnInit {
   }
 
     //Emoji for Create Post 
-    addstatus: any = "";
     commentEmojiPicker2: boolean = false;
     createPostEmojiPicker: boolean = false;
   
@@ -135,23 +135,4 @@ export class CreatepostComponent implements OnInit {
       this.commentEmojiPicker2 = !this.commentEmojiPicker2;
     }
 
-
-    dialogRef:any;
-  OpenDia() {
-    this.dialogRef = this.dialog.open(CreatePostDialogComponent , {
-      width: '600px',
-      data: {...this.data , ...{addstatus:this.addstatus}}
-    });
-
-    this.dialogRef.afterClosed().subscribe((res:any) => {
-      console.log(res);
-      // this.animal = result;
-      this.addstatus=res;
-    });
-  }
-
- 
-
-
 }
-
