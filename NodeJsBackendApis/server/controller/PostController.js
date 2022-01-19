@@ -11,6 +11,10 @@ var commentModal = require('../model/comments');
 exports.createPost = (req,res)=>{
     var file = req.file
 
+    if(!file){
+        res.status(400).json("Photo Should be selected");
+       }
+
     var send = new postModal({
         status:req.body.status,
         postUrl:"/assets/postStorage/"+file.filename,
@@ -34,10 +38,14 @@ exports.createPost = (req,res)=>{
 exports.updatePost= (req,res)=>{
 
     var file = req.file;
+        var filename;
+        if(file){
+            filename = "/assets/postStorage/"+file.filename;
+        }
 
     postModal.updateOne({_id:req.body.id} , {$set:{
         status:req.body.status,
-        postUrl:"/assets/postStorage/"+file.filename,
+        postUrl:filename,
     }}).then(responce=>{
         res.json(" Post Updated Successfully ");
     }).catch(err=>{

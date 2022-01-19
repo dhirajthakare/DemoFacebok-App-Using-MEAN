@@ -77,7 +77,7 @@ export class CreatePostDialogComponent implements OnInit {
       this.sharedService.postSavedSource.next(true)
     }, (err) => {
 
-      this.posterr = err.error.errors.postUrl[0];
+      this.posterr = err.error;
       this.createpostsuccess = null;
       console.log(err);
     })
