@@ -16,7 +16,9 @@ export class SearchPostComponent implements OnInit {
 
   box:any;
   allpost:any;
+  Loader:boolean = true
   style=`height: 240px; background-image: url('http://localhost:2000/assets/images/userdefault.png');background-size: cover; background-position: center;`;
+  
   ngOnInit(): void {
 
     this.friendship.serchbox.subscribe(res=>{
@@ -25,8 +27,10 @@ export class SearchPostComponent implements OnInit {
       this.getSearchPost(this.box);
     })
   }
+
   getSearchPost(search:any){
     this.postMiddle.searchPost(search).subscribe(res=>{
+      this.Loader = false;
       this.allpost = res;
       console.log(res);
     })
