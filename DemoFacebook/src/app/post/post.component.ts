@@ -1,13 +1,11 @@
 import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { CreatePostService } from '../services/create-post.service';
 import { FriendrelationshipService } from '../services/friendrelationship.service';
 import { ShareServiceService } from '../services/share-service.service';
 import { UsermiddlewareService } from '../services/usermiddleware.service';
 import { LikeUserDialogComponent } from './like-user-dialog/like-user-dialog.component';
+import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dialog.component';
 
 
 @Component({
@@ -21,11 +19,8 @@ export class PostComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder,
     private post: CreatePostService,
-    private route: Router,
     private userservice: UsermiddlewareService,
-    private toastr: ToastrService,
     private dialog: MatDialog,
     private friend:FriendrelationshipService,
     private sharedService : ShareServiceService
@@ -34,18 +29,7 @@ export class PostComponent implements OnInit {
   Loader = true;
   allPosts: any;
   data: any;
-  url: any;
 
-  public createPost = this.fb.group({
-    'status': '',
-    'post': '',
-    'id': ''
-  })
-  public UpdatePost = this.fb.group({
-    'status': '',
-    'post': '',
-    'id': ''
-  })
   @ViewChild('comment') commentfocus: ElementRef | any;
   @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
 
@@ -71,7 +55,6 @@ export class PostComponent implements OnInit {
     });
 
     console.log(this.data);
-    this.url = this.route.url;
   }
 
   currentUser: any;
@@ -161,76 +144,6 @@ export class PostComponent implements OnInit {
     }
 
   }
-  updatepostsuccess: any;
-  updateposterr: any;
-  imageSrc: any;
-  updatesrc: any;
-  file: any;
-
-  onFileUpdatePostChange(e: any) {
-    if (e.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.file = e.target.files[0];
-        console.log(this.file)
-        // console.log(this.imageSrc)
-        this.updatesrc = event.target.result;
-
-      }
-
-    }
-  }
-  onFilePostChange(e: any) {
-    if (e.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.file = e.target.files[0];
-        console.log(this.file)
-        // console.log(this.imageSrc)
-        this.imageSrc = event.target.result;
-
-      }
-
-    }
-  }
-  createpostsuccess: any;
-  posterr: any;
-  onUpdatepost() {
-
-    let formdata = new FormData;
-    formdata.append('status', this.UpdatePost.get('status')?.value);
-    formdata.append('id', this.UpdatePost.get('id')?.value);
-    if (this.file) {
-      formdata.append('postUrl', this.file);
-    }
-
-    this.post.updatePost(formdata).subscribe((res) => {
-      this.updatesrc = '';
-      this.file = '';
-      this.UpdatePost.reset();
-      this.getCurrentUserpost();
-      this.updatepostsuccess = res;
-      this.updateposterr = null;
-      console.log(res);
-      this.toastr.success(this.updatepostsuccess, 'Success!')
-      this.postUpdateModalClose.nativeElement.click();
-    }, (err) => {
-      this.updateposterr = err.error;
-      this.updatepostsuccess = null;
-      console.log(err);
-    })
-  }
-  edit(item: any) {
-    console.log(item);
-
-    this.UpdatePost.patchValue({
-      "status": item.status,
-      'id': item._id
-    })
-    this.updatesrc = "http://localhost:2000" + item.postUrl;
-  }
 
   comment: any = [];
   checkcomment: boolean = false;
@@ -312,37 +225,12 @@ export class PostComponent implements OnInit {
 
     }
   }
-
-
-  updatePostEmojiPicker: boolean = false;
-
-
-  updatePostToggleEmojiPicker() {
-    this.updatePostEmojiPicker = !this.updatePostEmojiPicker;
-  }
-  // toggleEmojiPicker1(item:any) {
-  //   console.log(item);
-  //   console.log(this.showEmojiPicker);
-  //   this.showEmojiPicker = !this.showEmojiPicker;
-  // }
+  
   onFocus() {
 
-    this.updatePostEmojiPicker = false;
     this.commentEmojiPicker = false;
 
   }
-
-  addEmojiUP(event: any) {
-    console.log(event.emoji.native);
-
-    this.UpdatePost.patchValue({
-      'status': this.UpdatePost.get('status')?.value + event.emoji.native
-
-    }
-    )
-    // this.showEmojiPicker = false;
-  }
-
 
   //Emoji for comments 
   addComments: any = "";
@@ -355,8 +243,6 @@ export class PostComponent implements OnInit {
     const addComments = this.addComments
     const text = addComments + event.emoji.native;
     this.addComments = text;
-
-    // this.commentEmojiPicker = false;
   }
 
   CheckUserLike(json: any, ids: any) {
@@ -377,6 +263,15 @@ export class PostComponent implements OnInit {
   likeDialog(item: any) {
 
     this.dialog.open(LikeUserDialogComponent, {
+      width: '500px',
+      data: item
+    });
+
+  }
+
+  UpdatePostDialog(item: any) {
+
+    this.dialog.open(UpdatePostDialogComponent, {
       width: '500px',
       data: item
     });
