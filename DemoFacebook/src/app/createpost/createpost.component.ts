@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UsermiddlewareService } from '../services/usermiddleware.service';
 import { CreatePostDialogComponent } from './create-post-dialog/create-post-dialog.component';
 
 @Component({
@@ -9,11 +10,17 @@ import { CreatePostDialogComponent } from './create-post-dialog/create-post-dial
 })
 export class CreatepostComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog , private service : UsermiddlewareService) { }
   data: any;
   ngOnInit(): void {
-    this.data = localStorage.getItem('accountHolder');
-    this.data = JSON.parse(this.data);
+    this.data = [];
+    this.service.currentLoginUser.subscribe((res: any)=>{
+      this.data = res;
+
+    })
+    // this.data = localStorage.getItem('accountHolder');
+    // this.data = JSON.parse(this.data);
+    console.log(this.data);
 
   }
 

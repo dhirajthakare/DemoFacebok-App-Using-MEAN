@@ -24,7 +24,9 @@ export class PostComponent implements OnInit {
     private dialog: MatDialog,
     private friend:FriendrelationshipService,
     private sharedService : ShareServiceService
-    ) { }
+    ) { 
+      this.data = [];
+    }
 
   Loader = true;
   allPosts: any;
@@ -34,6 +36,7 @@ export class PostComponent implements OnInit {
   @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
 
   ngOnInit(): void {
+    this.data =[];
     this.sharedService.postSavedSource.subscribe(res => {
       if(res){
         this.getCurrentUserpost();

@@ -1,76 +1,81 @@
 <!-- Update Post   Modal -->
-        <div class="card">
-            <div class="card-header">
-                <div class="text-end">
-                    <a class="text-secondary " mat-dialog-close ><i class="fa fa-times"></i></a>
+        <div class="">
+            <div class="card">
+                <div class="card-header">
+                    <div class="text-end">
+                        <button class="text-secondary  btn-close" mat-dialog-close ></button>
+                    </div>
+                    <h4 class="text-center">Edit Post </h4><br>
+    
+    
+                    <div *ngIf="updateposterr" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    
+                        </button>
+                        <strong>{{updateposterr.message?updateposterr.message:updateposterr}}</strong>
+                    </div>
+    
                 </div>
-                <h4 class="text-center">Edit Post </h4><br>
+    
+                    <div style="overflow-y: auto; height: 500px;" class="card-body p-3">
+    
 
 
-                <div *ngIf="updateposterr" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-
-                    </button>
-                    <strong>{{updateposterr.message?updateposterr.message:updateposterr}}</strong>
-                </div>
-
-            </div>
-
-                <div class="card-body p-3">
-
-                    <form [formGroup]='UpdatePost' method="POST" id="UpdatePost" (submit)='onUpdatepost()'>
-
-                        <div class="row">
-                            <div class=" col-md-2">
-                                <a
-                                    [href]="data.postUser.profileUrl ? 'http://localhost:2000'+data.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img
-                                        height="50" width="50" style="border-radius: 25px; object-fit: cover;"
-                                        [src]="data.postUser.profileUrl ? 'http://localhost:2000'+data.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                        alt="hell"></a>
-                            </div>
-                            <div class="col-md-6">
-                                <span style="text-decoration: none; color: black;" class=""><span class="">
-                                        {{data.postUser.name}}</span></span>
-                                <p title="Public"> <i class="fa fa-firefox" aria-hidden="true"></i>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mb-3">
+                        <form [formGroup]='UpdatePost' method="POST" id="UpdatePost" (submit)='onUpdatepost()'>
+    
                             <div class="row">
-                                <div class=" input-group">
-                                    <input *ngIf="data" formControlName='status' class="form-control "
-                                    type="text" name="status" id="status1"
-                                    placeholder="What's on your mind , {{data.postUser.name.substr(0,7)}} ?" aria-label="Search" (focus)="onFocus()">
-                                    <span (click)="updatePostToggleEmojiPicker()"  class=" input-group-text">🙂</span>
+                                <div class=" col-md-2">
+                                    <a
+                                        [href]="data.postUser.profileUrl ? 'http://localhost:2000'+data.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img
+                                            height="50" width="50" style="border-radius: 25px; object-fit: cover;"
+                                            [src]="data.postUser.profileUrl ? 'http://localhost:2000'+data.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                                            alt="hell"></a>
                                 </div>
-
+                                <div class="col-md-6">
+                                    <span style="text-decoration: none; color: black;" class=""><span class="">
+                                            {{data.postUser.name}}</span></span>
+                                    <p title="Public"> <i class="fa fa-firefox" aria-hidden="true"></i>
+                                    </p>
+                                </div>
                             </div>
-
-                        </div>
-                        <div class="my-4" *ngIf="updatesrc">
-                            <img height="300" width="400" style="object-fit: cover;" [src]="updatesrc" alt="">
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                <input formControlName='post' (change)="onFileUpdatePostChange($event)" accept='image/*'
-                                    type="file" capture="capture" name="post" class="form-control col mx-1" id="post1">
-
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class=" input-group">
+                                        <input *ngIf="data" formControlName='status' class="form-control "
+                                        type="text" name="status" id="status1"
+                                        placeholder="What's on your mind , {{data.postUser.name.substr(0,7)}} ?" aria-label="Search" (focus)="onFocus()">
+                                        <span (click)="updatePostToggleEmojiPicker()"  class=" input-group-text">🙂</span>
+                                    </div>
+    
+                                </div>
+    
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                <input style="border-radius: 12px;" type="text" name="updatepost" disabled
-                                    placeholder="Add to Your Post" class="form-control form-control-lg col mx-1"
-                                    id="updatepost">
+                            <div class="my-4" *ngIf="updatesrc">
+                                <img height="300" width="400" style="object-fit: contain;" [src]="updatesrc" alt="">
                             </div>
-                        </div>
-
-                        <button type="submit" id="Edit" class="btn btn-primary form-control btn-block"> Edit
-                            Post</button>
-
-                    </form>
-                </div>
-
-            <emoji-mart  *ngIf="updatePostEmojiPicker" (emojiSelect)="addEmojiUP($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
-
+                            <div class="mb-3">
+                                <div class="row">
+                                    <input formControlName='post' (change)="onFileUpdatePostChange($event)" accept='image/*'
+                                        type="file" capture="capture" name="post" class="form-control col mx-1" id="post1">
+    
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <input style="border-radius: 12px;" type="text" name="updatepost" disabled
+                                        placeholder="Add to Your Post" class="form-control form-control-lg col mx-1"
+                                        id="updatepost">
+                                </div>
+                            </div>
+    
+                            <button type="submit" id="Edit" class="btn btn-primary form-control btn-block"> Edit
+                                Post</button>
+    
+                        </form>
+                    </div>
+    
+                <emoji-mart  *ngIf="updatePostEmojiPicker" (emojiSelect)="addEmojiUP($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '2%', right: '2%',width:'220px',height:'420px' }"></emoji-mart>
+    
+            </div>
+    
         </div>
