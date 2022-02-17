@@ -55,6 +55,9 @@ import { MessangerComponent } from './chat-messanger/messanger/messanger.compone
 import { LikeUserDialogComponent } from './post/like-user-dialog/like-user-dialog.component';
 import { CreatePostDialogComponent } from './createpost/create-post-dialog/create-post-dialog.component';
 import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
+import { FriendsChatSideBar1Component } from './chat-messanger/friends-chat-side-bar1/friends-chat-side-bar1.component';
+import { FriendsChatSideBar2Component } from './chat-messanger/friends-chat-side-bar2/friends-chat-side-bar2.component';
+import { FriendsChatMainComponent } from './chat-messanger/friends-chat-main/friends-chat-main.component';
 
 
 @NgModule({
@@ -102,6 +105,9 @@ import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post
     LikeUserDialogComponent,
     CreatePostDialogComponent,
     UpdatePostDialogComponent,
+    FriendsChatSideBar1Component,
+    FriendsChatSideBar2Component,
+    FriendsChatMainComponent,
   ],
   imports: [
     BrowserModule,

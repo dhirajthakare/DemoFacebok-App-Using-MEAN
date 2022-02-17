@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
+import { FriendsChatMainComponent } from './chat-messanger/friends-chat-main/friends-chat-main.component';
 import { AccountCreateLoginComponent } from './create-and-login/account-create-login/account-create-login.component';
 import { CreateAndLoginComponent } from './create-and-login/create-and-login.component';
 import { EnterNewPasswordComponent } from './create-and-login/enter-new-password/enter-new-password.component';
@@ -71,8 +72,9 @@ const routes: Routes = [
     {path:'peoples',component:SearchPeopleComponent},
 
   ]},
-  {path:'messanger',component:ChatMessangerComponent},
-  // {path:':name' , component:ProfileComponent},
+  {path:'messanger',component:ChatMessangerComponent ,children:[
+    {path:'' , component:FriendsChatMainComponent}
+  ] },
   {path:'**' , component:ErrorComponent},
 
 
