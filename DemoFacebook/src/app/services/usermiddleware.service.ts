@@ -16,6 +16,8 @@ export class UsermiddlewareService {
 
   currentVisitedUser:any = new BehaviorSubject<any>('');
   currentLoginUser:any = new BehaviorSubject<any>('');
+  currentMessangerUser:any = new BehaviorSubject<any>('');
+
 
 
   createUserInfo(formdata:any){

@@ -15,8 +15,7 @@ export class MessangerComponent implements OnInit {
 
   constructor(
     private matdiaref:MatDialogRef<ProfileHeaderComponent>,
-    private activrouter : ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public data: {friend_id: any,user_id: any},
+    @Inject(MAT_DIALOG_DATA) public data:any,
     private messanger:MessangerService,
     private userservice:UsermiddlewareService
   ) { }
@@ -24,14 +23,9 @@ export class MessangerComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
 
-    this.activrouter.params.subscribe(res=>{
-      console.log(this.data.friend_id);
-      console.log(this.data.user_id);
-
       if(this.data){
         this.oninitgetdata();
       }
-    })
 
   }
   allmessage:any;
@@ -46,7 +40,7 @@ export class MessangerComponent implements OnInit {
   currentUser:any;
   oninitgetdata(){
 
-    this.userservice.currentVisitedUser.subscribe((res: any)=>{
+    this.userservice.getUser(this.data.userToken).subscribe((res: any)=>{
       this.currentUser = res;
       console.log(this.currentUser)
       if(this.currentUser){

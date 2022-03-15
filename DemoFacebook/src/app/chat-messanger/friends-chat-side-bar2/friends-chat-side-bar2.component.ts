@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
 
 @Component({
   selector: 'app-friends-chat-side-bar2',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendsChatSideBar2Component implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userservice:UsermiddlewareService
+  ) { }
 
+  data:any;
+  token:any;
   ngOnInit(): void {
+
+    this.userservice.currentMessangerUser.subscribe((res:any)=>{
+
+      this.token = res.userToken;
+
+      if(this.token){
+        this.userservice.getUser(this.token).subscribe(res=>{
+          this.data=res;
+        })
+      }
+
+    })
+
   }
 
 }

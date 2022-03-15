@@ -58,6 +58,7 @@ import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post
 import { FriendsChatSideBar1Component } from './chat-messanger/friends-chat-side-bar1/friends-chat-side-bar1.component';
 import { FriendsChatSideBar2Component } from './chat-messanger/friends-chat-side-bar2/friends-chat-side-bar2.component';
 import { FriendsChatMainComponent } from './chat-messanger/friends-chat-main/friends-chat-main.component';
+import { HomepageComponent } from './main/homepage/homepage.component';
 
 
 @NgModule({
@@ -108,6 +109,7 @@ import { FriendsChatMainComponent } from './chat-messanger/friends-chat-main/fri
     FriendsChatSideBar1Component,
     FriendsChatSideBar2Component,
     FriendsChatMainComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
