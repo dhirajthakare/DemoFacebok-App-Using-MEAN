@@ -48,6 +48,10 @@ export class FriendsChatMainComponent implements OnInit {
       console.log(this.currentUser)
       if(this.currentUser){
         this.getAllMessage();
+        setTimeout(() => {
+      this.sendMessageInput.nativeElement.focus();
+    }, 500);
+
         this.messangerClick();
       }
     })
@@ -103,13 +107,13 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
       // var length = Object.keys(this.allmessage).length;
       // console.log(length)
       this.getAllMessage();
-      this.sendMessageInput.nativeElement.focus();
+      // this.sendMessageInput.nativeElement.focus();
       console.log(this.i++);
     })
 
-    setTimeout(() => {
-      this.sendMessageInput.nativeElement.focus();
-    }, 500);
+    // setTimeout(() => {
+    //   this.sendMessageInput.nativeElement.focus();
+    // }, 500);
 
    
   }

@@ -1,4 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MessangerComponent } from 'src/app/chat-messanger/messanger/messanger.component';
 import { FriendrelationshipService } from 'src/app/services/friendrelationship.service';
 import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
 
@@ -11,7 +13,8 @@ export class Sidebar2Component implements OnInit {
 
   constructor(
     private userservice:UsermiddlewareService,
-     private friendship:FriendrelationshipService
+     private friendship:FriendrelationshipService,
+     private matDia:MatDialog
   ) { }
 
   data:any;
@@ -39,6 +42,20 @@ getUserFriends(){
     this.friends=res;
   },err=>{
     console.log(err);
+  })
+}
+
+OpenMessangerDia(item:any){
+  const matDiaref = this.matDia.open(MessangerComponent,{
+    width:'500px',
+    height:'500px',
+    data:{
+      user_id:this.data._id,
+      friend_id:item._id,
+      userToken:item.userToken,
+
+
+    }
   })
 }
 

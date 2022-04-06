@@ -5,6 +5,7 @@ import { Subscription, interval } from 'rxjs';
 import { ProfileHeaderComponent } from 'src/app/profile/profile-header/profile-header.component';
 import { MessangerService } from 'src/app/services/messanger.service';
 import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-messanger',
@@ -29,14 +30,26 @@ export class MessangerComponent implements OnInit {
 
   }
   allmessage:any;
+  @ViewChild('scrollMe')
+  private myScrollContainer!: ElementRef;
   @ViewChild('sendmessage') sendMessageInput : ElementRef | any
-
+  public i:number = 0;
   getAllMessage(){
     this.messanger.getmessage(this.data.user_id,this.data.friend_id).subscribe(res=>{
       console.log(res);
       this.allmessage=res;
+      if(this.allmessage){
+        if(this.i==1){
+          this.scrollToBottom();
+        }
+      }
     })
   }
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
   currentUser:any;
   oninitgetdata(){
 
@@ -91,7 +104,6 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
   }
 
   continuousgetmessage : Subscription | any;
-  public i:number = 0;
   messangerClick(){
 
     let intervaldata = interval(4000);
@@ -100,13 +112,9 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
       // var length = Object.keys(this.allmessage).length;
       // console.log(length)
       this.getAllMessage();
-      this.sendMessageInput.nativeElement.focus();
+      // this.sendMessageInput.nativeElement.focus();
       console.log(this.i++);
     })
-
-    setTimeout(() => {
-      this.sendMessageInput.nativeElement.focus();
-    }, 500);
 
    
   }
@@ -129,3 +137,4 @@ addMessangerEmoji(event:any){
   }
 
 }
+

@@ -8,7 +8,7 @@
                 <li style="font-size: larger;" class="list-inline-item mx-2 float-end"> <i class="fa fa-video-camera" aria-hidden="true"></i>                </li>
             </ul>
             <ul class="list-inline">
-                <input type="text" style="border-radius: 20px;" placeholder="Search Messenger " class=" form-control form-control-sm" name="" id="">
+                <input (keyup)="getUserSearchFriends(searchFrd.value)" #searchFrd type="text" style="border-radius: 20px;" placeholder="Search Messenger " class=" form-control form-control-sm" name="" id="">
                </ul>
         </div>
 

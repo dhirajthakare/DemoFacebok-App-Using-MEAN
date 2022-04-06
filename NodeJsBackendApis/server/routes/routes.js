@@ -54,6 +54,7 @@ route.get('/findfriends/:name' ,FriendController.findFriends);
 route.get('/getAddFriend/:id' ,FriendController.allfriends);
 route.get('/getallrequest/:id' ,FriendController.allRequest);
 route.get('/getuserfriends/:id' ,FriendController.allfriends);
+route.get('/alluserfriendssearch/:id/:name' ,FriendController.allfriendsearch);
 route.post('/allfriendspost' ,FriendController.allFriendsPosts);
 
 

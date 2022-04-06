@@ -37,9 +37,33 @@ getUserFriends(){
   this.friendship.getUseFriends(this.data._id).subscribe(res=>{
     console.log(res);
     this.friends=res;
+    this.assignRecentChat();
   },err=>{
     console.log(err);
   })
+}
+getUserSearchFriends(searchfrd:any){
+
+  console.log(searchfrd);
+  this.friendship.getUseSerachFriends(this.data._id,searchfrd).subscribe(res=>{
+    console.log(res);
+    // this.friends=res;
+  },err=>{
+    console.log(err);
+  })
+
+}
+
+assignRecentChat(){
+  console.log(this.friends.user_Friends[0]);
+
+  let newdata = {
+    friend_id:this.friends.user_Friends[0].friend_id._id,
+    user_id:this.data._id,
+    userToken:this.friends.user_Friends[0].friend_id.userToken
+  }
+  this.userservice.currentMessangerUser.next(newdata);
+
 }
 
 Opemessanger(data:any){

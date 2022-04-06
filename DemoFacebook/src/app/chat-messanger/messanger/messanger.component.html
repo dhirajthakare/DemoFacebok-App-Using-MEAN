@@ -8,17 +8,17 @@
                 <div style="border-bottom: 1px solid rgb(207, 205, 205);">
                     <span class="float-end" #editModelClose  mat-dialog-close><i class="fa fa-times"></i></span>
 
-                <div class="d-flex">
+                <div  *ngIf="currentUser" class="d-flex">
                     <a class=" mx-2"  ><img height="38" width="38" style="border-radius: 19px;object-fit: cover;" [src]=" currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" ></a>
-                    <a *ngIf="currentUser" style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  ><h4 class="">{{currentUser.name.substr(0,15)}}</h4></a>
+                    <a style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  ><h4 class="">{{currentUser.name.substr(0,15)}}</h4></a>
                 </div>
             </div>
      </div>
 
-    <div  style="height:400px; overflow-y: auto; overflow-x: hidden;" >
+    <div #scrollMe  style="height:400px; overflow-y: auto; overflow-x: hidden;" >
         <div style=" margin-left: 35%;" class=" ">
-            <a style=" text-decoration: none;" [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100" [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
-                <h3 *ngIf="currentUser" style=" color:black ;">{{currentUser.name.substr(0,15)}}</h3>
+            <a  *ngIf="currentUser" style=" text-decoration: none;" [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100" [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                <h3 style=" color:black ;">{{currentUser.name.substr(0,15)}}</h3>
 
             </a>
         </div>
