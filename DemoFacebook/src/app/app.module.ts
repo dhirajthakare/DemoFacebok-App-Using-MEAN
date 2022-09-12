@@ -11,7 +11,7 @@ import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { Sidebar2Component } from './main/sidebar2/sidebar2.component';
 import { ErrorComponent } from './error/error.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { UserProfileComponent } from './profile/user-profile/user-profile.component';
 import { PostComponent } from './post/post.component';
@@ -59,6 +59,7 @@ import { FriendsChatSideBar1Component } from './chat-messanger/friends-chat-side
 import { FriendsChatSideBar2Component } from './chat-messanger/friends-chat-side-bar2/friends-chat-side-bar2.component';
 import { FriendsChatMainComponent } from './chat-messanger/friends-chat-main/friends-chat-main.component';
 import { HomepageComponent } from './main/homepage/homepage.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 
 @NgModule({
@@ -126,7 +127,13 @@ import { HomepageComponent } from './main/homepage/homepage.component';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     AccountCreateDialogComponent
