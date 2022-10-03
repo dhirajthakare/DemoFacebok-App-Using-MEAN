@@ -1,0 +1,80 @@
+ <!-- Create Account  Modal -->
+ <div class="modal-dialog modal-dialog-scrollable ">
+    <div class="modal-content">
+
+            <div class="modal-header mt-2">
+                <div class="text-end">
+                    <a  class="text-secondary m-2 p-2 btn-close" mat-dialog-close></a>
+                </div>
+                <h4 class="text-center ">Add new User </h4><br>
+                
+
+            </div>
+        <div class="modal-body"  style="height: 420px;">
+            
+            <div class="card-body px-5">
+            
+            <form [formGroup]="createAccountForm"  method="post"  id="AddUser" (submit)="onSubmit()">
+
+                  <div  *ngIf="storeallerrors">
+                      <div *ngIf="!storeallerrors.fname && !storeallerrors.lname && !storeallerrors.email && !storeallerrors.gender && !storeallerrors.birthOfDate" class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <strong>{{storeallerrors}}</strong>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                  </div>
+                
+                <div class="mb-3">
+                    <div class="row">
+                        <input formControlName="fname" type="text" placeholder="Ex Dhiraj" name="fname" class="form-control col mx-1" id="fname" >
+                        <input type="text" formControlName="lname" placeholder="Ex Thakare" name="lname" class="form-control col mx-1" id="lname" >
+                        <p *ngIf='storeallerrors'><span *ngIf='storeallerrors.fname' class="text-danger">{{storeallerrors.fname}}.</span> <span *ngIf="storeallerrors.lname" class="text-danger">{{storeallerrors.lname}}.</span></p>
+
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <input type="email" formControlName="email" name="email" placeholder="Ex example@gmail.com" class="form-control col mx-1" id="email">
+                        <p *ngIf='storeallerrors'><span *ngIf='storeallerrors.email' class=" text-danger "> {{storeallerrors.email}} </span></p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <input type="password" formControlName="password" name="password" placeholder="Password" class="form-control col mx-1" id="password">
+                        <p *ngIf='storeallerrors'><span *ngIf='storeallerrors.password' class=" text-danger "> {{storeallerrors.password}} </span></p>
+                    </div>
+                </div>
+                
+                <div class="mb-2 ">
+                    <label for="">Birth Of Date</label>
+                    <div class="row">
+                        <input type="date" formControlName="birthOfDate" name="birthOfDate" class="form-control" id="birthOfDate">
+                        <p *ngIf='storeallerrors'><span *ngIf='storeallerrors.birthOfDate' class=" text-danger "> {{storeallerrors.birthOfDate}} </span></p>
+                    </div>
+                </div>
+               
+                <div class="mb-2">
+                    <label for="gender"> Select Gender</label><br>
+                    <div class="form-check form-check-inline">
+                        <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="Male" value="Male">
+                        <label class="form-check-label" for="Male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="Female" value="Female">
+                        <label class="form-check-label" for="Female">Female</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="Other" value="Other" >
+                        <label class="form-check-label" for="Other">Other</label>
+                      </div>
+                      <p *ngIf='storeallerrors'><span *ngIf='storeallerrors.gender' class=" text-danger "> {{storeallerrors.gender}} </span></p>
+                    </div>
+                 
+                <input type="submit" id="submit" class="btn btn-primary form-control btn-block" value="Sign Up">
+
+            </form>
+            </div>
+        </div>
+        
+    </div>
+  </div>
