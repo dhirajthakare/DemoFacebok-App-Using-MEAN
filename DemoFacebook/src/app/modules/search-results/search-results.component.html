@@ -1,0 +1,22 @@
+<div class="container-fluid d-flex flex-column flex-grow-1 vh-100 overflow-hidden">
+    <div  class="col-12 py-2">
+       <app-main-header ></app-main-header>
+    </div>
+    <div class="row flex-grow-1 overflow-hidden">
+        <div  style="border-right: 1px solid rgb(219, 219, 219);" class="col-md-3 mh-100 overflow-auto py-2">
+            <app-search-result-sidebar [searchbox]="searchbox"></app-search-result-sidebar>
+        </div>
+    
+        <div class="col-md-9 mh-100 overflow-auto py-2">
+            <router-outlet  class="col-md-8 offset-md-2"></router-outlet>
+        </div>
+
+   
+</div>
+<div class="row flex-shrink-0 bg-light">
+    <div class="col-12 pt-1">
+        <p class="text-center">Footer ...</p>
+    </div>
+</div>
+</div>
+<!-- <app-search-user-result   [style]="{ position: 'absolute', top: '12%', left: '0%', backgroundColor:'white',width:'330px' }"></app-search-user-result> -->

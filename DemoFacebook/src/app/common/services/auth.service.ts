@@ -6,16 +6,17 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  constructor(
-    private http:HttpClient
-  ) { }
-
   creatAccUrl = "http://localhost:2000/createAccount";
   loginAccUrl="http://localhost:2000/login";
   updateAccUrl = "http://localhost:2000/updateAccount/";
   sendMailUrl="http://localhost:2000/sendmail/";
   checkOtpUrl = "http://localhost:2000/checkopt/";
   changePasswordUrl = "http://localhost:2000/changepassword/";
+
+
+  constructor(
+    private http:HttpClient
+  ) { }
 
 
   createAcc(formdata:any){

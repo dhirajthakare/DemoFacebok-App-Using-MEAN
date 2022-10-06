@@ -1,0 +1,67 @@
+<div>
+    <div class="card">
+       
+        <div class="card-body">
+            <div class="row">
+               <div class="d-flex">
+                <h5 class="col-md-2">Friends</h5>
+                <div style="margin-left: 350px;" class="input-group mb-3">
+                    
+                    <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1"> <i class="fa fa-search" ></i> </span>
+                  </div>
+               </div>
+               
+                
+
+            </div>
+
+            <!-- <ul class="list-inline">
+                <li class=" btn  list-inline-item" routerLike="/deskbook"><h5>Friends</h5></li>
+                <li class=" btn list-inline-item float-end"><input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1">
+                </li>
+                </ul> -->
+                <div class="row">
+                    <div>
+                        <ul class="list-inline">
+                            <li class=" btn  list-inline-item" routerLike="/deskbook">All Friends</li>
+                            <!-- <li class=" btn list-inline-item ">muture Frineds</li>
+                            <li class=" btn list-inline-item ">Birthday</li>
+                            <li class=" btn list-inline-item ">College</li>
+                            <li class=" btn list-inline-item ">High School</li>
+                            <li class=" btn list-inline-item ">Current City</li>
+                            <li class=" btn list-inline-item ">Followes</li>
+                            <li class=" btn list-inline-item ">Following</li> -->
+    
+                            </ul>
+                    </div>
+                </div>
+
+                <div *ngIf="data" class="row">
+
+                    <div *ngFor="let item of currentUser.user_Friends" class="col-md-6 mt-2">
+
+                        <div class="card">
+                            <div class="card-body">
+                               <div class="row">
+                                <div [routerLink]="'/profile/'+item.friend_id.userToken" style="height: 80px;" class="col-md-3">
+                                    <img style="object-fit: cover;border-radius: 5px;" height="100%" width="100%" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                                </div>
+                                <div [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-8 mt-2">
+                                    <h5>{{item.friend_id.name}}</h5>
+                                    <p> Muture Friends </p>
+                                </div>
+                                <div *ngIf="currentUser && data" class="col-md-1 mt-3">
+                                    <i *ngIf="data._id==currentUser._id" class="fa fa-ellipsis-h"></i>
+                                </div>
+                               </div>
+                            </div>
+                        </div>
+
+                    </div>
+                  
+                </div>
+
+        </div>
+    </div>
+</div>

@@ -7,9 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SharedDataService {
 
-  constructor(private settitle:Title) { }
-
+  
   ActiveAccountHolder = new BehaviorSubject('');
+  public postSavedSource = new BehaviorSubject<boolean>(false);
+
+
+  constructor(private settitle:Title) { }
 
   changeTitle(StringTitle:string){
 

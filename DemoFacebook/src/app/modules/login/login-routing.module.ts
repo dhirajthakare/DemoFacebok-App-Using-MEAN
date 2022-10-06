@@ -8,12 +8,14 @@ import { LoginComponent } from './login.component';
 import { RecoverComponent } from './recover/recover.component';
 
 const routes: Routes = [
-  {path:'' , data: { title: 'Login Account' }, component:AccountCreateLoginComponent },
-  {path:'recover' , component:RecoverComponent, children:[
-  {path:'' , component:FindYourAccountPageComponent},
-  {path:'code' , component:EnterRecoverCodeComponent},
-  {path:'password' , component:EnterNewPasswordComponent},
-] },
+  {path:'' , data: { title: 'Login Account' }, component:LoginComponent , children:[
+    {path:'' , component:AccountCreateLoginComponent},
+    {path:'recover' , component:RecoverComponent, children:[
+      {path:'' , component:FindYourAccountPageComponent},
+      {path:'code' , component:EnterRecoverCodeComponent},
+      {path:'password' , component:EnterNewPasswordComponent},
+    ] }
+  ] },
 ];
 
 @NgModule({

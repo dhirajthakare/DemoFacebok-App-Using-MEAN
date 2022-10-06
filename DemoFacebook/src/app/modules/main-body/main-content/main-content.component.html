@@ -1,0 +1,16 @@
+<div style="overflow: hidden;">
+    <div>
+        <ul class="list-inline">
+            <li class=" btn  list-inline-item" routerLike="/deskbook">Home</li>
+            <li class=" btn list-inline-item">Favorites</li>
+            <li class=" btn list-inline-item">Recent</li>
+        </ul>
+        <hr class="text-secondary">
+        <app-show-stories class="d-flex" style="overflow-x: auto;" *ngIf="data" [loginUserId]="data._id" ></app-show-stories>
+        
+        </div>
+        <app-create-post></app-create-post>
+        <app-display-post [PostLocation]="'Main'"></app-display-post>
+    </div>
+    
+    

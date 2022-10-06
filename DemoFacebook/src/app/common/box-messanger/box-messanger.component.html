@@ -1,0 +1,75 @@
+  <!-- messanger  -->
+        <!-- data-keyboard="false" data-backdrop="static" -->
+        <div >
+            <div class="" >
+                <div class="" >
+
+     <div class="row" style="height: 50px;">
+                <div style="border-bottom: 1px solid rgb(207, 205, 205);">
+                    <span class="float-end" #editModelClose  mat-dialog-close><i class="fa fa-times"></i></span>
+
+                <div  *ngIf="currentUser" class="d-flex">
+                    <a class=" mx-2"  ><img height="38" width="38" style="border-radius: 19px;object-fit: cover;" [src]=" currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" ></a>
+                    <a style="text-decoration: none; color: black; margin-top: 10px;" class=" mx-2"  ><h4 class="">{{currentUser.name.substr(0,15)}}</h4></a>
+                </div>
+            </div>
+     </div>
+
+    <div #scrollMe  style="height:400px; overflow-y: auto; overflow-x: hidden;" >
+        <div style=" margin-left: 35%;" class=" ">
+            <a  *ngIf="currentUser" style=" text-decoration: none;" [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100" [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                <h3 style=" color:black ;">{{currentUser.name.substr(0,15)}}</h3>
+
+            </a>
+        </div>
+        <div *ngIf="currentUser">
+            <p class="text-center" >Deskbook</p>
+        <p class="text-center" >On deskbook {{currentUser.created_at | date:'medium'}}</p>
+        <p  *ngIf="currentUser.user_info" class="text-center" >{{currentUser.user_info.homeTown ? currentUser.user_info.homeTown : 'Not Mention'}}</p>
+        </div>
+
+        <div *ngIf="allmessage" class="row">
+                    <!-- Reciever Message-->
+            <div *ngFor="let item of allmessage">
+                
+                <div *ngIf="item.sender_id == data.user_id" class="media col-8 offset-4 ml-auto">
+                    <div class="media-body">
+                      <div class="bg-primary rounded py-2 px-3 mb-2">
+                        <p class="text-small mb-0 text-white">{{item.message}}</p>
+                      </div>
+                      <p class="small text-muted">{{item.created_at | date :'medium'}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- Sender Message-->
+                <div *ngIf="item.sender_id != data.user_id" class="media col-8 "><img [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" style="object-fit: cover; border-radius: 12px;" alt="user" width="30" height="30" class="rounded-circle">
+                  <div class="media-body ml-3">
+                    <div class="bg-light rounded py-2 px-3">
+                      <p class="text-small mb-0 text-muted">{{item.message}}</p>
+                    </div>
+                    <p class="small text-muted">{{item.created_at | date:'medium'}}</p>
+                  </div>
+                </div>
+               </div>
+            </div>
+        </div>
+  
+         
+
+         <div style="margin-bottom: 2%;" class="row">
+                <div class="d-flex col-md-12">
+                    <div class="input-group">
+                        <input #sendmessage [(ngModel)]="chatMessage"
+                        style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
+                        placeholder="Send Message..." (keyup.enter)="sendmsg(sendmessage.value)">
+                        <span (click)="MessageToggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
+                    </div>
+            </div>
+         </div>
+
+          </div>
+      </div>
+    </div>
+    <!-- <emoji-mart *ngIf="messageEmojiPicker"  (emojiSelect)="addMessangerEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Emojis" [style]="{ position: 'absolute', bottom: '28%', right: '35%',width:'300px',height:'405px' }"></emoji-mart> -->
+
+</div>

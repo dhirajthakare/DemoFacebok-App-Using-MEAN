@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-body">
+        <h4>Intro</h4>
+        <div>
+            <button *ngIf="data._id==currentUser._id"  class="form-control  "data-bs-toggle="modal" data-bs-target="#editProfile">Edit Profile Details</button><br>
+        </div>
+        <div *ngIf="currentUser.user_info">
+        <p *ngIf="currentUser.user_info.workplace"> <span><i class="fa fa-briefcase"></i></span> {{ currentUser.user_info.workplace}}<p>
+        <p *ngIf="currentUser.user_info.university" > <span><i class="fa fa-graduation-cap" aria-hidden="true"></i></span> Studied at {{currentUser.user_info.university}}</p>
+        <p *ngIf="currentUser.user_info.currentCity"> <span><i class="fa fa-home" aria-hidden="true"></i></span> Lives in {{currentUser.user_info.currentCity}}</p>
+        <p *ngIf="currentUser.user_info.homeTown"> <span><i class="fa fa-map-marker" aria-hidden="true"></i></span> From {{currentUser.user_info.homeTown}}</p>
+        <p *ngIf="currentUser.user_info.created_at"> <span><i class="fa fa-clock"></i></span> Joined June {{currentUser.created_at | date:'mediumDate'}}</p>
+        <p *ngIf="currentUser.user_info.relation"> <span><i class="fa fa-heart"></i></span> {{currentUser.user_info.relation }}</p>
+    </div>
+    </div>
+</div>

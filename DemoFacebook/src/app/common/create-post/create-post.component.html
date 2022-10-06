@@ -1,0 +1,45 @@
+
+<div class="row">
+    <div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <div class="col-md-1 col-1">
+                <a
+                [routerLink]="'/profile/'+data.userToken"><img
+                        height="50" width="50" style="border-radius: 25px; object-fit: cover;"
+                        [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                        alt="hell">
+                </a>
+            </div>
+            <div class="col-md-11 col-11 mx-3 mt-2 mt-md-2">
+                <form>
+                    <div class="input-group d-flex col-md-12">
+                        <input *ngIf="data"  (focus)="onFocus()" style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control " type="text"
+                        placeholder="What's on your mind , {{data.name.substr(0,7)}} ?" aria-label="Search" name="addstatus" [(ngModel)]="addstatus">
+                        <span (click)="toggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text">😀</span>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="row mt-2">
+        <div class="card">
+            <div class="card-body">
+                    <div class="row">
+                        <button class="btn col"><i class="fa text-danger fa-video-camera" aria-hidden="true"></i> Live
+                            Video </button>
+                        <button class="btn col" (click)="OpenDia()" ><i
+                                class="fa text-success fa-picture-o" aria-hidden="true"></i> Photo Video </button>
+                        <button class="btn col"><i class="fa text-warning fa-smile-o"
+                                aria-hidden="true"></i> Feeling/ Activity </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- <emoji-mart *ngIf="createPostEmojiPicker" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '8%', right: '20%' }"></emoji-mart> -->
+    
