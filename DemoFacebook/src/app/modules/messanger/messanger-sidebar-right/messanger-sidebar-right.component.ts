@@ -28,11 +28,6 @@ export class MessangerSidebarRightComponent implements OnInit {
     });
   }
 
-  
-// @HostListener("document:click")
-// clickedOut() {
-//   this.friendship.searchBoxVisibility.next(false);
-// }
 
 getUserFriends(){
   this.friendship.getUseFriends(this.data._id).subscribe(res=>{

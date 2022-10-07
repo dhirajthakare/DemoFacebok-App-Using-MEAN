@@ -34,38 +34,6 @@ ngOnInit(): void {
      
 }
 
-// onSubmit 
-  createAccountForm =  this.formbuilder.group({
-      'fname':'',
-      'lname':'',
-      'email':'',
-      'password':'',
-      'birthOfDate':'',
-      'gender':'',
-
-  })
-
-
-onSubmit(){
-  console.log(this.createAccountForm.value);
- 
-  this.service.createAcc(this.createAccountForm.value).subscribe((res)=>{
-    console.log(res);
-    this.regsuccess="Successfully Created Account ";
-    this.storeallerrors=null;
-    this.createAccountForm.reset();
-  },(err)=>{
-
-    console.log(err);
-
-    this.regsuccess=null;
-    this.storeallerrors = err.error;
-    console.log(this.storeallerrors)
-   
-  })
-}
-
-
   // On Login
 
   loginForm =  this.formbuilder.group({
@@ -97,23 +65,12 @@ onlogin(){
 
 
    this.loginerr = err.error;
-  //  if(!err.error){
-  //    this.loginerr=err
-  //  }else if(!err.error.message){
-  //   this.loginerr=err.error
-
-  //  }else 
-  //  this.loginerr=err.error.message;
-
-  //  this.loginsuccess=null
+   
  })
 }
 
 openAccountCreateDialog(){
-let diaRefrence = this.dialog.open(AccountCreateDialogComponent, { data:{
-  Name:'Dhiraj',
-  Sirname:'Thakare'
-}});
+let diaRefrence = this.dialog.open(AccountCreateDialogComponent);
 }
 
 
