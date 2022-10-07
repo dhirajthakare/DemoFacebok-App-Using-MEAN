@@ -6,6 +6,7 @@ import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dial
 import { LikeUserDialogComponent } from './like-user-dialog/like-user-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    PickerModule
     ],
     exports:[
       DisplayPostComponent

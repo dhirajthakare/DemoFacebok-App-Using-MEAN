@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { PostService } from '../../services/post.service';
 import { SharedDataService } from '../../services/shared-data.service';
 
@@ -15,7 +16,7 @@ export class CreatePostDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private post: PostService,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private sharedService: SharedDataService,
     private dialogRef : MatDialogRef<CreatePostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -70,7 +71,7 @@ export class CreatePostDialogComponent implements OnInit {
       this.createpostsuccess = res;
       this.posterr = null;
       console.log(res);
-      // this.toastr.success(this.createpostsuccess, 'Success!');
+      this.toastr.success(this.createpostsuccess, 'Success!');
       this.dialogRef.close(this.createPost.get('status')?.value);
       this.sharedService.postSavedSource.next(true)
     }, (err) => {

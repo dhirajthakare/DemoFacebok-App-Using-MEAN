@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
 import { FriendService } from '../services/friend.service';
 import { UserService } from '../services/user.service';
@@ -26,7 +27,7 @@ constructor(
   private navicateRoute : Router,
   private friendship:FriendService,
   private userservice:UserService,
-  // private toastr:ToastrService
+  private toastr:ToastrService
 
    ) { }
 
@@ -86,7 +87,7 @@ this.AccountD.updateUser(formdata,this.data._id).subscribe(res=>{
   console.log(res);
   this.updateerr=null;
   this.userservice.currentLoginUser.next(res);
-  // this.toastr.success('Profile Updated SucceesFully ','Success!')
+  this.toastr.success('Profile Updated SucceesFully ','Success!')
   this.updateModalClose.nativeElement.click();
 
   // window.location.reload()

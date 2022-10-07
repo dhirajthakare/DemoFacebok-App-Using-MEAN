@@ -8,6 +8,7 @@ import { MessangerSidebarLeftComponent } from './messanger-sidebar-left/messange
 import { MessangerMainComponent } from './messanger-main/messanger-main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainHeaderModule } from 'src/app/common/main-header/main-header.module';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MainHeaderModule } from 'src/app/common/main-header/main-header.module'
     MessangerRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MainHeaderModule
+    MainHeaderModule,
+    PickerModule
   ]
 })
 export class MessangerModule { }

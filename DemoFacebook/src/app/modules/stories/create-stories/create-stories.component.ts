@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { StorieService } from 'src/app/common/services/storie.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -15,7 +16,7 @@ export class CreateStoriesComponent implements OnInit {
     private userservice:UserService,
     private storymanage:StorieService,
     private router:Router,
-    // private toastr:ToastrService,
+    private toastr:ToastrService,
     private location: Location
   ) { }
  data:any;
@@ -55,7 +56,7 @@ export class CreateStoriesComponent implements OnInit {
       this.storymanage.createstory(formdata).subscribe((res)=>{
         this.storysrc = '';
         this.file='';
-        // this.toastr.success('Story Created Successfully ','Success!');
+        this.toastr.success('Story Created Successfully ','Success!');
         this.location.back();
             },(err)=>{
 

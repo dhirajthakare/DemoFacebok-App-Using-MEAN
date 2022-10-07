@@ -20,6 +20,8 @@
                     </div>
     
                 </form>
+                <emoji-mart *ngIf="createPostEmojiPicker" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '85%', right: '20%' }"></emoji-mart>
+
             </div>
         </div>
     
@@ -41,5 +43,4 @@
     </div>
     </div>
     </div>
-    <!-- <emoji-mart *ngIf="createPostEmojiPicker" (emojiSelect)="addEmoji($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '8%', right: '20%' }"></emoji-mart> -->
     

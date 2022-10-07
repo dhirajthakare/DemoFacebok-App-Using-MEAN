@@ -6,6 +6,7 @@ import { CreatePostComponent } from './create-post.component';
 import { CreatePostDialogComponent } from './create-post-dialog/create-post-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     CreatePostRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    PickerModule
   ],
   exports:[
     CreatePostComponent

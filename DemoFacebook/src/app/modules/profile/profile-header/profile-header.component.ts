@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { BoxMessangerComponent } from 'src/app/common/box-messanger/box-messanger.component';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
@@ -20,7 +21,7 @@ export class ProfileHeaderComponent implements OnInit {
     private fb:FormBuilder,
     private profileComp:ProfileComponent,
     private friend:FriendService,
-    // private toastr:ToastrService,
+    private toastr:ToastrService,
     private matDia:MatDialog
   ) { }
 
@@ -102,7 +103,7 @@ export class ProfileHeaderComponent implements OnInit {
       sendRequest(uid:any,fid:any){
   
         this.friend.sendRequest(uid,fid).subscribe(res=>{
-          // this.toastr.success('Request send succeessfully');
+          this.toastr.success('Request send succeessfully');
         },err=>{
           console.log(err);
         })
@@ -112,7 +113,7 @@ export class ProfileHeaderComponent implements OnInit {
        if(confirm('Are you sure you want to remove '+this.currentUser.name +' as your friend?')){
         this.friend.unfriend(this.data._id,this.currentUser._id).subscribe(res =>{
           console.log(res);
-          // this.toastr.success("Successfully Remove From Your Friend List",'Success!');
+          this.toastr.success("Successfully Remove From Your Friend List",'Success!');
           this.profileComp.ngOnInit();
           this.ngOnInit();
         },err=>{
@@ -160,7 +161,7 @@ if(this.file){
       this.CoverPhoto='';
       this.file=null;
       this.profileComp.getCurrentUserData();
-      // this.toastr.success('Profile Updated Successfully', 'Success!');
+      this.toastr.success('Profile Updated Successfully', 'Success!');
       this.editModelClose.nativeElement.click();
 
     },err=>{

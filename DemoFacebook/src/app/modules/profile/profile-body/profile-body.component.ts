@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 import { ProfileComponent } from '../profile.component';
@@ -15,7 +16,7 @@ export class ProfileBodyComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private userservice: UserService,
     private profileComp: ProfileComponent,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private friend: FriendService
   ) { }
 
@@ -72,7 +73,7 @@ export class ProfileBodyComponent implements OnInit {
 
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(res => {
-      // this.toastr.success('Request send succeessfully');
+      this.toastr.success('Request send succeessfully');
     }, err => {
       console.log(err);
     })

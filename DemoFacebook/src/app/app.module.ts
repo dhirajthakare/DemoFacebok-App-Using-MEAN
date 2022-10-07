@@ -7,6 +7,9 @@ import { HttpClientModule} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrModule } from 'ngx-toastr';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot(),
+    PickerModule
 
   ],
   providers: [],

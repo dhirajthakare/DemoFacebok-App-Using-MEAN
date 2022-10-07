@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FriendService } from '../../services/friend.service';
 import { PostService } from '../../services/post.service';
 import { SharedDataService } from '../../services/shared-data.service';
@@ -19,7 +20,7 @@ export class UpdatePostDialogComponent implements OnInit {
     private post: PostService,
     private route: Router,
     private userservice: UserService,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private dialog: MatDialog,
     private friend:FriendService,
     private sharedService : SharedDataService,
@@ -64,7 +65,7 @@ export class UpdatePostDialogComponent implements OnInit {
       this.updatepostsuccess = res;
       this.updateposterr = null;
       console.log(res);
-      // this.toastr.success(this.updatepostsuccess, 'Success!')
+      this.toastr.success(this.updatepostsuccess, 'Success!')
       this.dialogref.close();
     }, (err) => {
       this.updateposterr = err.error;

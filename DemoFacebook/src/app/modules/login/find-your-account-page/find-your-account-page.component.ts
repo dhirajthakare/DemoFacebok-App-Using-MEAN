@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/common/services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class FindYourAccountPageComponent implements OnInit {
 
   constructor(
     private service:AuthService,
-    // private toast : ToastrService,
+    private toast : ToastrService,
     private route : Router,
   ) { }
 
@@ -34,7 +35,7 @@ export class FindYourAccountPageComponent implements OnInit {
 
       console.log(res);
       let respo:any = res;
-      // this.toast.success(respo.message,"Success!");
+      this.toast.success(respo.message,"Success!");
       this.route.navigate(['recover/code'],{queryParams:{
         hash:btoa(respo.recoveryCode),
         Email:btoa(email)
@@ -43,7 +44,7 @@ export class FindYourAccountPageComponent implements OnInit {
       this.SendMail=false;
 
       let errp:any = err;
-      // this.toast.error(errp.error,"Fail!");
+      this.toast.error(errp.error,"Fail!");
       console.log(err);
     })
   }

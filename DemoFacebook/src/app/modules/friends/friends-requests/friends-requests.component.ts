@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -12,7 +13,7 @@ export class FriendsRequestsComponent implements OnInit {
   
   constructor(
     private friend:FriendService,
-    // private toastr:ToastrService,
+    private toastr:ToastrService,
     private userservice:UserService
   ) { }
 
@@ -52,20 +53,22 @@ export class FriendsRequestsComponent implements OnInit {
       console.log(res);
       this.request=res;
       this.getUserRequest();
-      // this.toastr.success('Request Accepted','Success!');
+      this.toastr.success('Request Accepted','Success!');
     },err=>{
       console.log(err);
     })
   }
   rejectRequest(fid:any){
-    this.friend.rejectRequest(this.data._id,fid).subscribe(res=>{
-      console.log(res);
-      this.request=res;
-      this.getUserRequest();
-      // this.toastr.success('Request Rejected','Success!');
-    },err=>{
-      console.log(err);
-    })
+    if(confirm("Are you sure You want to reject Request ?")){
+      this.friend.rejectRequest(this.data._id,fid).subscribe(res=>{
+        console.log(res);
+        this.request=res;
+        this.getUserRequest();
+        this.toastr.success('Request Rejected','Success!');
+      },err=>{
+        console.log(err);
+      })
+    }
   }
 
   hasMatch:any;

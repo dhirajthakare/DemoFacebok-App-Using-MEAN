@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
@@ -16,7 +17,7 @@ export class AccountCreateDialogComponent implements OnInit {
     public service : AuthService,
     private formbuilder : FormBuilder,
      private comman:SharedDataService,
-    //  private toast : ToastrService,
+     private toast : ToastrService,
      private dialogRef : MatDialogRef<AccountCreateDialogComponent>
      ) { }
 
@@ -41,7 +42,7 @@ console.log(this.createAccountForm.value);
 
 this.service.createAcc(this.createAccountForm.value).subscribe((res)=>{
 console.log(res);
-// this.toast.success("Successfully Created Acoount" , "Success!",);
+this.toast.success("Successfully Created Acoount" , "Success!",);
 this.storeallerrors=null;
 this.createAccountForm.reset();
 this.dialogRef.close();
