@@ -20,11 +20,6 @@ export class SearchResultsComponent implements OnInit {
     ) { }
     searchbox:any;
     ngOnInit(): void {
-  
-      if(localStorage.getItem('loggedin')!="true"){
-        localStorage.setItem('error',"You need To Login")
-        this.route.navigate(['']);
-      }
       this.getcurrentuser();
   
       this.router.queryParams.subscribe(res=>{

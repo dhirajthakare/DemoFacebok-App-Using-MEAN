@@ -16,13 +16,7 @@ export class FriendsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    if(localStorage.getItem('loggedin')!="true"){
-      localStorage.setItem('error',"You need To Login")
-      this.route.navigate(['']);
-    }
     this.getcurrentuser();
-
   }
 
   token:any;

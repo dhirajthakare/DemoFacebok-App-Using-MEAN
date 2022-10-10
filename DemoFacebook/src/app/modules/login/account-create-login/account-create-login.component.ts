@@ -29,8 +29,6 @@ constructor(
 sessionerror:any
 ngOnInit(): void {
   this.comman.changeTitle('Login Accont');
-  this.sessionerror=localStorage.getItem('error');
-  console.log(this.sessionerror);
      
 }
 
@@ -49,23 +47,15 @@ onlogin(){
    this.loginsuccess="login Successfully";
    console.log(res);
     this.token = res;
-  //  token = token.id;
-  //  console.log(this.token.userToken);
 
     localStorage.setItem('accountToken',this.token.userToken);
     this.loginerr=null;
     localStorage.setItem('loggedin',"true");
-    localStorage.removeItem('error');
     this.router.navigate(['deskbook']);
    
  },(err)=>{
    console.log(err);
-   console.log(err.error)
-   console.log(err.error.message)
-
-
    this.loginerr = err.error;
-   
  })
 }
 

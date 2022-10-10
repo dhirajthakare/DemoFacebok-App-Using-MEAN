@@ -17,10 +17,10 @@ export class MainBodyComponent implements OnInit {
  data:any;
  ngOnInit(): void {
    
-   if(localStorage.getItem('loggedin')!="true"){
-     localStorage.setItem('error',"You need To Login")
-     this.route.navigate(['']);
-   }
+  //  if(localStorage.getItem('loggedin')!="true"){
+  //    localStorage.setItem('error',"You need To Login")
+  //    this.route.navigate(['']);
+  //  }
    this.getcurrentuser();
 
  }

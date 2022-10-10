@@ -21,12 +21,7 @@ userdata:any;
 
 
 ngOnInit(): void {
-if(localStorage.getItem('loggedin')!="true"){
-localStorage.setItem('error',"You need To Login")
-this.routeNav.navigate(['']);
-}
 this.getCurrentUserData();
-
 }
 
 getCurrentUserData(){

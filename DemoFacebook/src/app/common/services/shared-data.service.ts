@@ -15,9 +15,11 @@ export class SharedDataService {
   constructor(private settitle:Title) { }
 
   changeTitle(StringTitle:string){
-
     this.settitle.setTitle(StringTitle);
+  }
 
+  isLoginUser(){
+    return !!localStorage.getItem('accountToken');
   }
 
 }
