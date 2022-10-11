@@ -11,6 +11,7 @@ import { RecoverComponent } from './recover/recover.component';
 import { AccountCreateDialogComponent } from './account-create-login/account-create-dialog/account-create-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginCardModule } from 'src/app/common/login-card/login-card.module';
 
 
 
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginRoutingModule,
     MatDialogModule,
     ReactiveFormsModule,
+    LoginCardModule
   ]
 })
 export class LoginModule { }

@@ -1,0 +1,32 @@
+<div>
+    <div class="card card-body">
+        <form [formGroup]="loginForm" method="post" (submit)="onlogin()" >
+                
+            <div *ngIf="loginerr" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{loginerr.message ? loginerr.message :  loginerr}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div *ngIf="loginsuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{loginsuccess}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <div class="form-group m-3">
+                <input formControlName='email' type="text" class="form-control form-control-lg" placeholder="Email Address">
+            </div>
+            <div class="form-group m-3">
+                <input formControlName='password' type="password" class="form-control form-control-lg" placeholder="Password">
+            </div>
+            <div class="form-group m-3">
+                <button class="btn btn-primary form-control form-control-lg ">Login</button>
+            </div>
+            <div class="text-center">
+                <a class="nav-link" routerLink="recover">Forget Password</a>
+            </div>
+        </form>
+        <hr>
+        <div class="form-group mx-5">
+            <button class="btn btn-success form-control form-control-lg " (click)="openAccountCreateDialog()">Create new account</button>
+        </div>
+        <p class="mx-5 mt-1">Make a page for advertisement <a style="text-decoration: none;" href="#">Click here</a></p> 
+    </div>
+</div>

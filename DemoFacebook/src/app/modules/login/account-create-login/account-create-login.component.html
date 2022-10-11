@@ -1,47 +1,15 @@
-<div class="container" style="overflow-y: hidden;" >
-    <div style="margin-top:12%">
-        <div class="row">
-           <div class="col-md-5 col-12 offset-md-1 mt-5" >
-            <h1 class="text-primary" style="font-size: 65px;">Deskbook</h1>
-            <p style=" font-size: 35px; line-height: 38px;"  > Deskbook helps you to connect and share your thoughts with the people in your life.</p>
-           </div>
-            <div class="card col-md-4 col-12 offset-1" style="border-radius: 10px;">
-                <div class="card-body">
-                    <form [formGroup]="loginForm" method="post" (submit)="onlogin()" >
-                            
-                        <div *ngIf="loginerr" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>{{loginerr.message ? loginerr.message :  loginerr}}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
-                          <div *ngIf="loginsuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{loginsuccess}}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
-                          <div *ngIf="sessionerror" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>{{sessionerror}}</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
-
-                        <div class="form-group m-3">
-                            <input formControlName='email' type="text" class="form-control form-control-lg" placeholder="Email Address">
-                        </div>
-                        <div class="form-group m-3">
-                            <input formControlName='password' type="password" class="form-control form-control-lg" placeholder="Password">
-                        </div>
-                        <div class="form-group m-3">
-                            <button class="btn btn-primary form-control form-control-lg ">Login</button>
-                        </div>
-                        <div class="text-center">
-                            <a class="nav-link" routerLink="recover">Forget Password</a>
-                        </div>
-                    </form>
-                    <hr>
-                    <div class="form-group mx-5">
-                        <button class="btn btn-success form-control form-control-lg " (click)="openAccountCreateDialog()">Create new account</button>
-                    </div>
-                </div>
-                <p class="mx-5">Make a page for advertisement <a style="text-decoration: none;" href="#">Click here</a></p>
-           </div>
+<div class="LoginPage">
+    <div class="container" style="overflow-y: hidden;" >
+        <div style="margin-top:12%">
+            <div class="row">
+               <div class="col-md-5 col-12 offset-md-1 mt-5" >
+                <h1 class="text-primary" style="font-size: 65px;">Deskbook</h1><br>
+                <p class="deskParams" > Deskbook helps you to connect and share your thoughts with the people in your life.</p>
+               </div>
+                <div class="col-md-4 col-12 offset-1">
+                    <app-login-card></app-login-card>
+               </div>
+            </div>
         </div>
     </div>
-    </div>
+</div>
