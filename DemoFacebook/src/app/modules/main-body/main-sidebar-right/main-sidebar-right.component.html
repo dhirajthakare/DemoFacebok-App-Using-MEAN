@@ -1,4 +1,4 @@
-<h6 class="text-secondary"> Contacts </h6>
+<h3 class="text-secondary"> Contacts </h3>
 
 <div *ngIf="friends">
     <ul *ngFor="let item of friends.user_Friends " class="list-group list-group-flush">
@@ -6,8 +6,8 @@
         <li (click)="OpenMessangerDia(item.friend_id)" class="list-group-item">
             <div class="d-flex">
                 <strong style="font-size: xx-large;" class="text-success">.</strong> 
-                <a>  <img height="42" width="42" style="border-radius: 21px; object-fit: cover;" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" ><p class=""> {{item.friend_id.name}}  </p> </a>
+                <div>  <img height="42" width="42" class="profileImgResize" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div class=" mt-2" ><p class=""> {{item.friend_id.name}}  </p> </div>
             </div>
         </li>
         

@@ -62,8 +62,6 @@ export class SearchUserResultComponent implements OnInit {
     this.displaybtn=res;
   });
 
-
-
 }
 ngOnChanges(){
 

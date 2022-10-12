@@ -22,7 +22,6 @@ export class FriendService {
 
   serchbox = new  BehaviorSubject('');
   searchBoxVisibility:any = new BehaviorSubject<any>(false);
-  inputblur:any =  new BehaviorSubject<any>(false);
   userLoginFriendsId= new BehaviorSubject<any>('');
  
   constructor(

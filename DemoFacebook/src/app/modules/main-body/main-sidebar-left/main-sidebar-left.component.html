@@ -2,98 +2,98 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div   class="d-flex">
-                <a [routerLink]="'/profile/'+data.userToken" ><img height="42" width="42" style="border-radius: 21px;object-fit: cover;" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="hell"></a>
-                <a  [routerLink]="'/profile/'+data.userToken" style="text-decoration: none; color: black;" class=" mt-2" href=""><p class=""> {{data.name}}</p></a>
+                <div [routerLink]="'/profile/'+data.userToken" ><img height="42" width="42" class="profileImgResize" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div   [routerLink]="'/profile/'+data.userToken"  class=" mt-2"><p class=""> {{data.name}}</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/covid.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">COVID-19 Information Center</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/covid.png"></div>
+                <div  class=" mt-2"><p class="">COVID-19 Information Center</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div routerLink="/friends" class="d-flex">
-                <a><img height="42" width="42" src="http://localhost:2000/assets/images/user.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2"><p class="">Friends</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/user.png"></div>
+                <div  class=" mt-2"><p class="">Friends</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/groups.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Groups</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/groups.png"></div>
+                <div  class=" mt-2"><p class="">Groups</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/marketplace.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">MarketPlace</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/marketplace.png"></div>
+                <div  class=" mt-2"><p class="">MarketPlace</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/watch.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Watch</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/watch.png"></div>
+                <div  class=" mt-2"><p class="">Watch</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/event.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Events}</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/event.png"></div>
+                <div  class=" mt-2"><p class="">Events}</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/memories.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Memories</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/memories.png"></div>
+                <div  class=" mt-2"><p class="">Memories</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/saved.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Saved</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/saved.png"></div>
+                <div  class=" mt-2"><p class="">Saved</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/pages.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Pages</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/pages.png"></div>
+                <div  class=" mt-2"><p class="">Pages</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div routerLink="messanger" class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/messanger.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" ><p class="">Messanger</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/messanger.png"></div>
+                <div  class=" mt-2" ><p class="">Messanger</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/weather.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Whether</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/weather.png"></div>
+                <div  class=" mt-2"><p class="">Whether</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/blood.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Blood Donations</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/blood.png"></div>
+                <div  class=" mt-2"><p class="">Blood Donations</p></div>
             </div>
         </li>
         <li class="list-group-item"><div class="d-flex">
-            <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/friendlist.png" alt="hell"></a>
-            <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Friend List</p></a>
+            <div><img height="42" width="42" src="http://localhost:2000/assets/images/friendlist.png"></div>
+            <div  class=" mt-2"><p class="">Friend List</p></div>
         </div></li>
         <li class="list-group-item">
             <div class="d-flex">
-                <a href=""><img height="42" width="42" src="http://localhost:2000/assets/images/recendf.png" alt="hell"></a>
-                <a style="text-decoration: none; color: black;" class=" mt-2" href=""><p class="">Recend & Favorites</p></a>
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/recendf.png"></div>
+                <div  class=" mt-2"><p class="">Recend & Favorites</p></div>
             </div>
         </li>
         <hr>
         <h4 class="text-secondary">Your ShortCuts</h4>
         <li class="list-group-item">
             <div  [routerLink]="'/profile/'+data.userToken" class="d-flex">
-                <a [routerLink]="'/profile/'+data.userToken"><img height="42" width="42" style="border-radius: 21px;object-fit: cover;" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="hell"></a>
-                <a [routerLink]="'/profile/'+data.userToken" style="text-decoration: none; color: black;" class=" mt-2" href=""><p class=""> {{data.name}}</p></a>
+                <div [routerLink]="'/profile/'+data.userToken"><img height="42"class="profileImgResize"  [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div [routerLink]="'/profile/'+data.userToken"  class=" mt-2"><p class=""> {{data.name}}</p></div>
             </div>
         </li>
       </ul>

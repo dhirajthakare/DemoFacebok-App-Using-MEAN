@@ -1,0 +1,88 @@
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        
+
+        <div class="modal-header mt-2">
+            <div class="text-end">
+                <a class="text-secondary btn-close" mat-dialog-close></a>
+            </div>
+            <h2 class="text-center ">Update {{data.name}} </h2><br>
+
+
+        </div>
+        <div style="height: 500px;" class="modal-body">
+  
+          <div class="card-body p-4">
+  
+            <form [formGroup]="createAccountForm" method="post" id="UpdateUser" (submit)="updateUser()">
+  
+              <!-- <div *ngIf="updatesuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                  </button>
+                  <strong>{{updatesuccess}}</strong>
+                </div> -->
+              <div *ngIf="updateerr" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+                <strong>{{updateerr.message?updateerr.message:updateerr}}</strong>
+              </div>
+  
+              <div class="mb-3">
+                <div class="row">
+                  <input formControlName="fname" type="text" placeholder="Ex Dhiraj" name="fname"
+                    class="form-control col mx-1" id="fname">
+                  <input type="text" formControlName="lname" placeholder="Ex Thakare" name="lname"
+                    class="form-control col mx-1" id="lname">
+                </div>
+                <div class="py-4" *ngIf="Profilesrc">
+                  <label for="profilephoto">Profile Photo : </label><br>
+                  <img id="profilephoto" height="300" width="400" style="object-fit: contain;" [src]="Profilesrc" alt="">
+                </div>
+  
+              </div>
+  
+              <div class="mb-3">
+                <div class="row">
+                  <input formControlName='profile' (change)="onFileChange($event)" accept='image/*' type="file"
+                    name="profile" class="form-control col mx-1" id="profile">
+  
+                </div>
+              </div>
+  
+              <div class="mb-2 ">
+                <label for="">Birth Of Date</label>
+                <div class="row">
+                  <input type="date" formControlName="birthOfDate" name="birthOfDate" class="form-control"
+                    id="birthOfDate">
+                </div>
+              </div>
+              <div class="mb-2">
+                <label for="gender"> Select Gender</label><br>
+                <div class="form-check form-check-inline">
+                  <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="Male"
+                    value="Male">
+                  <label class="form-check-label" for="Male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="Female"
+                    value="Female">
+                  <label class="form-check-label" for="Female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input formControlName="gender" class="form-check-input" type="radio" name="gender" id="Other"
+                    value="Other">
+                  <label class="form-check-label" for="Other">Other</label>
+                </div>
+              </div>
+              <!-- <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  </div> -->
+              <input type="submit" id="update" class="btn btn-primary form-control btn-block" value="Update User">
+  
+            </form>
+          </div>
+        </div>
+  
+      </div>
+    </div>

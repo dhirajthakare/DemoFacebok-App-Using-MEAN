@@ -1,149 +1,66 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../services/auth.service';
 import { FriendService } from '../services/friend.service';
 import { UserService } from '../services/user.service';
+import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.scss']
+  styleUrls: ['./main-header.component.scss'],
 })
 export class MainHeaderComponent implements OnInit {
-
   
-  @ViewChild('searcharea') searcharea!:ElementRef;
-  @ViewChild('updateModalClose') updateModalClose:any;
+  @ViewChild('searcharea') searcharea!: ElementRef;
+  @ViewChild('updateModalClose') updateModalClose: any;
 
-  updateerr:any;
-  updatesuccess:any;
-  Profilesrc:any;
-
-constructor( 
-  private formbuilder:FormBuilder ,
-  private AccountD:AuthService,
-  private navicateRoute : Router,
-  private friendship:FriendService,
-  private userservice:UserService,
-  private toastr:ToastrService
-
-   ) { }
-
-  // onSubmit 
-  
-  createAccountForm =  this.formbuilder.group({
-    'fname':'',
-    'lname':'',
-    'profile':'',
-    'birthOfDate':'',
-    'gender':'',
-
-})
+  updateerr: any;
+  updatesuccess: any;
+  Profilesrc: any;
+  file: any;
+  data: any;
 
 
-data:any;
-ngOnInit(): void {
-  
-  this.userservice.currentLoginUser.subscribe( (res: any) =>{
-    console.log(res);
-    this.data=res;
-    if(this.data){
-      this.setupdatevalue();
-    }
-  });
- 
+  constructor(
+    private dialog :MatDialog,
+    private navicateRoute: Router,
+    private friendship: FriendService,
+    private userservice: UserService,
+  ) {}
 
-  
-}
-
-file:any;
-onFileChange(e:any) {
-  if(e.target.files){
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = (event:any)=>{  
-      this.file=e.target.files[0];
-      console.log(this.file)
-      this.Profilesrc = event.target.result;
-
-    }
-
+  ngOnInit(): void {
+    this.userservice.currentLoginUser.subscribe((res: any) => {
+      console.log(res);
+      this.data = res;
+    });
   }
-}
-
-updateUser(){
-  // this.AccountD.
-let formdata = new FormData();
-formdata.append('fname',this.createAccountForm.get('fname')?.value)
-formdata.append('lname',this.createAccountForm.get('lname')?.value)
-formdata.append('profile',this.file);
-formdata.append('birthOfDate',this.createAccountForm.get('birthOfDate')?.value)
-formdata.append('gender',this.createAccountForm.get('gender')?.value)
-
-this.AccountD.updateUser(formdata,this.data._id).subscribe(res=>{
-  this.updatesuccess="Update Data Successfully";
-  console.log(res);
-  this.updateerr=null;
-  this.userservice.currentLoginUser.next(res);
-  this.toastr.success('Profile Updated SucceesFully ','Success!')
-  this.updateModalClose.nativeElement.click();
-
-  // window.location.reload()
-
-},err=>{
-  this.updatesuccess=null;
-  this.updateerr = err.error;
-  console.log(err);
-})
 
 
-}
-setupdatevalue(){
-  let arr = this.data.name.split("  ");
-  console.log(arr);
-  this.createAccountForm.patchValue({
-       'fname':arr[0],
-        'lname':arr[arr.length-1],
-        'profile':'',
-        'birthOfDate':this.data.birthOfDate,
-        'gender':this.data.gender,
-  })  
 
-  if(this.data.profileUrl){
-    this.Profilesrc="http://localhost:2000"+this.data.profileUrl;
-  }else{
-    this.Profilesrc = 'http://localhost:2000/assets/images/userdefault.png';
+  onFocus() {
+    this.friendship.searchBoxVisibility.next(true);
   }
-  
 
-}
-logout(){
+  onblur() {
+    setTimeout(() => {
+      this.friendship.searchBoxVisibility.next(false);
+    }, 400);
+  }
 
-if(confirm("Are You sure You Want To Logout ? ")){
-  localStorage.removeItem('loggedin');
-  localStorage.removeItem('accountToken');
- this.navicateRoute.navigate(['']);
-}
+  searchFriends(item: any) {
+    this.friendship.serchbox.next(item.value);
+  }
 
-}
+  openUpdateUserDialog(){
+    this.dialog.open(UpdateUserDialogComponent)
+  }
 
-onFocus(){
-this.friendship.searchBoxVisibility.next(true);
-this.friendship.inputblur.next(true);
-}
-onblur(){
-// this.friendship.searchBoxVisibility.next(false);
-setTimeout(() => {
-  this.friendship.searchBoxVisibility.next(false);
-}, 400);
-}
-
-searchFriends(item:any){
-// console.log(item.value);
-this.friendship.serchbox.next(item.value);
-}
-
-
+  logout() {
+    if (confirm('Are You sure You Want To Logout ? ')) {
+      localStorage.removeItem('loggedin');
+      localStorage.removeItem('accountToken');
+      this.navicateRoute.navigate(['']);
+    }
+  }
 }
