@@ -9,6 +9,7 @@ import { FriendsRequestsComponent } from './friends-requests/friends-requests.co
 import { AllFriendsComponent } from './all-friends/all-friends.component';
 import { SearchUserResultModule } from 'src/app/common/search-user-result/search-user-result.module';
 import { MainHeaderModule } from 'src/app/common/main-header/main-header.module';
+import { FooterModule } from 'src/app/common/footer/footer.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MainHeaderModule } from 'src/app/common/main-header/main-header.module'
     CommonModule,
     FriendsRoutingModule,
     SearchUserResultModule,
-    MainHeaderModule
+    MainHeaderModule,
+    FooterModule
   ]
 })
 export class FriendsModule { }

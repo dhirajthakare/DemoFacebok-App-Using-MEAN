@@ -3,11 +3,11 @@
 
         <div class="row">
             <div  *ngFor="let item of AllUserFriends.user_Friends" class="col-md-2 card mx-2" >
-                <div  [routerLink]="'/profile/'+item.friend_id.userToken" style="height: 220px;" class="col-md-12">
+                <div  [routerLink]="'/profile/'+item.friend_id.userToken" style="height: 220px;" class="col-md-12 btnPointer">
                     <img class="col-md-12" style="object-fit: contain;height: 100%;width: 100%;" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
                 </div>
                 <hr>
-                <div  [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-12">
+                <div  [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-12 btnPointer">
                     <h4 class="text-center">{{item.friend_id.name}}</h4>
                    
                 </div>

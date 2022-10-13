@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'search', loadChildren: () => import('./modules/search-results/search-results.module').then(m => m.SearchResultsModule), canActivate:[AuthGuard] },
   { path: 'deskbook', loadChildren: () => import('./modules/main-body/main-body.module').then(m => m.MainBodyModule) , canActivate:[AuthGuard] },
   { path: 'profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule), canActivate:[AuthGuard] },
+  { path: 'footer', loadChildren: () => import('./common/footer/footer.module').then(m => m.FooterModule) },
   { path: '**', component:ErrorComponent},
 ];
 

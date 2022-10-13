@@ -13,6 +13,7 @@ import { StoriesModule } from '../stories/stories.module';
 import { CreatePostModule } from 'src/app/common/create-post/create-post.module';
 import { DisplayPostModule } from 'src/app/common/display-post/display-post.module';
 import { BoxMessangerModule } from 'src/app/common/box-messanger/box-messanger.module';
+import { FooterModule } from 'src/app/common/footer/footer.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { BoxMessangerModule } from 'src/app/common/box-messanger/box-messanger.m
     StoriesModule,
     CreatePostModule,
     DisplayPostModule,
-    BoxMessangerModule
+    BoxMessangerModule,
+    FooterModule
   ]
 })
 export class MainBodyModule { }

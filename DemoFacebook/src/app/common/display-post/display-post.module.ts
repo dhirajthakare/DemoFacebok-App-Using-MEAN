@@ -7,6 +7,7 @@ import { LikeUserDialogComponent } from './like-user-dialog/like-user-dialog.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     LikeUserDialogComponent
   ],
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

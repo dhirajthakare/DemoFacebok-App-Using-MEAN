@@ -5,7 +5,7 @@
             <div class="text-end">
                 <button class="text-secondary  btn-close" mat-dialog-close ></button>
             </div>
-            <h4 class="text-center">Edit Post </h4><br>
+            <h3 class="text-center">Edit Post </h3><br>
 
 
             <div *ngIf="updateposterr" class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -25,15 +25,18 @@
 
                     <div class="row">
                         <div class=" col-md-2">
-                            <a
-                                [href]="data.postUser.profileUrl ? 'http://localhost:2000'+data.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img
+                            <div><img
                                     height="50" width="50" style="border-radius: 25px; object-fit: cover;"
                                     [src]="data.postUser.profileUrl ? 'http://localhost:2000'+data.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                   ></a>
+                                   >
+                                </div>
                         </div>
-                        <div class="col-md-6">
-                            <span style="text-decoration: none; color: black;" class=""><span class="">
-                                    {{data.postUser.name}}</span></span>
+                        <div class="col-md-6 mt-3">
+                            <div style="text-decoration: none; color: black;" class="">
+                                <h4 class="">
+                                    {{data.postUser.name}}
+                                </h4>
+                                </div>
                             <p title="Public"> <i class="fa fa-firefox" aria-hidden="true"></i>
                             </p>
                         </div>

@@ -9,6 +9,7 @@ import { MessangerMainComponent } from './messanger-main/messanger-main.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainHeaderModule } from 'src/app/common/main-header/main-header.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { FooterModule } from 'src/app/common/footer/footer.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     FormsModule,
     ReactiveFormsModule,
     MainHeaderModule,
-    PickerModule
+    PickerModule,
+    FooterModule
   ]
 })
 export class MessangerModule { }
