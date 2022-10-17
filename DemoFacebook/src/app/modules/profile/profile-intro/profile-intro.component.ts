@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditProfileDetailsDialogComponent } from 'src/app/common/main-header/edit-profile-details-dialog/edit-profile-details-dialog.component';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -12,7 +14,8 @@ export class ProfileIntroComponent implements OnInit {
   data:any;
   currentUser:any;
   constructor(
-    private userservice:UserService
+    private userservice:UserService,
+    private dialog:MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +36,10 @@ export class ProfileIntroComponent implements OnInit {
       console.log(this.currentUser);
 
     })
+}
 
+openeditProfileComponant(){
+  this.dialog.open(EditProfileDetailsDialogComponent)
 }
 
 }

@@ -2,7 +2,7 @@
     <div class="card-body">
         <h4>Intro</h4>
         <div>
-            <button *ngIf="data._id==currentUser._id"  class="form-control  "data-bs-toggle="modal" data-bs-target="#editProfile">Edit Profile Details</button><br>
+            <button *ngIf="data._id==currentUser._id"  class="form-control  " (click)="openeditProfileComponant()">Edit Profile Details</button><br>
         </div>
         <div *ngIf="currentUser.user_info">
         <p *ngIf="currentUser.user_info.workplace"> <span><i class="fa fa-briefcase"></i></span> {{ currentUser.user_info.workplace}}<p>

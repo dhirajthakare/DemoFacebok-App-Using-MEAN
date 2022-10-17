@@ -21,9 +21,6 @@ export class ProfileBodyComponent implements OnInit {
   ) { }
 
   prealoader = false;
-
-  public editProfile: any;
-
   data: any;
 
   @ViewChild('submitbtn')
@@ -31,6 +28,11 @@ export class ProfileBodyComponent implements OnInit {
 
   currentUser: any;
   friendsId: any = [];
+  userFriends: any;
+  
+  friends: any;
+  AllCurrentUserPost: any;
+
 
   ngOnInit(): void {
 
@@ -40,18 +42,12 @@ export class ProfileBodyComponent implements OnInit {
       if (this.data) {
         this.getAllFriendsId();
         this.oninitgetdata();
-
-
       }
 
     });
-
-
-
   }
 
 
-  userFriends: any;
   oninitgetdata() {
 
     this.userservice.currentVisitedUser.subscribe((res: any) => {
@@ -79,7 +75,6 @@ export class ProfileBodyComponent implements OnInit {
     })
   }
 
-  friends: any;
   getAllFriendsId() {
 
     this.friend.userLoginFriendsId.subscribe(res => {
@@ -87,8 +82,6 @@ export class ProfileBodyComponent implements OnInit {
     })
 
   }
-
-  AllCurrentUserPost: any;
   getpost() {
     this.userservice.getCurrentUserPost(this.currentUser._id, this.data._id).subscribe((res: any) => {
 
@@ -102,11 +95,6 @@ export class ProfileBodyComponent implements OnInit {
       // this.allPosts=res;
     })
 
-
-    // let source = this.userservice.getCurrentUserPost(this.currentUser.id,this.data.id);
-    // source.pipe(take(4)). subscribe(res => {
-    //   console.log(res);
-    // })
   }
 
 }

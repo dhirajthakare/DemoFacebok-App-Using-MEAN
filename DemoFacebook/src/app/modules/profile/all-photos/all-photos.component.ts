@@ -7,7 +7,6 @@ import { UserService } from 'src/app/common/services/user.service';
   styleUrls: ['./all-photos.component.scss']
 })
 export class AllPhotosComponent implements OnInit {
-
   
   constructor(
     private userservice:UserService
@@ -15,6 +14,8 @@ export class AllPhotosComponent implements OnInit {
 
 data:any;
 currentUser:any;
+allPosts:any;
+
 
   ngOnInit(): void {
 
@@ -39,7 +40,6 @@ currentUser:any;
     })
   }
 
-  allPosts:any;
   getpost(){
     this.userservice.getCurrentUserPost(this.currentUser._id,this.data._id).subscribe((res: any)=>{
       

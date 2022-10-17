@@ -10,6 +10,8 @@ export class SharedDataService {
   
   ActiveAccountHolder = new BehaviorSubject('');
   public postSavedSource = new BehaviorSubject<boolean>(false);
+  public editProfileSave = new BehaviorSubject<boolean>(false);
+
 
 
   constructor(private settitle:Title) { }

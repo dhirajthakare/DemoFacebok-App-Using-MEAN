@@ -16,6 +16,7 @@ import { DisplayPostModule } from 'src/app/common/display-post/display-post.modu
 import { CreatePostModule } from 'src/app/common/create-post/create-post.module';
 import { StoriesModule } from '../stories/stories.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FooterModule } from 'src/app/common/footer/footer.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DisplayPostModule,
     CreatePostModule,
     StoriesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterModule
   ]
 })
 export class ProfileModule { }
