@@ -1,48 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  constructor(private http: HttpClient) {}
 
-  creatAccUrl = "http://localhost:2000/createAccount";
-  loginAccUrl="http://localhost:2000/login";
-  updateAccUrl = "http://localhost:2000/updateAccount/";
-  sendMailUrl="http://localhost:2000/sendmail/";
-  checkOtpUrl = "http://localhost:2000/checkopt/";
-  changePasswordUrl = "http://localhost:2000/changepassword/";
+  private BaseUrl: any = environment.ApiURL;
 
-
-  constructor(
-    private http:HttpClient
-  ) { }
-
-
-  createAcc(formdata:any){
-    return this.http.post(this.creatAccUrl,formdata);
-   }
-
-   LoginAcc(formdata:any){
-     return this.http.post(this.loginAccUrl,formdata);
-    }
-
-    updateUser(formdata:any,id:number){
-       return this.http.post(this.updateAccUrl+id,formdata);
-    }
-
-  sendRecoveryMail(data:any){
-    return this.http.post(this.sendMailUrl,data);
+  createAcc(formdata: any) {
+    return this.http.post(this.BaseUrl + '/createAccount', formdata);
   }
 
-  checkOtp(data:any){
-    return this.http.post(this.checkOtpUrl , data);
+  LoginAcc(formdata: any) {
+    return this.http.post(this.BaseUrl + '/login', formdata);
   }
 
-  changePassword(data:any){
-    return this.http.post(this.changePasswordUrl , data);
-
+  updateUser(formdata: any, id: number) {
+    return this.http.post(this.BaseUrl + '/updateAccount/' + id, formdata);
   }
 
+  sendRecoveryMail(data: any) {
+    return this.http.post(this.BaseUrl + '/sendmail', data);
+  }
 
+  checkOtp(data: any) {
+    return this.http.post(this.BaseUrl + '/checkopt', data);
+  }
+
+  changePassword(data: any) {
+    return this.http.post(this.BaseUrl + '/changepassword', data);
+  }
 }

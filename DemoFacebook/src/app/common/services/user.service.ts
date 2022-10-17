@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  createuserInfourl="http://localhost:2000/createuserinformation";
-  getUserUrl = "http://localhost:2000/getcurrentloginuser/";
-  getCurrentUserPostUrl = "http://localhost:2000/getcurrentuserposts/";
+  private BaseUrl: any = environment.ApiURL;  
 
 
   currentVisitedUser:any = new BehaviorSubject<any>('');
@@ -19,13 +18,14 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   createUserInfo(formdata:any){
-    return this.http.post(this.createuserInfourl,formdata);
+    return this.http.post(this.BaseUrl+'/createuserinformation',formdata);
   }
   getUser(token:any){
-    return this.http.get(this.getUserUrl+token);
+    return this.http.get(this.BaseUrl+'/getcurrentloginuser/'+token);
   }
+
   getCurrentUserPost(cid:any,clickId:any):Observable<any>{
-   return this.http.get(this.getCurrentUserPostUrl+cid+'/'+clickId);
+   return this.http.get(this.BaseUrl+'/getcurrentuserposts/'+cid+'/'+clickId);
   }
 
 }

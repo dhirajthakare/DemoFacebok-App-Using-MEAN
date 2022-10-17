@@ -1,61 +1,51 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  createPostUrl = 'http://localhost:2000/createpost';
-  getpostUrl = 'http://localhost:2000/getpostdata/';
-  deletePostUrl = 'http://localhost:2000/deletepost/';
-  UpdatePostUrl = 'http://localhost:2000/updatepost/';
-  searchPostUrl = 'http://localhost:2000/findpost/';
-
-  likeDislikeUrl = 'http://localhost:2000/likedislike';
-  getlikeuserUrl = 'http://localhost:8000/api/user/getpostlke/';
-
-  commentUrl = 'http://localhost:2000/createcomment';
-  deleteCommentUrl = 'http://localhost:2000/deletecomment/';
-  
+  private BaseUrl: any = environment.ApiURL;  
 
   constructor( private http :HttpClient) { }
 
 
   createPost(formdata:any){
-    return this.http.post(this.createPostUrl,formdata)
+    return this.http.post(this.BaseUrl+'/createpost',formdata)
   }
   updatePost(formdata:any){
-    return this.http.post(this.UpdatePostUrl,formdata)
+    return this.http.post(this.BaseUrl+'/updatepost',formdata)
   }
   getpostData(id:number){
-    return this.http.get(this.getpostUrl+id);
+    return this.http.get(this.BaseUrl+'/getpostdata/'+id);
   }
 
 
   likeorUnlike(formdata:any){
-   return  this.http.post(this.likeDislikeUrl,formdata);
+   return  this.http.post(this.BaseUrl+'/likedislike',formdata);
   }
   getlikeUser(id:number):Observable<any>{
-    return this.http.get(this.getlikeuserUrl+id);
+    return this.http.get(this.BaseUrl+'/getpostlke/'+id);
   }
 
   deletePost(id:number){
-    return this.http.get(this.deletePostUrl+id);
+    return this.http.get(this.BaseUrl+'/deletepost/'+id);
   }
 
 
   createcomment(formdata:any){
-    return this.http.post(this.commentUrl,formdata);
+    return this.http.post(this.BaseUrl+'/createcomment/',formdata);
   }
 
   deletcomment(cid:number,pid:number){
-   return this.http.get(this.deleteCommentUrl+cid+'/'+pid);
+   return this.http.get(this.BaseUrl+'/deletecomment/'+cid+'/'+pid);
   }
 
   searchPost(search:any){
-    return this.http.get(this.searchPostUrl+search);
+    return this.http.get(this.BaseUrl+'/findpost/'+search);
   }
 
 

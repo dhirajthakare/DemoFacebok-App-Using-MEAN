@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessangerService {
 
-  sendmsgUrl = "http://localhost:2000/sendmessage";
-  getmsgUrl = "http://localhost:2000/getmessage/";
+  private BaseUrl: any = environment.ApiURL;
 
   messangerdisplayBox = new BehaviorSubject(false);
   user_id:any;
@@ -20,10 +20,10 @@ export class MessangerService {
   constructor(private http:HttpClient) { }
 
   sendmessage(formdata:any){
-    return this.http.post(this.sendmsgUrl,formdata);
+    return this.http.post(this.BaseUrl+'/sendmessage',formdata);
   }
 
   getmessage (uid:any,fid:any){
-    return this.http.get(this.getmsgUrl+uid+"/"+fid);
+    return this.http.get(this.BaseUrl+'/getmessage/'+uid+"/"+fid);
   }
 }
