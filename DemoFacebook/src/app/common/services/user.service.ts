@@ -8,18 +8,19 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  private BaseUrl: any = environment.ApiURL;  
+  constructor(private http:HttpClient) { }
 
+  private BaseUrl: any = environment.ApiURL;  
 
   currentVisitedUser:any = new BehaviorSubject<any>('');
   currentLoginUser:any = new BehaviorSubject<any>('');
   currentMessangerUser:any = new BehaviorSubject<any>('');
 
-  constructor(private http:HttpClient) { }
 
   createUserInfo(formdata:any){
     return this.http.post(this.BaseUrl+'/createuserinformation',formdata);
   }
+  
   getUser(token:any){
     return this.http.get(this.BaseUrl+'/getcurrentloginuser/'+token);
   }

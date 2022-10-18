@@ -7,10 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class StorieService {
 
-  constructor( private http:HttpClient) { }
-
   private BaseUrl: any = environment.ApiURL;  
 
+  constructor( private http:HttpClient) { }
 
   createstory(formdata:any){
     return this.http.post(this.BaseUrl+'/createstory',formdata);

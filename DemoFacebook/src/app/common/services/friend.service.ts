@@ -7,17 +7,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class FriendService {
+ 
+  constructor(
+    private http:HttpClient
+  ) { }
 
   private BaseUrl: any = environment.ApiURL;
 
   serchbox = new  BehaviorSubject('');
   searchBoxVisibility:any = new BehaviorSubject<any>(false);
   userLoginFriendsId= new BehaviorSubject<any>('');
- 
-  constructor(
-    private http:HttpClient
-  ) { }
-
   
   serchUsers(name:string):Observable<any>{
    return this.http.get(this.BaseUrl+'/findfriends/'+name);
@@ -38,16 +37,18 @@ export class FriendService {
    getUserRequest(id:any){
     return this.http.get(this.BaseUrl+'/getallrequest/'+id);
    }
+
    getUseFriends(id:any){
     return this.http.get(this.BaseUrl+'/getuserfriends/'+id);
    }
+
    getUseSerachFriends(id:any,name:string){
     return this.http.get(this.BaseUrl+'/alluserfriendssearch/'+id+'/'+name);
    }
    getAllFriendsPost(ids:any){
     return this.http.post(this.BaseUrl+'/allfriendspost',ids);
    }
-
+   
    unfriend(uid:number , fid:number){
      return this.http.get(this.BaseUrl+'/unfriend/'+uid+'/'+fid);
    }

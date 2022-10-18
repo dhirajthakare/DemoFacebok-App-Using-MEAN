@@ -8,21 +8,21 @@ import { environment } from 'src/environments/environment';
 })
 export class PostService {
 
-  private BaseUrl: any = environment.ApiURL;  
-
   constructor( private http :HttpClient) { }
-
+  
+  private BaseUrl: any = environment.ApiURL;  
 
   createPost(formdata:any){
     return this.http.post(this.BaseUrl+'/createpost',formdata)
   }
+
   updatePost(formdata:any){
     return this.http.post(this.BaseUrl+'/updatepost',formdata)
   }
+
   getpostData(id:number){
     return this.http.get(this.BaseUrl+'/getpostdata/'+id);
   }
-
 
   likeorUnlike(formdata:any){
    return  this.http.post(this.BaseUrl+'/likedislike',formdata);
@@ -47,6 +47,5 @@ export class PostService {
   searchPost(search:any){
     return this.http.get(this.BaseUrl+'/findpost/'+search);
   }
-
 
 }
