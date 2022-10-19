@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
 @Component({
   selector: 'app-about-profile',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService:SharedDataService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.sharedService.changeTitle('Deskbook | About');
+    }, 500);
   }
 
 }

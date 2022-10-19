@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -11,16 +12,12 @@ export class MainBodyComponent implements OnInit {
 
   
   constructor(
-    private route:Router,
+    private sharedata:SharedDataService,
     private userservice:UserService
     ) { }
  data:any;
  ngOnInit(): void {
-   
-  //  if(localStorage.getItem('loggedin')!="true"){
-  //    localStorage.setItem('error',"You need To Login")
-  //    this.route.navigate(['']);
-  //  }
+  this.sharedata.changeTitle('Deskbook | Home');
    this.getcurrentuser();
 
  }

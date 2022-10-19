@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -9,10 +10,12 @@ import { UserService } from 'src/app/common/services/user.service';
 export class ProfileStoryArchiveComponent implements OnInit {
 
   constructor(
-    private userservice:UserService
+    private userservice:UserService,
+    private sharedService:SharedDataService
   ) { }
   currentUser:any;
   ngOnInit(): void {
+    this.sharedService.changeTitle('Deskbook | Archive');
     this.userservice.currentVisitedUser.subscribe((res: any)=>{
       this.currentUser = res;
   })

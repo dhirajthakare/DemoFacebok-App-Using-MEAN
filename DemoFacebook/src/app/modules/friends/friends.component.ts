@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -11,12 +11,13 @@ export class FriendsComponent implements OnInit {
 
   
   constructor(
-    private route:Router,
+    private sharedata:SharedDataService,
      private userservice:UserService
   ) { }
 
   ngOnInit(): void {
     this.getcurrentuser();
+    this.sharedata.changeTitle('Deskbook | Friends');
   }
 
   token:any;

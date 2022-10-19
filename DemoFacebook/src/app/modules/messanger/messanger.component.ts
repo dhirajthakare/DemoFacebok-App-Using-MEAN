@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
 @Component({
   selector: 'app-messanger',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessangerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedData:SharedDataService) { }
 
   ngOnInit(): void {
+    this.sharedData.changeTitle('Deskbook | Messanger');
   }
 
 }

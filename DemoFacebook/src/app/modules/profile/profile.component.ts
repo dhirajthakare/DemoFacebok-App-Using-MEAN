@@ -25,6 +25,8 @@ export class ProfileComponent implements OnInit {
   friendsId: any = [];
 
   ngOnInit(): void {
+    this.sharedService.changeTitle('Deskbook | Profile');
+
     this.getCurrentUserData();
 
     this.sharedService.editProfileSave.subscribe((res: any) => {
