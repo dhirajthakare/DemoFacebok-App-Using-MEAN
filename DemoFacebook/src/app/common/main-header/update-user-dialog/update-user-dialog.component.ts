@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
+import { SharedDataService } from '../../services/shared-data.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class UpdateUserDialogComponent implements OnInit {
     private Authservice: AuthService,
     private userservice: UserService,
     private toastr: ToastrService,
-    private dialogRef : MatDialogRef<UpdateUserDialogComponent>
+    private dialogRef : MatDialogRef<UpdateUserDialogComponent>,
+    private sharedservice:SharedDataService
   ) {}
 
 
@@ -76,7 +78,7 @@ export class UpdateUserDialogComponent implements OnInit {
         this.updatesuccess = 'Update Data Successfully';
         console.log(res);
         this.updateerr = null;
-        this.userservice.currentLoginUser.next(res);
+        this.sharedservice.editProfileSave.next(true);
         this.toastr.success('Profile Updated SucceesFully ', 'Success!');
         this.dialogRef.close();
       },

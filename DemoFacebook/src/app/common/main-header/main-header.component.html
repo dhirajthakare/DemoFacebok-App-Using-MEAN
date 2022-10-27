@@ -37,7 +37,7 @@
                 class="fa fa-gamepad fa-lg" aria-hidden="true"></i>
               </div>
           </li>
-          <li class="nav-item mx-md-5 btnPointer">
+          <li *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'" class="nav-item mx-md-5 btnPointer">
             <div class="nav-link text-primary iconDiv" aria-current="page" ><i
                 class="fa fa-users fa-lg" aria-hidden="true"></i>
             </div>
@@ -52,7 +52,7 @@
       <div class="col-md-3 ">
         <ul class="navbar-nav me-auto my-2 my-lg-0 " >
 
-          <li class="btnPointer" [routerLink]="'/profile/'+data.userToken">
+          <li *ngIf="data" class="btnPointer" [routerLink]="'/profile/'+data.userToken">
             <div class="d-flex">
               <div><img class="profileImgResize" height="42" width="42"
                   [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
@@ -90,7 +90,7 @@
             <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
               <li><span class="dropdown-item" routerLink="/deskbook">home</span></li>
               <li><span class="dropdown-item" (click)="openUpdateUserDialog()">Update Profile</span></li>
-              <li [routerLink]="'/profile/'+data.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
+              <li *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
               <!-- <li><hr class="dropdown-divider"></li> -->
               <li><span class="dropdown-item" (click)="logout()">LogOut</span></li>
             </ul>

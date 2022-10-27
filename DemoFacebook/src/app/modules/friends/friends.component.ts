@@ -11,26 +11,13 @@ export class FriendsComponent implements OnInit {
 
   
   constructor(
-    private sharedata:SharedDataService,
-     private userservice:UserService
-  ) { }
+    private sharedata:SharedDataService
+    ) { }
 
   ngOnInit(): void {
-    this.getcurrentuser();
     this.sharedata.changeTitle('Deskbook | Friends');
   }
 
   token:any;
-  getcurrentuser(){
-    this.token =  localStorage.getItem('accountToken');
-    this.userservice.getUser(this.token).subscribe(res=>{
-      console.log(res);
-      localStorage.setItem('accountHolder',JSON.stringify(res));
-      this.userservice.currentLoginUser.next(res);
-  });
-
- 
-}
-
 
 }

@@ -59,11 +59,10 @@ export class ProfileComponent implements OnInit {
   }
 
   getCurrentLoginUser() {
-    this.token = localStorage.getItem('accountToken');
-    this.userservice.getUser(this.token).subscribe((res) => {
+
+    this.userservice.currentLoginUser.subscribe((res: any) => {
+      console.log(res);
       this.data = res;
-      localStorage.setItem('accountHolder', JSON.stringify(res));
-      this.userservice.currentLoginUser.next(res);
       if (this.data) {
         this.getAllFriendsId();
       }

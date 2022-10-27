@@ -10,10 +10,7 @@ const routes: Routes = [
   { path:'' , component:MainBodyComponent , children:[
     {path:'' , component:MainHomepageComponent , children:[
       {path:'' , component:MainContentComponent},
-    ]},
-    {path:'messanger' , component:MessangerComponent,children:[
-      {path:'' , component:MessangerMainComponent}
-    ] }
+    ]}
   ] },
 ];
 
