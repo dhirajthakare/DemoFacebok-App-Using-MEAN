@@ -1,0 +1,16 @@
+.deskParams{
+    font-size: 28px;
+    font-weight: normal;
+    line-height: 32px;
+    max-width: 500px;
+}
+
+@media (max-width: 769px){
+  
+    .deskParams{
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 32px;
+        max-width: 500px;
+    }
+}

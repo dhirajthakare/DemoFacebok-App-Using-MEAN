@@ -5,11 +5,13 @@ import { LoginCardRoutingModule } from './login-card-routing.module';
 import { LoginCardComponent } from './login-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DbContentComponent } from './db-content/db-content.component';
 
 
 @NgModule({
   declarations: [
-    LoginCardComponent
+    LoginCardComponent,
+    DbContentComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule
   ],
   exports:[
-    LoginCardComponent
+    LoginCardComponent,
+    DbContentComponent
   ]
 })
 export class LoginCardModule { }

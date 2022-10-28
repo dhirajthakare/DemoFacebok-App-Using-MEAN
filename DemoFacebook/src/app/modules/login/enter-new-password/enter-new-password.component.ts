@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/common/services/auth.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class EnterNewPasswordComponent implements OnInit {
   constructor(
     private router:ActivatedRoute,
     private route:Router,
-    private service:AuthService
+    private service:AuthService,
+    private toast:ToastrService
   ) { }
 
   Email:any;
@@ -31,10 +33,12 @@ export class EnterNewPasswordComponent implements OnInit {
       email:this.Email,
       password:Pass
     }
-    this.service.changePassword(dataf).subscribe(res=>{
+    this.service.changePassword(dataf).subscribe((res:any)=>{
       console.log(res);
+      this.toast.success(res,"success")
       this.route.navigate(['']);
     },err=>{
+      this.toast.error(err.error,"Faill")
       console.log(err);
     })
 
