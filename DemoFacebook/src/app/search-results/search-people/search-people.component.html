@@ -6,6 +6,9 @@
                  <h5>people</h5>
              </div>
          </div>
+         <div style="margin-top: 5%;" *ngIf="Loader" class=" text-center">
+            <img  src="../../assets/loader.gif" alt="">
+        </div>
 
              <ul *ngFor=" let item of userdata"  class="list-group list-group-flush">
                  <hr>

@@ -1,12 +1,16 @@
 <div  class="col-md-8 offset-md-2 card">
     <div>
-        <div class="card-body" *ngIf="allpost">
+        <div class="card-body">
             <div class="col-md-12">
                 <div class="row">
                         <h5>Photos</h5>
                     </div>
                 </div>
-            <div class="row">
+
+                <div style="margin-top: 5%;" *ngIf="Loader" class=" text-center">
+                    <img  src="../../assets/loader.gif" alt="">
+                </div> 
+            <div   *ngIf="allpost" class="row">
                 <div *ngFor="let item of allpost" class="col-md-4" >
                     <div style="border: 1px solid rgb(219, 216, 216);" class="my-2">
                         <div   [style]="item.postUrl ? 'height: 240px; background-image: url(http://localhost:2000'+item.postUrl+');background-size: cover; background-position: center;' : 'height: 240px; background-image: url(http://localhost:2000/assets/images/userdefault.png);background-size: cover; background-position: center;' " class="col-md-12">

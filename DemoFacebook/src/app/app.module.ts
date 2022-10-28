@@ -53,6 +53,8 @@ import { AccountCreateDialogComponent } from './create-and-login/account-create-
 import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
 import { MessangerComponent } from './chat-messanger/messanger/messanger.component';
 import { LikeUserDialogComponent } from './post/like-user-dialog/like-user-dialog.component';
+import { CreatePostDialogComponent } from './createpost/create-post-dialog/create-post-dialog.component';
+import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
 
 
 @NgModule({
@@ -98,6 +100,8 @@ import { LikeUserDialogComponent } from './post/like-user-dialog/like-user-dialo
     ChatMessangerComponent,
     MessangerComponent,
     LikeUserDialogComponent,
+    CreatePostDialogComponent,
+    UpdatePostDialogComponent,
   ],
   imports: [
     BrowserModule,

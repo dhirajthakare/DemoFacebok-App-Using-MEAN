@@ -11,8 +11,10 @@ export class SearchPeopleComponent implements OnInit {
 
   constructor(
 
-    private friendship : FriendrelationshipService
+    private friendship : FriendrelationshipService 
   ) { }
+
+  Loader:boolean =  true;
 
   ngOnInit(): void {
 
@@ -28,6 +30,7 @@ export class SearchPeopleComponent implements OnInit {
     this.friendship.serchUsers(search).pipe(debounceTime(300),distinctUntilChanged()) .subscribe(data=>{
       console.log(data);
       this.userdata=data;
+      this.Loader=false;
       
     },err=>{
       console.log(err);
