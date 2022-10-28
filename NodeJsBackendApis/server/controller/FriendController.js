@@ -124,6 +124,16 @@ exports.addFriend = (req,res)=>{
             res.status(400).json("Somthing wrong ")
         })
     }
+
+    // All friends of visited user wth search 
+    exports.allfriendsearch = (req,res)=>{
+        regext = new RegExp(req.params.name,'i');
+        usermodal.findOne({_id:req.params.id}).populate([{path:"user_info"}]).populate({path:"user_Friends",match:{user_id:req.params.id ,friendStatus:"Accepted"} , populate:([{path:"friend_id" ,match:{name:regext}} , {path:'user_id'}]) }).then(responce=>{
+            res.json(responce);
+        }).catch(err=>{
+            res.status(400).json("Somthing wrong ")
+        })
+    }
     exports.allRequest = (req,res)=>{
     
         usermodal.findOne({_id:req.params.id}).populate("user_info").populate({path:"user_Friends",match:{friend_id:req.params.id , friendStatus:"Pending"} , populate:([{path:"user_id"},{path:"friend_id"}]) }).then(responce=>{

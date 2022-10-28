@@ -1,55 +1,45 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, interval } from 'rxjs';
-import { ProfileHeaderComponent } from 'src/app/profile/profile-header/profile-header.component';
+import { interval, Subscription } from 'rxjs';
 import { MessangerService } from 'src/app/services/messanger.service';
 import { UsermiddlewareService } from 'src/app/services/usermiddleware.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-messanger',
-  templateUrl: './messanger.component.html',
-  styleUrls: ['./messanger.component.css']
+  selector: 'app-friends-chat-main',
+  templateUrl: './friends-chat-main.component.html',
+  styleUrls: ['./friends-chat-main.component.css']
 })
-export class MessangerComponent implements OnInit {
-
+export class FriendsChatMainComponent implements OnInit {
   constructor(
-    private matdiaref:MatDialogRef<ProfileHeaderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any,
+    private activrouter : ActivatedRoute,
     private messanger:MessangerService,
     private userservice:UsermiddlewareService
   ) { }
 
+  data:any;
+  
   ngOnInit(): void {
-    console.log(this.data);
+    
+    this.userservice.currentMessangerUser.subscribe((res: any)=>{
+      this.data = res;
+      console.log(res);
 
       if(this.data){
         this.oninitgetdata();
       }
+    })
 
   }
   allmessage:any;
-  @ViewChild('scrollMe')
-  private myScrollContainer!: ElementRef;
   @ViewChild('sendmessage') sendMessageInput : ElementRef | any
-  public i:number = 0;
+
   getAllMessage(){
     this.messanger.getmessage(this.data.user_id,this.data.friend_id).subscribe(res=>{
-      console.log(res);
       this.allmessage=res;
-      if(this.allmessage){
-        if(this.i==1){
-          this.scrollToBottom();
-        }
-      }
+      console.log(this.allmessage);
+
     })
   }
-  scrollToBottom(): void {
-    try {
-        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { }                 
-}
   currentUser:any;
   oninitgetdata(){
 
@@ -58,6 +48,10 @@ export class MessangerComponent implements OnInit {
       console.log(this.currentUser)
       if(this.currentUser){
         this.getAllMessage();
+        setTimeout(() => {
+      this.sendMessageInput.nativeElement.focus();
+    }, 500);
+
         this.messangerClick();
       }
     })
@@ -104,6 +98,7 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
   }
 
   continuousgetmessage : Subscription | any;
+  public i:number = 0;
   messangerClick(){
 
     let intervaldata = interval(4000);
@@ -115,6 +110,10 @@ this.messanger.sendmessage(dataf).subscribe(res=>{
       // this.sendMessageInput.nativeElement.focus();
       console.log(this.i++);
     })
+
+    // setTimeout(() => {
+    //   this.sendMessageInput.nativeElement.focus();
+    // }, 500);
 
    
   }
@@ -137,4 +136,3 @@ addMessangerEmoji(event:any){
   }
 
 }
-

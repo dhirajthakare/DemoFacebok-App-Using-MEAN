@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
+import { FriendsChatMainComponent } from './chat-messanger/friends-chat-main/friends-chat-main.component';
 import { AccountCreateLoginComponent } from './create-and-login/account-create-login/account-create-login.component';
 import { CreateAndLoginComponent } from './create-and-login/create-and-login.component';
 import { EnterNewPasswordComponent } from './create-and-login/enter-new-password/enter-new-password.component';
@@ -14,6 +15,7 @@ import { FriendsComponent } from './friends/friends.component';
 import { HomeComponent } from './friends/home/home.component';
 import { ContentBodyComponent } from './main/content-body/content-body.component';
 import { HeaderComponent } from './main/header/header.component';
+import { HomepageComponent } from './main/homepage/homepage.component';
 import { MainComponent } from './main/main.component';
 import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { Sidebar2Component } from './main/sidebar2/sidebar2.component';
@@ -40,12 +42,17 @@ const routes: Routes = [
     ] },
   ]},
   {
-  path:'deskbook' , component:MainComponent , children:[
-  {path:'header' , component:HeaderComponent},
-  {path:'' , component:ContentBodyComponent},
+  path:'deskbook' , component:MainComponent , children:[  
+  { path:'header' , component:HeaderComponent},
+  { path:'' , component:HomepageComponent , children:[
+    {path:'' , component:ContentBodyComponent},
+  ] },
+  {path:'messanger' , component:ChatMessangerComponent,children:[
+    {path:'' , component:FriendsChatMainComponent}
+  ] },
   {path:'sidebar' , component:SidebarComponent},
-  {path:'sidebar2' , component:Sidebar2Component},]
- },
+  {path:'sidebar2' , component:Sidebar2Component},
+]},
   {
       path:'stories' , component:StoriesComponent , children:[
       {path:'create',component:CreatestoriesComponent}
@@ -71,8 +78,11 @@ const routes: Routes = [
     {path:'peoples',component:SearchPeopleComponent},
 
   ]},
-  {path:'messanger',component:ChatMessangerComponent},
-  // {path:':name' , component:ProfileComponent},
+
+  // {path:'messanger',component:ChatMessangerComponent ,children:[
+  //   {path:'' , component:FriendsChatMainComponent}
+  // ] },
+
   {path:'**' , component:ErrorComponent},
 
 

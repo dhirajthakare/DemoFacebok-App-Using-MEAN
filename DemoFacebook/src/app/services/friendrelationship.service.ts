@@ -18,6 +18,7 @@ export class FriendrelationshipService {
 
   getUserRequestUrl="http://localhost:2000/getallrequest/";
   getUserFriendsUrl="http://localhost:2000/getuserfriends/";
+  getUseSerachFriendsUrl="http://localhost:2000/alluserfriendssearch/";
   getAllFriendsPostUrl="http://localhost:2000/allfriendspost/";
   removeFriendUrl ="http://localhost:2000/unfriend/";
 
@@ -53,6 +54,9 @@ export class FriendrelationshipService {
    }
    getUseFriends(id:any){
     return this.http.get(this.getUserFriendsUrl+id);
+   }
+   getUseSerachFriends(id:any,name:string){
+    return this.http.get(this.getUseSerachFriendsUrl+id+'/'+name);
    }
    getAllFriendsPost(ids:any){
     return this.http.post(this.getAllFriendsPostUrl,ids);

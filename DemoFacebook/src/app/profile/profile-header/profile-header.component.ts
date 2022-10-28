@@ -183,7 +183,10 @@ if(this.file){
       height:'500px',
       data:{
         user_id:this.data._id,
-        friend_id:this.currentUser._id
+        friend_id:this.currentUser._id,
+        userToken:this.currentUser.userToken,
+
+
       }
     })
   }
