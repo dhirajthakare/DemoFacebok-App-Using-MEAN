@@ -123,6 +123,7 @@ logout(){
 
   if(confirm("Are You sure You Want To Logout ? ")){
     localStorage.removeItem('loggedin');
+    localStorage.removeItem('accountToken');
    this.navicateRoute.navigate(['']);
   }
 
