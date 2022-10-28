@@ -9,7 +9,7 @@
                 <button type="button" class="btn-close"  mat-dialog-close aria-label="Close"></button>
             </div>
             <!-- {{item.user|json}} -->
-            <div *ngIf="moderdata" class="modal-body"  style="height: 350px; overflow-y: auto;">
+            <div *ngIf="moderdata" class="modal-body"  style="max-height: 350px; overflow-y: auto;">
                 <ul *ngFor="let user of moderdata.getlikes" class="list-group list-group-flush">
                     <li  class="list-group-item">
                         <div (click)="navicateUser(user.userclick_id.userToken)" class="d-flex">

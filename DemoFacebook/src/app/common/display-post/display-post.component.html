@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class=" col-md-1">
+                    <div class=" col-1">
                         <div [routerLink]="'/profile/'+item.postUser.userToken" class="btnPointer">
                             <img
                                 height="50" width="50" style="border-radius: 25px;object-fit: cover;"
@@ -16,16 +16,16 @@
                                 >
                         </div>
                     </div>
-                    <div class="col-md-6 mx-2">
+                    <div class="col-6 profileSection">
                         <span [routerLink]="'/profile/'+item.postUser.userToken" class="btnPointer"><span class="">
                                 {{item.postUser.name}}</span></span>
                         <p title="Public">{{item.createdAt | date:'medium'}} <i class="fa fa-firefox"
                                 aria-hidden="true"></i>
                         </p>
                     </div>
-                    <div *ngIf="data._id == item.postUser._id" class="col-md-1 offset-md-3">
+                    <div *ngIf="data._id == item.postUser._id" class="col-1 offset-3">
     
-                        <div class="nav-item  dropstart mx-2">
+                        <div class="nav-item  dropstart mx-md-2">
                             <a style="font-size: 19px;" class="nav-link active text-dark" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
