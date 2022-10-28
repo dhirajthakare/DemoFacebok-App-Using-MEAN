@@ -1,103 +1,99 @@
-<nav id="header" class="navbar navbar-expand-lg navbar-light ">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-      aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <div class="col-md-3">
-        <div class="row">
-          <div routerLink="/deskbook" class="col-md-2 btnPointer">
-            <img height="50" width="50" src="http://localhost:2000/assets/images/Desk1.png" alt="image">
+<div id="header"  class="navbarBox">
+  <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+          <div  routerLink="/deskbook" class="">
+            <img height="50" width="50" src="http://localhost:2000/assets/images/Desk1.png">
           </div>
-          <div class="col-md-9 mt-md-2">
-            <form class="d-flex col-md-10">
+          <div class=" mt-md-2">
+            <form class="d-flex">
               <input (focus)="onFocus()" (blur)="onblur()" (keyup)="searchFriends(searchFriend)"
                 style="border-radius: 23px;" #searchFriend class="form-control me-2" type="search"
                 placeholder="Search Deskbook" aria-label="Search">
             </form>
-
           </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <hr>
+          <div class="row">
+            <div class="d-flex ">
+              <!-- <div  class="m-2 mt-3">
+                <span class="fa fa-bell fa-lg btnPointer" > </span>
+              </div> -->
+              <div routerLink="/deskbook" class="nav-item homebutton btnPointer">
+                <div  class="nav-link text-primary iconDiv" aria-current="page"
+                  ><i class="fa fa-home fa-lg" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="nav-item mx-md-4 btnPointer">
+                <div class="nav-link  text-primary iconDiv" aria-current="page" ><i
+                    class="fa fa-caret-square-o-right fa-lg" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="nav-item  mx-md-4 btnPointer">
+                <div class="nav-link  text-primary iconDiv" aria-current="page" ><i
+                    class="fa fa-gamepad fa-lg" aria-hidden="true"></i>
+                  </div>
+              </div>
+              <div *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'" class="nav-item mx-md-4 btnPointer">
+                <div class="nav-link text-primary iconDiv" aria-current="page" ><i
+                    class="fa fa-users fa-lg" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="nav-item mx-md-4 btnPointer iconDiv">
+                <div class="nav-link iconDiv active" ><i class="fa fa-bell fa-lg"
+                    aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="nav-item mx-md-4 btnPointer iconDiv">
+                <div class="nav-link  text-primary" aria-current="page" ><i
+                    class="fa fa-briefcase fa-lg" aria-hidden="true"></i>
+                </div>
+              </div>
+                </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="d-flex">
+              <div *ngIf="data" class="btnPointer mx-md-5" [routerLink]="'/profile/'+data.userToken">
+                <div class="d-flex">
+                  <div><img class="profileImgResize" height="42" width="42"
+                      [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                     >
+                  </div>
+                  <div *ngIf="data" class=" mt-2" routerLike="/deskbook">
+                    <p>{{data.name.substr(0,16)}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class=" mx-2 btnPointer">
+                <div style="color:black !important" class="nav-link iconDiv active" aria-current="page" ><i class="fa fa-th fa-lg"
+                    aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class=" mx-2 btnPointer ">
+                <div  style="color:black !important" class="nav-link iconDiv active" ><i class="fa fa-commenting fa-lg"
+                    aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="dropstart mx-2">
+                <div  style="color:black !important" class="nav-link iconDiv active"  id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-caret-square-o-down fa-lg" aria-hidden="true"></i>
+                </div>
+                <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
+                  <li><span class="dropdown-item" routerLink="/deskbook">home</span></li>
+                  <li><span class="dropdown-item" (click)="openUpdateUserDialog()">Update Profile</span></li>
+                  <li *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
+                  <!-- <li><hr class="dropdown-divider"></li> -->
+                  <li><span class="dropdown-item" (click)="logout()">LogOut</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+              
         </div>
       </div>
-      <div class="col-md-6 ">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 " >
-          <li routerLink="/deskbook" class="nav-item mx-md-5 btnPointer">
-            <div  class="nav-link text-primary iconDiv" aria-current="page"
-              ><i class="fa fa-home fa-lg" aria-hidden="true"></i>
-            </div>
-          </li>
-          <li class="nav-item mx-md-5 btnPointer">
-            <div class="nav-link  text-primary iconDiv" aria-current="page" ><i
-                class="fa fa-caret-square-o-right fa-lg" aria-hidden="true"></i>
-            </div>
-          </li>
-          <li class="nav-item  mx-md-5 btnPointer">
-            <div class="nav-link  text-primary iconDiv" aria-current="page" ><i
-                class="fa fa-gamepad fa-lg" aria-hidden="true"></i>
-              </div>
-          </li>
-          <li *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'" class="nav-item mx-md-5 btnPointer">
-            <div class="nav-link text-primary iconDiv" aria-current="page" ><i
-                class="fa fa-users fa-lg" aria-hidden="true"></i>
-            </div>
-          </li>
-          <li class="nav-item mx-md-5 btnPointer iconDiv">
-            <div class="nav-link  text-primary" aria-current="page" ><i
-                class="fa fa-briefcase fa-lg" aria-hidden="true"></i>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-3 ">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 " >
-
-          <li *ngIf="data" class="btnPointer" [routerLink]="'/profile/'+data.userToken">
-            <div class="d-flex">
-              <div><img class="profileImgResize" height="42" width="42"
-                  [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                 >
-              </div>
-              <div *ngIf="data" class=" mt-2" routerLike="/deskbook">
-                <p>{{data.name.substr(0,16)}}</p>
-              </div>
-            </div>
-          </li>
-
-
-          <li class="nav-item mx-2 btnPointer">
-            <div class="nav-link iconDiv active" aria-current="page" ><i class="fa fa-th fa-lg"
-                aria-hidden="true"></i>
-            </div>
-          </li>
-
-          <li class="nav-item mx-2 btnPointer ">
-            <div class="nav-link iconDiv active" ><i class="fa fa-commenting fa-lg"
-                aria-hidden="true"></i>
-            </div>
-          </li>
-          <li class="nav-item mx-2 btnPointer">
-            <div class="nav-link iconDiv active" ><i class="fa fa-bell fa-lg"
-                aria-hidden="true"></i>
-            </div>
-          </li>
-
-          <li class="nav-item  dropstart mx-2">
-            <div class="nav-link iconDiv active"  id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-caret-square-o-down fa-lg" aria-hidden="true"></i>
-            </div>
-            <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
-              <li><span class="dropdown-item" routerLink="/deskbook">home</span></li>
-              <li><span class="dropdown-item" (click)="openUpdateUserDialog()">Update Profile</span></li>
-              <li *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
-              <!-- <li><hr class="dropdown-divider"></li> -->
-              <li><span class="dropdown-item" (click)="logout()">LogOut</span></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</nav>
+      </nav>
+</div>
