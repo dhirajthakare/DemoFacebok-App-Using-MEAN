@@ -58,7 +58,7 @@
                         </div>
                        <div *ngIf="userFriends" class="row">
                            <div *ngFor="let item of userFriends"  class="col-md-4 mt-2">
-                            <a style="text-decoration: none;color: black;" [href]="'/profile/'+item.friend_id.userToken" class="col-md-12">
+                            <a style="text-decoration: none;color: black;" [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-12">
                                 <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt=""><br>
                                 <p>{{item.friend_id.name}}</p>
                             </a>
@@ -83,7 +83,7 @@
            <div *ngIf="data && currentUser">
             <app-createpost *ngIf="data._id==currentUser._id"></app-createpost>
            </div>
-            <app-post></app-post>
+            <app-post [PostLocation]="'Profile'"></app-post>
         </div>
         
        

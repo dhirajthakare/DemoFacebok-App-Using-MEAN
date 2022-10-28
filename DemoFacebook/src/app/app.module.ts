@@ -52,6 +52,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AccountCreateDialogComponent } from './create-and-login/account-create-login/account-create-dialog/account-create-dialog.component';
 import { ChatMessangerComponent } from './chat-messanger/chat-messanger.component';
 import { MessangerComponent } from './chat-messanger/messanger/messanger.component';
+import { LikeUserDialogComponent } from './post/like-user-dialog/like-user-dialog.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { MessangerComponent } from './chat-messanger/messanger/messanger.compone
     AccountCreateDialogComponent,
     ChatMessangerComponent,
     MessangerComponent,
+    LikeUserDialogComponent,
   ],
   imports: [
     BrowserModule,
