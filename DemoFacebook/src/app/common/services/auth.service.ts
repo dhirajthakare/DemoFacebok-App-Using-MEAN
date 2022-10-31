@@ -13,6 +13,10 @@ export class AuthService {
   createAcc(formdata: any) {
     return this.http.post(this.BaseUrl + '/createAccount', formdata);
   }
+  
+  getUserProfile(){
+    return this.http.get(this.BaseUrl + '/getprofile');
+  }
 
   LoginAcc(formdata: any) {
     return this.http.post(this.BaseUrl + '/login', formdata);

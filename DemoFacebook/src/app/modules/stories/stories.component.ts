@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/common/services/auth.service';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -15,7 +16,8 @@ export class StoriesComponent implements OnInit {
   constructor(
     private route:Router,
     private userservice:UserService,
-    private sharedService:SharedDataService
+    private sharedService:SharedDataService,
+    private authservice:AuthService
     ) { }
  data:any;
  ngOnInit(): void {
@@ -25,13 +27,11 @@ export class StoriesComponent implements OnInit {
 
  token:any;
  getcurrentuser(){
-   this.token =  localStorage.getItem('accountToken');
-   this.userservice.getUser(this.token).subscribe(res=>{
+   this.authservice.getUserProfile().subscribe(res=>{
      console.log(res);
      localStorage.setItem('accountHolder',JSON.stringify(res));
      this.userservice.currentLoginUser.next(res);
  });
-
 
 }
 

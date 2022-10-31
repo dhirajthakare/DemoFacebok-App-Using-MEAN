@@ -4,7 +4,10 @@ var usermodal = require('../model/users');
 var commanService = require("../services/CommanService");
 var createAccvalid = require("../validation/CreateAccontValidaton");
 
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const jwtKey = "dtdtdtdtdtdtdtdtdtdt";
+
 
 // Create Account 
 exports.createAcc = async (req,res)=>{
@@ -83,7 +86,16 @@ exports.loginUser = async (req,res)=>{
         if(data){
 
          if(await bcrypt.compare(req.body.password,data.password)){
-            res.json(data);
+            
+            let payload = {
+                "userToken":data.userToken,
+                "_id":data._id
+            }
+            let jwtToken = jwt.sign(payload,jwtKey);
+
+            res.json(jwtToken);
+
+            // res.json(data);
         }else{
             throw " Password Is Invalid Please Try Agin ";
         }
@@ -97,5 +109,19 @@ exports.loginUser = async (req,res)=>{
     }
 
    
+}
+
+exports.getUserProfile =  async (req,res)=>{
+    const userData = req.userData;
+    usermodal.findOne({userToken:userData.userToken}). then(responce=>{
+        usermodal.findOne({userToken:responce.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:responce._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(responce1=>{
+            res.json(responce1);
+        }).catch(err=>{
+            res.status(400).json(" somthing wrong "+err);
+        })
+    }).catch(err=>{
+        res.status(400).json(" somthing wrong "+err);
+    })
+
 }
 

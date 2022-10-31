@@ -9,6 +9,7 @@ const PostController = require('../controller/PostController')
 const SendMailController = require('../controller/SendMailController')
 const StoryController = require('../controller/StoryController')
 const UserController = require('../controller/UserController')
+const verify = require('../middleware/verifyUserMiddleware')
 
 
 const fileuploadeController = require('../controller/fileUploadeController');
@@ -19,6 +20,7 @@ route.get('/api/',controller.home);
 route.post('/api/createAccount',AuthController.createAcc);
 route.post('/api/updateAccount/:id' ,fileuploadeController.ProfilePhotoUpload,AuthController.updateAccount)
 route.post('/api/login',AuthController.loginUser);
+route.get('/api/getprofile' ,verify,AuthController.getUserProfile);
 
 
 //Post mangement 

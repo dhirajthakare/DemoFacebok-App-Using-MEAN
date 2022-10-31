@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { FriendService } from '../services/friend.service';
 import { SharedDataService } from '../services/shared-data.service';
 import { UserService } from '../services/user.service';
@@ -17,6 +18,7 @@ export class MainHeaderComponent implements OnInit {
     private navicateRoute: Router,
     private friendship: FriendService,
     private userservice: UserService,
+    private authservice:AuthService,
     private sharedService:SharedDataService
   ) {}
 
@@ -67,8 +69,7 @@ export class MainHeaderComponent implements OnInit {
   }
 
   getcurrentuser() {
-    let token = localStorage.getItem('accountToken');
-    this.userservice.getUser(token).subscribe((res) => {
+    this.authservice.getUserProfile().subscribe((res) => {
       this.data = res;
       console.log(res);
       localStorage.setItem('accountHolder', JSON.stringify(res));
