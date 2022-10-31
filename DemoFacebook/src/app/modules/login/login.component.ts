@@ -15,9 +15,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem('loggedin')=="true"){
-      this.router.navigate(['/deskbook']);
-    }
   }
 
 }
