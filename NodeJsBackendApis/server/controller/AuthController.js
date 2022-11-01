@@ -91,7 +91,7 @@ exports.loginUser = async (req,res)=>{
                 "userToken":data.userToken,
                 "_id":data._id
             }
-            let jwtToken = jwt.sign(payload,jwtKey);
+            let jwtToken = jwt.sign(payload,jwtKey,{expiresIn:'48h'});
 
             res.json(jwtToken);
 
