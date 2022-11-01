@@ -1,0 +1,14 @@
+
+POST http://localhost:4200/api/login
+Content-Type: application/json
+
+{
+    "email":"dhiraj9900@gmail.com",
+    "password":"12345678"
+}
+
+###
+
+GET  http://localhost:4200/api/getprofile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVG9rZW4iOiJkaGlyYWoudGhha2FyZTE2Njc2MyIsIl9pZCI6IjYyZjM2MjJjOGExMjlkN2FlMjU4OTEyMCIsImlhdCI6MTY2NzMwMzAyNX0.nVeOtnfCD8BN5_dgRwbNk3hB2E_aZYiiKDz0ANhQBE0
+
