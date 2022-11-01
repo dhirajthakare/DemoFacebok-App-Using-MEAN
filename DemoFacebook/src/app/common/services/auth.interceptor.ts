@@ -17,8 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     let accountToken: any = localStorage.getItem('accountToken');
     // request.body.email = "Emaild"; // change body
-    console.log(accountToken);
-
     request = this.addToken(request, accountToken);
     return next.handle(request);
   }
