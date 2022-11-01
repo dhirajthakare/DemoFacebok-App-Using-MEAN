@@ -36,9 +36,9 @@
                     class="fa fa-gamepad fa-lg" aria-hidden="true"></i>
                   </div>
               </div>
-              <div *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'" class="nav-item mx-md-4 btnPointer">
-                <div class="nav-link text-primary iconDiv" aria-current="page" ><i
-                    class="fa fa-users fa-lg" aria-hidden="true"></i>
+              <div class="nav-item mx-md-4 btnPointer">
+                <div class="nav-link text-primary iconDiv" aria-current="page" ><i 
+                    class="fa fa-users fa-lg" [routerLink]="data?'/profile/'+data.userToken+'/friends':''" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="nav-item mx-md-4 btnPointer iconDiv">
@@ -56,14 +56,14 @@
           <hr>
           <div class="row">
             <div class="d-flex">
-              <div *ngIf="data" class="btnPointer mx-md-5" [routerLink]="'/profile/'+data.userToken">
+              <div class="btnPointer mx-md-5" [routerLink]="data?'/profile/'+data.userToken:data">
                 <div class="d-flex">
                   <div><img class="profileImgResize" height="42" width="42"
-                      [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                      [src]="data?data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
                      >
                   </div>
-                  <div *ngIf="data" class=" mt-2" routerLike="/deskbook">
-                    <p>{{data.name.substr(0,16)}}</p>
+                  <div class=" mt-2" routerLike="/deskbook">
+                    <p>{{data?data.name.substr(0,16):''}}</p>
                   </div>
                 </div>
               </div>
