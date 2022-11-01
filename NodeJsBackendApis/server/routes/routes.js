@@ -16,69 +16,64 @@ const fileuploadeController = require('../controller/fileUploadeController');
 
 route.get('/api/',controller.home);
 
-// Autthentication
+// Authentication
 route.post('/api/createAccount',AuthController.createAcc);
-route.post('/api/updateAccount/:id' ,fileuploadeController.ProfilePhotoUpload,AuthController.updateAccount)
 route.post('/api/login',AuthController.loginUser);
-route.get('/api/getprofile' ,verify,AuthController.getUserProfile);
+route.get('/api/getprofile' ,verify ,AuthController.getUserProfile);
+route.post('/api/updateAccount/:id' ,verify ,fileuploadeController.ProfilePhotoUpload,AuthController.updateAccount)
+
+
+// Forget Poassword
+route.post('/api/testmail' ,service.sendtestmail);
+route.post('/api/sendmail' ,SendMailController.sendtestmail);
+route.post('/api/checkopt' ,SendMailController.checkOtpCode);
+route.post('/api/changepassword' ,SendMailController.changePassword);
 
 
 //Post mangement 
-route.post('/api/createpost',fileuploadeController.postPhotoUpload , PostController.createPost);
-route.post('/api/updatepost',fileuploadeController.postPhotoUpload , PostController.updatePost);
-route.get('/api/getpostdata/:id' ,PostController.getPost);
-route.get('/api/deletepost/:id' ,PostController.deletePost);
-route.get('/api/findpost/:search' ,PostController.searchPost);
+route.post('/api/createpost',verify ,fileuploadeController.postPhotoUpload , PostController.createPost);
+route.post('/api/updatepost',verify ,fileuploadeController.postPhotoUpload , PostController.updatePost);
+route.get('/api/getpostdata/:id' ,verify ,PostController.getPost);
+route.get('/api/deletepost/:id' ,verify ,PostController.deletePost);
+route.get('/api/findpost/:search',verify ,PostController.searchPost);
 
 // Post =>Like And Comment 
-route.post('/api/likedislike',PostController.like);
-route.post('/api/createcomment',PostController.createComment);
-route.get('/api/deletecomment/:cid/:pid',PostController.deleteComment);
+route.post('/api/likedislike',verify ,PostController.like);
+route.post('/api/createcomment',verify ,PostController.createComment);
+route.get('/api/deletecomment/:cid/:pid',verify ,PostController.deleteComment);
 
 // Story Management 
-route.post('/api/createstory',fileuploadeController.StoryPhotoUpload , StoryController.createstory);
-route.post('/api/getstory/:id' ,StoryController.getStory);
+route.post('/api/createstory',fileuploadeController.StoryPhotoUpload ,verify , StoryController.createstory);
+route.post('/api/getstory/:id' ,verify ,StoryController.getStory);
 
 
-route.post('/api/createuserinformation' , fileuploadeController.ProfileCoverPhotoUpload ,UserController.addUserInfo);
+route.post('/api/createuserinformation' , fileuploadeController.ProfileCoverPhotoUpload ,verify ,UserController.addUserInfo);
 
 // Visited User
-route.get('/api/getcurrentloginuser/:token' ,UserController.getCurrentUser);
-route.get('/api/getcurrentuserposts/:cid/:id' ,UserController.getCurrentUserPost);
+route.get('/api/getcurrentloginuser/:token' ,verify ,UserController.getCurrentUser);
+route.get('/api/getcurrentuserposts/:cid/:id' ,verify ,UserController.getCurrentUserPost);
 
-route.get('/api/addfriend/:uid/:fid' ,FriendController.addFriend);
-route.get('/api/acceptfriendrequest/:uid/:fid' ,FriendController.acceptFriendRequest);
-route.get('/api/rejectfriendrequest/:uid/:fid' ,FriendController.rejectRequest);
-route.get('/api/unfriend/:uid/:fid' ,FriendController.unFriend);
-route.get('/api/findfriends/:name' ,FriendController.findFriends);
+route.get('/api/addfriend/:uid/:fid' ,verify ,FriendController.addFriend);
+route.get('/api/acceptfriendrequest/:uid/:fid' ,verify ,FriendController.acceptFriendRequest);
+route.get('/api/rejectfriendrequest/:uid/:fid' ,verify ,FriendController.rejectRequest);
+route.get('/api/unfriend/:uid/:fid' ,verify ,FriendController.unFriend);
+route.get('/api/findfriends/:name' ,verify ,FriendController.findFriends);
 
 // Request send and receive 
-route.get('/api/getAddFriend/:id' ,FriendController.allfriends);
-route.get('/api/getallrequest/:id' ,FriendController.allRequest);
-route.get('/api/getuserfriends/:id' ,FriendController.allfriends);
-route.get('/api/alluserfriendssearch/:id/:name' ,FriendController.allfriendsearch);
-route.post('/api/allfriendspost' ,FriendController.allFriendsPosts);
+route.get('/api/getAddFriend/:id' ,verify ,FriendController.allfriends);
+route.get('/api/getallrequest/:id' ,verify ,FriendController.allRequest);
+route.get('/api/getuserfriends/:id' ,verify ,FriendController.allfriends);
+route.get('/api/alluserfriendssearch/:id/:name' ,verify ,FriendController.allfriendsearch);
+route.post('/api/allfriendspost' ,verify ,FriendController.allFriendsPosts);
 
 
 //Send and get message 
-route.post('/api/sendmessage' ,MessageController.sendmsg);
-route.get('/api/getmessage/:uid/:fid' ,MessageController.getusermessage);
-
-// send Mail
-route.post('/api/testmail' ,service.sendtestmail);
+route.post('/api/sendmessage' ,verify ,MessageController.sendmsg);
+route.get('/api/getmessage/:uid/:fid' ,verify ,MessageController.getusermessage);
 
 
-route.post('/api/sendmail' ,SendMailController.sendtestmail);
-route.post('/api/checkopt' , SendMailController.checkOtpCode);
-route.post('/api/changepassword' , SendMailController.changePassword);
-
-
-
-
-
-route.get('/api/alluser' , UserController.findAllUsers);
-
-route.get('/api/alluserinfo' ,UserController.alluserinfo);
+route.get('/api/alluser' ,verify ,UserController.findAllUsers);
+route.get('/api/alluserinfo' ,verify ,UserController.alluserinfo);
 
 
 module.exports = route;
