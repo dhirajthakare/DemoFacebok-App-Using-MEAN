@@ -4,8 +4,9 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,7 +19,20 @@ export class AuthInterceptor implements HttpInterceptor {
     let accountToken: any = localStorage.getItem('accountToken');
     // request.body.email = "Emaild"; // change body
     request = this.addToken(request, accountToken);
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError(error => {
+          if (error instanceof HttpErrorResponse
+              && (error.status === 403 || error.status === 401)) {
+                localStorage.removeItem('accountToken');
+                localStorage.removeItem('accountHolder');
+                window.location.href = '';
+                return throwError(error);
+          } else {
+              return throwError(error);
+
+          }
+      })
+  )
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
