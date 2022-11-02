@@ -1,66 +1,67 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
-  styleUrls: ['./main-content.component.scss']
+  styleUrls: ['./main-content.component.scss'],
 })
 export class MainContentComponent implements OnInit {
-
-  
   constructor(
     private userservice: UserService,
-    private friend: FriendService,
-  ) { }
+    private friend: FriendService
+  ) {}
 
   likecounts = 0;
 
- 
-
-  data: any;
+  LoginUserDetails: any;
+  unSubscribeLoginUser: Subscription | any;
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser.subscribe((res: any) => {
-      console.log(res);
-      this.data = res;
-      if (this.data) {
-        this.getAllFriendsId();
+    this.getCurrentLoginDetails();
+  }
+
+  getCurrentLoginDetails() {
+    this.unSubscribeLoginUser = this.userservice.currentLoginUser.subscribe(
+      (res: any) => {
+        if (res) {
+          console.log(res);
+          this.LoginUserDetails = res;
+          this.getAllFriendsId();
+        }
       }
-    });
-
-    console.log(this.data);
-
+    );
   }
 
   friends: any;
   friendsId: Array<any> = [];
 
   getAllFriendsId() {
+    this.friend.getUseFriends(this.LoginUserDetails._id).subscribe(
+      (res) => {
+        this.friends = res;
+        console.log(this.friends);
+        this.friendsId = [];
 
-    this.friend.getUseFriends(this.data._id).subscribe(res => {
-      this.friends = res;
-      console.log(this.friends);
-      this.friendsId = [];
-
-      if (this.friends) {
-        this.friends = this.friends.user_Friends;
-        console.log("user " + this.data._id);
-        this.friendsId.push(this.data._id);
-        for (let i = 0; i < this.friends.length; i++) {
-          console.log("friend " + this.friends[i].friend_id._id);
-          this.friendsId.push(this.friends[i].friend_id._id);
+        if (this.friends) {
+          this.friends = this.friends.user_Friends;
+          this.friendsId.push(this.LoginUserDetails._id);
+          for (let i = 0; i < this.friends.length; i++) {
+            this.friendsId.push(this.friends[i].friend_id._id);
+          }
+          console.log(this.friendsId);
+          this.friend.userLoginFriendsId.next(this.friendsId);
         }
-        console.log(this.friendsId);
-        this.friend.userLoginFriendsId.next(this.friendsId);
-
+      },
+      (err) => {
+        console.log(err);
       }
-
-    }, err => {
-      console.log(err);
-    })
+    );
   }
 
-
+  ngOnDestroy() {
+    this.unSubscribeLoginUser.unsubscribe();
+  }
 }
