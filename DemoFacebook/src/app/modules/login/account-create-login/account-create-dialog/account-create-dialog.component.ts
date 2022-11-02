@@ -7,52 +7,42 @@ import { AuthService } from 'src/app/common/services/auth.service';
 @Component({
   selector: 'app-account-create-dialog',
   templateUrl: './account-create-dialog.component.html',
-  styleUrls: ['./account-create-dialog.component.scss']
+  styleUrls: ['./account-create-dialog.component.scss'],
 })
 export class AccountCreateDialogComponent implements OnInit {
+  constructor(
+    public service: AuthService,
+    private formbuilder: FormBuilder,
+    private toast: ToastrService,
+    private dialogRef: MatDialogRef<AccountCreateDialogComponent>
+  ) {}
 
-  constructor( 
-    public service : AuthService,
-    private formbuilder : FormBuilder,
-     private toast : ToastrService,
-     private dialogRef : MatDialogRef<AccountCreateDialogComponent>
-     ) { }
+  storeallerrors: any;
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+
+  // onSubmit
+  createAccountForm = this.formbuilder.group({
+    fname: '',
+    lname: '',
+    email: '',
+    password: '',
+    birthOfDate: '',
+    gender: '',
+  });
+
+  onSubmit() {
+    this.service.createAcc(this.createAccountForm.value).subscribe(
+      (res) => {
+        this.toast.success('Successfully Created Acoount', 'Success!');
+        this.storeallerrors = null;
+        this.createAccountForm.reset();
+        this.dialogRef.close();
+      },
+      (err) => {
+        console.log(err);
+        this.storeallerrors = err.error;
+      }
+    );
   }
-
-  
-// onSubmit 
-createAccountForm =  this.formbuilder.group({
-  'fname':'',
-  'lname':'',
-  'email':'',
-  'password':'',
-  'birthOfDate':'',
-  'gender':'',
-
-})
-
-storeallerrors:any;
-onSubmit(){
-console.log(this.createAccountForm.value);
-
-this.service.createAcc(this.createAccountForm.value).subscribe((res)=>{
-console.log(res);
-this.toast.success("Successfully Created Acoount" , "Success!",);
-this.storeallerrors=null;
-this.createAccountForm.reset();
-this.dialogRef.close();
-},(err)=>{
-
-console.log(err);
-
-this.storeallerrors = err.error;
-console.log(this.storeallerrors)
-
-})
-}
-
-
 }

@@ -8,52 +8,47 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login-card',
   templateUrl: './login-card.component.html',
-  styleUrls: ['./login-card.component.scss']
+  styleUrls: ['./login-card.component.scss'],
 })
 export class LoginCardComponent implements OnInit {
+  constructor(
+    public service: AuthService,
+    private formbuilder: FormBuilder,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
-  regsuccess:any
-  regerr:any;
-  loginsuccess:any;
-  loginerr:any;
-  storeallerrors:any;
-constructor(
-  public service : AuthService,
-  private formbuilder : FormBuilder,
-  private router : Router,
-  private dialog : MatDialog
-) { }
+  regsuccess: any;
+  regerr: any;
+  loginsuccess: any;
+  loginerr: any;
+  storeallerrors: any;
+  token: any;
 
-ngOnInit(): void {     
-}
-  // On Login
+  ngOnInit(): void {}
 
-  loginForm =  this.formbuilder.group({
-    'email':'mayur@gmail.com',
-    'password':'12345678',
-})
+  loginForm = this.formbuilder.group({
+    email: 'mayur@gmail.com',
+    password: '12345678',
+  });
 
-token:any;
-onlogin(){
- this.service.LoginAcc(this.loginForm.value).subscribe((res)=>{
+  onlogin() {
+    this.service.LoginAcc(this.loginForm.value).subscribe(
+      (res) => {
+        this.loginsuccess = 'login Successfully';
+        this.token = res;
+        localStorage.setItem('accountToken', this.token);
+        this.loginerr = null;
+        this.router.navigate(['deskbook']);
+      },
+      (err) => {
+        console.log(err);
+        this.loginerr = err.error;
+      }
+    );
+  }
 
-   this.loginsuccess="login Successfully";
-   this.token = res;
-
-
-    localStorage.setItem('accountToken',this.token);
-    this.loginerr=null;
-    localStorage.setItem('loggedin',"true");
-    this.router.navigate(['deskbook']);
-   
- },(err)=>{
-   console.log(err);
-   this.loginerr = err.error;
- })
-}
-
-openAccountCreateDialog(){
-let diaRefrence = this.dialog.open(AccountCreateDialogComponent);
-}
-
+  openAccountCreateDialog() {
+    this.dialog.open(AccountCreateDialogComponent);
+  }
 }
