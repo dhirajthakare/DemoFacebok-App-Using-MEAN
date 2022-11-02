@@ -1,9 +1,9 @@
 <div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <div  [routerLink]="'/profile/'+data.userToken"   class="d-flex btnPointer">
-                <div><img height="42" width="42" class="profileImgResize" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></div>
-                <div class=" mt-2"><p class=""> {{data.name}}</p></div>
+            <div  [routerLink]="LoginUserDetails?'/profile/'+LoginUserDetails.userToken:''"   class="d-flex btnPointer">
+                <div><img height="42" width="42" class="profileImgResize" [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':''"></div>
+                <div class=" mt-2"><p class=""> {{LoginUserDetails?LoginUserDetails.name:''}}</p></div>
             </div>
         </li>
         <li class="list-group-item">
@@ -91,9 +91,9 @@
         <hr>
         <h4 class="text-secondary">Your ShortCuts</h4>
         <li class="list-group-item">
-            <div  [routerLink]="'/profile/'+data.userToken" class="d-flex btnPointer">
-                <div><img height="42"class="profileImgResize"  [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></div>
-                <div class=" mt-2"><p class=""> {{data.name}}</p></div>
+            <div  [routerLink]="LoginUserDetails?'/profile/'+LoginUserDetails.userToken:''" class="d-flex btnPointer">
+                <div><img height="42"class="profileImgResize"  [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':''"></div>
+                <div class=" mt-2"><p class=""> {{LoginUserDetails?LoginUserDetails.name:''}}</p></div>
             </div>
         </li>
       </ul>

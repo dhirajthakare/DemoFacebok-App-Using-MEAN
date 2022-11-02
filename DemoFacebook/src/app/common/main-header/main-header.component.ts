@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { FriendService } from '../services/friend.service';
 import { SharedDataService } from '../services/shared-data.service';
@@ -30,15 +31,15 @@ export class MainHeaderComponent implements OnInit {
   Profilesrc: any;
   file: any;
   data: any;
+  unsubscriptionEditProfileSave: Subscription | any;
 
   ngOnInit(): void {
     this.getcurrentuser();
-    this.sharedService.editProfileSave.subscribe((res: any) => {
+    this.unsubscriptionEditProfileSave = this.sharedService.editProfileSave.subscribe((res: any) => {
       if (res) {
         this.getcurrentuser();
         this.sharedService.editProfileSave.next(false);
       }
-      console.log(res);
     });
   }
 
@@ -70,10 +71,17 @@ export class MainHeaderComponent implements OnInit {
 
   getcurrentuser() {
     this.authservice.getUserProfile().subscribe((res) => {
+      if(res){
       this.data = res;
-      console.log(res);
       localStorage.setItem('accountHolder', JSON.stringify(res));
       this.userservice.currentLoginUser.next(res);
+      }
     });
+  }
+
+  ngOnDestroy(){
+    this.unsubscriptionEditProfileSave.unsubscribe();
+    this.userservice.currentLoginUser.next('');
+
   }
 }

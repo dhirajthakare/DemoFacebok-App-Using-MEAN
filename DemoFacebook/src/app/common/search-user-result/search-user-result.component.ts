@@ -1,71 +1,69 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { FriendService } from '../services/friend.service';
 import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-search-user-result',
   templateUrl: './search-user-result.component.html',
-  styleUrls: ['./search-user-result.component.scss']
+  styleUrls: ['./search-user-result.component.scss'],
 })
 export class SearchUserResultComponent implements OnInit {
+  data: any;
+  searchbox: any;
+  userdata: any;
+  displaybtn: boolean = false;
+  totalLength: any;
 
-  data:any;
-  searchbox:any;
-  userdata:any;
-  displaybtn:boolean = false;
-  totalLength:any;
+  searchForm: any;
+  friendshipUnsubscribe: Subscription | any;
+  searchBoxVisibilityUnsubscribe: Subscription | any;
 
-  searchForm:any;
   constructor(
-    private userservice:UserService,
-    private friendship:FriendService,
-    private fb:FormBuilder,
+    private friendship: FriendService
+  ) {}
 
-  ) { 
-
-  }
-  
-  ngAfterViewInit(){
-  
-  }
+  ngAfterViewInit() {}
 
   ngOnInit(): void {
+    this.getSearchUserData();
+    this.searchBoxVisibilityCheck();
+  }
 
-    this.userservice.currentLoginUser.subscribe( (res: any) =>{
-      console.log(res);
-      this.data=res;
+
+  getSearchUserData() {
+    this.friendshipUnsubscribe = this.friendship.serchbox
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((res) => {
+        this.searchbox = res;
+        this.friendship.serchUsers(this.searchbox).subscribe(
+          (data) => {
+            console.log(data);
+            this.userdata = data;
+            this.totalLength = this.userdata.length;
+
+            this.userdata = data.filter((value: any, index: any) => {
+              return index <= 2;
+            });
+          },
+          (err) => {
+            this.userdata = null;
+            console.log(err);
+          }
+        );
+      });
+  }
+
+  searchBoxVisibilityCheck() {
+    this.searchBoxVisibilityUnsubscribe = this.friendship.searchBoxVisibility.subscribe((res: any) => {
+      this.displaybtn = res;
     });
-  
-  
-  this.friendship.serchbox.pipe( debounceTime(400) ,distinctUntilChanged()).subscribe(res=>{
-    this.searchbox =res;
-    this.friendship.serchUsers(this.searchbox).subscribe(data=>{
-      console.log(data);
-      this.userdata=data;
-      this.totalLength = this.userdata.length;
-      console.log(this.totalLength);
+  }
 
-      this.userdata = data.filter((value:any,index:any)=>{
-          return index <= 2 ;
-      })
+  ngOnChanges() {}
 
-    },err=>{
-      this.userdata=null;
-      console.log(err);
-    })
-   
-  })
-
-  this.friendship.searchBoxVisibility.subscribe((res: any)=>{
-    this.displaybtn=res;
-  });
-
-}
-ngOnChanges(){
-
-}
-
-
+  ngOnDestroy(){
+    this.friendshipUnsubscribe.unsubscribe();
+    this.searchBoxVisibilityUnsubscribe.unsubscribe();
+  }
 }
