@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -16,13 +17,20 @@ export class AllFriendsComponent implements OnInit {
   ) { }
 
   data:any;
-  ngOnInit(): void {
-    this.userservice.currentLoginUser.subscribe( (res: any) =>{
-      console.log(res);
-      this.data=res;
-      if(this.data){
-        this.getAllFriends(this.data._id);
+  onDestroy$:Subject<void> = new Subject<void>();
 
+  ngOnInit(): void {
+    this.getUserLoginDetails();
+  }
+
+  getUserLoginDetails(){
+    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
+      if(res){
+        console.log(res);
+        this.data=res;
+        if(this.data){
+          this.getAllFriends(this.data._id);
+        }
       }
     })
   }
@@ -35,6 +43,9 @@ export class AllFriendsComponent implements OnInit {
     
   }
 
+  ngOnDestroy() {
+    this.onDestroy$.next();
+  }
 
 
 }

@@ -30,15 +30,15 @@ export class MainHeaderComponent implements OnInit {
   updatesuccess: any;
   Profilesrc: any;
   file: any;
-  data: any;
-  unsubscriptionEditProfileSave: Subscription | any;
+  loginuserDetails: any;
+  unsubscriptionupdatedUserDetails: Subscription | any;
 
   ngOnInit(): void {
     this.getcurrentuser();
-    this.unsubscriptionEditProfileSave = this.sharedService.editProfileSave.subscribe((res: any) => {
+    this.unsubscriptionupdatedUserDetails = this.sharedService.updatedUserDetails.subscribe((res: any) => {
       if (res) {
         this.getcurrentuser();
-        this.sharedService.editProfileSave.next(false);
+        this.sharedService.updatedUserDetails.next(false);
       }
     });
   }
@@ -72,16 +72,42 @@ export class MainHeaderComponent implements OnInit {
   getcurrentuser() {
     this.authservice.getUserProfile().subscribe((res) => {
       if(res){
-      this.data = res;
-      localStorage.setItem('accountHolder', JSON.stringify(res));
-      this.userservice.currentLoginUser.next(res);
+      this.loginuserDetails = res;
+      if(this.loginuserDetails){
+      localStorage.setItem('accountHolder', JSON.stringify(this.loginuserDetails));
+      this.userservice.currentLoginUser.next(this.loginuserDetails);
+      this.getAllFriendsId()
+      }
       }
     });
   }
 
-  ngOnDestroy(){
-    this.unsubscriptionEditProfileSave.unsubscribe();
-    this.userservice.currentLoginUser.next('');
+  
+  friends: any;
+  friendsId: Array<any> = [];
 
+  getAllFriendsId() {
+    this.friendship.getUseFriends(this.loginuserDetails._id).subscribe(
+      (res) => {
+        this.friends = res;
+        if (this.friends) {
+          this.friends = this.friends.user_Friends;
+          this.friendsId.push(this.loginuserDetails._id);
+          for (let i = 0; i < this.friends.length; i++) {
+            this.friendsId.push(this.friends[i].friend_id._id);
+          }
+          this.friendship.userLoginFriendsId.next(this.friendsId);
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  ngOnDestroy(){
+    this.unsubscriptionupdatedUserDetails.unsubscribe();
+    this.userservice.currentLoginUser.next('');
+    this.friendship.userLoginFriendsId.next('');
   }
 }

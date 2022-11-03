@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { SharedDataService } from '../../services/shared-data.service';
 import { UserService } from '../../services/user.service';
@@ -19,7 +20,7 @@ export class UpdateUserDialogComponent implements OnInit {
   Profilesrc: any;
   file: any;
   data: any;
-
+  private onDestroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private formbuilder: FormBuilder,
@@ -40,11 +41,13 @@ export class UpdateUserDialogComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser.subscribe((res: any) => {
+    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
+      if(res){
       console.log(res);
       this.data = res;
       if (this.data) {
         this.setupdatevalue();
+      }
       }
     });
   }
@@ -78,7 +81,7 @@ export class UpdateUserDialogComponent implements OnInit {
         this.updatesuccess = 'Update Data Successfully';
         console.log(res);
         this.updateerr = null;
-        this.sharedservice.editProfileSave.next(true);
+        this.sharedservice.updatedUserDetails.next(true);
         this.toastr.success('Profile Updated SucceesFully ', 'Success!');
         this.dialogRef.close();
       },
@@ -92,7 +95,6 @@ export class UpdateUserDialogComponent implements OnInit {
 
   setupdatevalue() {
     let arr = this.data.name.split('  ');
-    console.log(arr);
     this.createAccountForm.patchValue({
       fname: arr[0],
       lname: arr[arr.length - 1],
@@ -107,6 +109,9 @@ export class UpdateUserDialogComponent implements OnInit {
       this.Profilesrc = 'http://localhost:2000/assets/images/userdefault.png';
     }
   }
-
+  
+  ngOnDestroy() {
+    this.onDestroy$.next();
+  }
 
 }

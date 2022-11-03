@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, Subscription, takeUntil } from 'rxjs';
 import { FriendService } from '../services/friend.service';
 import { UserService } from '../services/user.service';
 
@@ -16,8 +16,8 @@ export class SearchUserResultComponent implements OnInit {
   totalLength: any;
 
   searchForm: any;
-  friendshipUnsubscribe: Subscription | any;
-  searchBoxVisibilityUnsubscribe: Subscription | any;
+
+  ngonDestroy$ : Subject<void> = new Subject<void>();
 
   constructor(
     private friendship: FriendService
@@ -32,8 +32,8 @@ export class SearchUserResultComponent implements OnInit {
 
 
   getSearchUserData() {
-    this.friendshipUnsubscribe = this.friendship.serchbox
-      .pipe(debounceTime(400), distinctUntilChanged())
+     this.friendship.serchbox
+      .pipe(debounceTime(400), distinctUntilChanged() , takeUntil(this.ngonDestroy$))
       .subscribe((res) => {
         this.searchbox = res;
         this.friendship.serchUsers(this.searchbox).subscribe(
@@ -55,7 +55,7 @@ export class SearchUserResultComponent implements OnInit {
   }
 
   searchBoxVisibilityCheck() {
-    this.searchBoxVisibilityUnsubscribe = this.friendship.searchBoxVisibility.subscribe((res: any) => {
+    this.friendship.searchBoxVisibility.pipe(takeUntil(this.ngonDestroy$)).subscribe((res: any) => {
       this.displaybtn = res;
     });
   }
@@ -63,7 +63,6 @@ export class SearchUserResultComponent implements OnInit {
   ngOnChanges() {}
 
   ngOnDestroy(){
-    this.friendshipUnsubscribe.unsubscribe();
-    this.searchBoxVisibilityUnsubscribe.unsubscribe();
+    this.ngonDestroy$.next();
   }
 }

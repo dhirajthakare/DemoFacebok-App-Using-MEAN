@@ -38,7 +38,7 @@
               </div>
               <div class="nav-item mx-md-4 btnPointer">
                 <div class="nav-link text-primary iconDiv" aria-current="page" ><i 
-                    class="fa fa-users fa-lg" [routerLink]="data?'/profile/'+data.userToken+'/friends':''" aria-hidden="true"></i>
+                    class="fa fa-users fa-lg" [routerLink]="loginuserDetails?'/profile/'+loginuserDetails.userToken+'/friends':''" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="nav-item mx-md-4 btnPointer iconDiv">
@@ -56,14 +56,14 @@
           <hr>
           <div class="row">
             <div class="d-flex">
-              <div class="btnPointer mx-md-5" [routerLink]="data?'/profile/'+data.userToken:data">
+              <div class="btnPointer mx-md-5" [routerLink]="loginuserDetails?'/profile/'+loginuserDetails.userToken:loginuserDetails">
                 <div class="d-flex">
                   <div><img class="profileImgResize" height="42" width="42"
-                      [src]="data?data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
+                      [src]="loginuserDetails?loginuserDetails.profileUrl ? 'http://localhost:2000'+loginuserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
                      >
                   </div>
                   <div class=" mt-2" routerLike="/deskbook">
-                    <p>{{data?data.name.substr(0,16):''}}</p>
+                    <p>{{loginuserDetails?loginuserDetails.name.substr(0,16):''}}</p>
                   </div>
                 </div>
               </div>
@@ -85,7 +85,7 @@
                 <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
                   <li><span class="dropdown-item" routerLink="/deskbook">home</span></li>
                   <li><span class="dropdown-item" (click)="openUpdateUserDialog()">Update Profile</span></li>
-                  <li *ngIf="data" [routerLink]="'/profile/'+data.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
+                  <li *ngIf="loginuserDetails" [routerLink]="'/profile/'+loginuserDetails.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
                   <!-- <li><hr class="dropdown-divider"></li> -->
                   <li><span class="dropdown-item" (click)="logout()">LogOut</span></li>
                 </ul>

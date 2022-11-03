@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
   selector: 'app-friend-home',
@@ -9,19 +8,10 @@ import { UserService } from 'src/app/common/services/user.service';
 export class FriendHomeComponent implements OnInit {
 
  
-  constructor(
-    private userservice : UserService,
-  ) { }
+  constructor() { }
 
-    data:any;
+
   ngOnInit(): void {
-    this.userservice.currentLoginUser.subscribe( (res: any) =>{
-      console.log(res);
-      this.data=res;
-      if(this.data){
-
-      }
-    })
   }
 
 }
