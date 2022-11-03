@@ -23,7 +23,7 @@
                                 aria-hidden="true"></i>
                         </p>
                     </div>
-                    <div *ngIf="data._id == item.postUser._id" class="col-1 offset-3">
+                    <div *ngIf="loginuserDetails._id == item.postUser._id" class="col-1 offset-3">
     
                         <div class="nav-item  dropstart mx-md-2">
                             <a style="font-size: 19px;" class="nav-link active text-dark" id="navbarDropdown"
@@ -56,8 +56,8 @@
                     <div class="col-md-6">
                         <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createlike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getlikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getlikes =='' ">{{item.likeCounts}}</span> </p> -->
                         <p (click)="likeDialog(item)"> <i
-                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getlikes,data._id) &&
-                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getlikes,data._id) && item.likeCounts > 1 ? 'You And
+                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getlikes,loginuserDetails._id) &&
+                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getlikes,loginuserDetails._id) && item.likeCounts > 1 ? 'You And
                             '+(item.likeCounts - 1)+' Others ' : item.likeCounts }} </p>
     
                     </div>
@@ -72,7 +72,7 @@
     
                 <hr>
                 <div class="row">
-                    <button [disabled]="likestarted" (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,data._id) "
+                    <button [disabled]="likestarted" (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,loginuserDetails._id) "
                         class=" btn col"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
                     <button (click)="addcomment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
                         Comment</button>
@@ -97,7 +97,7 @@
                                 class="px-2 mt-md-2">
                                 <div style="justify-content: center;" class="d-flex ">
                                     <div class="p-1"> <span style="font-weight: bold;">{{comments.usercomment_id.name}}
-                                        </span> <span *ngIf="data._id==comments.usercomment_id._id"
+                                        </span> <span *ngIf="loginuserDetails._id==comments.usercomment_id._id"
                                             (click)="deleteComment(comments._id,item._id)" class="ms-2 btnPointer"><i
                                                 class="fa fa-times" aria-hidden="true"></i></span>
                                         <br>
@@ -114,7 +114,7 @@
                                 <div>
                                     <img
                                         height="37" width="37" style="border-radius: 18px; object-fit: cover;"
-                                        [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                                        [src]="loginuserDetails.profileUrl ? 'http://localhost:2000'+loginuserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
                                        >
                             </div>
                             </div>

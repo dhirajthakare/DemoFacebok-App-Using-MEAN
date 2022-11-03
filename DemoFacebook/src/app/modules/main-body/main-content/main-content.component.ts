@@ -27,7 +27,7 @@ export class MainContentComponent implements OnInit {
     this.unSubscribeLoginUser = this.userservice.currentLoginUser.subscribe(
       (res: any) => {
         if (res) {
-          console.log(res);
+          // console.log(res);
           this.LoginUserDetails = res;
           this.getAllFriendsId();
         }
@@ -42,7 +42,7 @@ export class MainContentComponent implements OnInit {
     this.friend.getUseFriends(this.LoginUserDetails._id).subscribe(
       (res) => {
         this.friends = res;
-        console.log(this.friends);
+        // console.log(this.friends);
         this.friendsId = [];
 
         if (this.friends) {
@@ -51,7 +51,7 @@ export class MainContentComponent implements OnInit {
           for (let i = 0; i < this.friends.length; i++) {
             this.friendsId.push(this.friends[i].friend_id._id);
           }
-          console.log(this.friendsId);
+          // console.log(this.friendsId);
           this.friend.userLoginFriendsId.next(this.friendsId);
         }
       },
@@ -63,5 +63,6 @@ export class MainContentComponent implements OnInit {
 
   ngOnDestroy() {
     this.unSubscribeLoginUser.unsubscribe();
+    this.friend.userLoginFriendsId.next('');
   }
 }

@@ -15,8 +15,6 @@ export class LikeUserDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public moderdata: any,
     private router : Router
 
-
-
   ) { }
 
   ngOnInit(): void {
@@ -24,8 +22,8 @@ export class LikeUserDialogComponent implements OnInit {
   }
   navicateUser(token:string){
     console.log(token);
-    this.router.navigate(['/profile/'+token]);
     this.dialogRef.close();
+    this.router.navigate(['/profile/'+token]);
     
   }
 

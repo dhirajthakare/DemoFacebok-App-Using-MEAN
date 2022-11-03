@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { CreatePostDialogComponent } from './create-post-dialog/create-post-dialog.component';
 
@@ -12,28 +13,29 @@ export class CreatePostComponent implements OnInit {
 
   
   constructor(private dialog: MatDialog , private service : UserService) { }
-  data: any;
+  loginuserDetails: any;
+  unSubscribeLoginUser: Subscription | any;
+
   ngOnInit(): void {
-    this.data = [];
-    this.service.currentLoginUser.subscribe((res: any)=>{
-      this.data = res;
+    this.getLoginUser();
+  }
 
+  getLoginUser(){
+    this.unSubscribeLoginUser = this.service.currentLoginUser.subscribe((res: any)=>{
+      if(res){
+        this.loginuserDetails = res;
+        // console.log(this.loginuserDetails);
+      }
     })
-    // this.data = localStorage.getItem('accountHolder');
-    // this.data = JSON.parse(this.data);
-    console.log(this.data);
-
   }
 
   onFocus() {
-    console.log('focus');
     this.createPostEmojiPicker = false;
 
   }
 
 
   addEmoji(event: any) {
-    console.log(event.emoji.native);
    this.addstatus =  this.addstatus + event.emoji.native;
     
   }
@@ -43,7 +45,6 @@ export class CreatePostComponent implements OnInit {
     createPostEmojiPicker: boolean = false;
   
     toggleEmojiPicker() {
-      console.log(this.createPostEmojiPicker);
       this.createPostEmojiPicker = !this.createPostEmojiPicker;
     }
 
@@ -52,15 +53,16 @@ export class CreatePostComponent implements OnInit {
     this.createPostEmojiPicker = false;
     let dialogRef = this.dialog.open(CreatePostDialogComponent , {
       width: '600px',
-      data: {...this.data , ...{addstatus:this.addstatus}}
+      data: {...this.loginuserDetails , ...{addstatus:this.addstatus}}
     });
 
     dialogRef.afterClosed().subscribe((res:any) => {
-      console.log(res);
       this.addstatus=res;
     });
   }
 
- 
+  ngOnDestroy() {
+    this.unSubscribeLoginUser.unsubscribe();
+  }
 
 }

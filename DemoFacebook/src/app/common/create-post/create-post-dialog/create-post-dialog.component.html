@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header">
             <div class="text-end">
-                <a class="text-secondary btn-close" mat-dialog-close></a>
+                <a class="text-secondary btn-close" (click)="closedialog()"></a>
             </div>
             <h3 class="text-center">Create Post </h3><br>
 
@@ -44,7 +44,7 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class=" input-group">
-                                <input formControlName='status' [(ngModel)]="addstatus" class="form-control "
+                                <input formControlName='status' class="form-control "
                                     type="text" name="status" id="status" (focus)="onFocus()"
                                     placeholder="What's on your mind , {{data.name.substr(0,7)}} ?" aria-label="Search">
                                 <span (click)="toggleEmojiPicker1()" class=" input-group-text btnPointer">😀</span>

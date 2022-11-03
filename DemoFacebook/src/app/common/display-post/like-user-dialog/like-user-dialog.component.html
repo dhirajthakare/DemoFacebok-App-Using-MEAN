@@ -12,15 +12,15 @@
             <div *ngIf="moderdata" class="modal-body"  style="max-height: 350px; overflow-y: auto;">
                 <ul *ngFor="let user of moderdata.getlikes" class="list-group list-group-flush">
                     <li  class="list-group-item">
-                        <div (click)="navicateUser(user.userclick_id.userToken)" class="d-flex">
-                            <a ><img
+                        <div (click)="navicateUser(user.userclick_id.userToken)" class="d-flex btnPointer">
+                            <div><img
                                     height="38" width="38" style="border-radius: 19px;object-fit: cover;"
                                     [src]="user.userclick_id.profileUrl ? 'http://localhost:2000'+user.userclick_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                   ></a>
+                                   ></div>
                             <i class="fa fa-thumbs-up text-primary mt-4" aria-hidden="true"></i>
-                            <a style="text-decoration: none; color: black;" class=" mt-2 mx-3">
+                            <div style="text-decoration: none; color: black;" class=" mt-2 mx-3">
                                 <p class=""> {{user.userclick_id.name}}</p>
-                            </a>
+                            </div>
                         </div>
                     </li>
                 </ul>

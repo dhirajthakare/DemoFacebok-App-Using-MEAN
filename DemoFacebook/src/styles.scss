@@ -74,3 +74,10 @@ body {
   background-color: white;
   width: 330px;
 }
+
+.card-header{
+  background-color: white !important;
+}
+.card-header .btn-close{
+  padding: 1em 0.5em !important;
+}
