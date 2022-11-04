@@ -10,7 +10,6 @@ export class SearchResultSidebarComponent implements OnInit {
   constructor() { }
   @Input('searchbox') searchbox :any;
 
-
   ngOnInit(): void {
   }
 

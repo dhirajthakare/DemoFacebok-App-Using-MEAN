@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { PostService } from 'src/app/common/services/post.service';
 
@@ -19,10 +20,11 @@ export class SearchPostComponent implements OnInit {
   allpost:any;
   Loader:boolean = true
   style=`height: 240px; background-image: url('http://localhost:2000/assets/images/userdefault.png');background-size: cover; background-position: center;`;
-  
+  destroy$ : Subject<void> = new Subject<void>();
+
   ngOnInit(): void {
 
-    this.friendship.serchbox.subscribe(res=>{
+    this.friendship.serchbox.pipe(debounceTime(300),distinctUntilChanged(),takeUntil(this.destroy$)).subscribe(res=>{
       console.log(res);
       this.box = res;
       this.getSearchPost(this.box);
@@ -37,5 +39,8 @@ export class SearchPostComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(){
+    this.destroy$.next();
+  }
 
 }

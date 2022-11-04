@@ -109,5 +109,6 @@ export class MainHeaderComponent implements OnInit {
     this.unsubscriptionupdatedUserDetails.unsubscribe();
     this.userservice.currentLoginUser.next('');
     this.friendship.userLoginFriendsId.next('');
+    this.friendship.serchbox.next('');
   }
 }

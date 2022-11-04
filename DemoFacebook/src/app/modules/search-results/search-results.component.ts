@@ -22,9 +22,13 @@ export class SearchResultsComponent implements OnInit {
       this.sharedService.changeTitle('Deskbook | Search');
   
       this.router.queryParams.subscribe(res=>{
+        if(res){
         this.searchbox = res;
         this.searchbox = this.searchbox.q;
-        this.friendship.serchbox.next(this.searchbox);
+        if(this.searchbox){
+          this.friendship.serchbox.next(this.searchbox);
+        }
+        }
   
       })
     }
