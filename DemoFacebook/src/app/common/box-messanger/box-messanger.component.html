@@ -53,13 +53,11 @@
                </div>
             </div>
         </div>
-  
-         
 
          <div style="margin-bottom: 2%;" class="row">
                 <div class="d-flex col-md-12">
                     <div class="input-group">
-                        <input #sendmessage [(ngModel)]="chatMessage"
+                        <input #sendmessage (focus)="onFocus()" [(ngModel)]="chatMessage"
                         style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
                         placeholder="Send Message..." (keyup.enter)="sendmsg(sendmessage.value)">
                         <span (click)="MessageToggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text btnPointer">😀</span>

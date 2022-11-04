@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="modal-body" style="height: 400px;">
+      <div  #scrollMe  class="modal-body" style="height: 370px;">
 
         <div class="col-4 offset-5 ">
           <div *ngIf="friendDetails" style=" text-decoration: none;" [routerLink]="'/profile/'+friendDetails.userToken"
@@ -65,27 +65,23 @@
             </div>
           </div>
         </div>
-        <div class="d-flex">
-          <button class="cbtn" style="float:left ;" #bottomDiv></button>
-        </div>
-
       </div>
       <div class="modal-footer">
           <div class="col-md-12">
             <div class="input-group">
-              <input #sendmessage [(ngModel)]="chatMessage"
+              <input #sendmessage [(ngModel)]="chatMessage" (focus)="onFocus()"
                 style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control"
                 type="search" placeholder="Send Message..." (keyup.enter)="sendmsg(sendmessage.value)">
               <span (click)="MessageToggleEmojiPicker()"
                 style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;"
                 class=" input-group-text btnPointer">😀</span>
             </div>
+            <emoji-mart *ngIf="messageEmojiPicker" (emojiSelect)="addMessangerEmoji($event)" class="emoji-mart" set="twitter"
+            emoji="point_up" title="Emojis"
+            [style]="{ position: 'absolute', bottom: '14%', right: '5%',width:'300px',height:'405px' }"></emoji-mart>
           </div>
       </div>
     </div>
-    <emoji-mart *ngIf="messageEmojiPicker" (emojiSelect)="addMessangerEmoji($event)" class="emoji-mart" set="twitter"
-      emoji="point_up" title="Emojis"
-      [style]="{ position: 'absolute', bottom: '28%', right: '35%',width:'300px',height:'405px' }"></emoji-mart>
 
   </div>
 </div>

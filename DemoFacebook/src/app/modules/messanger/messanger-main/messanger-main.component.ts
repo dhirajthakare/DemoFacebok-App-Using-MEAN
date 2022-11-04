@@ -17,7 +17,6 @@ export class MessangerMainComponent implements OnInit {
   data: any;
   allmessage: any;
   @ViewChild('sendmessage') sendMessageInput: ElementRef | any;
-  @ViewChild('bottomDiv') bottomDiv: ElementRef | any;
   ngOnDestroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
@@ -44,11 +43,6 @@ export class MessangerMainComponent implements OnInit {
       this.friendDetails = res;
       if (this.friendDetails) {
         this.getAllMessage();
-        setTimeout(() => {
-          this.bottomDiv.nativeElement.focus();
-        }, 500);
-
-        // this.messangerClick();
       }
       }
     });
@@ -62,6 +56,9 @@ export class MessangerMainComponent implements OnInit {
         if(res){
         this.allmessage = res;
         console.log(this.allmessage);
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 100);
         }
       });
   }
@@ -85,7 +82,6 @@ export class MessangerMainComponent implements OnInit {
       console.log(res);
       this.getAllMessage();
       this.chatMessage = '';
-      this.bottomDiv.nativeElement.focus();
       this.messageEmojiPicker = false;
       }
     });
@@ -108,6 +104,20 @@ export class MessangerMainComponent implements OnInit {
   MessageToggleEmojiPicker() {
     this.messageEmojiPicker = !this.messageEmojiPicker;
   }
+  
+  onFocus() {
+    this.messageEmojiPicker = false;
+  }
+
+  @ViewChild('scrollMe')
+  private myScrollContainer!: ElementRef;
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop =
+        this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) {}
+  }
+
   ngOnDestroy(): void {
     this.ngOnDestroy$.next();
   }

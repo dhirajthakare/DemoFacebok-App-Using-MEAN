@@ -105,6 +105,11 @@ export class BoxMessangerComponent implements OnInit {
   MessageToggleEmojiPicker() {
     this.messageEmojiPicker = !this.messageEmojiPicker;
   }
+
+  onFocus() {
+    this.messageEmojiPicker = false;
+  }
+  
   ngOnDestroy(): void {
     this.destroye$.next();
   }
