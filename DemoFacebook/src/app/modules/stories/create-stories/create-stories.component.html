@@ -21,31 +21,26 @@
                                             aria-hidden="true"></i></span></strong>
                             </div>
                             <div class="d-flex my-4">
-                                <a class=" mx-2"
-                                    [href]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'">
+                                <div class=" mx-2">
                                     <img height="60" width="60" style="border-radius: 30px; object-fit: cover;"
-                                        [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></a>
-                                <a style="text-decoration: none; color: black;" class="mx-2 mt-3" href="">
-                                    <p class=""> {{data.name}} </p>
-                                </a>
+                                        [src]="loginUserDetails?loginUserDetails.profileUrl ? 'http://localhost:2000'+loginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'">
+                                </div>
+                                <div style="text-decoration: none; color: black;" class="mx-2 mt-3">
+                                    <p class=""> {{loginUserDetails?loginUserDetails.name:''}} </p>
+                                </div>
                             </div>
                             <hr>
                             <div class="my-4" *ngIf="storysrc">
                                 <img height="350" width="350" style="object-fit: contain;" [src]="storysrc" alt="">
                             </div>
-                            <!-- <div class="my-4" *ngIf="!storysrc">
-                        <textarea name="" id="" cols="40" rows="8"></textarea>
-                    </div> -->
                             <div *ngIf="storysrc" class="row">
                                 <hr>
-
                                 <button routerLink="/deskbook"
                                     class=" col-md-3 mx-2 px-4 btn btn-secondary mb-2">Discard</button>
                                 <button class=" col-md-6 mx-2 px-4 btn btn-primary mb-2" (click)="oncreatestory()">Share
                                     to story</button>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -55,19 +50,14 @@
                             <i data-visualcompletion="css-img"
                                 style="background-image: url('http://localhost:2000/assets/images/storyBackground2.png'); background-position: 0px 0px; background-size: 222px 686px; width: 220px; height: 330px; background-repeat: no-repeat; display: inline-block;">
                                 <div style="justify-content: center; display: flex; margin-top: 65%;">
-                                    <!-- <i style="background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/olyVHe8yWTr.png'); background-position: 0px -426px; background-size: 34px 510px; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i> -->
-
                                     <div class="">
                                         <label for="file-input" class="circle">
                                             <i style="color: black; margin-top: 16px; margin-left: 16px;"
                                                 class=" fa fa-file-image-o fa-lg" aria-hidden="true"></i>
                                         </label>
-
-
                                         <input (change)="onFilechangestory($event)" class="d-none" id="file-input"
                                             type="file" />
                                     </div>
-
                                 </div>
                             </i>
 
@@ -83,14 +73,9 @@
                                 </div>
                             </i>
                         </div>
-
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
