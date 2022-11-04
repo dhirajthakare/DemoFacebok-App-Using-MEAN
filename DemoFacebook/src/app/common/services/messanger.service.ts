@@ -10,7 +10,6 @@ export class MessangerService {
 
   private BaseUrl: any = environment.ApiURL;
 
-  messangerdisplayBox = new BehaviorSubject(false);
   user_id:any;
   friend_id:any;
   profileUrl:any;

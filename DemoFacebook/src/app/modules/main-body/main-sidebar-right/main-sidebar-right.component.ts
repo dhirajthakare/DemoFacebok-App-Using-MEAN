@@ -54,9 +54,9 @@ export class MainSidebarRightComponent implements OnInit {
       width: '500px',
       height: '500px',
       data: {
-        user_id: this.LoginUserDetails._id,
+        loginUser_id: this.LoginUserDetails._id,
         friend_id: item._id,
-        userToken: item.userToken,
+        friendUsertoken: item.userToken,
       },
     });
   }
