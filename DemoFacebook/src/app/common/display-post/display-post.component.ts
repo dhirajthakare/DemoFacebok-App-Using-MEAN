@@ -63,9 +63,11 @@ export class DisplayPostComponent implements OnInit {
   currentUser: any;
   oninitgetdata() {
     this.userservice.currentVisitedUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
+        if(res){
         this.currentUser = res;
         console.log(res);
         this.getCurrentUserpost();
+        }
       });
   }
 
