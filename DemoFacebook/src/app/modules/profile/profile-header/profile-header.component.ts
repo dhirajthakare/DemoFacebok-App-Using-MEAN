@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 import { BoxMessangerComponent } from 'src/app/common/box-messanger/box-messanger.component';
 import { EditProfileDetailsDialogComponent } from 'src/app/common/main-header/edit-profile-details-dialog/edit-profile-details-dialog.component';
 import { FriendService } from 'src/app/common/services/friend.service';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 import { ProfileComponent } from '../profile.component';
 
@@ -18,48 +21,76 @@ export class ProfileHeaderComponent implements OnInit {
     private profileComp: ProfileComponent,
     private friend: FriendService,
     private toastr: ToastrService,
-    private matDia: MatDialog
+    private matDia: MatDialog,
+    private route:Router,
+    private activeRoute:ActivatedRoute,
+    private sharedService:SharedDataService
   ) {}
 
-  data: any;
+  loginUserDetails: any;
   CoverPhoto: any;
-  currentUser: any;
+  CurrentvisitedUser: any;
   friendsId: any = [];
+  destroy$:Subject<void> = new Subject<void>();
 
 
   ngOnInit(): void {
+    this.getCurrentvisitedUserData();
+    this.sharedService.editProfileSave.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      if (res) {
+        this.getCurrentvisitedUserData();
+        this.sharedService.editProfileSave.next(false);
+      }
+    });
     this.getAllFriendsId();
+    this.getCurrentLoginUser();
+  }
 
-    this.userservice.currentLoginUser.subscribe((res: any) => {
-      console.log(res);
-      this.data = res;
-      if (this.data) {
-        this.oninitgetdata();
+  getCurrentvisitedUserData() {
+    this.activeRoute.params.subscribe((res) => {
+      let visitedUserToken = res['token'];
+      if (visitedUserToken) {
+        this.userservice.getUser(visitedUserToken).subscribe(
+          (res) => {
+           if(res){
+            // console.log(res);
+            this.CurrentvisitedUser = res;
+            if (this.CurrentvisitedUser.user_info) {
+              if (this.CurrentvisitedUser.user_info.CoverPhoto) {
+                this.CoverPhoto =
+                  'http://localhost:2000' + this.CurrentvisitedUser.user_info.CoverPhoto;
+              }
+            }
+            this.userservice.currentVisitedUser.next(res);
+           }
+          },
+          (err) => {
+            this.route.navigate(['error']);
+          }
+        );
       }
     });
   }
 
-  oninitgetdata() {
-    this.userservice.currentVisitedUser.subscribe((res: any) => {
-      this.currentUser = res;
-      console.log(this.currentUser);
-      if (this.currentUser.user_info) {
-        if (this.currentUser.user_info.CoverPhoto) {
-          this.CoverPhoto =
-            'http://localhost:2000' + this.currentUser.user_info.CoverPhoto;
-        }
-      }
-      if (this.currentUser) {
-      }
-    });
-  }
   getAllFriendsId() {
-    this.friend.userLoginFriendsId.subscribe((res) => {
-      this.friendsId = res;
-      console.log(this.friendsId);
+    this.friend.userLoginFriendsId.pipe(takeUntil(this.destroy$)).subscribe((res) => {
+      if(res){
+        // console.log(res);
+        this.friendsId = res;
+      }
     });
   }
 
+  getCurrentLoginUser() {
+    this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+     if(res){
+      // console.log(res);
+      this.loginUserDetails = res;
+     }
+    });
+  }
+
+ 
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(
       (res) => {
@@ -75,11 +106,11 @@ export class ProfileHeaderComponent implements OnInit {
     if (
       confirm(
         'Are you sure you want to remove ' +
-          this.currentUser.name +
+          this.CurrentvisitedUser.name +
           ' as your friend?'
       )
     ) {
-      this.friend.unfriend(this.data._id, this.currentUser._id).subscribe(
+      this.friend.unfriend(this.loginUserDetails._id, this.CurrentvisitedUser._id).subscribe(
         (res) => {
           console.log(res);
           this.toastr.success(
@@ -101,9 +132,9 @@ export class ProfileHeaderComponent implements OnInit {
       width: '500px',
       height: '500px',
       data: {
-        loginUser_id: this.data._id,
-        friend_id: this.currentUser._id,
-        friendUsertoken: this.currentUser.userToken,
+        loginUser_id: this.loginUserDetails._id,
+        friend_id: this.CurrentvisitedUser._id,
+        friendUsertoken: this.CurrentvisitedUser.userToken,
       },
     });
   }
@@ -112,5 +143,9 @@ export class ProfileHeaderComponent implements OnInit {
     this.matDia.open(EditProfileDetailsDialogComponent);
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.userservice.currentVisitedUser.next('');
+    this.destroy$.next();
+  }
+
 }

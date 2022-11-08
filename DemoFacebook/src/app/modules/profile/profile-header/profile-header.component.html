@@ -1,23 +1,23 @@
-<div *ngIf="!currentUser&&!data" style="margin-top: 5%;" class=" text-center">
+<div *ngIf="!CurrentvisitedUser&&!loginUserDetails" style="margin-top: 5%;" class=" text-center">
     <img src="../../assets/loader.gif" alt="">
 </div>
-<div *ngIf="currentUser&&data">
+<div *ngIf="CurrentvisitedUser&&loginUserDetails">
     <div>
         <div style="height: 400px;width: 100%;">
             <a style=" text-decoration: none;"
-                [href]=" currentUser.user_info ? 'http://localhost:2000'+currentUser.user_info.CoverPhoto : ''">
-                <div [style]="currentUser.user_info ? 'background-image: url('+'http://localhost:2000'+ currentUser.user_info.CoverPhoto+')':'background-color: white;'"
+                [href]=" CurrentvisitedUser.user_info ? 'http://localhost:2000'+CurrentvisitedUser.user_info.CoverPhoto : ''">
+                <div [style]="CurrentvisitedUser.user_info ? 'background-image: url('+'http://localhost:2000'+ CurrentvisitedUser.user_info.CoverPhoto+')':'background-color: white;'"
                     style="height: 300px;width: 100%; background-position: center; background-size: cover;background-repeat: no-repeat; ">
 
                     <div style="padding-top: 210px; margin-left: 42%;" class=" ">
                         <a style=" text-decoration: none;"
-                            [href]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img
+                            [href]="CurrentvisitedUser.profileUrl ? 'http://localhost:2000'+CurrentvisitedUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"><img
                                 style="border-radius: 80px; object-fit: cover;" height="160" width="160"
-                                [src]="currentUser.profileUrl ? 'http://localhost:2000'+currentUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                                [src]="CurrentvisitedUser.profileUrl ? 'http://localhost:2000'+CurrentvisitedUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
                                 alt="">
                         </a>
                     </div>
-                    <h2 *ngIf="currentUser" style=" color:black ; text-align: center;">{{currentUser.name.substr(0,15)}}
+                    <h2 *ngIf="CurrentvisitedUser" style=" color:black ; text-align: center;">{{CurrentvisitedUser.name.substr(0,15)}}
                     </h2>
                 </div>
             </a>
@@ -26,14 +26,14 @@
         <div class="col-12">
             <div class="row">
                 <ul class="list-inline">
-                    <li [routerLink]="'/profile/'+currentUser.userToken" class=" btn  list-inline-item "
+                    <li [routerLink]="'/profile/'+CurrentvisitedUser.userToken" class=" btn  list-inline-item "
                         routerLike="/deskbook">Posts</li>
                     <li routerLink="about" class=" btn list-inline-item">About</li>
                     <li routerLink="photos" class=" btn list-inline-item">Photos</li>
                     <li routerLink="archive" class=" btn  list-inline-item" routerLike="/deskbook">Story Archive</li>
                     <li routerLink="friends" class=" btn list-inline-item">Friends</li>
                     <li class=" btn list-inline-item">Video</li>
-                    <li *ngIf="friendsId.includes(currentUser._id) && data._id!=currentUser._id"
+                    <li *ngIf="friendsId.includes(CurrentvisitedUser._id) && loginUserDetails._id!=CurrentvisitedUser._id"
                         style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><span
                             id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="btn fa fa-user-times text-dark"></i>
@@ -46,19 +46,19 @@
                     </li>
                     <!-- <li class=" btn list-inline-item" >More</li> -->
                     <!-- <li style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><i class="btn fa fa fa-user-check text-dark"></i></li> -->
-                    <li *ngIf="data._id==currentUser._id" (click)="openeditProfileComponant()"
+                    <li *ngIf="loginUserDetails._id==CurrentvisitedUser._id" (click)="openeditProfileComponant()"
                         style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"><i
                             class="btn fa fa fa-edit text-dark"></i>Edit Profile</li>
-                    <li *ngIf="data._id != currentUser._id && friendsId.includes(currentUser._id)"
+                    <li *ngIf="loginUserDetails._id != CurrentvisitedUser._id && friendsId.includes(CurrentvisitedUser._id)"
                         style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"
                         (click)="OpenMessangerDia()"><i class="btn fa fa-commenting text-dark"> <strong>
                                 Message</strong></i></li>
-                    <li *ngIf="data._id != currentUser._id "
-                        (click)="friendsId.includes(currentUser._id) ? '':sendRequest(data._id,currentUser._id)"
+                    <li *ngIf="loginUserDetails._id != CurrentvisitedUser._id "
+                        (click)="friendsId.includes(CurrentvisitedUser._id) ? '':sendRequest(loginUserDetails._id,CurrentvisitedUser._id)"
                         style="background-color: rgb(240, 255, 255);"
                         class="mx-1 text-primary float-end btn list-inline-item"> <i class="btn fa text-primary"
-                            [class]=" friendsId.includes(currentUser._id) ? 'fa fa-user':'fa fa-user-plus'"
-                            aria-hidden="true"></i> {{friendsId.includes(currentUser._id) ? ' Friend ':' Add Friend '}}
+                            [class]=" friendsId.includes(CurrentvisitedUser._id) ? 'fa fa-user':'fa fa-user-plus'"
+                            aria-hidden="true"></i> {{friendsId.includes(CurrentvisitedUser._id) ? ' Friend ':' Add Friend '}}
                     </li>
                 </ul>
             </div>

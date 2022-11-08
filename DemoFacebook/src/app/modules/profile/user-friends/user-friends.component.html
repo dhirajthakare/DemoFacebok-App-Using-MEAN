@@ -37,9 +37,9 @@
                     </div>
                 </div>
 
-                <div *ngIf="data" class="row">
+                <div *ngIf="loginUserDetails" class="row">
 
-                    <div *ngFor="let item of currentUser.user_Friends" class="col-md-6 mt-2">
+                    <div *ngFor="let item of currentVisitedUserDetails.user_Friends" class="col-md-6 mt-2">
 
                         <div class="card">
                             <div class="card-body">
@@ -51,8 +51,8 @@
                                     <h5>{{item.friend_id.name}}</h5>
                                     <p> Muture Friends </p>
                                 </div>
-                                <div *ngIf="currentUser && data" class="col-md-1 mt-3">
-                                    <i *ngIf="data._id==currentUser._id" class="fa fa-ellipsis-h"></i>
+                                <div *ngIf="currentVisitedUserDetails && loginUserDetails" class="col-md-1 mt-3">
+                                    <i *ngIf="loginUserDetails._id==currentVisitedUserDetails._id" class="fa fa-ellipsis-h"></i>
                                 </div>
                                </div>
                             </div>

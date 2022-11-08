@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -14,29 +15,36 @@ export class UserFriendsComponent implements OnInit {
     private sharedService:SharedDataService
   ) { }
 
-  data:any;
-  currentUser:any
+  loginUserDetails:any;
+  currentVisitedUserDetails:any
+  destroy$:Subject<void> = new Subject<void>();
+
   ngOnInit(): void {
     this.sharedService.changeTitle('Deskbook | friends');
     this.loginuser();
+    this.getCurrentVisitedUser();
   }
 
     loginuser(){
-      this.userservice.currentLoginUser.subscribe( (res: any) =>{
+      this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
+        if(res){
         console.log(res);
-        this.data=res;
-        if(this.data){
-          this.oninitgetdata();
+        this.loginUserDetails=res;
         }
-  
       });
     }
-  oninitgetdata(){
+    getCurrentVisitedUser(){
 
-    this.userservice.currentVisitedUser.subscribe((res: any)=>{
-      this.currentUser = res;
-      console.log(this.currentUser);
+    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
+      if(res){
+        this.currentVisitedUserDetails = res;
+       console.log(this.currentVisitedUserDetails);
+      }
     })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -13,12 +14,19 @@ export class ProfileStoryArchiveComponent implements OnInit {
     private userservice:UserService,
     private sharedService:SharedDataService
   ) { }
-  currentUser:any;
+  currentVisitedUserDetails:any;
+  destroy$:Subject<void> = new Subject<void>();
+
   ngOnInit(): void {
     this.sharedService.changeTitle('Deskbook | Archive');
-    this.userservice.currentVisitedUser.subscribe((res: any)=>{
-      this.currentUser = res;
+    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
+      this.currentVisitedUserDetails = res;
   })
+
+}
+
+ngOnDestroy() {
+  this.destroy$.next();
 }
 
 }

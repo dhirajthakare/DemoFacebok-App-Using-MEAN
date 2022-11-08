@@ -72,15 +72,16 @@ export class DisplayPostComponent implements OnInit {
   datasubtitle: any;
   getCurrentUserpost() {
     if (this.PostLocation == 'Profile') {
-      console.log(this.PostLocation);
-      console.log('Profile  Componant');
+      
       this.datasubtitle = this.userservice
         .getCurrentUserPost(this.currentUser._id, this.loginuserDetails._id)
         .subscribe(
           (res) => {
+            if(res){
             this.Loader = false;
             this.allPosts = res;
             console.log(res);
+            }
           },
           (err) => {
             this.Loader = false;

@@ -7,8 +7,8 @@
 <div>
     <div>
       
-      <div *ngIf="data && currentUser && friendsId">
-        <div  *ngIf="data._id != currentUser._id && !friendsId.includes(currentUser._id) " class="row">
+      <div *ngIf="loginUserDetails && currentVisitedUserDetails && friendsId">
+        <div  *ngIf="loginUserDetails._id != currentVisitedUserDetails._id && !friendsId.includes(currentVisitedUserDetails._id) " class="row">
             <div class=" col-md-12 mt-3 py-2">
                 <div>
                     <div class="card">
@@ -20,7 +20,7 @@
                          
                                 </div>
                                 <div style="margin-top: 2%;">
-                                    <li *ngIf="data._id != currentUser._id" (click)="sendRequest(data._id,currentUser._id)" class="mx-1 pe-4  btn-primary float-end btn list-inline-item"> <i class="btn text-light" [class]=" friendsId.includes(currentUser._id) ? 'fa fa-user':'fa fa-user-plus'" aria-hidden="true"></i> {{friendsId.includes(currentUser._id) ? ' Friend ':' Add Friend '}}</li>
+                                    <li *ngIf="loginUserDetails._id != currentVisitedUserDetails._id" (click)="sendRequest(loginUserDetails._id,currentVisitedUserDetails._id)" class="mx-1 pe-4  btn-primary float-end btn list-inline-item"> <i class="btn text-light" [class]=" friendsId.includes(currentVisitedUserDetails._id) ? 'fa fa-user':'fa fa-user-plus'" aria-hidden="true"></i> {{friendsId.includes(currentVisitedUserDetails._id) ? ' Friend ':' Add Friend '}}</li>
                                 </div>
                             </div>
                         </div>
@@ -56,8 +56,8 @@
                             <h4 class="float-start">Friends</h4>
                         <a routerLink="friends" class=" float-end"> See All Friends</a><br><br>
                         </div>
-                       <div *ngIf="userFriends" class="row">
-                           <div *ngFor="let item of userFriends"  class="col-md-4 mt-2">
+                       <div *ngIf="currentVisitedUserFriends" class="row">
+                           <div *ngFor="let item of currentVisitedUserFriends"  class="col-md-4 mt-2">
                             <a style="text-decoration: none;color: black;" [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-12">
                                 <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt=""><br>
                                 <p>{{item.friend_id.name}}</p>
@@ -80,8 +80,8 @@
                     </div>
                 </div>
             </div>
-           <div *ngIf="data && currentUser">
-            <app-create-post *ngIf="data._id==currentUser._id"></app-create-post>
+           <div *ngIf="loginUserDetails && currentVisitedUserDetails">
+            <app-create-post *ngIf="loginUserDetails._id==currentVisitedUserDetails._id"></app-create-post>
            </div>
             <app-display-post [PostLocation]="'Profile'"></app-display-post>
         </div>

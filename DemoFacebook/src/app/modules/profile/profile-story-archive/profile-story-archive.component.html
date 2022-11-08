@@ -1,4 +1,3 @@
-<div *ngIf="currentUser">
-    <app-show-stories class="row"  [loginUserId]="currentUser._id" ></app-show-stories>
-
+<div *ngIf="currentVisitedUserDetails">
+    <app-show-stories class="row"  [loginUserId]="currentVisitedUserDetails._id" ></app-show-stories>
 </div>

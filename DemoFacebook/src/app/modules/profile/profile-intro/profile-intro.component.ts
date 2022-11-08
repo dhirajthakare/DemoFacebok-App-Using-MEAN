@@ -1,45 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject, takeUntil } from 'rxjs';
 import { EditProfileDetailsDialogComponent } from 'src/app/common/main-header/edit-profile-details-dialog/edit-profile-details-dialog.component';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
   selector: 'app-profile-intro',
   templateUrl: './profile-intro.component.html',
-  styleUrls: ['./profile-intro.component.scss']
+  styleUrls: ['./profile-intro.component.scss'],
 })
 export class ProfileIntroComponent implements OnInit {
+  loginUserDetails: any;
+  currentVisitedUserDetails: any;
+  destroy$: Subject<void> = new Subject<void>();
 
-  
-  data:any;
-  currentUser:any;
-  constructor(
-    private userservice:UserService,
-    private dialog:MatDialog
-  ) { }
+  constructor(private userservice: UserService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser.subscribe( (res: any) =>{
-      console.log(res);
-      this.data=res;
-  
-    });
-   
+    this.userservice.currentLoginUser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        if(res){
+        console.log(res);
+        this.loginUserDetails = res;
+        }
+      });
+
     this.oninitgetdata();
-  
   }
 
-  oninitgetdata(){
+  oninitgetdata() {
+    this.userservice.currentVisitedUser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        if(res){
+        this.currentVisitedUserDetails = res;
+        console.log(this.currentVisitedUserDetails);
+        }
+      });
+  }
 
-    this.userservice.currentVisitedUser.subscribe((res: any)=>{
-      this.currentUser = res;
-      console.log(this.currentUser);
+  openeditProfileComponant() {
+    this.dialog.open(EditProfileDetailsDialogComponent);
+  }
 
-    })
-}
-
-openeditProfileComponant(){
-  this.dialog.open(EditProfileDetailsDialogComponent)
-}
-
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
 }
