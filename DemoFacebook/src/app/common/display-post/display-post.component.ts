@@ -53,7 +53,11 @@ export class DisplayPostComponent implements OnInit {
           this.loginuserDetails = res;
           if (this.loginuserDetails) {
             console.log(this.loginuserDetails);
-            this.oninitgetdata();
+            if (this.PostLocation == 'Profile') {
+              this.oninitgetdata();
+            }else if (this.PostLocation == 'Main'){
+              this.getAllFriendsPost();
+            }
           }
         }
       }
