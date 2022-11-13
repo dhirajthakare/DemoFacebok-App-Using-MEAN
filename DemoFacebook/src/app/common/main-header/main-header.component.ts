@@ -91,6 +91,7 @@ export class MainHeaderComponent implements OnInit {
       (res) => {
         this.friends = res;
         if (this.friends) {
+          this.friendsId=[];
           this.friends = this.friends.user_Friends;
           this.friendsId.push(this.loginuserDetails._id);
           for (let i = 0; i < this.friends.length; i++) {

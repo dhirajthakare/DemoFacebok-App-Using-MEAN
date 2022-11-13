@@ -8,7 +8,6 @@ import { EditProfileDetailsDialogComponent } from 'src/app/common/main-header/ed
 import { FriendService } from 'src/app/common/services/friend.service';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 import { UserService } from 'src/app/common/services/user.service';
-import { ProfileComponent } from '../profile.component';
 
 @Component({
   selector: 'app-profile-header',
@@ -18,7 +17,6 @@ import { ProfileComponent } from '../profile.component';
 export class ProfileHeaderComponent implements OnInit {
   constructor(
     private userservice: UserService,
-    private profileComp: ProfileComponent,
     private friend: FriendService,
     private toastr: ToastrService,
     private matDia: MatDialog,
@@ -117,8 +115,7 @@ export class ProfileHeaderComponent implements OnInit {
             'Successfully Remove From Your Friend List',
             'Success!'
           );
-          this.profileComp.ngOnInit();
-          this.ngOnInit();
+          this.sharedService.updatedUserDetails.next(true);
         },
         (err) => {
           console.log(err);
