@@ -36,8 +36,6 @@ export class CreatePostDialogComponent implements OnInit {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.file = e.target.files[0];
-        console.log(this.file);
-        // console.log(this.imageSrc)
         this.imageSrc = event.target.result;
       };
     }
@@ -57,7 +55,6 @@ export class CreatePostDialogComponent implements OnInit {
         this.createPost.reset();
         this.createpostsuccess = res;
         this.posterr = null;
-        console.log(res);
         this.toastr.success(this.createpostsuccess, 'Success!');
         this.dialogRef.close();
         this.sharedService.postSavedSource.next(true);

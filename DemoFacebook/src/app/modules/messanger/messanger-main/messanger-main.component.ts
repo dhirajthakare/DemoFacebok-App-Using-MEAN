@@ -29,7 +29,6 @@ export class MessangerMainComponent implements OnInit {
       if (res) {
         this.data = res;
         if (this.data) {
-          console.log(this.data);
           this.oninitgetdata();
         }
       }
@@ -55,7 +54,6 @@ export class MessangerMainComponent implements OnInit {
       .subscribe((res) => {
         if(res){
         this.allmessage = res;
-        console.log(this.allmessage);
         setTimeout(() => {
           this.scrollToBottom();
         }, 100);
@@ -79,7 +77,6 @@ export class MessangerMainComponent implements OnInit {
 
     this.messanger.sendmessage(formData).subscribe((res) => {
       if(res){
-      console.log(res);
       this.getAllMessage();
       this.chatMessage = '';
       this.messageEmojiPicker = false;

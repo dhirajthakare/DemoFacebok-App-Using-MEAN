@@ -24,7 +24,6 @@ export class CreatePostComponent implements OnInit {
     this.unSubscribeLoginUser = this.service.currentLoginUser.subscribe((res: any)=>{
       if(res){
         this.loginuserDetails = res;
-        // console.log(this.loginuserDetails);
       }
     })
   }

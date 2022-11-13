@@ -29,7 +29,6 @@ export class MessangerSidebarRightComponent implements OnInit {
         if (res) {
           this.loginuserDetails = res;
           if (this.loginuserDetails) {
-            // console.log(res);
             this.getUserFriends();
           }
         }
@@ -41,7 +40,6 @@ export class MessangerSidebarRightComponent implements OnInit {
       (res) => {
         if (res) {
           this.friends = res;
-          // console.log(this.friends);
           this.assignRecentChat();
         }
       },
@@ -55,7 +53,6 @@ export class MessangerSidebarRightComponent implements OnInit {
       .getUseSerachFriends(this.loginuserDetails._id, searchfrd)
       .subscribe(
         (res) => {
-          console.log(res);
           // this.friends=res;
         },
         (err) => {
@@ -65,7 +62,6 @@ export class MessangerSidebarRightComponent implements OnInit {
   }
 
   assignRecentChat() {
-    // console.log(this.friends.user_Friends[0]);
     let newdata = {
       friend_id: this.friends.user_Friends[0].friend_id._id,
       loginUser_id: this.loginuserDetails._id,

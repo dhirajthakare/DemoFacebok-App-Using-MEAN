@@ -20,7 +20,6 @@ export class SearchPeopleComponent implements OnInit {
   ngOnInit(): void {
 
     this.friendship.serchbox.pipe(debounceTime(300),distinctUntilChanged(),takeUntil(this.destroy$)).subscribe(res=>{
-      console.log(res);
       this.getallsearchUser(res)
     })
   }
@@ -28,7 +27,6 @@ export class SearchPeopleComponent implements OnInit {
   userdata:any;
   getallsearchUser(search:any){
     this.friendship.serchUsers(search).pipe(debounceTime(300),distinctUntilChanged()).subscribe(data=>{
-      console.log(data);
       this.userdata=data;
       this.Loader=false;
       

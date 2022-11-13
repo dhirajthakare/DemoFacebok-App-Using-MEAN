@@ -36,7 +36,6 @@ export class DisplayPostComponent implements OnInit {
   ngOnInit(): void {
     this.sharedService.postSavedSource.pipe(takeUntil(this.onDestroy$)).subscribe((res) => {
         if (res) {
-          console.log(res);
           this.getCurrentUserpost();
           this.sharedService.postSavedSource.next(false);
         }
@@ -52,7 +51,6 @@ export class DisplayPostComponent implements OnInit {
         if (res) {
           this.loginuserDetails = res;
           if (this.loginuserDetails) {
-            console.log(this.loginuserDetails);
             if (this.PostLocation == 'Profile') {
               this.oninitgetdata();
             }else if (this.PostLocation == 'Main'){
@@ -69,7 +67,6 @@ export class DisplayPostComponent implements OnInit {
     this.userservice.currentVisitedUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
         if(res){
         this.currentUser = res;
-        console.log(res);
         this.getCurrentUserpost();
         }
       });
@@ -86,7 +83,6 @@ export class DisplayPostComponent implements OnInit {
             if(res){
             this.Loader = false;
             this.allPosts = res;
-            console.log(res);
             }
           },
           (err) => {
@@ -109,7 +105,6 @@ export class DisplayPostComponent implements OnInit {
           (res) => {
             this.Loader = false;
             this.allPosts = res;
-            console.log(this.allPosts);
           },
           (err) => {
             this.Loader = false;
@@ -138,7 +133,6 @@ export class DisplayPostComponent implements OnInit {
   deletePost(item: any) {
     if (confirm('are you sure to Delete Post?')) {
       this.post.deletePost(item._id).subscribe((res) => {
-        console.log('deletion done');
         this.getCurrentUserpost();
       });
     }
@@ -189,7 +183,6 @@ export class DisplayPostComponent implements OnInit {
         comment.value = '';
         this.addComments = '';
         this.getCurrentUserpost();
-        console.log(res);
       },
       (err) => {
         console.log(err);

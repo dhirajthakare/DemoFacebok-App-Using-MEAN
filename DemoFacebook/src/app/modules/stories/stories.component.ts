@@ -23,7 +23,6 @@ export class StoriesComponent implements OnInit {
   token: any;
   getcurrentuser() {
     this.authservice.getUserProfile().subscribe((res) => {
-      console.log(res);
       localStorage.setItem('accountHolder', JSON.stringify(res));
       this.userservice.currentLoginUser.next(res);
     });

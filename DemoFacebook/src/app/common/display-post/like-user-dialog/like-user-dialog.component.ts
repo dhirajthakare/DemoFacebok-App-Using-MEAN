@@ -18,10 +18,8 @@ export class LikeUserDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.moderdata);
   }
   navicateUser(token:string){
-    console.log(token);
     this.dialogRef.close();
     this.router.navigate(['/profile/'+token]);
     

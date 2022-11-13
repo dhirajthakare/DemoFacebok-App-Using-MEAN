@@ -20,10 +20,8 @@ export class EnterNewPasswordComponent implements OnInit {
   Email:any;
   ngOnInit(): void {
     this.router.queryParams.subscribe(res=>{
-      console.log(res)
       let data:any = res;
       this.Email=atob(data.Email);
-      console.log(this.Email);
     })
   }
 
@@ -34,7 +32,6 @@ export class EnterNewPasswordComponent implements OnInit {
       password:Pass
     }
     this.service.changePassword(dataf).subscribe((res:any)=>{
-      console.log(res);
       this.toast.success(res,"success")
       this.route.navigate(['']);
     },err=>{

@@ -37,7 +37,6 @@ export class BoxMessangerComponent implements OnInit {
     this.messanger
       .getmessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
-        console.log(res);
         this.allmessage = res;
         if (this.allmessage) {
           setTimeout(() => {
@@ -57,7 +56,6 @@ export class BoxMessangerComponent implements OnInit {
     this.userservice.getUser(this.data.friendUsertoken).subscribe((res: any) => {
       if (res) {
         this.friendDetails = res;
-        console.log(this.friendDetails);
         if (this.friendDetails) {
           this.getAllMessage();
           this.messangerClick();
@@ -80,7 +78,6 @@ export class BoxMessangerComponent implements OnInit {
     };
 
     this.messanger.sendmessage(dataf).subscribe((res) => {
-      console.log(res);
       this.getAllMessage();
       this.chatMessage = '';
       this.sendMessageInput.nativeElement.focus();
@@ -97,8 +94,6 @@ export class BoxMessangerComponent implements OnInit {
   }
 
   addMessangerEmoji(event: any) {
-    console.log(event.emoji.native);
-
     this.chatMessage = this.chatMessage + event.emoji.native;
   }
 

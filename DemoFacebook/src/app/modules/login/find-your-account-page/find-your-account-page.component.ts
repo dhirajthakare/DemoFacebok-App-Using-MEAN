@@ -23,7 +23,6 @@ export class FindYourAccountPageComponent implements OnInit {
   SendMail=false;
   sendrecoveryMail(email:any){
     this.SendMail=true;
-    console.log(email);
     this.hashEmail = btoa(email);
 
     let dataf = {
@@ -32,8 +31,6 @@ export class FindYourAccountPageComponent implements OnInit {
     }
     this.service.sendRecoveryMail(dataf).subscribe(res=>{
       this.SendMail=false;
-
-      console.log(res);
       let respo:any = res;
       this.toast.success(respo.message,"Success!");
       this.route.navigate(['recover/code'],{queryParams:{

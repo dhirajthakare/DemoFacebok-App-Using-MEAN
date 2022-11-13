@@ -43,7 +43,6 @@ export class UpdateUserDialogComponent implements OnInit {
   ngOnInit(): void {
     this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
       if(res){
-      console.log(res);
       this.data = res;
       if (this.data) {
         this.setupdatevalue();
@@ -58,7 +57,6 @@ export class UpdateUserDialogComponent implements OnInit {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.file = e.target.files[0];
-        console.log(this.file);
         this.Profilesrc = event.target.result;
       };
     }
@@ -79,7 +77,6 @@ export class UpdateUserDialogComponent implements OnInit {
     this.Authservice.updateUser(formdata, this.data._id).subscribe(
       (res) => {
         this.updatesuccess = 'Update Data Successfully';
-        console.log(res);
         this.updateerr = null;
         this.sharedservice.updatedUserDetails.next(true);
         this.toastr.success('Profile Updated SucceesFully ', 'Success!');

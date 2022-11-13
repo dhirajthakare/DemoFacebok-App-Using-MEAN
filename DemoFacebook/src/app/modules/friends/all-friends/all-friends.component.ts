@@ -26,7 +26,6 @@ export class AllFriendsComponent implements OnInit {
   getUserLoginDetails(){
     this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
       if(res){
-        console.log(res);
         this.data=res;
         if(this.data){
           this.getAllFriends(this.data._id);
@@ -38,7 +37,6 @@ export class AllFriendsComponent implements OnInit {
   getAllFriends(id:any){
     this.friend.getUseFriends(id).subscribe(res=>{
       this.AllUserFriends=res;
-      console.log(this.data);
     })
     
   }

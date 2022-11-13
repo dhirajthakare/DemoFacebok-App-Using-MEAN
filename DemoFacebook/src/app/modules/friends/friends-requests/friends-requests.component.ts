@@ -30,7 +30,6 @@ export class FriendsRequestsComponent implements OnInit {
     this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
       if(res){
       this.loginuserDetails=res;
-      console.log(this.loginuserDetails);
       if(this.loginuserDetails){
         this.getUserRequest();
       }
@@ -42,7 +41,6 @@ export class FriendsRequestsComponent implements OnInit {
     this.friend.getUserRequest(this.loginuserDetails._id).subscribe(res=>{
       if(res){
       this.request=res;
-      console.log(this.request);
       }
 
     },err=>{
@@ -52,7 +50,6 @@ export class FriendsRequestsComponent implements OnInit {
   acceptRequest(fid:any){
     this.friend.acceptRequest(this.loginuserDetails._id,fid).subscribe(res=>{
       if(res){
-      console.log(res);
       this.request=res;
       this.getUserRequest();
       this.toastr.success('Request Accepted','Success!');
@@ -65,7 +62,6 @@ export class FriendsRequestsComponent implements OnInit {
     if(confirm("Are you sure You want to reject Request ?")){
       this.friend.rejectRequest(this.loginuserDetails._id,fid).subscribe(res=>{
        if(res){
-        console.log(res);
         this.request=res;
         this.getUserRequest();
         this.toastr.success('Request Rejected','Success!');

@@ -19,7 +19,6 @@ export class MessangerSidebarLeftComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res: any) => {
         if (res) {
-          // console.log(res);
           this.token = res.friend_userToken;
 
           if (this.token) {

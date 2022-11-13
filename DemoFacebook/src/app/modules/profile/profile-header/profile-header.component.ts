@@ -51,7 +51,6 @@ export class ProfileHeaderComponent implements OnInit {
         this.userservice.getUser(visitedUserToken).subscribe(
           (res) => {
            if(res){
-            // console.log(res);
             this.CurrentvisitedUser = res;
             if (this.CurrentvisitedUser.user_info) {
               if (this.CurrentvisitedUser.user_info.CoverPhoto) {
@@ -73,7 +72,6 @@ export class ProfileHeaderComponent implements OnInit {
   getAllFriendsId() {
     this.friend.userLoginFriendsId.pipe(takeUntil(this.destroy$)).subscribe((res) => {
       if(res){
-        // console.log(res);
         this.friendsId = res;
       }
     });
@@ -82,7 +80,6 @@ export class ProfileHeaderComponent implements OnInit {
   getCurrentLoginUser() {
     this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
      if(res){
-      // console.log(res);
       this.loginUserDetails = res;
      }
     });
@@ -110,7 +107,6 @@ export class ProfileHeaderComponent implements OnInit {
     ) {
       this.friend.unfriend(this.loginUserDetails._id, this.CurrentvisitedUser._id).subscribe(
         (res) => {
-          console.log(res);
           this.toastr.success(
             'Successfully Remove From Your Friend List',
             'Success!'

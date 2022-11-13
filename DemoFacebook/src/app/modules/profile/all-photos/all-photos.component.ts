@@ -51,7 +51,6 @@ destroy$:Subject<void> = new Subject<void>();
     this.userservice.getCurrentUserPost(this.currentVisitedUserDetails._id,this.loginUserDetails._id).subscribe((res: any)=>{ 
       if(res){
       this.allPosts=res;
-      console.log(this.allPosts);
       }
     })
   }

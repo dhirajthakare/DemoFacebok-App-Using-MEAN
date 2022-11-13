@@ -22,7 +22,6 @@ export class EnterRecoverCodeComponent implements OnInit {
   ngOnInit(): void {
 
     this.router.queryParams.subscribe((res: any)=>{
-      console.log(res)
       let data:any = res;
       this.code = atob(data.hash) ;
       this.Email=atob(data.Email);
@@ -46,11 +45,6 @@ export class EnterRecoverCodeComponent implements OnInit {
     },err=>{
    this.errorCode=true
     })
-    if(CodeId==this.code){
-      console.log("Otp is correct");
-    }else{
-      console.log("somthing wrong");
-    }
 
   }
 

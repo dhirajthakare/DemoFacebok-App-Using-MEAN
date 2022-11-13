@@ -41,7 +41,6 @@ export class ProfileBodyComponent implements OnInit {
     this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
       if(res){
         this.loginUserDetails = res;
-        // console.log(this.loginUserDetails);
         this.getCurrentVisitedUser();
       }
     });
@@ -53,13 +52,11 @@ export class ProfileBodyComponent implements OnInit {
     this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if(res){
       this.currentVisitedUserDetails = res;
-      // console.log(this.currentVisitedUserDetails);
       if (this.currentVisitedUserDetails.user_Friends) {
         this.currentVisitedUserFriends = this.currentVisitedUserDetails.user_Friends.filter((value: any, index: number) => {
           return index <= 8;
         })
       }
-      // console.log(this.currentVisitedUserFriends);
       this.getpost();
       }
 
@@ -90,7 +87,6 @@ export class ProfileBodyComponent implements OnInit {
         this.AllCurrentUserPost = res.filter((value: any, index: number) => {
           return index <= 8;
         })
-        // console.log(this.AllCurrentUserPost);
       }
     })
 

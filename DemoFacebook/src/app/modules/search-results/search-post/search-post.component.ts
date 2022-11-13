@@ -25,7 +25,6 @@ export class SearchPostComponent implements OnInit {
   ngOnInit(): void {
 
     this.friendship.serchbox.pipe(debounceTime(300),distinctUntilChanged(),takeUntil(this.destroy$)).subscribe(res=>{
-      console.log(res);
       this.box = res;
       this.getSearchPost(this.box);
     })
@@ -35,7 +34,6 @@ export class SearchPostComponent implements OnInit {
     this.postMiddle.searchPost(search).subscribe(res=>{
       this.Loader = false;
       this.allpost = res;
-      console.log(res);
     })
   }
 

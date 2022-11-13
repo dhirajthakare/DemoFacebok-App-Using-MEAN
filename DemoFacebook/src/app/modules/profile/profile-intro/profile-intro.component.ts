@@ -21,7 +21,6 @@ export class ProfileIntroComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
         if(res){
-        console.log(res);
         this.loginUserDetails = res;
         }
       });
@@ -35,7 +34,6 @@ export class ProfileIntroComponent implements OnInit {
       .subscribe((res: any) => {
         if(res){
         this.currentVisitedUserDetails = res;
-        console.log(this.currentVisitedUserDetails);
         }
       });
   }
