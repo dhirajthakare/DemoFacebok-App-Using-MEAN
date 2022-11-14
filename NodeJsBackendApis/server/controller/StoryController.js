@@ -34,17 +34,12 @@ exports.createstory = (req,res)=>{
 
 // get stories
 exports.getStory = (req,res)=>{
-
-    storyModal.find({createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).then(responce1=>{
-        
-        storyModal.find({user_id:req.params.id ,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id') .then(responce2 =>{
-
-            storyModal.find({user_id:req.body}).then(responce3=>{
-                res.json(Array({"allStories":responce1},{"userstories":responce2},{"userFriendStories":responce3}));
-
+  
+        storyModal.find({user_id:req.params.id ,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id').then(responce2 =>{
+            storyModal.find({user_id:req.body,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id').then(responce3=>{
+                res.json(Array({"userstories":responce2},{"userFriendStories":responce3}));
             })
         })
-    })
     
 }
 

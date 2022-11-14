@@ -29,7 +29,6 @@ export class CreateStoriesComponent implements OnInit {
       .pipe(takeUntil(this.destoy$))
       .subscribe((res: any) => {
         if (res) {
-          console.log(res);
           this.loginUserDetails = res;
         }
       });

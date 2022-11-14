@@ -43,9 +43,8 @@ export class ShowStoriesComponent implements OnInit {
     this.storymanage.getstory(this.loginUserId, this.friendsId).subscribe(
       (res) => {
         this.allstory = res;
-        this.userstory = this.allstory[1].userstories;
-        this.userFriensStory = this.allstory[2].userFriendStories;
-        this.allstory = this.allstory[0].allStories;
+        this.userstory = this.allstory[0].userstories;
+        this.userFriensStory = this.allstory[1].userFriendStories;
       },
       (err) => {
         console.log(err);
@@ -65,7 +64,7 @@ export class ShowStoriesComponent implements OnInit {
             this.friends = this.friends.user_Friends;
             // this.friendsId.push(this.id);
             for (let i = 0; i < this.friends.length; i++) {
-              this.friendsId.push(this.friends[i]._id);
+              this.friendsId.push(this.friends[i].friend_id._id);
             }
             // this.friend.userLoginFriendsId.next(this.friendsId);
             if(this.friendsId){
