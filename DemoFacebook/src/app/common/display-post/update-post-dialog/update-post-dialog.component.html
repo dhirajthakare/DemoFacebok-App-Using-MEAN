@@ -53,8 +53,19 @@
                         </div>
 
                     </div>
-                    <div class="my-4" *ngIf="updatesrc">
+                    <div  *ngIf="updatesrc">
                         <img height="300" width="400" style="object-fit: contain;" [src]="updatesrc" alt="">
+                    </div>
+                    <div>
+                        <image-cropper class="mb-3"
+                        style="max-height:400px;max-width:500px"
+                        [imageChangedEvent]="imageChangeEvt"
+                        [aspectRatio]="4/3"
+                        [maintainAspectRatio]="true"
+                        format="jpeg"
+                        (imageCropped) = "cropImg($event)"
+                        >
+                        </image-cropper>
                     </div>
                     <div class="mb-3">
                         <div class="row">

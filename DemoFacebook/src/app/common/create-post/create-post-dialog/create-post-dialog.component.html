@@ -41,7 +41,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="mb-3">
+                    <div>
                         <div class="row">
                             <div class=" input-group">
                                 <input formControlName='status' class="form-control "
@@ -52,8 +52,16 @@
                         </div>
 
                     </div>
-                    <div class="my-4 justify-content-center" *ngIf="imageSrc">
-                        <img height="300" width="400" style="object-fit: contain;" [src]="imageSrc" alt="">
+                    <div>
+                        <image-cropper 
+                        style="max-height:400px;max-width:500px"
+                        [imageChangedEvent]="imageChangeEvt"
+                        [aspectRatio]="4/3"
+                        [maintainAspectRatio]="true"
+                        format="jpeg"
+                        (imageCropped) = "cropImg($event)"
+                        >
+                        </image-cropper>
                     </div>
                     <div class="mb-3">
                         <div class="row">

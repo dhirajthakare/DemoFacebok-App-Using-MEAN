@@ -7,6 +7,7 @@ import { CreatePostDialogComponent } from './create-post-dialog/create-post-dial
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    PickerModule
+    PickerModule,
+    ImageCropperModule
   ],
   exports:[
     CreatePostComponent

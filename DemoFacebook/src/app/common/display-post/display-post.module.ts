@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { RouterModule } from '@angular/router';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    PickerModule
+    PickerModule,
+    ImageCropperModule
     ],
     exports:[
       DisplayPostComponent

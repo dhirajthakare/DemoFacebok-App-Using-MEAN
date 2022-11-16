@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from '../../services/post.service';
 import { SharedDataService } from '../../services/shared-data.service';
@@ -48,7 +49,6 @@ export class UpdatePostDialogComponent implements OnInit {
 
     this.post.updatePost(formdata).subscribe(
       (res) => {
-        this.updatesrc = '';
         this.file = '';
         this.UpdatePost.reset();
         this.sharedService.postSavedSource.next(true);
@@ -73,16 +73,38 @@ export class UpdatePostDialogComponent implements OnInit {
     this.updatesrc = 'http://localhost:2000' + item.postUrl;
   }
 
+  imageChangeEvt:any;
   onFileUpdatePostChange(e: any) {
-    if (e.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.file = e.target.files[0];
-        this.updatesrc = event.target.result;
-      };
-    }
+    this.file = e.target.files[0];
+    this.imageChangeEvt = e;
+    this.updatesrc = '';
+
+    //for get selcted Image Source
+    // if (e.target.files) {
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(e.target.files[0]);
+    //   reader.onload = (event: any) => {
+    //     let imageScrc = event.target.result;
+    //   };
+    // }
   }
+
+  cropImg(event: ImageCroppedEvent) {
+    let croppImgPriview:any = event.base64;
+    let File = base64ToFile(croppImgPriview);
+    this.file = this.blobToFile(File, this.file.name);
+  }
+
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
+    return new File(
+      [theBlob as any], // cast as any
+      fileName,
+      {
+        lastModified: new Date().getTime(),
+        type: theBlob.type,
+      }
+    );
+  };
 
   updatePostEmojiPicker: boolean = false;
 

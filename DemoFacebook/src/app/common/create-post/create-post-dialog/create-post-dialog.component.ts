@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from '../../services/post.service';
 import { SharedDataService } from '../../services/shared-data.service';
@@ -20,26 +21,39 @@ export class CreatePostDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {}
-
+  file: any;
+  imageChangeEvt: any = '';
   public createPost = this.fb.group({
     status: this.data.addstatus,
     post: '',
     id: '',
   });
 
-  imageSrc: any;
-  file: any;
+  ngOnInit(): void {}
+
   onFilePostChange(e: any) {
-    if (e.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.file = e.target.files[0];
-        this.imageSrc = event.target.result;
-      };
-    }
+    this.file = e.target.files[0];
+    this.imageChangeEvt = e;
   }
+
+  cropImg(event: ImageCroppedEvent) {
+    let croppImgPriview:any = event.base64;
+    let File = base64ToFile(croppImgPriview);
+    this.file = this.blobToFile(File, this.file.name);
+
+  }
+
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
+    return new File(
+      [theBlob as any], // cast as any
+      fileName,
+      {
+        lastModified: new Date().getTime(),
+        type: theBlob.type,
+      }
+    );
+  };
+
   createpostsuccess: any;
   posterr: any;
   oncreatepost() {
@@ -50,7 +64,6 @@ export class CreatePostDialogComponent implements OnInit {
 
     this.post.createPost(formdata).subscribe(
       (res) => {
-        this.imageSrc = '';
         this.file = '';
         this.createPost.reset();
         this.createpostsuccess = res;
