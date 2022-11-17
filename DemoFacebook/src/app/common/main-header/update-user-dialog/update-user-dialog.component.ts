@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -14,13 +15,6 @@ import { UserService } from '../../services/user.service';
 })
 export class UpdateUserDialogComponent implements OnInit {
 
-  
-  updateerr: any;
-  updatesuccess: any;
-  Profilesrc: any;
-  file: any;
-  data: any;
-  private onDestroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private formbuilder: FormBuilder,
@@ -31,6 +25,14 @@ export class UpdateUserDialogComponent implements OnInit {
     private sharedservice:SharedDataService
   ) {}
 
+
+  updateerr: any;
+  updatesuccess: any;
+  Profilesrc: any;
+  file: any;
+  data: any;
+  private onDestroy$: Subject<void> = new Subject<void>();
+  imageChangeEvt:any;
 
   createAccountForm = this.formbuilder.group({
     fname: '',
@@ -52,15 +54,27 @@ export class UpdateUserDialogComponent implements OnInit {
   }
 
   onFileChange(e: any) {
-    if (e.target.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.file = e.target.files[0];
-        this.Profilesrc = event.target.result;
-      };
-    }
+    this.imageChangeEvt = e;
+    this.file = e.target.files[0];
+    this.Profilesrc = '';
   }
+
+  cropImg(event: ImageCroppedEvent) {
+    let croppImgPriview:any = event.base64;
+    let File = base64ToFile(croppImgPriview);
+    this.file = this.blobToFile(File, this.file.name);
+  }
+
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
+    return new File(
+      [theBlob as any], // cast as any
+      fileName,
+      {
+        lastModified: new Date().getTime(),
+        type: theBlob.type,
+      }
+    );
+  };
 
   updateUser() {
     // this.Authservice.

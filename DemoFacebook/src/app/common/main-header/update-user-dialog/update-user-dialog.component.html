@@ -34,10 +34,23 @@
                   <input type="text" formControlName="lname" placeholder="Ex Thakare" name="lname"
                     class="form-control col mx-1" id="lname">
                 </div>
-                <div class="py-4" *ngIf="Profilesrc">
-                  <label for="profilephoto">Profile Photo : </label><br>
-                  <img id="profilephoto" height="300" width="400" style="object-fit: contain;" [src]="Profilesrc" alt="">
+                <div class="my-3">
+                  <label>Profile Photo : </label>
                 </div>
+                <div  *ngIf="Profilesrc">
+                  <img id="profilephoto" style="object-fit: contain;max-height:400px;max-width:500px " [src]="Profilesrc" alt="">
+                </div>
+                <div>
+                  <image-cropper 
+                  style="max-height:400px;max-width:500px"
+                  [imageChangedEvent]="imageChangeEvt"
+                  [aspectRatio]="4/4"
+                  [maintainAspectRatio]="true"
+                  format="jpeg"
+                  (imageCropped) = "cropImg($event)"
+                  >
+                  </image-cropper>
+              </div>
   
               </div>
   
@@ -74,10 +87,6 @@
                   <label class="form-check-label" for="Other">Other</label>
                 </div>
               </div>
-              <!-- <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div> -->
               <input type="submit" id="update" class="btn btn-primary form-control btn-block" value="Update User">
   
             </form>
