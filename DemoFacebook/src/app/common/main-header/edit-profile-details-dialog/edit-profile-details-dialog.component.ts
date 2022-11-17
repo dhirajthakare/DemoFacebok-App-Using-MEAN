@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { SharedDataService } from '../../services/shared-data.service';
@@ -26,6 +27,8 @@ export class EditProfileDetailsDialogComponent implements OnInit {
   editProfile:any;
   currentLoginUserDetails:any;
   CoverPhoto:any;
+  file:any;
+  imageChangeEvt:any;
   Destroy$ : Subject<void> = new Subject<void>();
 
 
@@ -65,17 +68,28 @@ export class EditProfileDetailsDialogComponent implements OnInit {
     });
   }
 
-  file:any;
   onChangeCoverPhoto(e:any) {
-    if(e.target.files){
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event:any)=>{  
-        this.file=e.target.files[0];
-        this.CoverPhoto = event.target.result;
-      }
-    }
+    this.imageChangeEvt = e;
+    this.file = e.target.files[0];
+    this.CoverPhoto = '';
   }
+
+  cropImg(event: ImageCroppedEvent) {
+    let croppImgPriview:any = event.base64;
+    let File = base64ToFile(croppImgPriview);
+    this.file = this.blobToFile(File, this.file.name);
+  }
+
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
+    return new File(
+      [theBlob as any], // cast as any
+      fileName,
+      {
+        lastModified: new Date().getTime(),
+        type: theBlob.type,
+      }
+    );
+  };
 
   oneditprofile(){
       let formdata = new FormData();

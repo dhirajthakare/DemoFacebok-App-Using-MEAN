@@ -46,16 +46,27 @@
                             </div>
 
                         </div>
-                        <div class="mb-3">
-                            Cover Photo :
-                            <div class="my-4 justify-content-centerm mb-3" *ngIf="CoverPhoto">
-                                <img height="300" width="100%" style="object-fit: cover;" [src]="CoverPhoto" alt="">
-                            </div><br>
+                        <div class="my-3">
+                            <label for="">Cover Photo :</label>
+                        </div>
+                        <div>
+                            <div class="justify-content-centerm" *ngIf="CoverPhoto">
+                                <img style="object-fit: cover;max-height:400px;max-width:100%" [src]="CoverPhoto" alt="">
+                            </div>
+                            <div>
+                                <image-cropper 
+                                [imageChangedEvent]="imageChangeEvt"
+                                [aspectRatio]="4/2"
+                                [maintainAspectRatio]="true"
+                                format="jpeg"
+                                (imageCropped) = "cropImg($event)"
+                                >
+                                </image-cropper>
+                            </div>
                             <div class="mb-3">
                                 <div class="row">
                                     <input formControlName='CoverPhoto'  (change)="onChangeCoverPhoto($event)" accept='image/*'
                                         type="file" capture="capture" name="CoverPhoto" class="form-control p-md-3 col" id="CoverPhoto">
-    
                                 </div>
                             </div>
                         </div>
