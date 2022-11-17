@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { StorieService } from 'src/app/common/services/storie.service';
@@ -22,6 +23,7 @@ export class CreateStoriesComponent implements OnInit {
   loginUserDetails: any;
   storysrc: any;
   file: any;
+  imageChangeEvt:any;
   destoy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
@@ -35,15 +37,35 @@ export class CreateStoriesComponent implements OnInit {
   }
 
   onFilechangestory(e: any) {
+    this.imageChangeEvt = e;
+    this.file = e.target.files[0];
     if (e.target.files) {
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
-        this.file = e.target.files[0];
         this.storysrc = event.target.result;
       };
     }
   }
+
+  cropImg(event: ImageCroppedEvent) {
+    let croppImgPriview:any = event.base64;
+    let File = base64ToFile(croppImgPriview);
+    this.file = this.blobToFile(File, this.file.name);
+  }
+
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
+    return new File(
+      [theBlob as any], // cast as any
+      fileName,
+      {
+        lastModified: new Date().getTime(),
+        type: theBlob.type,
+      }
+    );
+  };
+
+
   oncreatestory() {
     let formdata = new FormData();
     formdata.append('user_id', this.loginUserDetails._id);

@@ -30,8 +30,16 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="my-4" *ngIf="storysrc">
-                                <img height="350" width="350" style="object-fit: contain;" [src]="storysrc" alt="">
+                            <div>
+                                <image-cropper 
+                                style="max-height:400px;max-width:500px"
+                                [imageChangedEvent]="imageChangeEvt"
+                                [aspectRatio]="3/4"
+                                [maintainAspectRatio]="true"
+                                format="jpeg"
+                                (imageCropped) = "cropImg($event)"
+                                >
+                                </image-cropper>
                             </div>
                             <div *ngIf="storysrc" class="row">
                                 <hr>

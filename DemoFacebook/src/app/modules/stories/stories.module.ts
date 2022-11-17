@@ -5,6 +5,7 @@ import { StoriesRoutingModule } from './stories-routing.module';
 import { StoriesComponent } from './stories.component';
 import { ShowStoriesComponent } from './show-stories/show-stories.component';
 import { CreateStoriesComponent } from './create-stories/create-stories.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CreateStoriesComponent } from './create-stories/create-stories.componen
   ],
   imports: [
     CommonModule,
-    StoriesRoutingModule
+    StoriesRoutingModule,
+    ImageCropperModule
   ],
   exports: [
     StoriesComponent,
