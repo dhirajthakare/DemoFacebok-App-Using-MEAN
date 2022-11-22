@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { StorieService } from 'src/app/common/services/storie.service';
 import { UserService } from 'src/app/common/services/user.service';
+import { ShowStoriesDialogComponent } from '../show-stories-dialog/show-stories-dialog.component';
 
 @Component({
   selector: 'app-show-stories',
@@ -13,7 +15,8 @@ export class ShowStoriesComponent implements OnInit {
   constructor(
     private userservice: UserService,
     private storymanage: StorieService,
-    private friend: FriendService
+    private friend: FriendService,
+    private matdialog : MatDialog
   ) {}
 
   @Input('loginUserId') loginUserId: any;
@@ -78,6 +81,25 @@ export class ShowStoriesComponent implements OnInit {
       }
     );
   }
+
+  openSilder(allstory:any,selctedIndex:any){
+
+    this.matdialog.open(ShowStoriesDialogComponent,
+     {
+       maxWidth: '600px',
+       maxHeight: '600px',
+       minWidth: '550px',
+       minHeight: '550px',
+
+       panelClass: 'custom-modalbox',
+       data: {
+        allstory: allstory,
+        selctedIndex: selctedIndex
+      }
+     });
+ 
+   }
+   
   ngOnDestroy() {
     this.unSubscribeLoginUser.unsubscribe();
   }

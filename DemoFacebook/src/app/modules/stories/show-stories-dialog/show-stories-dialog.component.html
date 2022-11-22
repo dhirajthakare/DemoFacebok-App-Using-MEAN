@@ -1,0 +1,21 @@
+<div class="alldiv">
+
+    <div class="card-header">
+        <div class="d-flex btnPointer">
+            <div><img height="42" width="42" class="profileImgResize"
+                    [src]="mysrc.user_id.profileUrl?'http://localhost:2000'+mysrc.user_id.profileUrl:'http://localhost:2000/assets/images/userdefault.png'"></div>
+            <div class=" mt-2">
+                <p class="text-primary mx-1"> {{mysrc.user_id.name}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div>
+            <div class="col-8 offset-2">
+                    <img [src]="'http://localhost:2000'+mysrc.storyUrl" class="mystory"
+                        alt="" srcset="">
+                </div>
+            </div>
+    </div>
+
+</div>

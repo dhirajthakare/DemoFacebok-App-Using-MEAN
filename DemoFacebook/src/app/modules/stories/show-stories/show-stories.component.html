@@ -7,19 +7,19 @@
     </div>
 </div>
 
-<div *ngFor="let item of userstory" class=" col-3">
-    <div  class=" card">
-        <a class="" [href]="'http://localhost:2000'+item.storyUrl"><img style=" object-fit: contain; "
-            height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
+<div *ngIf="userstory && userstory[0]" class=" col-3">
+    <div (click)="openSilder(userstory,0)" class=" card">
+        <a class=""><img style=" object-fit: contain; "
+            height="200" width="100%" [src]="'http://localhost:2000'+userstory[0].storyUrl" alt=""></a>
     <div  class="card-footer">
         <p style="color: white" class=" text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>
-       <p class="text-center"> {{item.user_id.name }}</p>
+       <p class="text-center"> {{userstory[0].user_id.name }}</p>
     </div>
     </div>
 </div>
-<div *ngFor="let item of userFriensStory" class=" col-3">
-    <div  *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
-        <a class="" [href]="'http://localhost:2000'+item.storyUrl"><img style=" object-fit: contain; "
+<div *ngFor="let item of userFriensStory;let index = index" class=" col-3">
+    <div  (click)="openSilder(userFriensStory,index)" *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
+        <a class="" ><img style=" object-fit: contain; "
             height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
     <div  class="card-footer">
         <p style="color: white" class=" text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>

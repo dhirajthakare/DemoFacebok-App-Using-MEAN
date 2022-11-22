@@ -81,3 +81,10 @@ body {
 .card-header .btn-close{
   padding: 1em 0.5em !important;
 }
+
+.custom-modalbox {
+  mat-dialog-container {
+      padding: 0;
+      background: black !important;
+  }
+}
