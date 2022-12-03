@@ -241,7 +241,7 @@ export class DisplayPostComponent implements OnInit {
 
   UpdatePostDialog(item: any) {
     this.dialog.open(UpdatePostDialogComponent, {
-      width: '500px',
+      width: '600px',
       data: item,
     });
   }
