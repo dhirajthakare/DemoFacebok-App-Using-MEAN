@@ -19,7 +19,7 @@ export class FriendService {
   userLoginFriendsId= new BehaviorSubject<any>('');
   
   serchUsers(name:string):Observable<any>{
-   return this.http.get(this.BaseUrl+'/findfriends/'+name);
+   return this.http.post(this.BaseUrl+'/findfriends/',{"name":name});
   }
 
   sendRequest(uid:any,fid:any){

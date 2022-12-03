@@ -38,12 +38,17 @@ export class SearchUserResultComponent implements OnInit {
         this.searchbox = res;
         this.friendship.serchUsers(this.searchbox).subscribe(
           (data) => {
-            this.userdata = data;
-            this.totalLength = this.userdata.length;
-
-            this.userdata = data.filter((value: any, index: any) => {
-              return index <= 2;
-            });
+            if(data){
+              this.userdata = data;
+              this.totalLength = this.userdata.length;
+  
+              this.userdata = data.filter((value: any, index: any) => {
+                return index <= 2;
+              });
+            }else{
+              this.userdata = null;
+              this.totalLength = 0;
+            }
           },
           (err) => {
             this.userdata = null;

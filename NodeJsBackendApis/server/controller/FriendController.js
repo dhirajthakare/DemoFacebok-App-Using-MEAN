@@ -107,12 +107,16 @@ exports.addFriend = (req,res)=>{
     
     // Search Friends 
     exports.findFriends =(req,res)=>{
-        regext = new RegExp(req.params.name,'i');
+        if(req.body.name){
+        regext = new RegExp(req.body.name,'i');
         usermodal.find({$or:[{name:regext},{email:regext}]}).then(responce=>{
             res.json(responce);
         }).catch(err=>{
             res.status(400).json("somthing wrong "+err);
         })
+        }else{
+            res.json();
+        }
     }
     
     // All friends of visited user

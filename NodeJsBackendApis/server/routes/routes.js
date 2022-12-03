@@ -57,7 +57,7 @@ route.get('/api/addfriend/:uid/:fid' ,verify ,FriendController.addFriend);
 route.get('/api/acceptfriendrequest/:uid/:fid' ,verify ,FriendController.acceptFriendRequest);
 route.get('/api/rejectfriendrequest/:uid/:fid' ,verify ,FriendController.rejectRequest);
 route.get('/api/unfriend/:uid/:fid' ,verify ,FriendController.unFriend);
-route.get('/api/findfriends/:name' ,verify ,FriendController.findFriends);
+route.post('/api/findfriends/' ,verify ,FriendController.findFriends);
 
 // Request send and receive 
 route.get('/api/getAddFriend/:id' ,verify ,FriendController.allfriends);
