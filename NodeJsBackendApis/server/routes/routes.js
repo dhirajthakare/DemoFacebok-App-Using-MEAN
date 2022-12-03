@@ -35,7 +35,7 @@ route.post('/api/createpost',verify ,fileuploadeController.postPhotoUpload , Pos
 route.post('/api/updatepost',verify ,fileuploadeController.postPhotoUpload , PostController.updatePost);
 route.get('/api/getpostdata/:id' ,verify ,PostController.getPost);
 route.get('/api/deletepost/:id' ,verify ,PostController.deletePost);
-route.get('/api/findpost/:search',verify ,PostController.searchPost);
+route.post('/api/findpost/',verify ,PostController.searchPost);
 
 // Post =>Like And Comment 
 route.post('/api/likedislike',verify ,PostController.like);

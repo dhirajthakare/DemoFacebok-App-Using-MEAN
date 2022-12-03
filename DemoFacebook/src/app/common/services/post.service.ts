@@ -45,7 +45,7 @@ export class PostService {
   }
 
   searchPost(search:any){
-    return this.http.get(this.BaseUrl+'/findpost/'+search);
+    return this.http.post(this.BaseUrl+'/findpost/',{"search":search});
   }
 
 }
