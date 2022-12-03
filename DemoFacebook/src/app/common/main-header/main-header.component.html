@@ -38,7 +38,7 @@
               </div>
               <div class="nav-item mx-md-4 btnPointer">
                 <div class="nav-link text-primary iconDiv" aria-current="page" ><i 
-                    class="fa fa-users fa-lg" [routerLink]="loginuserDetails?'/profile/'+loginuserDetails.userToken+'/friends':''" aria-hidden="true"></i>
+                    class="fa fa-users fa-lg" [routerLink]="'/friends'" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="nav-item mx-md-4 btnPointer iconDiv">
@@ -85,7 +85,7 @@
                 <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
                   <li><span class="dropdown-item" routerLink="/deskbook">home</span></li>
                   <li><span class="dropdown-item" (click)="openUpdateUserDialog()">Update Profile</span></li>
-                  <li *ngIf="loginuserDetails" [routerLink]="'/profile/'+loginuserDetails.userToken+'/friends'"><a class="dropdown-item">Friends</a></li>
+                  <li *ngIf="loginuserDetails" [routerLink]="'//friends'"><a class="dropdown-item">Friends</a></li>
                   <!-- <li><hr class="dropdown-divider"></li> -->
                   <li><span class="dropdown-item" (click)="logout()">LogOut</span></li>
                 </ul>
