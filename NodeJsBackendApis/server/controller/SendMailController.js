@@ -1,11 +1,7 @@
 // All modal imported
 var usermodal = require("../model/users");
 var transport = require("../database/mailConnection");
-const crypto = require("crypto");
-const key = "password";
-const algo = "aes256";
-const bcrypt = require('bcryptjs');
-
+const bcrypt = require("bcryptjs");
 
 // Send Mail Recovery
 exports.sendtestmail = (req, res) => {
@@ -102,29 +98,28 @@ exports.checkOtpCode = (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  let data = await usermodal
-    .findOne({ email: req.body.email });
-      if (data) {
-        let salt = await bcrypt.genSalt(10);
-        hashpassword = await bcrypt.hash(req.body.password,salt);
-        usermodal
-          .updateOne(
-            { email: req.body.email },
-            {
-              $set: {
-                password: hashpassword,
-              },
-            }
-          )
-          .then((responce) => {
-            res.json("Password Updated Succeessfully");
-          })
-          .catch((err) => {
-            res.status(400).json("Somthing wrong while update Password ");
-          });
-    }else{
-      res.status(400).json("Token Expired You Can't Change Password");
-    }
+  let data = await usermodal.findOne({ email: req.body.email });
+  if (data) {
+    let salt = await bcrypt.genSalt(10);
+    hashpassword = await bcrypt.hash(req.body.password, salt);
+    usermodal
+      .updateOne(
+        { email: req.body.email },
+        {
+          $set: {
+            password: hashpassword,
+          },
+        }
+      )
+      .then((responce) => {
+        res.json("Password Updated Succeessfully");
+      })
+      .catch((err) => {
+        res.status(400).json("Somthing wrong while update Password ");
+      });
+  } else {
+    res.status(400).json("Token Expired You Can't Change Password");
+  }
 };
 
 // randomFunction
