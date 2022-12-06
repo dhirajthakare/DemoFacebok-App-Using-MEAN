@@ -4,6 +4,8 @@ var transport = require("../database/mailConnection");
 const crypto = require("crypto");
 const key = "password";
 const algo = "aes256";
+const bcrypt = require('bcryptjs');
+
 
 // Send Mail Recovery
 exports.sendtestmail = (req, res) => {
@@ -99,20 +101,18 @@ exports.checkOtpCode = (req, res) => {
   }
 };
 
-exports.changePassword = (req, res) => {
-  usermodal
-    .findOne({ email: req.body.email })
-    .then((data) => {
+exports.changePassword = async (req, res) => {
+  let data = await usermodal
+    .findOne({ email: req.body.email });
       if (data) {
-        cipher = crypto.createCipher(algo, key);
-        const encryptedPass =
-          cipher.update(req.body.password, "utf8", "hex") + cipher.final("hex");
+        let salt = await bcrypt.genSalt(10);
+        hashpassword = await bcrypt.hash(req.body.password,salt);
         usermodal
           .updateOne(
             { email: req.body.email },
             {
               $set: {
-                password: encryptedPass,
+                password: hashpassword,
               },
             }
           )
@@ -122,13 +122,9 @@ exports.changePassword = (req, res) => {
           .catch((err) => {
             res.status(400).json("Somthing wrong while update Password ");
           });
-      } else {
-        res.status(400).json("Token Expired You Can't Change Password");
-      }
-    })
-    .catch((errr) => {
+    }else{
       res.status(400).json("Token Expired You Can't Change Password");
-    });
+    }
 };
 
 // randomFunction
