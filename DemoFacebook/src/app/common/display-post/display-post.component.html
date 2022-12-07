@@ -48,8 +48,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <a href="http://localhost:2000{{item.postUrl}}"><img height="460" width="100%"
-                            style=" object-fit: contain;" src="http://localhost:2000{{item.postUrl}}"></a>
+                    <div (dblclick)="onlike(item._id,item.postUser._id)" class="btnPointer"><img height="460" width="100%"
+                            style=" object-fit: contain;" src="http://localhost:2000{{item.postUrl}}"></div>
     
                 </div>
                 <div class="row mt-3">
