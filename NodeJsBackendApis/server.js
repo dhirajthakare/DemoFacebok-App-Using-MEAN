@@ -20,8 +20,16 @@ const Mailconnect = require('./server/database/mailConnection');
 
 const router = require('./server/routes/routes')
 app.use(router);
+const httpServer = require('http').Server(app);
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origins: ["http://localhost:4200"],
+  },
+});
 
+const socketio = require('./server/controller/socketIoController')
+socketio.io(io);
 
-app.listen(port,()=>{
+httpServer.listen(port,()=>{
     console.log(`server Running on http://localhost:${port}`);
 });
