@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription, interval, timeout, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { MessangerService } from '../services/messanger.service';
 import { UserService } from '../services/user.service';
 
@@ -21,8 +21,14 @@ export class BoxMessangerComponent implements OnInit {
     private messanger: MessangerService,
     private userservice: UserService
   ) {}
+  destroye$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
+    this.messanger.getRealtimeChat().pipe(takeUntil(this.destroye$)).subscribe((res:any)=>{
+      if(res.includes(this.data.loginUser_id) && res.includes(this.data.friend_id)){
+        this.getAllMessage();
+      }
+    });
     if (this.data) {
       this.oninitgetdata();
     }
@@ -30,8 +36,6 @@ export class BoxMessangerComponent implements OnInit {
   allmessage: any;
   @ViewChild('scrollMe')
   private myScrollContainer!: ElementRef;
-  @ViewChild('sendmessage') sendMessageInput: ElementRef | any;
-  destroye$: Subject<void> = new Subject<void>();
 
   getAllMessage() {
     this.messanger
@@ -58,7 +62,6 @@ export class BoxMessangerComponent implements OnInit {
         this.friendDetails = res;
         if (this.friendDetails) {
           this.getAllMessage();
-          this.messangerClick();
         }
       }
     });
@@ -78,18 +81,9 @@ export class BoxMessangerComponent implements OnInit {
     };
 
     this.messanger.sendmessage(dataf).subscribe((res) => {
-      this.getAllMessage();
+      this.messanger.sendRealTimeMessage([this.data.loginUser_id,this.data.friend_id]);
       this.chatMessage = '';
-      this.sendMessageInput.nativeElement.focus();
       this.messageEmojiPicker = false;
-    });
-  }
-
-  messangerClick() {
-    let intervaldata = interval(4000);
-
-    intervaldata.pipe(takeUntil(this.destroye$)).subscribe((res) => {
-      this.getAllMessage();
     });
   }
 

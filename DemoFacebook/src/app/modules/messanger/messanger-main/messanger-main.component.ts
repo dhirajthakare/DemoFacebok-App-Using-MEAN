@@ -16,7 +16,6 @@ export class MessangerMainComponent implements OnInit {
 
   data: any;
   allmessage: any;
-  @ViewChild('sendmessage') sendMessageInput: ElementRef | any;
   ngOnDestroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
