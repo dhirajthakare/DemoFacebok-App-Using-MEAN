@@ -39,7 +39,7 @@
 
         <div *ngIf="allmessage" class="row">
           <!-- Reciever Message-->
-          <div *ngFor="let item of allmessage">
+          <div *ngFor="let item of allmessage;trackBy:TrackByFun">
 
             <div *ngIf="item.sender_id == data.loginUser_id" class="media col-8 offset-4 ml-auto">
               <div class="media-body">

@@ -27,6 +27,9 @@ export class MessangerMainComponent implements OnInit {
     this.getcurrentMessagererUser(); 
   }
 
+  TrackByFun(index:number,item:any){
+    return item._id;
+  }
 
   getcurrentMessagererUser(){
     this.userservice.currentMessangerUser.pipe(takeUntil(this.ngOnDestroy$)).subscribe((res: any) => {

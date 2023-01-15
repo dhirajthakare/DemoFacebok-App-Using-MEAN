@@ -33,6 +33,11 @@ export class BoxMessangerComponent implements OnInit {
       this.oninitgetdata();
     }
   }
+
+  TrackByFun(index:number,item:any){
+    return item._id;
+  }
+  
   allmessage: any;
   @ViewChild('scrollMe')
   private myScrollContainer!: ElementRef;
