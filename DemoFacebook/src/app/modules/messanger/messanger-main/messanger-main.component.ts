@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { interval, Subject, Subscription, takeUntil } from 'rxjs';
+import { interval, pipe, Subject, Subscription, takeUntil } from 'rxjs';
 import { MessangerService } from 'src/app/common/services/messanger.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -20,6 +20,11 @@ export class MessangerMainComponent implements OnInit {
   ngOnDestroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
+    this.messanger.getRealtimeChat().pipe(takeUntil(this.ngOnDestroy$)).subscribe((res:any)=>{
+      if(res.includes(this.data.loginUser_id) && res.includes(this.data.friend_id)){
+        this.getAllMessage();
+      }
+    })
     this.getcurrentMessagererUser(); 
   }
 
@@ -77,22 +82,12 @@ export class MessangerMainComponent implements OnInit {
 
     this.messanger.sendmessage(formData).subscribe((res) => {
       if(res){
-      this.getAllMessage();
-      this.chatMessage = '';
-      this.messageEmojiPicker = false;
+        this.messanger.sendRealTimeMessage([this.data.loginUser_id,this.data.friend_id]);
+        this.chatMessage = '';
+        this.messageEmojiPicker = false;
       }
     });
-  }
-
-
-  continuousgetmessage: Subscription | any;
-  messangerClick() {
-    let intervaldata = interval(4000);
-
-    this.continuousgetmessage = intervaldata.subscribe((res) => {
-      this.getAllMessage();
-    });
-  }
+  } 
 
   addMessangerEmoji(event: any) {
     this.chatMessage = this.chatMessage + event.emoji.native;
