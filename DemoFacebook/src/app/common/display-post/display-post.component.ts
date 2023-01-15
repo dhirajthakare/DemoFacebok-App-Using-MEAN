@@ -246,6 +246,10 @@ export class DisplayPostComponent implements OnInit {
     });
   }
 
+  TrackByFunc(index:number,item:any){
+    return item._id;
+  }
+
   ngOnDestroy() {
     this.onDestroy$.next();
   }

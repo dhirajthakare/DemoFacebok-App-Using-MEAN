@@ -4,7 +4,7 @@
 </div>
 <!-- <app-createpost></app-createpost> -->
 <div *ngIf="!Loader && allPosts">
-    <div *ngFor=" let item of allPosts " class="row mt-md-2">
+    <div *ngFor=" let item of allPosts;trackBy:TrackByFunc" class="row mt-md-2">
         <div class="card">
             <div class="card-body">
                 <div class="row">
