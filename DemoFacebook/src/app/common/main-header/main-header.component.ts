@@ -37,7 +37,7 @@ export class MainHeaderComponent implements OnInit {
     this.getcurrentuser();
     this.unsubscriptionupdatedUserDetails = this.sharedService.updatedUserDetails.subscribe((res: any) => {
       if (res) {
-        this.getcurrentuser();
+        this.getcurrentuser(true,res);
         this.sharedService.updatedUserDetails.next(false);
       }
     });
@@ -69,14 +69,16 @@ export class MainHeaderComponent implements OnInit {
     }
   }
 
-  getcurrentuser() {
+  getcurrentuser(optionalForUpdateUser:boolean=false,exceptioncase:any = true) {
     this.authservice.getUserProfile().subscribe((res) => {
       if(res){
       this.loginuserDetails = res;
       if(this.loginuserDetails){
       localStorage.setItem('accountHolder', JSON.stringify(this.loginuserDetails));
       this.userservice.currentLoginUser.next(this.loginuserDetails);
-      this.getAllFriendsId()
+      if(!optionalForUpdateUser || typeof(exceptioncase) === "string" ){
+        this.getAllFriendsId()
+      }
       }
       }
     });

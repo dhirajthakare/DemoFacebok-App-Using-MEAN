@@ -99,7 +99,7 @@ export class DisplayPostComponent implements OnInit {
   getAllFriendsPost() {
     this.friend.userLoginFriendsId.pipe(takeUntil(this.onDestroy$)).subscribe((res) => {
       if(res){
-      this.friendsId = res;
+        this.friendsId = res;
       if (this.friendsId) {
         this.friend.getAllFriendsPost(this.friendsId).subscribe(
           (res) => {

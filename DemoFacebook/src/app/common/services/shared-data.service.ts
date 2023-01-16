@@ -12,7 +12,7 @@ export class SharedDataService {
   ActiveAccountHolder = new BehaviorSubject('');
   public postSavedSource = new BehaviorSubject<boolean>(false);
   public editProfileSave = new BehaviorSubject<boolean>(false);
-  public updatedUserDetails = new BehaviorSubject<boolean>(false);
+  public updatedUserDetails = new BehaviorSubject<any>(false);
 
   changeTitle(StringTitle:string){
     this.settitle.setTitle(StringTitle);
