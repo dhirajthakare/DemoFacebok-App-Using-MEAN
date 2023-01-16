@@ -8,6 +8,10 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditProfileDetailsDialogComponent } from './edit-profile-details-dialog/edit-profile-details-dialog.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -22,7 +26,11 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports:[
     MainHeaderComponent

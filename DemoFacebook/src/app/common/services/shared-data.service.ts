@@ -21,5 +21,20 @@ export class SharedDataService {
   isLoginUser(){
     return !!localStorage.getItem('accountToken');
   }
+  getSelectedDate(obj: any, field: string) {
+    let scheduledate =
+      obj[field] === null
+        ? ''
+        : obj &&
+          <any>new Date(obj[field]) !== 'Invalid Date' &&
+          !isNaN(<any>new Date(obj[field]))
+        ? new Date(
+            new Date(obj[field]).setDate(new Date(obj[field]).getDate() + 1)
+          )
+            .toISOString()
+            .slice(0, 10)
+        : obj[field] || obj[field] || '';
+    return scheduledate;
+  }
 
 }

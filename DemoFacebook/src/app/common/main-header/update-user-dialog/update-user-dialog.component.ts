@@ -84,7 +84,7 @@ export class UpdateUserDialogComponent implements OnInit {
     formdata.append('profile', this.file);
     formdata.append(
       'birthOfDate',
-      this.createAccountForm.get('birthOfDate')?.value
+      this.Changebirth?this.sharedservice.getSelectedDate(this.createAccountForm.value,'birthOfDate'):this.data.birthOfDate
     );
     formdata.append('gender', this.createAccountForm.get('gender')?.value);
 
@@ -102,6 +102,10 @@ export class UpdateUserDialogComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  Changebirth:boolean = false;
+  changeDate(){
+    this.Changebirth = true;
   }
 
   setupdatevalue() {

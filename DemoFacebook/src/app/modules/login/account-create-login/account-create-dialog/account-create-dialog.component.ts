@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/common/services/auth.service';
+import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
 @Component({
   selector: 'app-account-create-dialog',
@@ -14,7 +15,8 @@ export class AccountCreateDialogComponent implements OnInit {
     public service: AuthService,
     private formbuilder: FormBuilder,
     private toast: ToastrService,
-    private dialogRef: MatDialogRef<AccountCreateDialogComponent>
+    private dialogRef: MatDialogRef<AccountCreateDialogComponent>,
+    private sharedservice:SharedDataService
   ) {}
 
   storeallerrors: any;
@@ -32,6 +34,9 @@ export class AccountCreateDialogComponent implements OnInit {
   });
 
   onSubmit() {
+    this.createAccountForm.patchValue({
+      "birthOfDate":this.sharedservice.getSelectedDate(this.createAccountForm.value,'birthOfDate')
+    })
     this.service.createAcc(this.createAccountForm.value).subscribe(
       (res) => {
         this.toast.success('Successfully Created Acoount', 'Success!');

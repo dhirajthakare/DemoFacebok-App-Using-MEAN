@@ -12,7 +12,10 @@ import { AccountCreateDialogComponent } from './account-create-login/account-cre
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginCardModule } from 'src/app/common/login-card/login-card.module';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -30,7 +33,11 @@ import { LoginCardModule } from 'src/app/common/login-card/login-card.module';
     LoginRoutingModule,
     MatDialogModule,
     ReactiveFormsModule,
-    LoginCardModule
+    LoginCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class LoginModule { }

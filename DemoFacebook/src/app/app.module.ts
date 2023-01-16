@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { AuthInterceptor } from './common/services/auth.interceptor';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 
@@ -34,7 +35,8 @@ import { AuthInterceptor } from './common/services/auth.interceptor';
       provide:HTTP_INTERCEPTORS,
       useClass:AuthInterceptor,
       multi:true
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent]
 })

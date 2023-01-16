@@ -55,20 +55,17 @@
               </div>
   
               <div class="mb-3">
-                <div class="row">
                   <input formControlName='profile' (change)="onFileChange($event)" accept='image/*' type="file"
-                    name="profile" class="form-control col mx-1" id="profile">
-  
+                    name="profile" class="form-control col" id="profile">
                 </div>
-              </div>
-  
-              <div class="mb-2 ">
-                <label for="">Birth Of Date</label>
-                <div class="row">
-                  <input type="date" formControlName="birthOfDate" name="birthOfDate" class="form-control"
-                    id="birthOfDate">
-                </div>
-              </div>
+            <div class="mb-2 ">
+                <mat-form-field appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input (dateChange)="changeDate()" formControlName="birthOfDate" name="birthOfDate" id="birthOfDate" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker (viewChanged)="changeDate()" #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
               <div class="mb-2">
                 <label for="gender"> Select Gender</label><br>
                 <div class="form-check form-check-inline">
