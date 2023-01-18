@@ -34,7 +34,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userservice.currentLoginUser.pipe(takeUntil(this.Destroy$)).subscribe( (res: any) =>{
+    this.userservice.currentVisitedUser.pipe(takeUntil(this.Destroy$)).subscribe( (res: any) =>{
       if(res){
       this.currentLoginUserDetails=res;
       if(this.currentLoginUserDetails.user_info){
@@ -109,7 +109,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
     this.userservice.createUserInfo(formdata).subscribe((res:any)=>{
       this.toastr.success(res, 'Success!');
       this.sharedservice.editProfileSave.next(true);
-      this.sharedservice.updatedUserDetails.next(true);
+      // this.sharedservice.updatedUserDetails.next(true);
       this.dialogref.close();
     },err=>{
       console.log(err);
