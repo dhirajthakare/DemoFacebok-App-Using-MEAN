@@ -123,7 +123,7 @@ export class ProfileHeaderComponent implements OnInit {
   OpenMessangerDia() {
     const matDiaref = this.matDia.open(BoxMessangerComponent, {
       width: '500px',
-      height: '500px',
+      height: '550px',
       data: {
         loginUser_id: this.loginUserDetails._id,
         friend_id: this.CurrentvisitedUser._id,

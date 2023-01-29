@@ -62,12 +62,14 @@ export class MessangerSidebarRightComponent implements OnInit {
   }
 
   assignRecentChat() {
-    let newdata = {
-      friend_id: this.friends.user_Friends[0].friend_id._id,
-      loginUser_id: this.loginuserDetails._id,
-      friend_userToken: this.friends.user_Friends[0].friend_id.userToken,
-    };
-    this.userservice.currentMessangerUser.next(newdata);
+    if(this.friends.user_Friends.length){
+      let newdata = {
+        friend_id: this.friends.user_Friends[0].friend_id._id,
+        loginUser_id: this.loginuserDetails._id,
+        friend_userToken: this.friends.user_Friends[0].friend_id.userToken,
+      };
+      this.userservice.currentMessangerUser.next(newdata);
+    }
   }
 
   Opemessanger(data: any) {

@@ -24,20 +24,26 @@ export class BoxMessangerComponent implements OnInit {
   destroye$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.messanger.getRealtimeChat().pipe(takeUntil(this.destroye$)).subscribe((res:any)=>{
-      if(res.includes(this.data.loginUser_id) && res.includes(this.data.friend_id)){
-        this.getAllMessage();
-      }
-    });
+    this.messanger
+      .getRealtimeChat()
+      .pipe(takeUntil(this.destroye$))
+      .subscribe((res: any) => {
+        if (
+          res.includes(this.data.loginUser_id) &&
+          res.includes(this.data.friend_id)
+        ) {
+          this.getAllMessage();
+        }
+      });
     if (this.data) {
       this.oninitgetdata();
     }
   }
 
-  TrackByFun(index:number,item:any){
+  TrackByFun(index: number, item: any) {
     return item._id;
   }
-  
+
   allmessage: any;
   @ViewChild('scrollMe')
   private myScrollContainer!: ElementRef;
@@ -62,14 +68,16 @@ export class BoxMessangerComponent implements OnInit {
   }
   friendDetails: any;
   oninitgetdata() {
-    this.userservice.getUser(this.data.friendUsertoken).subscribe((res: any) => {
-      if (res) {
-        this.friendDetails = res;
-        if (this.friendDetails) {
-          this.getAllMessage();
+    this.userservice
+      .getUser(this.data.friendUsertoken)
+      .subscribe((res: any) => {
+        if (res) {
+          this.friendDetails = res;
+          if (this.friendDetails) {
+            this.getAllMessage();
+          }
         }
-      }
-    });
+      });
   }
 
   //  message Session
@@ -78,7 +86,6 @@ export class BoxMessangerComponent implements OnInit {
   messageEmojiPicker: any;
 
   sendmsg(value: any) {
-
     let dataf = {
       message: value,
       sender_id: this.data.loginUser_id,
@@ -86,7 +93,10 @@ export class BoxMessangerComponent implements OnInit {
     };
 
     this.messanger.sendmessage(dataf).subscribe((res) => {
-      this.messanger.sendRealTimeMessage([this.data.loginUser_id,this.data.friend_id]);
+      this.messanger.sendRealTimeMessage([
+        this.data.loginUser_id,
+        this.data.friend_id,
+      ]);
       this.chatMessage = '';
       this.messageEmojiPicker = false;
     });
@@ -103,7 +113,7 @@ export class BoxMessangerComponent implements OnInit {
   onFocus() {
     this.messageEmojiPicker = false;
   }
-  
+
   ngOnDestroy(): void {
     this.destroye$.next();
   }
