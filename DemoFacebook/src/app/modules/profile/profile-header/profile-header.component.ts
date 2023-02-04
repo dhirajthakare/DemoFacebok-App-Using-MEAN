@@ -88,8 +88,8 @@ export class ProfileHeaderComponent implements OnInit {
  
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(
-      (res) => {
-        this.toastr.success('Request send succeessfully');
+      (res:any) => {
+        this.toastr.success(res);
       },
       (err) => {
         console.log(err);
