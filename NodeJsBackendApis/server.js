@@ -27,6 +27,14 @@ const io = require("socket.io")(httpServer, {
   },
 });
 
+const { ExpressPeerServer } = require("peer");
+const options = {
+  debug: true,
+};
+
+app.use("/peerjs", ExpressPeerServer(httpServer, options));
+
+
 const socketio = require('./server/controller/socketIoController')
 socketio.io(io);
 
