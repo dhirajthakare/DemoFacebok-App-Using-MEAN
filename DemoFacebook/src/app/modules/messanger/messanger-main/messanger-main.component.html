@@ -1,65 +1,120 @@
 <div *ngIf="data">
   <div class="modal-dialog modal-dialog-scrollable">
-
     <div class="modal-content">
-
-      <div class="modal-header mt-2">
-        <div>
-
-          <div *ngIf="friendDetails" class="d-flex">
-            <div [routerLink]="'/profile/'+friendDetails.userToken" class=" mx-2 btnPointer"><img height="38" width="38"
-                style="border-radius: 19px;object-fit: cover;"
-                [src]=" friendDetails.profileUrl ? 'http://localhost:2000'+friendDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'">
-            </div>
-            <div [routerLink]="'/profile/'+friendDetails.userToken"
-              style="text-decoration: none; color: black; margin-top: 10px;" class="btnPointer mx-2">
-              <h4 class="">{{friendDetails.name}}</h4>
+      <div class="modal-header">
+        <div *ngIf="friendDetails" class="row col-12">
+          <div
+            [routerLink]="'/profile/' + friendDetails.userToken"
+            class="col-md-1 btnPointer"
+          >
+            <img
+              height="38"
+              width="38"
+              style="border-radius: 19px; object-fit: cover"
+              [src]="
+                friendDetails.profileUrl
+                  ? 'http://localhost:2000' + friendDetails.profileUrl
+                  : 'http://localhost:2000/assets/images/userdefault.png'
+              "
+            />
+          </div>
+          <div
+            [routerLink]="'/profile/' + friendDetails.userToken"
+            style="text-decoration: none; color: black; margin-top: 10px"
+            class="col-md-2 btnPointer"
+          >
+            <h6 style="font-size:medium;font-weight:500" class="">{{ friendDetails.name }}</h6>
+          </div>
+          <div
+            style="text-decoration: none; color: black; margin-top: 10px"
+            class="col-md-2 offset-7 btnPointer"
+          >
+            <div style="font-size:large" class="btnPointer text-primary d-flext">
+              <i class="fa fa-video-camera mx-2"></i>
+              <i class="fa fa-phone mx-2"></i>
+              <i class="fa fa-info-circle mx-2"></i>
             </div>
           </div>
         </div>
       </div>
 
-      <div  #scrollMe  class="modal-body" style="height: 370px;">
-
-        <div class="col-4 offset-5 ">
-          <div *ngIf="friendDetails" style=" text-decoration: none;" [routerLink]="'/profile/'+friendDetails.userToken"
-            class="btnPointer mt-1"><img style="border-radius: 80px; object-fit: cover;" height="100" width="100"
-              [src]="friendDetails.profileUrl ? 'http://localhost:2000'+friendDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-              alt="">
-            <h3 style=" color:black ;">{{friendDetails.name}}</h3>
-
+      <div #scrollMe class="modal-body" style="height: 370px">
+        <div class="col-4 offset-5">
+          <div
+            *ngIf="friendDetails"
+            style="text-decoration: none"
+            [routerLink]="'/profile/' + friendDetails.userToken"
+            class="btnPointer mt-1"
+          >
+            <img
+              style="border-radius: 80px; object-fit: cover"
+              height="100"
+              width="100"
+              [src]="
+                friendDetails.profileUrl
+                  ? 'http://localhost:2000' + friendDetails.profileUrl
+                  : 'http://localhost:2000/assets/images/userdefault.png'
+              "
+              alt=""
+            />
+            <h3 style="color: black">{{ friendDetails.name }}</h3>
           </div>
         </div>
         <div *ngIf="friendDetails">
           <p class="text-center">Deskbook</p>
-          <p class="text-center">On deskbook {{friendDetails.createdAt | date:'medium'}}</p>
-          <p *ngIf="friendDetails.user_info" class="text-center">{{friendDetails.user_info.homeTown ?
-            friendDetails.user_info.homeTown : 'Not Mention'}}</p>
+          <p class="text-center">
+            On deskbook {{ friendDetails.createdAt | date : "medium" }}
+          </p>
+          <p *ngIf="friendDetails.user_info" class="text-center">
+            {{
+              friendDetails.user_info.homeTown
+                ? friendDetails.user_info.homeTown
+                : "Not Mention"
+            }}
+          </p>
         </div>
 
         <div *ngIf="allmessage" class="row">
           <!-- Reciever Message-->
-          <div *ngFor="let item of allmessage;trackBy:TrackByFun">
-
-            <div *ngIf="item.sender_id == data.loginUser_id" class="media col-8 offset-4 ml-auto">
+          <div *ngFor="let item of allmessage; trackBy: TrackByFun">
+            <div
+              *ngIf="item.sender_id == data.loginUser_id"
+              class="media col-8 offset-4 ml-auto"
+            >
               <div class="media-body">
                 <div class="bg-primary rounded py-2 px-3 mb-2">
-                  <p class="text-small mb-0 text-white">{{item.message}}</p>
+                  <p class="text-small mb-0 text-white">{{ item.message }}</p>
                 </div>
-                <p class="small text-muted">{{item.created_at | date :'medium'}}</p>
+                <p class="small text-muted">
+                  {{ item.created_at | date : "medium" }}
+                </p>
               </div>
             </div>
             <div class="row">
               <!-- Sender Message-->
-              <div *ngIf="item.sender_id != data.loginUser_id" class="media col-8 "><img
-                  [src]="friendDetails.profileUrl ? 'http://localhost:2000'+friendDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                  style="object-fit: cover; border-radius: 12px;" alt="user" width="30" height="30"
-                  class="rounded-circle">
+              <div
+                *ngIf="item.sender_id != data.loginUser_id"
+                class="media col-8"
+              >
+                <img
+                  [src]="
+                    friendDetails.profileUrl
+                      ? 'http://localhost:2000' + friendDetails.profileUrl
+                      : 'http://localhost:2000/assets/images/userdefault.png'
+                  "
+                  style="object-fit: cover; border-radius: 12px"
+                  alt="user"
+                  width="30"
+                  height="30"
+                  class="rounded-circle"
+                />
                 <div class="media-body ml-3">
                   <div class="bg-light rounded py-2 px-3">
-                    <p class="text-small mb-0 text-muted">{{item.message}}</p>
+                    <p class="text-small mb-0 text-muted">{{ item.message }}</p>
                   </div>
-                  <p class="small text-muted">{{item.created_at | date:'medium'}}</p>
+                  <p class="small text-muted">
+                    {{ item.created_at | date : "medium" }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -67,21 +122,48 @@
         </div>
       </div>
       <div class="modal-footer">
-          <div class="col-md-12">
-            <div class="input-group">
-              <input #sendmessage [(ngModel)]="chatMessage" (focus)="onFocus()"
-                style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control"
-                type="search" placeholder="Send Message..." (keyup.enter)="sendmsg(sendmessage.value)">
-              <span (click)="MessageToggleEmojiPicker()"
-                style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;"
-                class=" input-group-text btnPointer">😀</span>
-            </div>
-            <emoji-mart *ngIf="messageEmojiPicker" (emojiSelect)="addMessangerEmoji($event)" class="emoji-mart" set="twitter"
-            emoji="point_up" title="Emojis"
-            [style]="{ position: 'absolute', bottom: '14%', right: '5%',width:'300px',height:'405px' }"></emoji-mart>
+        <div class="col-md-12">
+          <div class="input-group">
+            <input
+              #sendmessage
+              [(ngModel)]="chatMessage"
+              (focus)="onFocus()"
+              style="
+                border-top-left-radius: 23px;
+                border-bottom-left-radius: 23px;
+              "
+              class="form-control"
+              type="search"
+              placeholder="Send Message..."
+              (keyup.enter)="sendmsg(sendmessage.value)"
+            />
+            <span
+              (click)="MessageToggleEmojiPicker()"
+              style="
+                border-top-right-radius: 23px;
+                border-bottom-right-radius: 23px;
+              "
+              class="input-group-text btnPointer"
+              >😀</span
+            >
           </div>
+          <emoji-mart
+            *ngIf="messageEmojiPicker"
+            (emojiSelect)="addMessangerEmoji($event)"
+            class="emoji-mart"
+            set="twitter"
+            emoji="point_up"
+            title="Emojis"
+            [style]="{
+              position: 'absolute',
+              bottom: '14%',
+              right: '5%',
+              width: '300px',
+              height: '405px'
+            }"
+          ></emoji-mart>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
