@@ -92,3 +92,24 @@ body {
 mat-form-field .mat-form-field-wrapper{
   padding-bottom: 0px !important;
 }
+
+
+.myCallbody #currentUser {
+  height: 200px;
+  margin: 0.5rem;
+  // width: 400px;
+  object-fit: cover;
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  background-color: white;
+  width: 300px;
+  border-radius: 0%;
+}
+
+.myCallbody video {
+  height: 560px;
+  margin: 0.5rem;
+  width: 100%;
+  object-fit: cover;
+}

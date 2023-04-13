@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'search', loadChildren: () => import('./modules/search-results/search-results.module').then(m => m.SearchResultsModule), canActivate:[AuthGuard] },
   { path: 'deskbook', loadChildren: () => import('./modules/main-body/main-body.module').then(m => m.MainBodyModule) , canActivate:[AuthGuard] },
   { path: 'profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule), canActivate:[AuthGuard] },
+  { path: 'takecall/:', loadChildren: () => import('./modules/take-call/take-call.module').then(m => m.TakeCallModule) },
   { path: '**', component:ErrorComponent},
 ];
 
