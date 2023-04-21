@@ -10,14 +10,27 @@ export class TakeCallService {
   constructor() { }
   socket = io("localhost:2000");
 
-  createRoom(ROOM_ID: any, userName: any, userId: any) {
-    this.socket.emit('join-room', ROOM_ID, userName, userId);
+  createRoom(ROOM_ID: any, userName: any, userId: any,friendDetail:any,videochatUrl:any) {
+    this.socket.emit('join-room', ROOM_ID, userName, userId,friendDetail,videochatUrl);
   }
 
   getConnecteduser() {
     let observable = new Observable<any>((observer) => {
       this.socket.on('user-connected', (UserId) => {
         observer.next(UserId);
+      });
+      return () => {
+        // this.socket.disconnect();
+      };
+    });
+
+    return observable;
+  }
+
+  someOneCallYou() {
+    let observable = new Observable<any>((observer) => {
+      this.socket.on('call-friend', (detailds) => {
+        observer.next(detailds);
       });
       return () => {
         // this.socket.disconnect();

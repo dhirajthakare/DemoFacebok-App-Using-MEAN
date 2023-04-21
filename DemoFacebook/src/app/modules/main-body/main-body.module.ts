@@ -14,6 +14,7 @@ import { CreatePostModule } from 'src/app/common/create-post/create-post.module'
 import { DisplayPostModule } from 'src/app/common/display-post/display-post.module';
 import { BoxMessangerModule } from 'src/app/common/box-messanger/box-messanger.module';
 import { FooterModule } from 'src/app/common/footer/footer.module';
+import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { FooterModule } from 'src/app/common/footer/footer.module';
     CreatePostModule,
     DisplayPostModule,
     BoxMessangerModule,
-    FooterModule
+    FooterModule,
+    AcceptCallModule
   ]
 })
 export class MainBodyModule { }

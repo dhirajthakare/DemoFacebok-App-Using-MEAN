@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { TakeCallService } from 'src/app/common/services/take-call.service';
-declare var Peer:any;
+declare var Peer: any;
 
 @Component({
   selector: 'app-take-call',
   templateUrl: './take-call.component.html',
-  styleUrls: ['./take-call.component.scss']
+  styleUrls: ['./take-call.component.scss'],
 })
 export class TakeCallComponent implements OnInit {
-
   constructor(
     private socket: TakeCallService,
     private activerouter: ActivatedRoute,
     private route: Router
   ) {}
 
+  callfriendData: any;
   userName: any = '';
   peer: any;
   myVideoStream: any;
@@ -24,32 +25,42 @@ export class TakeCallComponent implements OnInit {
   anotherid: any;
   mypeerid: any;
   copyURl: any = window.location.href;
+  callUser: any;
+  private onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
-    // this.userName = prompt('Enter your name');
-    this.userName = prompt('select name');
-    this.myVideo.muted = true;
-    this.getLatestConnectedUser();
-    this.makePeerConnection();
-    this.getMessage();
-    this.getleaveroomData();
-    // this.check();
+    this.activerouter.queryParams.subscribe((res: any) => {
+      if (res) {
+        this.callfriendData = JSON.parse(atob(res.token));
+        this.callUser = atob(res.calluser);
+        console.log(this.callfriendData);
+        this.userName = this.callfriendData.name;
+        this.myVideo.muted = true;
+        this.getLatestConnectedUser();
+        this.makePeerConnection();
+        this.getMessage();
+        this.getleaveroomData();
+      }
+    });
   }
 
   ngAfterViewInit(): void {}
 
   getLatestConnectedUser() {
-    this.socket.getConnecteduser().subscribe((res) => {
-      if (res) {
-        this.connectToNewUser(res, this.myVideoStream);
-      }
-    });
+    this.socket
+      .getConnecteduser()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res) => {
+        if (res) {
+          this.connectToNewUser(res, this.myVideoStream);
+        }
+      });
   }
   videoOn: any = true;
 
   makePeerConnection() {
     this.peer = new Peer({
-      host:'localhost',
-      port:'2000',
+      host: 'localhost',
+      port: '2000',
       path: '/peerjs',
       // debug: 3
     });
@@ -61,7 +72,9 @@ export class TakeCallComponent implements OnInit {
           ? this.activerouter.snapshot.params['']
           : 'room',
         this.userName,
-        id
+        id,
+        this.callUser == 'addedCall' ? this.callfriendData : '',
+        this.route.url
       );
       // socket.emit("join-room", ROOM_ID, id, user);
     });
@@ -156,12 +169,15 @@ export class TakeCallComponent implements OnInit {
 
   allMessage: any = [];
   getMessage() {
-    this.socket.getMessage().subscribe((res: any) => {
-      this.allMessage.push({
-        message: res.message,
-        userName: res.userName,
+    this.socket
+      .getMessage()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res: any) => {
+        this.allMessage.push({
+          message: res.message,
+          userName: res.userName,
+        });
       });
-    });
   }
 
   leaveRoom() {
@@ -170,17 +186,16 @@ export class TakeCallComponent implements OnInit {
     this.route.navigate(['']);
   }
   getleaveroomData() {
-    this.socket.getLeaveRoomuser().subscribe((res) => {
-      console.log(res);
-      const element = document.getElementById(res.userId);
-      element?.remove();
-      this.route.navigate(['']);
-    });
+    this.socket
+      .getLeaveRoomuser()
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res) => {
+        console.log(res);
+        const element = document.getElementById(res.userId);
+        element?.remove();
+        this.route.navigate(['']);
+      });
   }
-
-  // ngOnDestroy() {
-  //   console.log('Destroy Componant');
-  // }
 
   name = 'Angular ';
   myWin: any = {};
@@ -207,5 +222,7 @@ export class TakeCallComponent implements OnInit {
     }, 1000);
   }
 
-
+  ngOnDestroy() {
+    this.onDestroy$.next();
+  }
 }

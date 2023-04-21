@@ -1,14 +1,17 @@
 exports.io = (newIo) =>
   newIo.on("connection", (socket) => {
-    console.log("socket io connection done");
+    // console.log("socket io connection done");
     socket.on("send message", (data) => {
       newIo.emit("get chat message", data);
     });
     
-    socket.on("join-room", (ROOM_ID, userName, userId) => {
-      console.log(ROOM_ID, userName, userId);
+    socket.on("join-room", (ROOM_ID, userName, userId,firendDetail,videoChatUrl) => {
+      // console.log(ROOM_ID, userName, userId,firendDetail);
       socket.join(ROOM_ID);
       setTimeout(() => {
+        if(firendDetail){
+          socket.broadcast.emit("call-friend",{friend:firendDetail,chatURL:videoChatUrl});
+        }
         socket.broadcast.to(ROOM_ID).emit("user-connected", userId);
       }, 1000);
 
@@ -19,7 +22,7 @@ exports.io = (newIo) =>
       });
 
       socket.on("leave room", () => {
-        console.log("leave room", userName, userId, ROOM_ID);
+        // console.log("leave room", userName, userId, ROOM_ID);
         socket.broadcast.to(ROOM_ID).emit("leave room user", {
           userName: userName,
           userId: userId,
