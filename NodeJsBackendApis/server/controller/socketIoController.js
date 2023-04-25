@@ -5,12 +5,12 @@ exports.io = (newIo) =>
       newIo.emit("get chat message", data);
     });
     
-    socket.on("join-room", (ROOM_ID, userName, userId,firendDetail,videoChatUrl) => {
-      // console.log(ROOM_ID, userName, userId,firendDetail);
+    socket.on("join-room", (ROOM_ID, userName, userId,friendDetails,videoChatUrl) => {
+      // console.log(ROOM_ID, userName, userId,friendDetails);
       socket.join(ROOM_ID);
       setTimeout(() => {
-        if(firendDetail){
-          socket.broadcast.emit("call-friend",{friend:firendDetail,chatURL:videoChatUrl});
+        if(friendDetails){
+          socket.broadcast.emit("call-friend",{friendDetails:friendDetails,chatURL:videoChatUrl});
         }
         socket.broadcast.to(ROOM_ID).emit("user-connected", userId);
       }, 1000);

@@ -35,7 +35,7 @@ export class MainBodyComponent implements OnInit {
     this.socket.someOneCallYou().pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
       if (res) {
         console.log(res, this.data);
-        if (res.friend._id == this.data._id) {
+        if (res.friendDetails.friendId == this.data._id) {
           this.matDialog.open(AcceptCallComponent, {
             data: res.chatURL,
           });

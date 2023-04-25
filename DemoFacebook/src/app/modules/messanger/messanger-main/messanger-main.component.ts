@@ -34,10 +34,18 @@ export class MessangerMainComponent implements OnInit {
         }
       });
     this.getcurrentMessagererUser();
+    this.getCurrentLoginuser();
   }
 
   TrackByFun(index: number, item: any) {
     return item._id;
+  }
+
+  currentloginuserDetails:any;
+  getCurrentLoginuser(){
+    this.userservice.currentLoginUser.subscribe((res:any)=>{
+      this.currentloginuserDetails = res;
+    })
   }
 
   getcurrentMessagererUser() {
@@ -129,10 +137,20 @@ export class MessangerMainComponent implements OnInit {
     this.ngOnDestroy$.next();
   }
   callFriend(friend: any) {
-    // console.log("friend",friend);
-    let encrytData = btoa(JSON.stringify(friend));
+    console.log(friend,this.currentloginuserDetails);
+    let frienddetails = {
+      friendName:friend.name,
+      friendId:friend._id,
+      friendprofileURL:friend.profileUrl
+    }
+
+    let loginuserDetail = {
+      loginUserName:this.currentloginuserDetails.name,
+      loginUserId:this.currentloginuserDetails._id,
+      loginUserProfileURL:this.currentloginuserDetails.profileUrl,
+    }
     window.open(
-      `/takecall/?token=${encrytData}&&calluser=${btoa('addedCall')}`,
+      `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginuserDetail=${btoa(JSON.stringify(loginuserDetail))}&&calluser=${btoa('addedCall')}`,
       'popup',
       'width=1000,height=1000'
     );

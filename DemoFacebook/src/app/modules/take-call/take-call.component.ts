@@ -16,8 +16,8 @@ export class TakeCallComponent implements OnInit {
     private route: Router
   ) {}
 
-  callfriendData: any;
-  userName: any = '';
+  friendDetails: any;
+  LoginUserDetails: any = '';
   peer: any;
   myVideoStream: any;
   myVideo = document.createElement('video');
@@ -30,10 +30,10 @@ export class TakeCallComponent implements OnInit {
   ngOnInit(): void {
     this.activerouter.queryParams.subscribe((res: any) => {
       if (res) {
-        this.callfriendData = JSON.parse(atob(res.token));
+        this.friendDetails = JSON.parse(atob(res.frienddetails));
         this.callUser = atob(res.calluser);
-        console.log(this.callfriendData);
-        this.userName = this.callfriendData.name;
+        console.log(this.friendDetails,this.callUser);
+        this.LoginUserDetails = JSON.parse(atob(res.frienddetails));
         this.myVideo.muted = true;
         this.getLatestConnectedUser();
         this.makePeerConnection();
@@ -68,12 +68,10 @@ export class TakeCallComponent implements OnInit {
     this.peer.on('open', (id: any) => {
       console.log('my id is ' + id);
       this.socket.createRoom(
-        this.activerouter.snapshot.params['']
-          ? this.activerouter.snapshot.params['']
-          : 'room',
-        this.userName,
+        'myroom',
+        this.LoginUserDetails.loginUserName,
         id,
-        this.callUser == 'addedCall' ? this.callfriendData : '',
+        this.callUser == 'addedCall' ? this.friendDetails : '',
         this.route.url
       );
       // socket.emit("join-room", ROOM_ID, id, user);
