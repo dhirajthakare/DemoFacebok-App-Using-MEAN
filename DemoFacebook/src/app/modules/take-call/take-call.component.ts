@@ -132,7 +132,7 @@ export class TakeCallComponent implements OnInit {
     let enabled: any = this.myVideoStream.getVideoTracks()[0].enabled;
     if (enabled) {
       this.myVideoStream.getVideoTracks()[0].enabled = false;
-      this.myVideoClass = 'fa fa-video-slash';
+      this.myVideoClass = 'fa fa-video-camera-slash';
     } else {
       this.myVideoStream.getVideoTracks()[0].enabled = true;
       this.myVideoClass = 'fa fa-video-camera';
@@ -142,10 +142,10 @@ export class TakeCallComponent implements OnInit {
     let enabled: any = this.myVideoStream.getAudioTracks()[0].enabled;
     if (enabled) {
       this.myVideoStream.getAudioTracks()[0].enabled = false;
-      this.myAudioClass = 'fas fa-microphone-slash';
+      this.myAudioClass = 'fa fa-microphone-slash';
     } else {
       this.myVideoStream.getAudioTracks()[0].enabled = true;
-      this.myAudioClass = 'fas fa-microphone';
+      this.myAudioClass = 'fa fa-microphone';
     }
   }
 

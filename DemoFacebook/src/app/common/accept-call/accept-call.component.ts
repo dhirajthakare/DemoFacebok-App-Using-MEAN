@@ -15,7 +15,7 @@ export class AcceptCallComponent implements OnInit {
   ngOnInit(): void {}
 
   acceptCall() {
-    let newUrl = this.data.split('&')[0] + `&&calluser=${btoa('receivedCall')}`;
+    let newUrl = this.data.chatURL.split('&')[0] + `&&calluser=${btoa('receivedCall')}`;
     window.open(`${newUrl}`, 'popup', 'width=1000,height=1000');
     this.matdiaref.close();
   }

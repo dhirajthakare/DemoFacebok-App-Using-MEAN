@@ -140,6 +140,7 @@ export class MessangerMainComponent implements OnInit {
     console.log(friend,this.currentloginuserDetails);
     let frienddetails = {
       friendName:friend.name,
+      callFriendName:this.currentloginuserDetails.name,
       friendId:friend._id,
       friendprofileURL:friend.profileUrl
     }

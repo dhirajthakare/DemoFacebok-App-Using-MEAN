@@ -37,7 +37,7 @@ export class MainBodyComponent implements OnInit {
         console.log(res, this.data);
         if (res.friendDetails.friendId == this.data._id) {
           this.matDialog.open(AcceptCallComponent, {
-            data: res.chatURL,
+            data: {chatURL:res.chatURL,friendDetails:res.friendDetails},
           });
         }
       }
