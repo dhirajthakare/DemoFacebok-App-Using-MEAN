@@ -1,0 +1,100 @@
+<div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div  [routerLink]="LoginUserDetails?'/profile/'+LoginUserDetails.userToken:''"   class="d-flex btnPointer">
+                <div><img height="42" width="42" class="profileImgResize" [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div class=" mt-2"><p class=""> {{LoginUserDetails?LoginUserDetails.name:''}}</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/covid.png"></div>
+                <div  class=" mt-2"><p class="">COVID-19 Information Center</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div routerLink="/friends" class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/user.png"></div>
+                <div  class=" mt-2"><p class="">Friends</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/groups.png"></div>
+                <div  class=" mt-2"><p class="">Groups</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/marketplace.png"></div>
+                <div  class=" mt-2"><p class="">MarketPlace</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/watch.png"></div>
+                <div  class=" mt-2"><p class="">Watch</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/event.png"></div>
+                <div  class=" mt-2"><p class="">Events</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/memories.png"></div>
+                <div  class=" mt-2"><p class="">Memories</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/saved.png"></div>
+                <div  class=" mt-2"><p class="">Saved</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/pages.png"></div>
+                <div  class=" mt-2"><p class="">Pages</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div routerLink="/messanger" class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/messanger.png"></div>
+                <div  class=" mt-2" ><p class="">Messanger</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/weather.png"></div>
+                <div  class=" mt-2"><p class="">Whether</p></div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/blood.png"></div>
+                <div  class=" mt-2"><p class="">Blood Donations</p></div>
+            </div>
+        </li>
+        <li class="list-group-item"><div class="d-flex btnPointer">
+            <div><img height="42" width="42" src="http://localhost:2000/assets/images/friendlist.png"></div>
+            <div  class=" mt-2"><p class="">Friend List</p></div>
+        </div></li>
+        <li class="list-group-item">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/recendf.png"></div>
+                <div  class=" mt-2"><p class="">Recend & Favorites</p></div>
+            </div>
+        </li>
+        <hr>
+        <h4 class="text-secondary">Your ShortCuts</h4>
+        <li class="list-group-item">
+            <div  [routerLink]="LoginUserDetails?'/profile/'+LoginUserDetails.userToken:''" class="d-flex btnPointer">
+                <div><img height="42"class="profileImgResize"  [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div class=" mt-2"><p class=""> {{LoginUserDetails?LoginUserDetails.name:''}}</p></div>
+            </div>
+        </li>
+      </ul>
+</div>

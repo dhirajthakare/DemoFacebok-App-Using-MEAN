@@ -1,0 +1,33 @@
+<div class="" style="height: 100%;">
+    <div class="body">
+       <div>
+           <ul class="list-inline">
+               <li style="font-size: larger; font-weight: 500;" class="list-inline-item  mx-2 "> Chats</li>
+               <li style="font-size: larger;" class="list-inline-item mx-2 float-end"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></li>
+               <li style="font-size: larger;" class="list-inline-item mx-2 float-end"> <i class="fa fa-bars" aria-hidden="true"> </i></li>
+               <li style="font-size: larger;" class="list-inline-item mx-2 float-end"> <i class="fa fa-video-camera" aria-hidden="true"></i>                </li>
+           </ul>
+           <ul class="list-inline">
+               <input (keyup)="getUserSearchFriends(searchFrd.value)" #searchFrd type="text" style="border-radius: 20px;" placeholder="Search Messenger " class=" form-control form-control-sm" name="" id="">
+              </ul>
+       </div>
+
+       <div>
+           <div *ngIf="friends">
+               <ul *ngFor="let item of friends.user_Friends " class="list-group list-group-flush">
+           
+                   <li (click)="Opemessanger(item.friend_id)" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start btnPointer">
+                       <div class="d-flex">
+                           <strong style="font-size: xx-large;" class="text-success">.</strong> 
+                           <div>  <img height="42" width="42" style="border-radius: 21px; object-fit: cover;" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"></div>
+                           <div style="text-decoration: none; color: black;" class=" mt-2" ><p class=""> {{item.friend_id.name}}  </p> </div>
+                       </div>
+                   </li>
+                   
+               
+               </ul>
+           </div>
+       </div>
+
+    </div>
+</div>

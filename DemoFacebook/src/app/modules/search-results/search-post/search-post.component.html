@@ -1,0 +1,42 @@
+<div  class="col-md-8 offset-md-2 card">
+    <div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="row">
+                        <h5>Photos</h5>
+                    </div>
+                </div>
+
+                <div style="margin-top: 5%;" *ngIf="Loader" class=" text-center">
+                    <img  src="../../assets/loader.gif" alt="">
+                </div> 
+            <div   *ngIf="allpost" class="row">
+                <div *ngFor="let item of allpost" class="col-md-4" >
+                    
+
+                    <div  [routerLink]="'/profile/'+item.postUser.userToken" style="height: 220px;" class="col-md-12">
+                        <img class="col-md-12" style="object-fit: contain;height: 100%;width: 100%;" [src]="item.postUrl ? 'http://localhost:2000'+item.postUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                    </div>
+                    <hr>
+                    <div  [routerLink]="'/profile/'+item.postUser.userToken" class="col-md-12">
+                        <h4 class="text-center">{{item.postUser.name}}</h4>
+                       
+                    </div>
+                    
+                </div>
+               
+        
+            </div>
+            
+        
+        </div>
+        <!-- <div >
+    
+                <img style="height: 510px;width: 100%;" src="http://localhost:8000/images/null_states_people_gray_wash.svg" alt="">
+                <p class="text-center">You Dont Have Friends</p>
+        </div> -->
+    </div>
+    
+    
+    
+</div>

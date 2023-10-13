@@ -81,12 +81,16 @@ exports.deletePost = (req,res)=>{
 //search Post
 exports.searchPost = (req,res)=>{
 
-    regex = new RegExp(req.params.search , 'i');
+    if(req.body.search){
+    regex = new RegExp(req.body.search , 'i');
     postModal.find({ $or:[{status:regex}] }).populate('postUser') .then(responce=>{
         res.json(responce);
     }).catch(err=>{
         res.status(400).json(" not found ");
     });
+    }else{
+        res.json();
+    }
 
 
 }

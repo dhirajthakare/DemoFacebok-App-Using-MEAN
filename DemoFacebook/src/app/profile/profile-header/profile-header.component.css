@@ -1,8 +1,0 @@
-li:hover{
-    background-color: rgb(221, 213, 213);
-    color: black;
-}
-.list-inline-item:active{
-    text-decoration: underline;
-    color: blue;
-}

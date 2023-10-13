@@ -4,10 +4,10 @@ var usermodal = require('../model/users');
 var commanService = require("../services/CommanService");
 var createAccvalid = require("../validation/CreateAccontValidaton");
 
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const jwtKey = "dtdtdtdtdtdtdtdtdtdt";
 
-const crypto = require("crypto");
-const key = "password";
-const algo = "aes256";
 
 // Create Account 
 exports.createAcc = async (req,res)=>{
@@ -16,13 +16,13 @@ exports.createAcc = async (req,res)=>{
         createAccvalid.AccontValid(req.body);
         useravailable  = await usermodal.findOne({email:req.body.email});
         if(!useravailable){
-            cipher = crypto.createCipher(algo,key);
-        const encryptedPass = cipher.update(req.body.password,'utf8','hex')+cipher.final('hex');
+        let salt = await bcrypt.genSalt(10);
+        hashpassword = await bcrypt.hash(req.body.password,salt);
     
         const send  = await new usermodal({
         name:req.body.fname+'  '+req.body.lname,
         email:req.body.email,
-        password:encryptedPass,
+        password:hashpassword,
         birthOfDate:req.body.birthOfDate,
         gender:req.body.gender,
         profileUrl:req.body.profileUrl,
@@ -85,23 +85,43 @@ exports.loginUser = async (req,res)=>{
 
         if(data){
 
-         decipher = crypto.createDecipher(algo,key);
-         decryptedPass = decipher.update(data.password,'hex','utf8')+decipher.final('utf8');
-         if(decryptedPass == req.body.password){
-            res.json(data);
+         if(await bcrypt.compare(req.body.password,data.password)){
+            
+            let payload = {
+                "userToken":data.userToken,
+                "_id":data._id
+            }
+            let jwtToken = jwt.sign(payload,jwtKey,{expiresIn:'48h'});
+
+            res.json(jwtToken);
+
+            // res.json(data);
         }else{
             throw " Password Is Invalid Please Try Agin ";
         }
         }else{
             throw " Username Is Invalid ";
         }
-
-       
+ 
     }
     catch(err){
         res.status(400).json(err);
     }
 
    
+}
+
+exports.getUserProfile =  async (req,res)=>{
+    const userData = req.userData;
+    usermodal.findOne({userToken:userData.userToken}). then(responce=>{
+        usermodal.findOne({userToken:responce.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:responce._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(responce1=>{
+            res.json(responce1);
+        }).catch(err=>{
+            res.status(400).json(" somthing wrong "+err);
+        })
+    }).catch(err=>{
+        res.status(400).json(" somthing wrong "+err);
+    })
+
 }
 

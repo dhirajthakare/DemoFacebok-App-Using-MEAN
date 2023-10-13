@@ -1,0 +1,19 @@
+<div class="d-flex flex-column flex-grow-1 vh-100 overflow-hidden">
+    <div id="header" class="col-12 py-2">
+        <app-main-header></app-main-header>
+    </div>
+    <div id="main" class="row flex-grow-1 overflow-hidden">
+        <div id="sidebar1" style="width:30%" class=" mh-100 overflow-auto py-2">
+            <app-main-sidebar-left></app-main-sidebar-left>
+        </div>
+
+        <div id="main_container" style="width:40%" class=" mh-100 overflow-auto py-2">
+            <router-outlet></router-outlet>
+        </div>
+        <div id="sidebar2" style="width:30%" class=" mh-100 overflow-auto py-2">
+            <app-main-sidebar-right></app-main-sidebar-right>
+        </div>
+
+    </div>
+    <app-footer></app-footer>
+</div>
