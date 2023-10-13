@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DemoFacebook": {
+    "deskbook": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo-facebook",
+            "outputPath": "dist/demo-deskbook",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -44,7 +44,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -56,6 +56,27 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uat.ts"
                 }
               ],
               "outputHashing": "all"
@@ -80,10 +101,13 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "DemoFacebook:build:production"
+              "browserTarget": "deskbook:build:production"
+            },
+            "uat": {
+              "browserTarget": "deskbook:build:uat"
             },
             "development": {
-              "browserTarget": "DemoFacebook:build:development"
+              "browserTarget": "deskbook:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +115,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DemoFacebook:build"
+            "browserTarget": "deskbook:build"
           }
         },
         "test": {
@@ -115,5 +139,5 @@
       }
     }
   },
-  "defaultProject": "DemoFacebook"
+  "defaultProject": "deskbook"
 }

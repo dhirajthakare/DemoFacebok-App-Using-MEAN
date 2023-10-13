@@ -17,21 +17,20 @@ export class EnterNewPasswordComponent implements OnInit {
     private toast:ToastrService
   ) { }
 
-  Email:any;
+  Email!:string;
   ngOnInit(): void {
-    this.router.queryParams.subscribe(res=>{
-      let data:any = res;
-      this.Email=atob(data.Email);
+    this.router.queryParams.subscribe((res:any)=>{
+      this.Email=atob(res.Email);
     })
   }
 
-  changePassword(Pass:any){
+  changePassword(Pass:string){
 
-    let dataf = {
+    let formData = {
       email:this.Email,
       password:Pass
     }
-    this.service.changePassword(dataf).subscribe((res:any)=>{
+    this.service.changePassword(formData).subscribe((res:any)=>{
       this.toast.success(res,"success")
       this.route.navigate(['']);
     },err=>{

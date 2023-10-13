@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
+import { AcceptCallComponent } from 'src/app/common/accept-call/accept-call.component';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 
@@ -11,7 +13,8 @@ import { UserService } from 'src/app/common/services/user.service';
 export class MessangerSidebarRightComponent implements OnInit {
   constructor(
     private userservice: UserService,
-    private friendship: FriendService
+    private friendship: FriendService,
+    private matdialog: MatDialog
   ) {}
 
   loginuserDetails: any;
@@ -62,7 +65,7 @@ export class MessangerSidebarRightComponent implements OnInit {
   }
 
   assignRecentChat() {
-    if(this.friends.user_Friends.length){
+    if (this.friends.user_Friends.length) {
       let newdata = {
         friend_id: this.friends.user_Friends[0].friend_id._id,
         loginUser_id: this.loginuserDetails._id,
@@ -84,5 +87,11 @@ export class MessangerSidebarRightComponent implements OnInit {
   ngOnDestroy() {
     this.onDestroy$.next();
     this.userservice.currentMessangerUser.next('');
+  }
+
+  openAcceptCall() {
+    this.matdialog.open(AcceptCallComponent, {
+      disableClose:false
+    });
   }
 }

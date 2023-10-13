@@ -24,21 +24,23 @@
 
                 <form [formGroup]='createPost' method="POST" id="AddUser" (submit)='oncreatepost()'>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class=" col-md-2">
                             <div>
                                 <img height="50" width="50" style="border-radius: 25px; object-fit: cover;"
                                     [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'">
                             </div>
                         </div>
-                        <div class="col-md-6 mt-3">
+                        <div style="display: flex;" class="col-md-6 mt-3">
                             <div style="text-decoration: none; color: black;">
                                 <h4 class="">
                                     {{data.name}}
                                 </h4>
                                 </div>
+                           <div class="mx-3">
                             <p title="Public"> <i class="fa fa-firefox" aria-hidden="true"></i>
                             </p>
+                           </div>
                         </div>
                     </div>
                     <div>

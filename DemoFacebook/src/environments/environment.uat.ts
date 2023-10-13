@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  ApiURL:"/api",
-  AppEnv:"Development"
+  ApiURL:"http://localhost:2000/api",
+  AppEnv:"UAT"
 };
 
 /*

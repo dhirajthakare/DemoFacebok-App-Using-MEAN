@@ -22,20 +22,20 @@ body {
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$DemoFacebook-primary: mat.define-palette(mat.$indigo-palette);
-$DemoFacebook-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$deskbook-primary: mat.define-palette(mat.$indigo-palette);
+$deskbook-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$DemoFacebook-warn: mat.define-palette(mat.$red-palette);
+$deskbook-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$DemoFacebook-theme: mat.define-light-theme(
+$deskbook-theme: mat.define-light-theme(
   (
     color: (
-      primary: $DemoFacebook-primary,
-      accent: $DemoFacebook-accent,
-      warn: $DemoFacebook-warn,
+      primary: $deskbook-primary,
+      accent: $deskbook-accent,
+      warn: $deskbook-warn,
     ),
   )
 );
@@ -43,7 +43,7 @@ $DemoFacebook-theme: mat.define-light-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($DemoFacebook-theme);
+@include mat.all-component-themes($deskbook-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -91,4 +91,25 @@ body {
 
 mat-form-field .mat-form-field-wrapper{
   padding-bottom: 0px !important;
+}
+
+
+.myCallbody #currentUser {
+  height: 200px;
+  margin: 0.5rem;
+  // width: 400px;
+  object-fit: cover;
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  background-color: white;
+  width: 300px;
+  border-radius: 0%;
+}
+
+.myCallbody video {
+  height: 560px;
+  margin: 0.5rem;
+  width: 100%;
+  object-fit: cover;
 }

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountCreateDialogComponent } from 'src/app/modules/login/account-create-login/account-create-dialog/account-create-dialog.component';
 import { AuthService } from '../services/auth.service';
+import { LoginError } from '../interface/user,inteface';
 
 @Component({
   selector: 'app-login-card',
@@ -11,6 +12,13 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login-card.component.scss'],
 })
 export class LoginCardComponent implements OnInit {
+  loginsuccess!: string;
+  loginerr!: LoginError | null;
+  token: any;
+  loginForm = this.formbuilder.group({
+    email: 'mayur@gmail.com',
+    password: '12345678',
+  });
   constructor(
     public service: AuthService,
     private formbuilder: FormBuilder,
@@ -18,19 +26,12 @@ export class LoginCardComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  regsuccess: any;
-  regerr: any;
-  loginsuccess: any;
-  loginerr: any;
-  storeallerrors: any;
-  token: any;
-
-  ngOnInit(): void {}
-
-  loginForm = this.formbuilder.group({
-    email: 'mayur@gmail.com',
-    password: '12345678',
-  });
+  ngOnInit(): void {
+    this.formbuilder.group({
+      email: 'mayur@gmail.com',
+      password: '12345678',
+    });
+  }
 
   onlogin() {
     this.service.LoginAcc(this.loginForm.value).subscribe(

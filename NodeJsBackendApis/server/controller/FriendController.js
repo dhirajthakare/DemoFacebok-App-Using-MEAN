@@ -9,7 +9,7 @@ exports.addFriend = (req,res)=>{
 
     friendsModal.findOne({user_id:req.params.uid,friend_id:req.params.fid,friendStatus:'Pending'}).then(responce=>{
         if(responce){
-            res.json(" AllReady send request  ");
+            res.json(" Allready send request  ");
         }else{
             // res.json("worng")
             var send = new friendsModal({
@@ -23,7 +23,7 @@ exports.addFriend = (req,res)=>{
                 usermodal.updateMany({$or:[{_id:req.params.uid},{_id:req.params.fid}]},{$push:{
                     user_Friends : reqSend._id
                 }}).then(updateuser=>{
-                    res.json(" request send successfully ");
+                    res.json(" Request send successfully ");
                 }).catch(err=>{
                     res.status(400).json(" Somthing wrong while update friends "+err);
                 })
