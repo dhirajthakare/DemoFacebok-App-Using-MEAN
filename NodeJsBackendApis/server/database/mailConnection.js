@@ -6,8 +6,8 @@ var transport = nodemailer.createTransport({
     secure: false,
     requireTLS: true,
     auth: {
-        user:process.env.Email,
-        pass: process.env.EmailPassword
+        user:process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD
 
     }
 

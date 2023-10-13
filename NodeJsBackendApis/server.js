@@ -1,26 +1,26 @@
-const express  = require('express');
+const express = require("express");
 const app = express();
 
-const dotenv = require('dotenv');
-dotenv.config({path:'enviorment1.env'});
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
 
-const cors = require('cors');
+const cors = require("cors");
 app.use(cors());
 
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const port = 2000 || process.env.PORT
+const port = 2000 || process.env.PORT;
 
-app.use('/assets',express.static('assets'))
+app.use("/assets", express.static("assets"));
 
-const connect = require('./server/database/dbconfig');
+const connect = require("./server/database/dbconfig");
 
-const Mailconnect = require('./server/database/mailConnection');
+const Mailconnect = require("./server/database/mailConnection");
 
-const router = require('./server/routes/routes')
+const router = require("./server/routes/routes");
 app.use(router);
-const httpServer = require('http').Server(app);
+const httpServer = require("http").Server(app);
 const io = require("socket.io")(httpServer, {
   cors: {
     origins: ["http://localhost:4200"],
@@ -34,10 +34,9 @@ const options = {
 
 app.use("/peerjs", ExpressPeerServer(httpServer, options));
 
-
-const socketio = require('./server/controller/socketIoController')
+const socketio = require("./server/controller/socketIoController");
 socketio.io(io);
 
-httpServer.listen(port,()=>{
-    console.log(`server Running on http://localhost:${port}`);
+httpServer.listen(port, () => {
+  console.log(`server Running on http://localhost:${port}`);
 });
