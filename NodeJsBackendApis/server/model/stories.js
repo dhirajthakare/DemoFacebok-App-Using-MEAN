@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const storySchema = mongoose.Schema({
     storyText:{type:String},
     viewsCount:{type:Number,default:0},
     storyCommentCounts:{type:Number,default:0},
@@ -9,4 +9,4 @@ const usersechma = mongoose.Schema({
 
 },{ timestamps: true})
 
-module.exports = mongoose.model('stories',usersechma);
+module.exports = mongoose.model('stories',storySchema);

@@ -1,12 +1,12 @@
 
 
 // All modal imported
-var usermodal = require('../model/users');
+var userModel = require('../model/users');
 var storyModal = require('../model/stories');
 
 
-// create Sories 
-exports.createstory = (req,res)=>{
+// create stories 
+exports.createStory = (req,res)=>{
     
     var file = req.file;
     var send  = new storyModal({
@@ -16,18 +16,18 @@ exports.createstory = (req,res)=>{
 
     })
 
-    send.save().then(responce=>{
+    send.save().then(response=>{
 
-        usermodal.updateOne({_id:req.body.user_id},{$push:{
-            user_stories:responce._id
-        }}).then(userstory=>{
+        userModel.updateOne({_id:req.body.user_id},{$push:{
+            user_stories:response._id
+        }}).then(userStory=>{
             res.json("Story Updated Successfully");
 
         }).catch(err=>{
-            res.status(400).json("Somthing Wrong While Update Post Like");
+            res.status(400).json("Something Wrong While Update Post Like");
         })
     }).catch(err=>{
-        res.status(400).json("Story Updated Faild "+err);
+        res.status(400).json("Story Updated Fails "+err);
     })
 }
 
@@ -35,9 +35,9 @@ exports.createstory = (req,res)=>{
 // get stories
 exports.getStory = (req,res)=>{
   
-        storyModal.find({user_id:req.params.id ,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id').then(responce2 =>{
-            storyModal.find({user_id:req.body,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id').then(responce3=>{
-                res.json(Array({"userstories":responce2},{"userFriendStories":responce3}));
+        storyModal.find({user_id:req.params.id ,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id').then(response2 =>{
+            storyModal.find({user_id:req.body,createdAt:{$gt:new Date(Date.now() - 24*60*60 * 1000)}}).populate('user_id').then(response3=>{
+                res.json(Array({"userstories":response2},{"userFriendStories":response3}));
             })
         })
     

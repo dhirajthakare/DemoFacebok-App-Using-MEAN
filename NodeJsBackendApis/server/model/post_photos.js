@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const postSchema = mongoose.Schema({
     status:{type:String},
     likeCounts:{type:Number,default:0},
     commentCounts:{type:Number,default:0},
@@ -15,4 +15,4 @@ const usersechma = mongoose.Schema({
 },{ timestamps: true 
 })
 
-module.exports = mongoose.model('post_photos',usersechma);
+module.exports = mongoose.model('post_photos',postSchema);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const userSchema = mongoose.Schema({
     friendStatus:{type:String},
     user_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
@@ -8,4 +8,4 @@ const usersechma = mongoose.Schema({
 },{ timestamps: true 
 })
 
-module.exports = mongoose.model('friends_users',usersechma);
+module.exports = mongoose.model('friends_users',userSchema);

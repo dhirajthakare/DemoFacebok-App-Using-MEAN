@@ -1,5 +1,5 @@
 // All modal imported
-var usermodal = require("../model/users");
+var userModel = require("../model/users");
 var postModal = require("../model/post_photos");
 var likeModal = require("../model/likes");
 var commentModal = require("../model/comments");
@@ -22,7 +22,7 @@ exports.createPost = async (req, res) => {
     let createPost = await send.save();
 
     if (createPost) {
-      let updateduserPostid = await usermodal.updateOne(
+      let updatedUserPostId = await userModel.updateOne(
         { _id: req.body.user_id },
         {
           $push: {
@@ -31,16 +31,16 @@ exports.createPost = async (req, res) => {
         }
       );
 
-      if (updateduserPostid) {
+      if (updatedUserPostId) {
         res.json("Post Created  Successfully");
       } else {
-        res.status(400).json("somthing wrong while update User Post");
+        res.status(400).json("something wrong while update User Post");
       }
     } else {
       res.status(400).json(err + "Post Updated Failed ");
     }
   } catch (err) {
-    res.status(400).json("somthing wrong while update User Post");
+    res.status(400).json("something wrong while update User Post");
   }
 };
 
@@ -65,17 +65,17 @@ exports.updatePost = async (req, res) => {
     if (updatedPost.modifiedCount) {
       res.json(" Post Updated Successfully ");
     } else {
-      res.status(400).json(" Post Updation Failed ");
+      res.status(400).json(" Post updated Failed ");
     }
   } catch (err) {
-    res.status(400).json(" Post Updation Failed ");
+    res.status(400).json(" Post updated Failed ");
   }
 };
 
 //Get Posts
 exports.getPost = async (req, res) => {
   try {
-    let responce = await postModal
+    let response = await postModal
       .find()
       .sort({ createdAt: -1 })
       .populate([
@@ -87,13 +87,13 @@ exports.getPost = async (req, res) => {
         },
         { path: "postcomment", populate: "usercomment_id" },
       ]);
-    if (responce) {
-      res.json(responce);
+    if (response) {
+      res.json(response);
     } else {
-      res.status(400).json("somthing wrong");
+      res.status(400).json("something wrong");
     }
   } catch (err) {
-    res.status(400).json("somthing wrong");
+    res.status(400).json("something wrong");
   }
 };
 
@@ -102,12 +102,12 @@ exports.deletePost = async (req, res) => {
   try {
     let deletedPost = await postModal.deleteOne({ _id: req.params.id });
     if (deletedPost.deletedCount) {
-      res.json("deleted successfuly ");
+      res.json("deleted successfully ");
     } else {
       res.status(400).json("This post is not available");
     }
   } catch (err) {
-    res.status(400).json("Somthing Wrong Please try again ");
+    res.status(400).json("Something Wrong Please try again ");
   }
 };
 
@@ -116,12 +116,12 @@ exports.searchPost = async (req, res) => {
   try {
     if (req.body.search) {
       regex = new RegExp(req.body.search, "i");
-      let responce = await postModal
+      let response = await postModal
         .find({ $or: [{ status: regex }] })
         .populate("postUser");
 
-      if (responce) {
-        res.json(responce);
+      if (response) {
+        res.json(response);
       } else {
         res.status(400).json(" Not found ");
       }
@@ -137,15 +137,15 @@ exports.searchPost = async (req, res) => {
 
 exports.like = async (req, res) => {
   try {
-    let checklike = await likeModal.findOne({
+    let checkLike = await likeModal.findOne({
       post_photo_id: req.body.post_photo_id,
       user_id: req.body.user_id,
       userclick_id: req.body.userclick_id,
     });
 
-    if (checklike) {
-      if (checklike.likeStatus == "like") {
-        let updatelike = await likeModal.updateOne(
+    if (checkLike) {
+      if (checkLike.likeStatus == "like") {
+        let updateLike = await likeModal.updateOne(
           {
             post_photo_id: req.body.post_photo_id,
             user_id: req.body.user_id,
@@ -157,8 +157,8 @@ exports.like = async (req, res) => {
             },
           }
         );
-        if (updatelike.modifiedCount) {
-          let postupdate = await postModal.updateOne(
+        if (updateLike.modifiedCount) {
+          let postUpdate = await postModal.updateOne(
             { _id: req.body.post_photo_id },
             {
               $inc: {
@@ -166,7 +166,7 @@ exports.like = async (req, res) => {
               },
             }
           );
-          if (postupdate.modifiedCount) {
+          if (postUpdate.modifiedCount) {
             res.json("update to unlike");
           } else {
             res.status(400).json("error comes while update unlike count");
@@ -174,8 +174,8 @@ exports.like = async (req, res) => {
         } else {
           res.status(400).json("error come while remove like ");
         }
-      } else if (checklike.likeStatus == "unlike") {
-        let updatelike = await likeModal.updateOne(
+      } else if (checkLike.likeStatus == "unlike") {
+        let updateLike = await likeModal.updateOne(
           {
             post_photo_id: req.body.post_photo_id,
             user_id: req.body.user_id,
@@ -187,7 +187,7 @@ exports.like = async (req, res) => {
             },
           }
         );
-        if (updatelike.modifiedCount) {
+        if (updateLike.modifiedCount) {
           let updatePost = await postModal.updateOne(
             { _id: req.body.post_photo_id },
             {
@@ -205,7 +205,7 @@ exports.like = async (req, res) => {
           res.status(400).json("error come while add like ");
         }
       } else {
-        res.status(400).json("Somthing Wrong");
+        res.status(400).json("Something Wrong");
       }
     } else {
       var send = new likeModal({
@@ -229,16 +229,16 @@ exports.like = async (req, res) => {
           }
         );
         if (updatePost.modifiedCount) {
-          res.json("Creted like ");
+          res.json("Created like ");
         } else {
-          res.status(400).json("Somthing Wrong While Update Post Like");
+          res.status(400).json("Something Wrong While Update Post Like");
         }
       } else {
-        res.status(400).json("somthing wrong Please try Again 1");
+        res.status(400).json("something wrong Please try Again 1");
       }
     }
   } catch (err) {
-    res.status(400).json("somthing wrong Please try Again 2");
+    res.status(400).json("something wrong Please try Again 2");
   }
 };
 
@@ -254,7 +254,7 @@ exports.createComment = async (req, res) => {
 
     let createComment = await send.save();
     if (createComment) {
-      let postupdate = await postModal.updateOne(
+      let postUpdate = await postModal.updateOne(
         { _id: req.body.post_photo_id },
         {
           $push: {
@@ -265,16 +265,16 @@ exports.createComment = async (req, res) => {
           },
         }
       );
-      if (postupdate) {
+      if (postUpdate) {
         res.json(" Comment Added Successfully ");
       } else {
-        res.status(400).json("Somthing wrong while wpdate post comment");
+        res.status(400).json("Something wrong while update post comment");
       }
     } else {
-      res.status(400).json("Somthing wrong please try again");
+      res.status(400).json("Something wrong please try again");
     }
   } catch (err) {
-    res.status(400).json("Somthing wrong please try again");
+    res.status(400).json("Something wrong please try again");
   }
 };
 
@@ -283,7 +283,7 @@ exports.deleteComment = async (req, res) => {
   try {
     let deleteComment = await commentModal.deleteOne({ _id: req.params.cid });
     if (deleteComment.deletedCount) {
-      let postupdate = await postModal.updateOne(
+      let postUpdate = await postModal.updateOne(
         { _id: req.params.pid },
         {
           $inc: {
@@ -291,15 +291,15 @@ exports.deleteComment = async (req, res) => {
           },
         }
       );
-      if (postupdate) {
+      if (postUpdate) {
         res.json("Deleted Comment");
       } else {
         res.status(400).json("error comes while update comment count");
       }
     } else {
-      res.status(400).json("Somthing wrong while delete Comment");
+      res.status(400).json("Something wrong while delete Comment");
     }
   } catch (err) {
-    res.status(400).json("Somthing wrong");
+    res.status(400).json("Something wrong");
   }
 };

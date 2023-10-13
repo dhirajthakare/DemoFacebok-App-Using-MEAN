@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const userInfoSchema = mongoose.Schema({
     workplace:{type:String},
     highSchool:{type:String},
     university:{type:String},
@@ -14,4 +14,4 @@ const usersechma = mongoose.Schema({
 
 },{ timestamps: true });
 
-module.exports = mongoose.model('userinformations',usersechma);
+module.exports = mongoose.model('userinformations',userInfoSchema);

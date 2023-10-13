@@ -2,11 +2,11 @@
 
 
 // All modal imported
-var usermodal = require('../model/users');
+var userModel = require('../model/users');
 var userInfoModal = require('../model/userinformations');
 var postModal = require("../model/post_photos");
 
-const userinformations = require('../model/userinformations');
+const userInformationModel = require('../model/userinformations');
 
 // Add User More Information  Information
 exports.addUserInfo = (req,res)=>{
@@ -17,8 +17,8 @@ exports.addUserInfo = (req,res)=>{
         filename = "/assets/profileCoverStorage/"+file.filename;
     }
     // console.log(req.body.user_id);
-    userinformations.findOne({user:req.body.user_id}).then(resinfo=>{
-        if(resinfo){
+    userInformationModel.findOne({user:req.body.user_id}).then(resInfo=>{
+        if(resInfo){
 
             userInfoModal.updateOne({user:req.body.user_id},{$set:{
                 workplace:req.body.workplace,
@@ -31,10 +31,10 @@ exports.addUserInfo = (req,res)=>{
                 website:req.body.website,
                 Sociallinks:req.body.Sociallinks,
                 user : req.body.user_id
-            }}).then(updsteres=>{
+            }}).then(updateRes=>{
                 res.json("Profile Information Updated Successfully ");
             }).catch(err=>{
-                res.status(400).json("somthing Wrong While Update Information ")
+                res.status(400).json("something Wrong While Update Information ")
             })
 
         }else{
@@ -54,16 +54,16 @@ exports.addUserInfo = (req,res)=>{
     
             userinfo.save().then((data)=>{
     
-                usermodal.updateOne({_id:req.body.user_id},{
+                userModel.updateOne({_id:req.body.user_id},{
                     $set:{
                         user_info:data._id
                     }
-                }).then(updateres=>{
+                }).then(updateRes=>{
                     res.json("Information Added Successfully");
                 })
     
             }).catch(err=>{
-                res.json("somthing problem with Information "+err);
+                res.json("something problem with Information "+err);
             })
     
         }
@@ -75,14 +75,14 @@ exports.addUserInfo = (req,res)=>{
 // get Current  User
 exports.getCurrentUser =(req,res)=>{
 
-    usermodal.findOne({userToken:req.params.token}). then(responce=>{
-        usermodal.findOne({userToken:responce.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:responce._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(responce1=>{
-            res.json(responce1);
+    userModel.findOne({userToken:req.params.token}). then(response=>{
+        userModel.findOne({userToken:response.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:response._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(response1=>{
+            res.json(response1);
         }).catch(err=>{
-            res.status(400).json(" somthing wrong "+err);
+            res.status(400).json(" something wrong "+err);
         })
     }).catch(err=>{
-        res.status(400).json(" somthing wrong "+err);
+        res.status(400).json(" something wrong "+err);
     })
 
 }
@@ -90,16 +90,16 @@ exports.getCurrentUser =(req,res)=>{
 
 //get Current login  User Post
 exports.getCurrentUserPost =(req,res)=>{
-    postModal.find({postUser:req.params.cid}).sort({createdAt:-1}).populate([{path:"postUser"},{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"userclick_id"}]) },{path:"postcomment" , populate:("usercomment_id")}]).then(responce=>{
-        res.json(responce);
+    postModal.find({postUser:req.params.cid}).sort({createdAt:-1}).populate([{path:"postUser"},{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"userclick_id"}]) },{path:"postcomment" , populate:("usercomment_id")}]).then(response=>{
+        res.json(response);
     }).catch(err=>{
-        res.json("somthing wrong "+err);
+        res.json("something wrong "+err);
     })
 }
 
 exports.findAllUsers = (req,res)=>{
 
-    usermodal.find().populate(
+    userModel.find().populate(
         { path:"user_post" , populate :[
             { path:"getlikes" ,populate:[
                 {path:"userclick_id"},{path:"user_id"}
@@ -107,15 +107,15 @@ exports.findAllUsers = (req,res)=>{
             
             {path:"postcomment"}
             
-        ]}) .then(responce=>{
-        res.json(responce);
+        ]}) .then(response=>{
+        res.json(response);
     }).catch(err=>{
         res.status(400).send(err);
     })
 }
 
-exports.alluserinfo = (req,res)=>{
-    userinformations.find().populate("user").then(responce=>{
-        res.json(responce);
+exports.allUserinfo = (req,res)=>{
+    userInformationModel.find().populate("user").then(response=>{
+        res.json(response);
     })
 }

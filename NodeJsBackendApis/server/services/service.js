@@ -2,7 +2,7 @@ const axios = require('axios');
 const nodemailer = require("nodemailer");
 const port = process.env.PORT || 3000;
 
-exports.homeroute = (req,res)=>{
+exports.homeRoute = (req,res)=>{
      res.send("hello bro");
 }
 
@@ -19,7 +19,7 @@ var transport = nodemailer.createTransport({
  
  });
 
- exports.sendtestmail = (req,res)=>{
+ exports.sendTestMail = (req,res)=>{
 
     
      var mailOptions = {

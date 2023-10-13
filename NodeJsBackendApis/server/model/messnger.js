@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const messageSchema = mongoose.Schema({
     message:{type:String},
     sender_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
@@ -8,4 +8,4 @@ const usersechma = mongoose.Schema({
 },{ timestamps: true 
 })
 
-module.exports = mongoose.model('messangers',usersechma);
+module.exports = mongoose.model('messangers',messageSchema);

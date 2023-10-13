@@ -9,7 +9,7 @@ const ProfileStorage = multer.diskStorage({
     }
 })
 
-//Post Uploade
+//Post Upload
 const PostStorage = multer.diskStorage({
     destination:'assets/postStorage/',filename:(req,file,callBack)=>{
         // console.log(file);
@@ -17,7 +17,7 @@ const PostStorage = multer.diskStorage({
     }
 })
 
-//Story Uploade
+//Story Upload
 const storyStorage = multer.diskStorage({
     destination:'assets/storyStorage/',filename:(req,file,callBack)=>{
         // console.log(file);
@@ -26,7 +26,7 @@ const storyStorage = multer.diskStorage({
 })
 
 
-//profileCover Uploade
+//profileCover Upload
 const profileCoverStorage = multer.diskStorage({
     destination:'assets/profileCoverStorage/',filename:(req,file,callBack)=>{
         // console.log(file);
@@ -35,21 +35,21 @@ const profileCoverStorage = multer.diskStorage({
 })
 
 
-    // Profile Uploade 
+    // Profile Upload 
 var profilePhoto = multer({storage:ProfileStorage});
-    //Post Uploade
-var postfile = multer({storage:PostStorage});
-    //Story Uploade
-var storyfile = multer({storage:storyStorage});
+    //Post Upload
+var postFile = multer({storage:PostStorage});
+    //Story Upload
+var storyFile = multer({storage:storyStorage});
     // profile cover
 var ProfileCoverFIle = multer({storage:profileCoverStorage});
 
 
 exports.ProfilePhotoUpload = profilePhoto.single('profile');
 
-exports.postPhotoUpload = postfile.single('postUrl');
+exports.postPhotoUpload = postFile.single('postUrl');
 
-exports.StoryPhotoUpload = storyfile.single('storyUrl');
+exports.StoryPhotoUpload = storyFile.single('storyUrl');
 
 // exports.ProfileCoverPhotoUpload = if(single('CoverPhoto')){
 // return ProfileCoverFIle.single('CoverPhoto') ;

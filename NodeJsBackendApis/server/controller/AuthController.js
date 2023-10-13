@@ -1,8 +1,8 @@
 
 // All modal imported
-var usermodal = require('../model/users');
-var commanService = require("../services/CommanService");
-var createAccvalid = require("../validation/CreateAccontValidaton");
+var userModel = require('../model/users');
+var commandService = require("../services/CommanService");
+var accountValidation = require("../validation/CreateAccountValidator");
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -13,20 +13,20 @@ const jwtKey = "dtdtdtdtdtdtdtdtdtdt";
 exports.createAcc = async (req,res)=>{
      
     try{
-        createAccvalid.AccontValid(req.body);
-        useravailable  = await usermodal.findOne({email:req.body.email});
-        if(!useravailable){
+        accountValidation.accountValidation(req.body);
+        userAvailable  = await userModel.findOne({email:req.body.email});
+        if(!userAvailable){
         let salt = await bcrypt.genSalt(10);
-        hashpassword = await bcrypt.hash(req.body.password,salt);
+        hashPassword = await bcrypt.hash(req.body.password,salt);
     
-        const send  = await new usermodal({
+        const send  = await new userModel({
         name:req.body.fname+'  '+req.body.lname,
         email:req.body.email,
-        password:hashpassword,
+        password:hashPassword,
         birthOfDate:req.body.birthOfDate,
         gender:req.body.gender,
         profileUrl:req.body.profileUrl,
-        userToken:req.body.fname +'.'+req.body.lname+commanService.randomNum(100000, 999999),
+        userToken:req.body.fname +'.'+req.body.lname+commandService.randomNum(100000, 999999),
         
         }).save();
         if(send){
@@ -35,7 +35,7 @@ exports.createAcc = async (req,res)=>{
             res.status.json("Something wrong while Create Account");
         }
         }else{
-            res.status(400).json("User Already Avilable ");
+            res.status(400).json("User Already Available ");
         }
     }
     catch(err){
@@ -55,7 +55,7 @@ exports.updateAccount = async (req,res)=>{
         }
         
         
-          var updatedAcc = await usermodal.updateOne({_id:req.params.id} , {$set:{
+          var updatedAcc = await userModel.updateOne({_id:req.params.id} , {$set:{
             name:req.body.fname+"  "+req.body.lname,
             birthOfDate:req.body.birthOfDate,
             profileUrl:filename,
@@ -64,7 +64,7 @@ exports.updateAccount = async (req,res)=>{
         }} );
     
         if(updatedAcc){
-            var data = await usermodal.findOne({ _id:req.params.id })
+            var data = await userModel.findOne({ _id:req.params.id })
             res.json(data);
         }
     }
@@ -81,7 +81,7 @@ exports.updateAccount = async (req,res)=>{
 exports.loginUser = async (req,res)=>{
      
     try{
-        var data = await usermodal.findOne({email:req.body.email});
+        var data = await userModel.findOne({email:req.body.email});
 
         if(data){
 
@@ -113,14 +113,14 @@ exports.loginUser = async (req,res)=>{
 
 exports.getUserProfile =  async (req,res)=>{
     const userData = req.userData;
-    usermodal.findOne({userToken:userData.userToken}). then(responce=>{
-        usermodal.findOne({userToken:responce.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:responce._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(responce1=>{
-            res.json(responce1);
+    userModel.findOne({userToken:userData.userToken}). then(response=>{
+        userModel.findOne({userToken:response.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:response._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(response1=>{
+            res.json(response1);
         }).catch(err=>{
-            res.status(400).json(" somthing wrong "+err);
+            res.status(400).json(" something wrong "+err);
         })
     }).catch(err=>{
-        res.status(400).json(" somthing wrong "+err);
+        res.status(400).json(" something wrong "+err);
     })
 
 }

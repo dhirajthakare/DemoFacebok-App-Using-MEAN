@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const commentSchema = mongoose.Schema({
     comment:{type:String},
     post_photo_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'post_photos' },
@@ -10,4 +10,4 @@ const usersechma = mongoose.Schema({
 },{ timestamps: true 
 })
 
-module.exports = mongoose.model('comments',usersechma);
+module.exports = mongoose.model('comments',commentSchema);

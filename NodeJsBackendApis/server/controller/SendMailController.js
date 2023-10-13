@@ -1,21 +1,21 @@
 // All modal imported
-var usermodal = require("../model/users");
+var userModel = require("../model/users");
 var transport = require("../database/mailConnection");
 const bcrypt = require("bcryptjs");
 
 // Send Mail Recovery
-exports.sendtestmail = (req, res) => {
-  usermodal
+exports.sendTestMail = (req, res) => {
+  userModel
     .findOne({ email: req.body.emails })
-    .then((responce) => {
-      if (responce) {
+    .then((response) => {
+      if (response) {
         var otpCode = randomNum(10000000, 99999999);
         var mailOptions = {
           from: "deskbook@gmail.com",
           to: req.body.emails,
           subject:
             otpCode +
-            ` is your Deskbook account recovery code
+            ` is your DeskBook account recovery code
         `,
           html:
             `
@@ -34,13 +34,13 @@ exports.sendtestmail = (req, res) => {
         <body>
         <div id="recoverCard" >
   <div>
-      <h1 style="font-weight: 600; color: rgb(63, 63, 241);">Deskbook</h1>
+      <h1 style="font-weight: 600; color: rgb(63, 63, 241);">DeskBook</h1>
       <hr>
       <p>Hi ` +
-            responce.name +
+            response.name +
             ` ,</p>
       <p style="line-height: 20px;">
-We received a request to reset your Deskbook password.
+We received a request to reset your DeskBook password.
 Enter the following password reset code:
       </p>
 
@@ -62,11 +62,11 @@ Enter the following password reset code:
         transport.sendMail(mailOptions, function (error, info) {
           if (error) {
             console.log(error);
-            res.status(400).json("Somthing wrong Please try Again");
+            res.status(400).json("Something wrong Please try Again");
           } else {
             // console.log("Email has been send from node js", info);
             res.json({
-              message: "Recovery Email Send Succefully ",
+              message: "Recovery Email Send Successfully ",
               recoveryCode: otpCode,
             });
           }
@@ -81,7 +81,7 @@ Enter the following password reset code:
     })
     .catch((err) => {
       // console.log(err);
-      res.status(400).json("Somthing wrong while check mail ");
+      res.status(400).json("Something wrong while check mail ");
     });
 };
 
@@ -98,24 +98,24 @@ exports.checkOtpCode = (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-  let data = await usermodal.findOne({ email: req.body.email });
+  let data = await userModel.findOne({ email: req.body.email });
   if (data) {
     let salt = await bcrypt.genSalt(10);
-    hashpassword = await bcrypt.hash(req.body.password, salt);
-    usermodal
+    hashPassword = await bcrypt.hash(req.body.password, salt);
+    userModel
       .updateOne(
         { email: req.body.email },
         {
           $set: {
-            password: hashpassword,
+            password: hashPassword,
           },
         }
       )
-      .then((responce) => {
-        res.json("Password Updated Succeessfully");
+      .then((response) => {
+        res.json("Password Updated Successfully");
       })
       .catch((err) => {
-        res.status(400).json("Somthing wrong while update Password ");
+        res.status(400).json("Something wrong while update Password ");
       });
   } else {
     res.status(400).json("Token Expired You Can't Change Password");
