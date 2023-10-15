@@ -34,4 +34,8 @@ export class MainContentComponent implements OnInit {
   ngOnDestroy() {
     this.unSubscribeLoginUser.unsubscribe();
   }
+  onScroll() {
+    console.log("scrolled!!");
+  }
+
 }

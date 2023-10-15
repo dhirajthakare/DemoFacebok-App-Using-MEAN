@@ -15,6 +15,7 @@ import { DisplayPostModule } from 'src/app/common/display-post/display-post.modu
 import { BoxMessangerModule } from 'src/app/common/box-messanger/box-messanger.module';
 import { FooterModule } from 'src/app/common/footer/footer.module';
 import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module'
     MainSidebarLeftComponent,
     MainSidebarRightComponent,
     MainHomepageComponent,
-    MainContentComponent
+    MainContentComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +36,8 @@ import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module'
     DisplayPostModule,
     BoxMessangerModule,
     FooterModule,
-    AcceptCallModule
+    AcceptCallModule,
+    InfiniteScrollModule
   ]
 })
 export class MainBodyModule { }
