@@ -51,7 +51,7 @@ exports.updateAccount = async (req,res)=>{
         var file = req.file;
         var filename;
         if(file){
-            filename = "/assets/profileupload/"+file.filename;
+            filename = "/assets/profileUpload/"+file.filename;
         }
         
         
