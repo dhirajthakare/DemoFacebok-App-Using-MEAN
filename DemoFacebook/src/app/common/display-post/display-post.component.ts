@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { FriendService } from '../services/friend.service';
 import { PostService } from '../services/post.service';
 import { SharedDataService } from '../services/shared-data.service';
@@ -18,7 +18,7 @@ export class DisplayPostComponent implements OnInit {
 
   constructor(
     private post: PostService,
-    private userservice: UserService,
+    private userService: UserService,
     private dialog: MatDialog,
     private friend: FriendService,
     private sharedService: SharedDataService
@@ -26,9 +26,9 @@ export class DisplayPostComponent implements OnInit {
 
   Loader = true;
   allPosts: any;
-  loginuserDetails: any;
+  loginUserDetails: any;
 
-  @ViewChild('comment') commentfocus: ElementRef | any;
+  @ViewChild('comment') commentFocus: ElementRef | any;
   @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
 
   private onDestroy$: Subject<void> = new Subject<void>();
@@ -36,7 +36,7 @@ export class DisplayPostComponent implements OnInit {
   ngOnInit(): void {
     this.sharedService.postSavedSource.pipe(takeUntil(this.onDestroy$)).subscribe((res) => {
         if (res) {
-          this.getCurrentUserpost();
+          this.getCurrentUserPost();
           this.sharedService.postSavedSource.next(false);
         }
       });
@@ -46,13 +46,13 @@ export class DisplayPostComponent implements OnInit {
 
   getLoginUserDetails() {
     this.Loader = true;
-    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe(
+    this.userService.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe(
       (res: any) => {
         if (res) {
-          this.loginuserDetails = res;
-          if (this.loginuserDetails) {
+          this.loginUserDetails = res;
+          if (this.loginUserDetails) {
             if (this.PostLocation == 'Profile') {
-              this.oninitgetdata();
+              this.initializeData();
             }else if (this.PostLocation == 'Main'){
               this.getAllFriendsPost();
             }
@@ -63,21 +63,21 @@ export class DisplayPostComponent implements OnInit {
   }
 
   currentUser: any;
-  oninitgetdata() {
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
+  initializeData() {
+    this.userService.currentVisitedUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
         if(res){
         this.currentUser = res;
-        this.getCurrentUserpost();
+        this.getCurrentUserPost();
         }
       });
   }
 
-  datasubtitle: any;
-  getCurrentUserpost() {
+  dataSubtitle: any;
+  getCurrentUserPost() {
     if (this.PostLocation == 'Profile') {
       
-      this.datasubtitle = this.userservice
-        .getCurrentUserPost(this.currentUser._id, this.loginuserDetails._id)
+      this.dataSubtitle = this.userService
+        .getCurrentUserPost(this.currentUser._id, this.loginUserDetails._id)
         .subscribe(
           (res) => {
             if(res){
@@ -116,32 +116,31 @@ export class DisplayPostComponent implements OnInit {
     });
   }
 
-  likestarted: boolean = false;
-  onlike(post_id: any, user_id: any) {
-    this.likestarted = true;
+  isLikeClick: boolean = false;
+  likePost(post_id: any, user_id: any) {
+    this.isLikeClick = true;
     let formData = {
       post_photo_id: post_id,
       user_id: user_id,
-      userclick_id: this.loginuserDetails._id,
+      userclick_id: this.loginUserDetails._id,
     };
-    this.post.likeorUnlike(formData).subscribe((res) => {
-      this.likestarted = false;
-      this.getCurrentUserpost();
+    this.post.likeOrUnlike(formData).subscribe((res) => {
+      this.isLikeClick = false;
+      this.getCurrentUserPost();
     });
   }
 
   deletePost(item: any) {
     if (confirm('are you sure to Delete Post?')) {
       this.post.deletePost(item._id).subscribe((res) => {
-        this.getCurrentUserpost();
+        this.getCurrentUserPost();
       });
     }
   }
 
   comment: any = [];
-  checkcomment: boolean = false;
-  checkpostid: any;
-  oncomments(item: any) {
+  checkPostId: any;
+  onComments(item: any) {
 
     if (this.comment.includes(item._id)) {
       this.comment.forEach((value: number, index: any) => {
@@ -149,40 +148,40 @@ export class DisplayPostComponent implements OnInit {
       });
     } else {
       this.comment.push(item._id);
-      this.checkpostid = item._id;
+      this.checkPostId = item._id;
     }
 
     this.addComments = '';
     this.commentEmojiPicker = false;
   }
-  addcomment(item: any) {
+  addComment(item: any) {
     if (this.comment.includes(item._id)) {
     } else {
       this.comment.push(item._id);
     }
-    this.checkpostid = item._id;
+    this.checkPostId = item._id;
 
     this.addComments = '';
     setTimeout(() => {
-      this.commentfocus.nativeElement.focus();
+      this.commentFocus.nativeElement.focus();
     }, 0);
 
   }
 
-  createcomment(comment: any, item: any) {
+  createComment(comment: any, item: any) {
 
     let FormData = {
       comment: comment.value,
       post_photo_id: item._id,
       user_id: item.user_id,
-      usercomment_id: this.loginuserDetails._id,
+      usercomment_id: this.loginUserDetails._id,
     };
 
-    this.post.createcomment(FormData).subscribe(
+    this.post.createComment(FormData).subscribe(
       (res) => {
         comment.value = '';
         this.addComments = '';
-        this.getCurrentUserpost();
+        this.getCurrentUserPost();
       },
       (err) => {
         console.log(err);
@@ -192,9 +191,9 @@ export class DisplayPostComponent implements OnInit {
 
   deleteComment(cid: number, pid: number) {
     if (confirm('Are You Sure You Want to Delete Comment ?')) {
-      this.post.deletcomment(cid, pid).subscribe(
+      this.post.deleteComment(cid, pid).subscribe(
         (res) => {
-          this.getCurrentUserpost();
+          this.getCurrentUserPost();
         },
         (err) => {
           console.log(err);
@@ -223,8 +222,8 @@ export class DisplayPostComponent implements OnInit {
   CheckUserLike(json: any, ids: any) {
     let hasMatch = false;
     for (let index = 0; index < json.length; ++index) {
-      let jsoncheck = json[index];
-      if (jsoncheck.userclick_id._id == ids) {
+      let jsonCheck = json[index];
+      if (jsonCheck.userclick_id._id == ids) {
         hasMatch = true;
         break;
       }

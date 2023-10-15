@@ -24,7 +24,7 @@ export class PostService {
     return this.http.get(this.BaseUrl+'/getpostdata/'+id);
   }
 
-  likeorUnlike(formdata:any){
+  likeOrUnlike(formdata:any){
    return  this.http.post(this.BaseUrl+'/likedislike',formdata);
   }
   getlikeUser(id:number):Observable<any>{
@@ -36,11 +36,11 @@ export class PostService {
   }
 
 
-  createcomment(formdata:any){
+  createComment(formdata:any){
     return this.http.post(this.BaseUrl+'/createcomment/',formdata);
   }
 
-  deletcomment(cid:number,pid:number){
+  deleteComment(cid:number,pid:number){
    return this.http.get(this.BaseUrl+'/deletecomment/'+cid+'/'+pid);
   }
 

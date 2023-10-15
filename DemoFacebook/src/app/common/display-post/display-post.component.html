@@ -23,7 +23,7 @@
                                 aria-hidden="true"></i>
                         </p>
                     </div>
-                    <div *ngIf="loginuserDetails._id == item.postUser._id" class="col-1 offset-3">
+                    <div *ngIf="loginUserDetails._id == item.postUser._id" class="col-1 offset-3">
     
                         <div class="nav-item  dropstart mx-md-2">
                             <a style="font-size: 19px;" class="nav-link active text-dark" id="navbarDropdown"
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div (dblclick)="onlike(item._id,item.postUser._id)" class="btnPointer"><img height="460" width="100%"
+                    <div (dblclick)="likePost(item._id,item.postUser._id)" class="btnPointer"><img height="460" width="100%"
                             style=" object-fit: contain;" src="http://localhost:2000{{item.postUrl}}"></div>
     
                 </div>
@@ -56,14 +56,14 @@
                     <div class="col-md-6">
                         <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createlike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getlikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getlikes =='' ">{{item.likeCounts}}</span> </p> -->
                         <p (click)="likeDialog(item)"> <i
-                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getlikes,loginuserDetails._id) &&
-                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getlikes,loginuserDetails._id) && item.likeCounts > 1 ? 'You And
+                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getlikes,loginUserDetails._id) &&
+                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getlikes,loginUserDetails._id) && item.likeCounts > 1 ? 'You And
                             '+(item.likeCounts - 1)+' Others ' : item.likeCounts }} </p>
     
                     </div>
                     <div class="col-md-3 offset-md-3">
                         <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createlike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getlikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getlikes =='' ">{{item.likeCounts}}</span> </p> -->
-                        <p (click)="oncomments(item)"> <span *ngIf=" item.commentCounts > 0 ">{{item.commentCounts}}
+                        <p (click)="onComments(item)"> <span *ngIf=" item.commentCounts > 0 ">{{item.commentCounts}}
                                 Comments</span> </p>
     
                     </div>
@@ -72,9 +72,9 @@
     
                 <hr>
                 <div class="row">
-                    <button [disabled]="likestarted" (click)="onlike(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,loginuserDetails._id) "
+                    <button [disabled]="isLikeClick" (click)="likePost(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,loginUserDetails._id) "
                         class=" btn col"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
-                    <button (click)="addcomment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
+                    <button (click)="addComment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
                         Comment</button>
                     <button class="btn col"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</button>
     
@@ -97,7 +97,7 @@
                                 class="px-2 mt-md-2">
                                 <div style="justify-content: center;" class="d-flex ">
                                     <div class="p-1"> <span style="font-weight: bold;">{{comments.usercomment_id.name}}
-                                        </span> <span *ngIf="loginuserDetails._id==comments.usercomment_id._id"
+                                        </span> <span *ngIf="loginUserDetails._id==comments.usercomment_id._id"
                                             (click)="deleteComment(comments._id,item._id)" class="ms-2 btnPointer"><i
                                                 class="fa fa-times" aria-hidden="true"></i></span>
                                         <br>
@@ -108,20 +108,20 @@
     
                         </div>
                     </div>
-                    <div  *ngIf="checkpostid==item._id"  class="row">
+                    <div  *ngIf="checkPostId==item._id"  class="row">
                         <div class="d-flex">
                             <div class=" mx-2 mt-2">
                                 <div>
                                     <img
                                         height="37" width="37" style="border-radius: 18px; object-fit: cover;"
-                                        [src]="loginuserDetails.profileUrl ? 'http://localhost:2000'+loginuserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                                        [src]="loginUserDetails.profileUrl ? 'http://localhost:2000'+loginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
                                        >
                             </div>
                             </div>
                             <div  class="col-md-11 mt-md-2">
                                 <div class="d-flex col-md-12">
                                     <div class="input-group m-1">
-                                        <input  (focus)="onFocus()" #comment (keyup.enter)="createcomment(comment,item)"
+                                        <input  (focus)="onFocus()" #comment (keyup.enter)="createComment(comment,item)"
                                         style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
                                         placeholder="Write a Comment..."  [(ngModel)]="addComments">
                                         <span (click)="commentToggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text btnPointer">😀</span>
