@@ -1,7 +1,7 @@
 // All modal imported
 var userModel = require('../model/users');
-var postModal = require("../model/post_photos");
-var friendsModal = require('../model/friends_users');
+var postModal = require("../model/post-photos");
+var friendsModal = require('../model/friends-users');
 
 
 // Add friends 

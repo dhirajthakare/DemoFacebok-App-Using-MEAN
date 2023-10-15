@@ -1,6 +1,6 @@
 // All modal imported
 var userModel = require("../model/users");
-var transport = require("../database/mailConnection");
+var transport = require("../database/mail-connection");
 const bcrypt = require("bcryptjs");
 
 // Send Mail Recovery

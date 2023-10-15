@@ -2,17 +2,17 @@ const express = require('express');
 const route = express.Router();
 const service = require('../services/service');
 const controller = require('../controller/controller')
-const AuthController = require('../controller/AuthController')
-const FriendController = require('../controller/FriendController')
-const MessageController = require('../controller/MessageController')
-const PostController = require('../controller/PostController')
-const SendMailController = require('../controller/SendMailController')
-const StoryController = require('../controller/StoryController')
-const UserController = require('../controller/UserController')
-const verify = require('../middleware/verifyUserMiddleware')
+const AuthController = require('../controller/auth.controller')
+const FriendController = require('../controller/friend.controller')
+const MessageController = require('../controller/messenger.controller')
+const PostController = require('../controller/post.controller')
+const SendMailController = require('../controller/send-mail.controller')
+const StoryController = require('../controller/Story.controller')
+const UserController = require('../controller/user.controller')
+const verify = require('../middleware/verify-user.middleware')
 
 
-const fileUploadController = require('../controller/fileUploadeController');
+const fileUploadController = require('../controller/file-upload.controller');
 
 route.get('/api/',controller.home);
 

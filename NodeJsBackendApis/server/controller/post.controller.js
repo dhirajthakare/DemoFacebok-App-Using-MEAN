@@ -1,6 +1,6 @@
 // All modal imported
 var userModel = require("../model/users");
-var postModal = require("../model/post_photos");
+var postModal = require("../model/post-photos");
 var likeModal = require("../model/likes");
 var commentModal = require("../model/comments");
 

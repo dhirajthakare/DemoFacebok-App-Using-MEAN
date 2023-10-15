@@ -1,7 +1,7 @@
 
-var messengerModel = require('../model/messnger');
+var messengerModel = require('../model/messenger');
 
-const messenger = require('../model/messnger');
+const messenger = require('../model/messenger');
 
 //send message
 exports.sendMsg = (req,res)=>{

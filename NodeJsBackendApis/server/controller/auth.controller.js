@@ -1,8 +1,8 @@
 
 // All modal imported
 var userModel = require('../model/users');
-var commandService = require("../services/CommanService");
-var accountValidation = require("../validation/CreateAccountValidator");
+var commandService = require("../services/common.Service");
+var accountValidation = require("../validation/create-account-validator");
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');

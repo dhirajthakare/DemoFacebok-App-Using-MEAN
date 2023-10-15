@@ -1,14 +1,14 @@
 
 // All modal imported
 var userModal = require('../model/users');
-var userInfoModal = require('../model/userinformations');
-var postModal = require("../model/post_photos");
+var userInfoModal = require('../model/user-information');
+var postModal = require("../model/post-photos");
 var likeModal = require('../model/likes');
 var commentModal = require('../model/comments');
 var storyModal = require('../model/stories');
-var friendsModal = require('../model/friends_users');
-var messengerModal = require('../model/messnger');
-var transport = require('../database/mailConnection')
+var friendsModal = require('../model/friends-users');
+var messengerModal = require('../model/messenger');
+var transport = require('../database/mail-connection')
 
 
 // welcome api

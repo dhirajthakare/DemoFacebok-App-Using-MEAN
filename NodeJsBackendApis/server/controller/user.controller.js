@@ -3,10 +3,10 @@
 
 // All modal imported
 var userModel = require('../model/users');
-var userInfoModal = require('../model/userinformations');
-var postModal = require("../model/post_photos");
+var userInfoModal = require('../model/user-information');
+var postModal = require("../model/post-photos");
 
-const userInformationModel = require('../model/userinformations');
+const userInformationModel = require('../model/user-information');
 
 // Add User More Information  Information
 exports.addUserInfo = (req,res)=>{

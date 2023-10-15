@@ -14,9 +14,9 @@ const port = 2000 || process.env.PORT;
 
 app.use("/assets", express.static("assets"));
 
-const connect = require("./server/database/dbconfig");
+const connect = require("./server/database/db-config");
 
-const mailConnect = require("./server/database/mailConnection");
+const mailConnect = require("./server/database/mail-connection");
 
 const router = require("./server/routes/routes");
 app.use(router);
@@ -34,7 +34,7 @@ const options = {
 
 app.use("/peerjs", ExpressPeerServer(httpServer, options));
 
-const socketIo = require("./server/controller/socketIoController");
+const socketIo = require("./server/controller/socket-Io.controller");
 socketIo.io(io);
 
 httpServer.listen(port, () => {
