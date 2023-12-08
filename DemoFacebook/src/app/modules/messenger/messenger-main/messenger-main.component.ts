@@ -5,7 +5,7 @@ import { MessengerService } from 'src/app/common/services/messenger.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
-  selector: 'app-messanger-main',
+  selector: 'app-messenger-main',
   templateUrl: './messenger-main.component.html',
   styleUrls: ['./messenger-main.component.scss'],
 })

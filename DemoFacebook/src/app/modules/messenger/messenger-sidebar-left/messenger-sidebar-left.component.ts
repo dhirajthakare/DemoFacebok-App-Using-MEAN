@@ -3,9 +3,9 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
-  selector: 'app-messanger-sidebar-left',
-  templateUrl: './messanger-sidebar-left.component.html',
-  styleUrls: ['./messanger-sidebar-left.component.scss'],
+  selector: 'app-messenger-sidebar-left',
+  templateUrl: './messenger-sidebar-left.component.html',
+  styleUrls: ['./messenger-sidebar-left.component.scss'],
 })
 export class MessengerSidebarLeftComponent implements OnInit {
   constructor(private userService: UserService) {}

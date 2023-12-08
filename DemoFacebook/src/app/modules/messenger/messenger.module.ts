@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { MessengerRoutingModule } from './messenger-routing.module';
 import { MessengerComponent } from './messenger.component';
-import { MessengerSidebarRightComponent } from './messanger-sidebar-right/messanger-sidebar-right.component';
-import { MessengerSidebarLeftComponent } from './messanger-sidebar-left/messanger-sidebar-left.component';
+import { MessengerSidebarRightComponent } from './messenger-sidebar-right/messenger-sidebar-right.component';
+import { MessengerSidebarLeftComponent } from './messenger-sidebar-left/messenger-sidebar-left.component';
 import { MessengerMainComponent } from './messenger-main/messenger-main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainHeaderModule } from 'src/app/common/main-header/main-header.module';

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessengerSidebarLeftComponent } from './messanger-sidebar-left.component';
+import { MessengerSidebarLeftComponent } from './messenger-sidebar-left.component';
 
 describe('MessengerSidebarLeftComponent', () => {
   let component: MessengerSidebarLeftComponent;

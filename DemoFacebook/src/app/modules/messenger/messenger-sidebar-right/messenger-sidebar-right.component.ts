@@ -6,9 +6,9 @@ import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
-  selector: 'app-messanger-sidebar-right',
-  templateUrl: './messanger-sidebar-right.component.html',
-  styleUrls: ['./messanger-sidebar-right.component.scss'],
+  selector: 'app-messenger-sidebar-right',
+  templateUrl: './messenger-sidebar-right.component.html',
+  styleUrls: ['./messenger-sidebar-right.component.scss'],
 })
 export class MessengerSidebarRightComponent implements OnInit {
   constructor(
