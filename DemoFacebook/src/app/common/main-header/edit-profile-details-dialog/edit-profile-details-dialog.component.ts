@@ -75,8 +75,8 @@ export class EditProfileDetailsDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPreview:any = event.base64;
-    let File = base64ToFile(croppImgPreview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 
@@ -92,21 +92,21 @@ export class EditProfileDetailsDialogComponent implements OnInit {
   };
 
   oneditprofile(){
-      let formdata = new FormData();
-      formdata.append('workplace',this.editProfile.get('workplace').value);
-      formdata.append('highSchool',this.editProfile.get('highSchool').value);
-      formdata.append('university',this.editProfile.get('university').value);
+      let formData = new FormData();
+      formData.append('workplace',this.editProfile.get('workplace').value);
+      formData.append('highSchool',this.editProfile.get('highSchool').value);
+      formData.append('university',this.editProfile.get('university').value);
 
       if(this.file){
-        formdata.append('CoverPhoto',this.file);
+        formData.append('CoverPhoto',this.file);
       }
 
-      formdata.append('currentCity',this.editProfile.get('currentCity').value);
-      formdata.append('homeTown',this.editProfile.get('homeTown').value);
-      formdata.append('relation',this.editProfile.get('relation').value);
-      formdata.append('user_id',this.editProfile.get('user_id').value);
+      formData.append('currentCity',this.editProfile.get('currentCity').value);
+      formData.append('homeTown',this.editProfile.get('homeTown').value);
+      formData.append('relation',this.editProfile.get('relation').value);
+      formData.append('user_id',this.editProfile.get('user_id').value);
 
-    this.userService.createUserInfo(formdata).subscribe((res:any)=>{
+    this.userService.createUserInfo(formData).subscribe((res:any)=>{
       this.toastService.success(res, 'Success!');
       this.sharedService.editProfileSave.next(true);
       // this.sharedService.updatedUserDetails.next(true);

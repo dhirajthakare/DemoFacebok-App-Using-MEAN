@@ -11,7 +11,7 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class MessengerMainComponent implements OnInit {
   constructor(
-    private messanger: MessengerService,
+    private messenger: MessengerService,
     private userService: UserService,
     private route: Router,
     private activeRouter: ActivatedRoute
@@ -22,7 +22,7 @@ export class MessengerMainComponent implements OnInit {
   ngOnDestroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.messanger
+    this.messenger
       .getRealtimeChat()
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((res: any) => {
@@ -34,7 +34,7 @@ export class MessengerMainComponent implements OnInit {
         }
       });
     this.getcurrentMessagererUser();
-    this.getCurrentLoginuser();
+    this.getCurrentLoginUser();
   }
 
   TrackByFun(index: number, item: any) {
@@ -42,7 +42,7 @@ export class MessengerMainComponent implements OnInit {
   }
 
   currentloginUserDetails:any;
-  getCurrentLoginuser(){
+  getCurrentLoginUser(){
     this.userService.currentLoginUser.subscribe((res:any)=>{
       this.currentloginUserDetails = res;
     })
@@ -55,14 +55,14 @@ export class MessengerMainComponent implements OnInit {
         if (res) {
           this.data = res;
           if (this.data) {
-            this.oninitgetdata();
+            this.onInitGetData();
           }
         }
       });
   }
 
   friendDetails: any;
-  oninitgetdata() {
+  onInitGetData() {
     this.userService
       .getUser(this.data.friend_userToken)
       .subscribe((res: any) => {
@@ -76,7 +76,7 @@ export class MessengerMainComponent implements OnInit {
   }
 
   getAllMessage() {
-    this.messanger
+    this.messenger
       .getmessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
         if (res) {
@@ -100,9 +100,9 @@ export class MessengerMainComponent implements OnInit {
       receiver_id: this.data.friend_id,
     };
 
-    this.messanger.sendmessage(formData).subscribe((res) => {
+    this.messenger.sendMessage(formData).subscribe((res) => {
       if (res) {
-        this.messanger.sendRealTimeMessage([
+        this.messenger.sendRealTimeMessage([
           this.data.loginUser_id,
           this.data.friend_id,
         ]);
@@ -145,13 +145,13 @@ export class MessengerMainComponent implements OnInit {
       friendprofileURL:friend.profileUrl
     }
 
-    let loginuserDetail = {
+    let loginUserDetail = {
       loginUserName:this.currentloginUserDetails.name,
       loginUserId:this.currentloginUserDetails._id,
       loginUserProfileURL:this.currentloginUserDetails.profileUrl,
     }
     window.open(
-      `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginuserDetail=${btoa(JSON.stringify(loginuserDetail))}&&callUser=${btoa('addedCall')}`,
+      `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginUserDetail=${btoa(JSON.stringify(loginUserDetail))}&&callUser=${btoa('addedCall')}`,
       'popup',
       'width=1000,height=1000'
     );

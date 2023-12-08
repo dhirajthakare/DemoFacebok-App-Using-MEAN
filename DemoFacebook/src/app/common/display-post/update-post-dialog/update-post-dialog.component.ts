@@ -40,14 +40,14 @@ export class UpdatePostDialogComponent implements OnInit {
   file: any;
 
   onUpdatepost() {
-    let formdata = new FormData();
-    formdata.append('status', this.UpdatePost.get('status')?.value);
-    formdata.append('id', this.UpdatePost.get('id')?.value);
+    let formData = new FormData();
+    formData.append('status', this.UpdatePost.get('status')?.value);
+    formData.append('id', this.UpdatePost.get('id')?.value);
     if (this.file) {
-      formdata.append('postUrl', this.file);
+      formData.append('postUrl', this.file);
     }
 
-    this.post.updatePost(formdata).subscribe(
+    this.post.updatePost(formData).subscribe(
       (res) => {
         this.file = '';
         this.UpdatePost.reset();
@@ -90,8 +90,8 @@ export class UpdatePostDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPreview:any = event.base64;
-    let File = base64ToFile(croppImgPreview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 

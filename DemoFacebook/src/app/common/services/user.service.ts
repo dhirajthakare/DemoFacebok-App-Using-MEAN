@@ -17,12 +17,12 @@ export class UserService {
   currentMessengerUser:any = new BehaviorSubject<any>('');
 
 
-  createUserInfo(formdata:any){
-    return this.http.post(this.BaseUrl+'/createuserinformation',formdata);
+  createUserInfo(formData:any){
+    return this.http.post(this.BaseUrl+'/createuserinformation',formData);
   }
   
   getUser(token:any){
-    return this.http.get(this.BaseUrl+'/getcurrentloginuser/'+token);
+    return this.http.get(this.BaseUrl+'/getcurrentloginUser/'+token);
   }
 
   getCurrentUserPost(cid:any,clickId:any):Observable<any>{

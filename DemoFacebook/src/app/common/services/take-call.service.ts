@@ -14,7 +14,7 @@ export class TakeCallService {
     this.socket.emit('join-room', ROOM_ID, userName, userId,friendDetail,videochatUrl);
   }
 
-  getConnecteduser() {
+  getConnectedUser() {
     let observable = new Observable<any>((observer) => {
       this.socket.on('user-connected', (UserId) => {
         observer.next(UserId);
@@ -29,8 +29,8 @@ export class TakeCallService {
 
   someOneCallYou() {
     let observable = new Observable<any>((observer) => {
-      this.socket.on('call-friend', (detailds) => {
-        observer.next(detailds);
+      this.socket.on('call-friend', (details) => {
+        observer.next(details);
       });
       return () => {
         // this.socket.disconnect();
@@ -40,8 +40,8 @@ export class TakeCallService {
     return observable;
   }
 
-  sendmessage(message: any) {
-    this.socket.emit('sendmessage', message);
+  sendMessage(message: any) {
+    this.socket.emit('sendMessage', message);
   }
 
   getMessage() {

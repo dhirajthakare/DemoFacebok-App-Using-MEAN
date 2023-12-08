@@ -22,10 +22,10 @@ export class MainSidebarRightComponent implements OnInit {
   unSubscribeLoginUser: Subscription | any;
 
   ngOnInit(): void {
-    this.getCurrentLoginuser();
+    this.getCurrentLoginUser();
   }
 
-  getCurrentLoginuser() {
+  getCurrentLoginUser() {
     this.unSubscribeLoginUser = this.userService.currentLoginUser.subscribe(
       (res: any) => {
         if (res) {
@@ -50,13 +50,13 @@ export class MainSidebarRightComponent implements OnInit {
   }
 
   OpenMessengerDia(item: any) {
-    const matDiaref = this.matDia.open(BoxMessengerComponent, {
+    const matDiaRef = this.matDia.open(BoxMessengerComponent, {
       width: '500px',
       height: '550px',
       data: {
         loginUser_id: this.LoginUserDetails._id,
         friend_id: item._id,
-        friendUsertoken: item.userToken,
+        friendUserToken: item.userToken,
       },
     });
   }

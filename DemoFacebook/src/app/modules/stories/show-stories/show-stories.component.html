@@ -7,18 +7,18 @@
     </div>
 </div>
 
-<div *ngIf="userstory && userstory[0]" class=" col-3">
-    <div (click)="openSilder(userstory,0)" class=" card">
+<div *ngIf="userStories && userStories[0]" class=" col-3">
+    <div (click)="openSilder(userStories,0)" class=" card">
         <a class=""><img style=" object-fit: contain; "
-            height="200" width="100%" [src]="'http://localhost:2000'+userstory[0].storyUrl" alt=""></a>
+            height="200" width="100%" [src]="'http://localhost:2000'+userStories[0].storyUrl" alt=""></a>
     <div  class="card-footer">
         <p style="color: white" class=" text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>
-       <p class="text-center"> {{userstory[0].user_id.name }}</p>
+       <p class="text-center"> {{userStories[0].user_id.name }}</p>
     </div>
     </div>
 </div>
-<div *ngFor="let item of userFriensStory;let index = index" class=" col-3">
-    <div  (click)="openSilder(userFriensStory,index)" *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
+<div *ngFor="let item of userFriendsStory;let index = index" class=" col-3">
+    <div  (click)="openSilder(userFriendsStory,index)" *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
         <a class="" ><img style=" object-fit: contain; "
             height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
     <div  class="card-footer">

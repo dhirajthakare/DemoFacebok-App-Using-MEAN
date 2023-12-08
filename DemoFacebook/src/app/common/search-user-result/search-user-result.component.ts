@@ -36,7 +36,7 @@ export class SearchUserResultComponent implements OnInit {
       .pipe(debounceTime(400), distinctUntilChanged() , takeUntil(this.ngonDestroy$))
       .subscribe((res) => {
         this.searchBox = res;
-        this.friendship.serchUsers(this.searchBox).subscribe(
+        this.friendship.searchUsers(this.searchBox).subscribe(
           (data) => {
             if(data){
               this.userData = data;

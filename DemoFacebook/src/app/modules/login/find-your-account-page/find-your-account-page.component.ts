@@ -23,11 +23,11 @@ export class FindYourAccountPageComponent implements OnInit {
     this.SendMail = true;
     this.hashEmail = btoa(email);
 
-    let dataf = {
+    let formData = {
       emails: email,
       hashEmails: this.hashEmail,
     };
-    this.service.sendRecoveryMail(dataf).subscribe(
+    this.service.sendRecoveryMail(formData).subscribe(
       (res: any) => {
         this.SendMail = false;
         this.toast.success(res.message, 'Success!');

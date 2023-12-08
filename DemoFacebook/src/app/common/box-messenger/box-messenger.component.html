@@ -130,7 +130,7 @@
         <div class="col-md-12">
           <div class="input-group">
             <input
-              #sendmessage
+              #sendMessage
               [(ngModel)]="chatMessage"
               (focus)="onFocus()"
               style="
@@ -140,7 +140,7 @@
               class="form-control"
               type="search"
               placeholder="Send Message..."
-              (keyup.enter)="sendmsg(sendmessage.value)"
+              (keyup.enter)="sendmsg(sendMessage.value)"
             />
             <span
               (click)="MessageToggleEmojiPicker()"

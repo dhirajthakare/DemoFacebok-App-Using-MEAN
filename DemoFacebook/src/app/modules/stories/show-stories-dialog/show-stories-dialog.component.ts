@@ -18,24 +18,24 @@ export class ShowStoriesDialogComponent implements OnInit {
     this.myobject();
   }
 
-  mysrc:any;
+  mySrc:any;
   i:any =0 ;
   destroy$: Subject<void> = new Subject<void>();
 
 
   myobject(){
 
-    this.i = this.data.selctedIndex;
-    let  length = this.data.allstory.length;
-    this.mysrc = this.data.allstory[this.i];
+    this.i = this.data.selectedIndex;
+    let  length = this.data.allStories.length;
+    this.mySrc = this.data.allStories[this.i];
 
 
-    let intervaldata = interval(2000);
-    intervaldata.pipe(takeUntil(this.destroy$)).subscribe((res) => {
+    let intervalData = interval(2000);
+    intervalData.pipe(takeUntil(this.destroy$)).subscribe((res) => {
       this.i++;
 
       if(length > (this.i)){
-        this.mysrc = this.data.allstory[this.i]
+        this.mySrc = this.data.allStories[this.i]
       }else{
         this.dialogRef.close();
       }

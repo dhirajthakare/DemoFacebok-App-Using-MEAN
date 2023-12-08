@@ -21,11 +21,11 @@ export class UserFriendsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.changeTitle('DeskBook | friends');
-    this.loginuser();
+    this.loginUser();
     this.getCurrentVisitedUser();
   }
 
-    loginuser(){
+    loginUser(){
       this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
         if(res){
         this.loginUserDetails=res;

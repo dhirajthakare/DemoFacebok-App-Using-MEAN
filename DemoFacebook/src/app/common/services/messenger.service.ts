@@ -40,8 +40,8 @@ export class MessengerService {
     this.socket.emit("send message",item)
   }
 
-  sendmessage(formdata:any){
-    return this.http.post(this.BaseUrl+'/sendmessage',formdata);
+  sendMessage(formData:any){
+    return this.http.post(this.BaseUrl+'/sendMessage',formData);
   }
 
   getmessage (uid:any,fid:any){

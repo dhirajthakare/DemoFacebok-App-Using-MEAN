@@ -50,7 +50,7 @@ route.post('/api/getstory/:id' ,verify ,StoryController.getStory);
 route.post('/api/createuserinformation' , fileUploadController.ProfileCoverPhotoUpload ,verify ,UserController.addUserInfo);
 
 // Visited User
-route.get('/api/getcurrentloginuser/:token' ,verify ,UserController.getCurrentUser);
+route.get('/api/getcurrentloginUser/:token' ,verify ,UserController.getCurrentUser);
 route.get('/api/getCurrentUserposts/:cid/:id' ,verify ,UserController.getCurrentUserPost);
 
 route.get('/api/addfriend/:uid/:fid' ,verify ,FriendController.addFriend);
@@ -68,7 +68,7 @@ route.post('/api/allfriendspost' ,verify ,FriendController.allFriendsPosts);
 
 
 //Send and get message 
-route.post('/api/sendmessage' ,verify ,MessageController.sendMsg);
+route.post('/api/sendMessage' ,verify ,MessageController.sendMsg);
 route.get('/api/getmessage/:uid/:fid' ,verify ,MessageController.getUserMessage);
 
 

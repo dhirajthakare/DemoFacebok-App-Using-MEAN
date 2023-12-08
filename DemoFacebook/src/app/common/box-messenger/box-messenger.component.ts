@@ -36,7 +36,7 @@ export class BoxMessengerComponent implements OnInit {
         }
       });
     if (this.data) {
-      this.oninitgetdata();
+      this.onInitGetData();
     }
   }
 
@@ -67,9 +67,9 @@ export class BoxMessengerComponent implements OnInit {
     } catch (err) {}
   }
   friendDetails: any;
-  oninitgetdata() {
+  onInitGetData() {
     this.userService
-      .getUser(this.data.friendUsertoken)
+      .getUser(this.data.friendUserToken)
       .subscribe((res: any) => {
         if (res) {
           this.friendDetails = res;
@@ -86,13 +86,13 @@ export class BoxMessengerComponent implements OnInit {
   messageEmojiPicker: any;
 
   sendmsg(value: any) {
-    let dataf = {
+    let formData = {
       message: value,
       sender_id: this.data.loginUser_id,
       receiver_id: this.data.friend_id,
     };
 
-    this.messenger.sendmessage(dataf).subscribe((res) => {
+    this.messenger.sendMessage(formData).subscribe((res) => {
       this.messenger.sendRealTimeMessage([
         this.data.loginUser_id,
         this.data.friend_id,

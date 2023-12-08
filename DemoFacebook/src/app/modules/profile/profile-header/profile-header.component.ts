@@ -27,16 +27,16 @@ export class ProfileHeaderComponent implements OnInit {
 
   loginUserDetails: any;
   CoverPhoto: any;
-  CurrentvisitedUser: any;
+  CurrentVisitedUser: any;
   friendsId: any = [];
   destroy$:Subject<void> = new Subject<void>();
 
 
   ngOnInit(): void {
-    this.getCurrentvisitedUserData();
+    this.getCurrentVisitedUserData();
     this.sharedService.editProfileSave.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if (res) {
-        this.getCurrentvisitedUserData();
+        this.getCurrentVisitedUserData();
         this.sharedService.editProfileSave.next(false);
       }
     });
@@ -44,18 +44,18 @@ export class ProfileHeaderComponent implements OnInit {
     this.getCurrentLoginUser();
   }
 
-  getCurrentvisitedUserData() {
+  getCurrentVisitedUserData() {
     this.activeRoute.params.subscribe((res) => {
       let visitedUserToken = res['token'];
       if (visitedUserToken) {
         this.userService.getUser(visitedUserToken).subscribe(
           (res) => {
            if(res){
-            this.CurrentvisitedUser = res;
-            if (this.CurrentvisitedUser.user_info) {
-              if (this.CurrentvisitedUser.user_info.CoverPhoto) {
+            this.CurrentVisitedUser = res;
+            if (this.CurrentVisitedUser.user_info) {
+              if (this.CurrentVisitedUser.user_info.CoverPhoto) {
                 this.CoverPhoto =
-                  'http://localhost:2000' + this.CurrentvisitedUser.user_info.CoverPhoto;
+                  'http://localhost:2000' + this.CurrentVisitedUser.user_info.CoverPhoto;
               }
             }
             this.userService.currentVisitedUser.next(res);
@@ -101,11 +101,11 @@ export class ProfileHeaderComponent implements OnInit {
     if (
       confirm(
         'Are you sure you want to remove ' +
-          this.CurrentvisitedUser.name +
+          this.CurrentVisitedUser.name +
           ' as your friend?'
       )
     ) {
-      this.friend.unfriend(this.loginUserDetails._id, this.CurrentvisitedUser._id).subscribe(
+      this.friend.unfriend(this.loginUserDetails._id, this.CurrentVisitedUser._id).subscribe(
         (res) => {
           this.toastService.success(
             'Successfully Remove From Your Friend List',
@@ -121,18 +121,18 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   OpenMessengerDia() {
-    const matDiaref = this.matDia.open(BoxMessengerComponent, {
+    const matDiaRef = this.matDia.open(BoxMessengerComponent, {
       width: '500px',
       height: '550px',
       data: {
         loginUser_id: this.loginUserDetails._id,
-        friend_id: this.CurrentvisitedUser._id,
-        friendUsertoken: this.CurrentvisitedUser.userToken,
+        friend_id: this.CurrentVisitedUser._id,
+        friendUserToken: this.CurrentVisitedUser.userToken,
       },
     });
   }
 
-  openeditProfileComponant() {
+  openEditProfileComponent() {
     this.matDia.open(EditProfileDetailsDialogComponent);
   }
 

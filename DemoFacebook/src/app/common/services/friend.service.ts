@@ -18,7 +18,7 @@ export class FriendService {
   searchBoxVisibility:any = new BehaviorSubject<any>(false);
   userLoginFriendsId= new BehaviorSubject<any>('');
   
-  serchUsers(name:string):Observable<any>{
+  searchUsers(name:string):Observable<any>{
    return this.http.post(this.BaseUrl+'/findfriends/',{"name":name});
   }
 

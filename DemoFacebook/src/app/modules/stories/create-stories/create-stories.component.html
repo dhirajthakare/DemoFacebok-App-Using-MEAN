@@ -41,11 +41,11 @@
                                 >
                                 </image-cropper>
                             </div>
-                            <div *ngIf="storysrc" class="row">
+                            <div *ngIf="storySrc" class="row">
                                 <hr>
                                 <button routerLink="/deskbook"
                                     class=" col-md-3 mx-2 px-4 btn btn-secondary mb-2">Discard</button>
-                                <button class=" col-md-6 mx-2 px-4 btn btn-primary mb-2" (click)="oncreatestory()">Share
+                                <button class=" col-md-6 mx-2 px-4 btn btn-primary mb-2" (click)="onCreateStory()">Share
                                     to story</button>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                             <i style="color: black; margin-top: 16px; margin-left: 16px;"
                                                 class=" fa fa-file-image-o fa-lg" aria-hidden="true"></i>
                                         </label>
-                                        <input (change)="onFilechangestory($event)" class="d-none" id="file-input"
+                                        <input (change)="onFileChangeStory($event)" class="d-none" id="file-input"
                                             type="file" />
                                     </div>
                                 </div>

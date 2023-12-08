@@ -12,20 +12,20 @@ export class PostService {
   
   private BaseUrl: any = environment.ApiURL;  
 
-  createPost(formdata:any){
-    return this.http.post(this.BaseUrl+'/createpost',formdata)
+  createPost(formData:any){
+    return this.http.post(this.BaseUrl+'/createpost',formData)
   }
 
-  updatePost(formdata:any){
-    return this.http.post(this.BaseUrl+'/updatepost',formdata)
+  updatePost(formData:any){
+    return this.http.post(this.BaseUrl+'/updatepost',formData)
   }
 
   getpostData(id:number){
     return this.http.get(this.BaseUrl+'/getpostdata/'+id);
   }
 
-  likeOrUnlike(formdata:any){
-   return  this.http.post(this.BaseUrl+'/likedislike',formdata);
+  likeOrUnlike(formData:any){
+   return  this.http.post(this.BaseUrl+'/likedislike',formData);
   }
   getlikeUser(id:number):Observable<any>{
     return this.http.get(this.BaseUrl+'/getpostlke/'+id);
@@ -36,8 +36,8 @@ export class PostService {
   }
 
 
-  createComment(formdata:any){
-    return this.http.post(this.BaseUrl+'/createcomment/',formdata);
+  createComment(formData:any){
+    return this.http.post(this.BaseUrl+'/createcomment/',formData);
   }
 
   deleteComment(cid:number,pid:number){

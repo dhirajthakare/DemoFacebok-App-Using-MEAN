@@ -25,10 +25,10 @@ export class ProfileIntroComponent implements OnInit {
         }
       });
 
-    this.oninitgetdata();
+    this.onInitGetData();
   }
 
-  oninitgetdata() {
+  onInitGetData() {
     this.userService.currentVisitedUser
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
@@ -38,7 +38,7 @@ export class ProfileIntroComponent implements OnInit {
       });
   }
 
-  openeditProfileComponant() {
+  openEditProfileComponent() {
     this.dialog.open(EditProfileDetailsDialogComponent);
   }
 

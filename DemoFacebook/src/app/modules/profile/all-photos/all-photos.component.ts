@@ -27,7 +27,7 @@ destroy$:Subject<void> = new Subject<void>();
       if(res){
       this.loginUserDetails=res;  
       if(this.loginUserDetails){
-        this.oninitgetdata();
+        this.onInitGetData();
       }
       }
 
@@ -35,7 +35,7 @@ destroy$:Subject<void> = new Subject<void>();
 
   }
 
-  oninitgetdata(){
+  onInitGetData(){
 
     this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
       if(res){

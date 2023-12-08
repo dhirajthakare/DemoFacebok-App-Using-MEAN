@@ -6,7 +6,7 @@ import { GuestGuard } from './common/guards/guest.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule), canActivate:[GuestGuard] },
-  { path: 'messanger', loadChildren: () => import('./modules/messenger/messenger.module').then(m => m.MessengerModule), canActivate:[AuthGuard] },
+  { path: 'messenger', loadChildren: () => import('./modules/messenger/messenger.module').then(m => m.MessengerModule), canActivate:[AuthGuard] },
   { path: 'friends', loadChildren: () => import('./modules/friends/friends.module').then(m => m.FriendsModule), canActivate:[AuthGuard] },
   { path: 'stories', loadChildren: () => import('./modules/stories/stories.module').then(m => m.StoriesModule), canActivate:[AuthGuard] },
   { path: 'search', loadChildren: () => import('./modules/search-results/search-results.module').then(m => m.SearchResultsModule), canActivate:[AuthGuard] },

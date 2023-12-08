@@ -57,12 +57,12 @@ export class CreatePostDialogComponent implements OnInit {
   createpostsuccess: any;
   posterr: any;
   oncreatepost() {
-    let formdata = new FormData();
-    formdata.append('status', this.createPost.get('status')?.value);
-    formdata.append('user_id', this.data._id);
-    formdata.append('postUrl', this.file);
+    let formData = new FormData();
+    formData.append('status', this.createPost.get('status')?.value);
+    formData.append('user_id', this.data._id);
+    formData.append('postUrl', this.file);
 
-    this.post.createPost(formdata).subscribe(
+    this.post.createPost(formData).subscribe(
       (res) => {
         this.file = '';
         this.createPost.reset();

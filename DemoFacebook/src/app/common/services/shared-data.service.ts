@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SharedDataService {
 
-  constructor(private settitle:Title) { }
+  constructor(private setTitle:Title) { }
 
   ActiveAccountHolder = new BehaviorSubject('');
   public postSavedSource = new BehaviorSubject<boolean>(false);
@@ -15,14 +15,14 @@ export class SharedDataService {
   public updatedUserDetails = new BehaviorSubject<any>(false);
 
   changeTitle(StringTitle:string){
-    this.settitle.setTitle(StringTitle);
+    this.setTitle.setTitle(StringTitle);
   }
 
   isLoginUser(){
     return !!localStorage.getItem('accountToken');
   }
   getSelectedDate(obj: any, field: string) {
-    let scheduledate =
+    let scheduleDate =
       obj[field] === null
         ? ''
         : obj &&
@@ -34,7 +34,7 @@ export class SharedDataService {
             .toISOString()
             .slice(0, 10)
         : obj[field] || obj[field] || '';
-    return scheduledate;
+    return scheduleDate;
   }
 
 }

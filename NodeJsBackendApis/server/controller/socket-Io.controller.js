@@ -15,7 +15,7 @@ exports.io = (newIo) =>
         socket.broadcast.to(ROOM_ID).emit("user-connected", userId);
       }, 1000);
 
-      socket.on("sendmessage", (message) => {
+      socket.on("sendMessage", (message) => {
         newIo
           .to(ROOM_ID)
           .emit("getmessage", { message: message, userName: userName });

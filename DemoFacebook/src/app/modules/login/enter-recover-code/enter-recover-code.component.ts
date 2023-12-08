@@ -25,12 +25,12 @@ export class EnterRecoverCodeComponent implements OnInit {
     });
   }
   checkCode(CodeId: string) {
-    let dataf = {
+    let formData = {
       serverOtp: this.code,
       userOtp: CodeId,
     };
 
-    this.service.checkOtp(dataf).subscribe(
+    this.service.checkOtp(formData).subscribe(
       (res) => {
         this.errorCode = false;
         this.route.navigate(['/recover/password'], {

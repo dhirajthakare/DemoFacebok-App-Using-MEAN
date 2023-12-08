@@ -18,11 +18,11 @@ export class ProfileBodyComponent implements OnInit {
     private friend: FriendService
   ) { }
 
-  prealoader = false;
+  preLoader = false;
   loginUserDetails: any;
 
-  @ViewChild('submitbtn')
-  submitbtn!: ElementRef<HTMLElement>;
+  @ViewChild('submitBtn')
+  submitBtn!: ElementRef<HTMLElement>;
 
   currentVisitedUserDetails: any;
   friendsId: any = [];
@@ -33,11 +33,11 @@ export class ProfileBodyComponent implements OnInit {
   destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.getloginuser();
+    this.getLoginUser();
     this.getAllFriendsId();
   }
 
-  getloginuser(){
+  getLoginUser(){
     this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
       if(res){
         this.loginUserDetails = res;
@@ -66,7 +66,7 @@ export class ProfileBodyComponent implements OnInit {
 
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(res => {
-      this.toastService.success('Request send succeessfully');
+      this.toastService.success('Request send successfully');
     }, err => {
       console.log(err);
     })

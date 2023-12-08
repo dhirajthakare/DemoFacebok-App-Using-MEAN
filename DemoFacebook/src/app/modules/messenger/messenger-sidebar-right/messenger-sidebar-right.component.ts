@@ -14,7 +14,7 @@ export class MessengerSidebarRightComponent implements OnInit {
   constructor(
     private userService: UserService,
     private friendship: FriendService,
-    private matdialog: MatDialog
+    private matDialogRef: MatDialog
   ) {}
 
   loginUserDetails: any;
@@ -75,7 +75,7 @@ export class MessengerSidebarRightComponent implements OnInit {
     }
   }
 
-  Opemessanger(data: any) {
+  Opemessenger(data: any) {
     let newdata = {
       friend_id: data._id,
       loginUser_id: this.loginUserDetails._id,
@@ -90,7 +90,7 @@ export class MessengerSidebarRightComponent implements OnInit {
   }
 
   openAcceptCall() {
-    this.matdialog.open(AcceptCallComponent, {
+    this.matDialogRef.open(AcceptCallComponent, {
       disableClose:false
     });
   }

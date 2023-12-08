@@ -5,17 +5,17 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class StorieService {
+export class StoriesService {
 
   private BaseUrl: any = environment.ApiURL;  
 
   constructor( private http:HttpClient) { }
 
-  createstory(formdata:any){
-    return this.http.post(this.BaseUrl+'/createstory',formdata);
+  createStory(formData:any){
+    return this.http.post(this.BaseUrl+'/createstory',formData);
   }
 
-  getstory(id:number,ids:any){
+  getStories(id:number,ids:any){
     return this.http.post(this.BaseUrl+'/getstory/'+id,ids);
   }
 }

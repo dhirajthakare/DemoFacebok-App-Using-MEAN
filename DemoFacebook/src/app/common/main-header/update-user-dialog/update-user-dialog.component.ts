@@ -60,8 +60,8 @@ export class UpdateUserDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPreview:any = event.base64;
-    let File = base64ToFile(croppImgPreview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 
@@ -78,17 +78,17 @@ export class UpdateUserDialogComponent implements OnInit {
 
   updateUser() {
     // this.authService.
-    let formdata = new FormData();
-    formdata.append('fname', this.createAccountForm.get('fname')?.value);
-    formdata.append('lname', this.createAccountForm.get('lname')?.value);
-    formdata.append('profile', this.file);
-    formdata.append(
+    let formData = new FormData();
+    formData.append('fname', this.createAccountForm.get('fname')?.value);
+    formData.append('lname', this.createAccountForm.get('lname')?.value);
+    formData.append('profile', this.file);
+    formData.append(
       'birthOfDate',
       this.Changebirth?this.sharedService.getSelectedDate(this.createAccountForm.value,'birthOfDate'):this.data.birthOfDate
     );
-    formdata.append('gender', this.createAccountForm.get('gender')?.value);
+    formData.append('gender', this.createAccountForm.get('gender')?.value);
 
-    this.authService.updateUser(formdata, this.data._id).subscribe(
+    this.authService.updateUser(formData, this.data._id).subscribe(
       (res) => {
         this.updateSuccess = 'Update Data Successfully';
         this.updateError = null;

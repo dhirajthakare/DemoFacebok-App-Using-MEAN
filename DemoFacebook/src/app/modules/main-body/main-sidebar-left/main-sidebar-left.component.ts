@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FriendService } from 'src/app/common/services/friend.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class MainSidebarLeftComponent implements OnInit {
   constructor(
-    private friendship: FriendService,
     private userService: UserService
   ) {}
 

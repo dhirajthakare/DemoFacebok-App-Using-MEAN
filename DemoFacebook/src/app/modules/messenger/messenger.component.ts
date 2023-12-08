@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
 @Component({
-  selector: 'app-messanger',
+  selector: 'app-messenger',
   templateUrl: './messenger.component.html',
   styleUrls: ['./messenger.component.scss']
 })
