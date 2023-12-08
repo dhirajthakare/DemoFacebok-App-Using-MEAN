@@ -6,9 +6,9 @@ const postSchema = mongoose.Schema({
     postUrl:{type:String},
     postUser:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
-    getlikes:[
+    getLikes:[
     { type:mongoose.Schema.Types.ObjectId , ref:'likes' } ],
-    postcomment:[
+    postComments:[
     { type:mongoose.Schema.Types.ObjectId , ref:'comments' } ],
 
 

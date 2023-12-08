@@ -41,12 +41,12 @@ export class TakeCallService {
   }
 
   sendMessage(message: any) {
-    this.socket.emit('sendMessage', message);
+    this.socket.emit('send-message', message);
   }
 
   getMessage() {
     let observable = new Observable<any>((observer) => {
-      this.socket.on('getmessage', (messageDetails) => {
+      this.socket.on('getMessage', (messageDetails) => {
         observer.next(messageDetails);
       });
       return () => {

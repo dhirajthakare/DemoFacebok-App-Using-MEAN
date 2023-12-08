@@ -76,7 +76,7 @@ exports.addUserInfo = (req,res)=>{
 exports.getCurrentUser =(req,res)=>{
 
     userModel.findOne({userToken:req.params.token}). then(response=>{
-        userModel.findOne({userToken:response.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:response._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(response1=>{
+        userModel.findOne({userToken:response.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:response._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getLikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userClickId"}]) },{path:"postComments" ,populate:([{path:"user_commented_id"}])}]) }). then(response1=>{
             res.json(response1);
         }).catch(err=>{
             res.status(400).json(" something wrong "+err);
@@ -90,7 +90,7 @@ exports.getCurrentUser =(req,res)=>{
 
 //get Current login  User Post
 exports.getCurrentUserPost =(req,res)=>{
-    postModal.find({postUser:req.params.cid}).sort({createdAt:-1}).populate([{path:"postUser"},{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"userclick_id"}]) },{path:"postcomment" , populate:("usercomment_id")}]).then(response=>{
+    postModal.find({postUser:req.params.cid}).sort({createdAt:-1}).populate([{path:"postUser"},{path:"getLikes" , match:{likeStatus:"like"}, populate:([{path:"userClickId"}]) },{path:"postComments" , populate:("user_commented_id")}]).then(response=>{
         res.json(response);
     }).catch(err=>{
         res.json("something wrong "+err);
@@ -101,11 +101,11 @@ exports.findAllUsers = (req,res)=>{
 
     userModel.find().populate(
         { path:"user_post" , populate :[
-            { path:"getlikes" ,populate:[
-                {path:"userclick_id"},{path:"user_id"}
+            { path:"getLikes" ,populate:[
+                {path:"userClickId"},{path:"user_id"}
             ] },
             
-            {path:"postcomment"}
+            {path:"postComments"}
             
         ]}) .then(response=>{
         res.json(response);

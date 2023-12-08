@@ -5,7 +5,7 @@ const commentSchema = mongoose.Schema({
     { type:mongoose.Schema.Types.ObjectId , ref:'post_photos' },
     user_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
-    usercomment_id:
+    user_commented_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
 },{ timestamps: true 
 })

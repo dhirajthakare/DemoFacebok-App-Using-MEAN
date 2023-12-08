@@ -37,8 +37,8 @@ export class CreatePostDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
 
   }
@@ -54,9 +54,9 @@ export class CreatePostDialogComponent implements OnInit {
     );
   };
 
-  createpostsuccess: any;
-  posterr: any;
-  oncreatepost() {
+  createPostSuccess: any;
+  postError: any;
+  onCreatePost() {
     let formData = new FormData();
     formData.append('status', this.createPost.get('status')?.value);
     formData.append('user_id', this.data._id);
@@ -66,15 +66,15 @@ export class CreatePostDialogComponent implements OnInit {
       (res) => {
         this.file = '';
         this.createPost.reset();
-        this.createpostsuccess = res;
-        this.posterr = null;
-        this.toastService.success(this.createpostsuccess, 'Success!');
+        this.createPostSuccess = res;
+        this.postError = null;
+        this.toastService.success(this.createPostSuccess, 'Success!');
         this.dialogRef.close();
         this.sharedService.postSavedSource.next(true);
       },
       (err) => {
-        this.posterr = err.error;
-        this.createpostsuccess = null;
+        this.postError = err.error;
+        this.createPostSuccess = null;
         console.log(err);
       }
     );
@@ -97,7 +97,7 @@ export class CreatePostDialogComponent implements OnInit {
     });
   }
 
-  closedialog(){
+  closeDialog(){
     this.dialogRef.close(this.createPost.get('status')?.value);
   }
   

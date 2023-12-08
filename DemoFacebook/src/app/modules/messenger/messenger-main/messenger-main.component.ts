@@ -77,7 +77,7 @@ export class MessengerMainComponent implements OnInit {
 
   getAllMessage() {
     this.messenger
-      .getmessage(this.data.loginUser_id, this.data.friend_id)
+      .getMessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
         if (res) {
           this.allMessage = res;

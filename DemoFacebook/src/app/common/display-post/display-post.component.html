@@ -54,15 +54,15 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6">
-                        <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createlike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getlikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getlikes =='' ">{{item.likeCounts}}</span> </p> -->
+                        <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createLike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getLikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getLikes =='' ">{{item.likeCounts}}</span> </p> -->
                         <p (click)="likeDialog(item)"> <i
-                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getlikes,loginUserDetails._id) &&
-                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getlikes,loginUserDetails._id) && item.likeCounts > 1 ? 'You And
+                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getLikes,loginUserDetails._id) &&
+                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getLikes,loginUserDetails._id) && item.likeCounts > 1 ? 'You And
                             '+(item.likeCounts - 1)+' Others ' : item.likeCounts }} </p>
     
                     </div>
                     <div class="col-md-3 offset-md-3">
-                        <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createlike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getlikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getlikes =='' ">{{item.likeCounts}}</span> </p> -->
+                        <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createLike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getLikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getLikes =='' ">{{item.likeCounts}}</span> </p> -->
                         <p (click)="onComments(item)"> <span *ngIf=" item.commentCounts > 0 ">{{item.commentCounts}}
                                 Comments</span> </p>
     
@@ -72,7 +72,7 @@
     
                 <hr>
                 <div class="row">
-                    <button [disabled]="isLikeClick" (click)="likePost(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getlikes,loginUserDetails._id) "
+                    <button [disabled]="isLikeClick" (click)="likePost(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getLikes,loginUserDetails._id) "
                         class=" btn col"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
                     <button (click)="addComment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
                         Comment</button>
@@ -83,21 +83,21 @@
                 <hr>
                 <div style="max-height:110px" *ngIf="comment.includes(item._id)" class="row overflow-auto ">
     
-                    <div *ngFor="let comments of item.postcomment" class="row">
+                    <div *ngFor="let comments of item.postComments" class="row">
                         <div style="font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;"
                             class="d-flex">
                             <div class="mt-3 mx-2">
                                 <div><img
                                         height="35" width="35" style="border-radius: 17px; object-fit: cover;"
-                                        [src]="comments.usercomment_id.profileUrl ? 'http://localhost:2000'+comments.usercomment_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                                        [src]="comments.user_commented_id.profileUrl ? 'http://localhost:2000'+comments.user_commented_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
                                        >
                             </div>
                             </div>
                             <div  style="background-color: rgb(245, 242, 246); border-radius: 18px;height: 56px;"
                                 class="px-2 mt-md-2">
                                 <div style="justify-content: center;" class="d-flex ">
-                                    <div class="p-1"> <span style="font-weight: bold;">{{comments.usercomment_id.name}}
-                                        </span> <span *ngIf="loginUserDetails._id==comments.usercomment_id._id"
+                                    <div class="p-1"> <span style="font-weight: bold;">{{comments.user_commented_id.name}}
+                                        </span> <span *ngIf="loginUserDetails._id==comments.user_commented_id._id"
                                             (click)="deleteComment(comments._id,item._id)" class="ms-2 btnPointer"><i
                                                 class="fa fa-times" aria-hidden="true"></i></span>
                                         <br>

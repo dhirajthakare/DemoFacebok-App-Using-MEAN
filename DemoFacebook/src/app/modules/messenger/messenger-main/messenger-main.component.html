@@ -75,7 +75,7 @@
         </div>
 
         <div *ngIf="allMessage" class="row">
-          <!-- Reciever Message-->
+          <!-- Receiver Message-->
           <div *ngFor="let item of allMessage; trackBy: TrackByFun">
             <div
               *ngIf="item.sender_id == data.loginUser_id"

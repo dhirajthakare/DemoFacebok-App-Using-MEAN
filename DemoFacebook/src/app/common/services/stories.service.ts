@@ -12,10 +12,10 @@ export class StoriesService {
   constructor( private http:HttpClient) { }
 
   createStory(formData:any){
-    return this.http.post(this.BaseUrl+'/createstory',formData);
+    return this.http.post(this.BaseUrl+'/create-story',formData);
   }
 
   getStories(id:number,ids:any){
-    return this.http.post(this.BaseUrl+'/getstory/'+id,ids);
+    return this.http.post(this.BaseUrl+'/get-story/'+id,ids);
   }
 }

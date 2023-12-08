@@ -12,11 +12,11 @@ export class AuthService {
   private BaseUrl: any = environment.ApiURL;
 
   createAcc(formData: LoginForm) {
-    return this.http.post(this.BaseUrl + '/createAccount', formData);
+    return this.http.post(this.BaseUrl + '/create-account', formData);
   }
 
   getUserProfile() {
-    return this.http.get(this.BaseUrl + '/getprofile');
+    return this.http.get(this.BaseUrl + '/get-profile');
   }
 
   LoginAcc(formData: CreateAccountField) {
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   updateUser(formData: any, id: number) {
-    return this.http.post(this.BaseUrl + '/updateAccount/' + id, formData);
+    return this.http.post(this.BaseUrl + '/update-account/' + id, formData);
   }
 
   sendRecoveryMail(data: any) {
@@ -32,10 +32,10 @@ export class AuthService {
   }
 
   checkOtp(data: any) {
-    return this.http.post(this.BaseUrl + '/checkopt', data);
+    return this.http.post(this.BaseUrl + '/check-opt', data);
   }
 
   changePassword(data: LoginForm) {
-    return this.http.post(this.BaseUrl + '/changepassword', data);
+    return this.http.post(this.BaseUrl + '/change-password', data);
   }
 }

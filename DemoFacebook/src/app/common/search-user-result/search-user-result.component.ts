@@ -17,7 +17,7 @@ export class SearchUserResultComponent implements OnInit {
 
   searchForm: any;
 
-  ngonDestroy$ : Subject<void> = new Subject<void>();
+  ngOnDestroy$ : Subject<void> = new Subject<void>();
 
   constructor(
     private friendship: FriendService
@@ -33,7 +33,7 @@ export class SearchUserResultComponent implements OnInit {
 
   getSearchUserData() {
      this.friendship.searchBox
-      .pipe(debounceTime(400), distinctUntilChanged() , takeUntil(this.ngonDestroy$))
+      .pipe(debounceTime(400), distinctUntilChanged() , takeUntil(this.ngOnDestroy$))
       .subscribe((res) => {
         this.searchBox = res;
         this.friendship.searchUsers(this.searchBox).subscribe(
@@ -59,7 +59,7 @@ export class SearchUserResultComponent implements OnInit {
   }
 
   searchBoxVisibilityCheck() {
-    this.friendship.searchBoxVisibility.pipe(takeUntil(this.ngonDestroy$)).subscribe((res: any) => {
+    this.friendship.searchBoxVisibility.pipe(takeUntil(this.ngOnDestroy$)).subscribe((res: any) => {
       this.displayBtn = res;
     });
   }
@@ -67,6 +67,6 @@ export class SearchUserResultComponent implements OnInit {
   ngOnChanges() {}
 
   ngOnDestroy(){
-    this.ngonDestroy$.next();
+    this.ngOnDestroy$.next();
   }
 }

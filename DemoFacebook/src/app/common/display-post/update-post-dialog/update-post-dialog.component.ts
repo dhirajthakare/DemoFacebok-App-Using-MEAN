@@ -33,13 +33,13 @@ export class UpdatePostDialogComponent implements OnInit {
 
   @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
 
-  updatepostsuccess: any;
-  updateposterr: any;
+  updatePostSuccess: any;
+  updatePostError: any;
   imageSrc: any;
-  updatesrc: any;
+  updateSrc: any;
   file: any;
 
-  onUpdatepost() {
+  onUpdatePost() {
     let formData = new FormData();
     formData.append('status', this.UpdatePost.get('status')?.value);
     formData.append('id', this.UpdatePost.get('id')?.value);
@@ -52,14 +52,14 @@ export class UpdatePostDialogComponent implements OnInit {
         this.file = '';
         this.UpdatePost.reset();
         this.sharedService.postSavedSource.next(true);
-        this.updatepostsuccess = res;
-        this.updateposterr = null;
-        this.toastService.success(this.updatepostsuccess, 'Success!');
+        this.updatePostSuccess = res;
+        this.updatePostError = null;
+        this.toastService.success(this.updatePostSuccess, 'Success!');
         this.dialogRef.close();
       },
       (err) => {
-        this.updateposterr = err.error;
-        this.updatepostsuccess = null;
+        this.updatePostError = err.error;
+        this.updatePostSuccess = null;
         console.log(err);
       }
     );
@@ -70,14 +70,14 @@ export class UpdatePostDialogComponent implements OnInit {
       status: item.status,
       id: item._id,
     });
-    this.updatesrc = 'http://localhost:2000' + item.postUrl;
+    this.updateSrc = 'http://localhost:2000' + item.postUrl;
   }
 
   imageChangeEvt:any;
   onFileUpdatePostChange(e: any) {
     this.file = e.target.files[0];
     this.imageChangeEvt = e;
-    this.updatesrc = '';
+    this.updateSrc = '';
 
     //for get selcted Image Source
     // if (e.target.files) {

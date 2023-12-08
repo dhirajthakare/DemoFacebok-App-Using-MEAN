@@ -91,7 +91,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
     );
   };
 
-  oneditprofile(){
+  onEditProfile(){
       let formData = new FormData();
       formData.append('workplace',this.editProfile.get('workplace').value);
       formData.append('highSchool',this.editProfile.get('highSchool').value);

@@ -114,7 +114,7 @@ exports.loginUser = async (req,res)=>{
 exports.getUserProfile =  async (req,res)=>{
     const userData = req.userData;
     userModel.findOne({userToken:userData.userToken}). then(response=>{
-        userModel.findOne({userToken:response.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:response._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userclick_id"}]) },{path:"postcomment" ,populate:([{path:"usercomment_id"}])}]) }). then(response1=>{
+        userModel.findOne({userToken:response.userToken}).populate({path:"user_info" }).populate({path:"user_Friends" ,match:{user_id:response._id ,friendStatus:'Accepted'}, populate:([{path:"friend_id"},{path:"user_id"}]) }).populate({path:"user_post" , populate:([{path:"getLikes" , match:{likeStatus:"like"}, populate:([{path:"user_id"},{path:"userClickId"}]) },{path:"postComments" ,populate:([{path:"user_commented_id"}])}]) }). then(response1=>{
             res.json(response1);
         }).catch(err=>{
             res.status(400).json(" something wrong "+err);

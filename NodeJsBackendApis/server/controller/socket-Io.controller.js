@@ -18,7 +18,7 @@ exports.io = (newIo) =>
       socket.on("sendMessage", (message) => {
         newIo
           .to(ROOM_ID)
-          .emit("getmessage", { message: message, userName: userName });
+          .emit("getMessage", { message: message, userName: userName });
       });
 
       socket.on("leave room", () => {

@@ -18,15 +18,15 @@ export class UserService {
 
 
   createUserInfo(formData:any){
-    return this.http.post(this.BaseUrl+'/createuserinformation',formData);
+    return this.http.post(this.BaseUrl+'/create-user-information',formData);
   }
   
   getUser(token:any){
-    return this.http.get(this.BaseUrl+'/getcurrentloginUser/'+token);
+    return this.http.get(this.BaseUrl+'/get-current-login-user/'+token);
   }
 
   getCurrentUserPost(cid:any,clickId:any):Observable<any>{
-   return this.http.get(this.BaseUrl+'/getCurrentUserposts/'+cid+'/'+clickId);
+   return this.http.get(this.BaseUrl+'/get-current-user-posts/'+cid+'/'+clickId);
   }
 
 }

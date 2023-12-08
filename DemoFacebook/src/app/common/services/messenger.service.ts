@@ -16,7 +16,7 @@ export class MessengerService {
   user_id:any;
   friend_id:any;
   profileUrl:any;
-  friendname:any;
+  friendName:any;
 
 
   constructor(private http:HttpClient) { }
@@ -41,10 +41,10 @@ export class MessengerService {
   }
 
   sendMessage(formData:any){
-    return this.http.post(this.BaseUrl+'/sendMessage',formData);
+    return this.http.post(this.BaseUrl+'/send-message',formData);
   }
 
-  getmessage (uid:any,fid:any){
-    return this.http.get(this.BaseUrl+'/getmessage/'+uid+"/"+fid);
+  getMessage (uid:any,fid:any){
+    return this.http.get(this.BaseUrl+'/get-message/'+uid+"/"+fid);
   }
 }

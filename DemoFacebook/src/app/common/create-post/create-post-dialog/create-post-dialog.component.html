@@ -3,15 +3,15 @@
     <div class="card">
         <div class="card-header">
             <div class="text-end">
-                <a class="text-secondary btn-close" (click)="closedialog()"></a>
+                <a class="text-secondary btn-close" (click)="closeDialog()"></a>
             </div>
             <h3 class="text-center">Create Post </h3><br>
 
-            <div *ngIf="posterr" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div *ngIf="postError" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <div type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 
                 </div>
-                <strong>{{posterr}}</strong>
+                <strong>{{postError}}</strong>
             </div>
 
         </div>
@@ -22,7 +22,7 @@
 
 
 
-                <form [formGroup]='createPost' method="POST" id="AddUser" (submit)='oncreatepost()'>
+                <form [formGroup]='createPost' method="POST" id="AddUser" (submit)='onCreatePost()'>
 
                     <div class="row mb-3">
                         <div class=" col-md-2">
@@ -74,9 +74,9 @@
                     </div>
                     <div class="mb-3">
                         <div class="row">
-                            <input style="border-radius: 12px;" type="text" name="cretepost" disabled
+                            <input style="border-radius: 12px;" type="text" name="create-post" disabled
                                 placeholder="Add to Your Post" class="form-control form-control-lg col mx-1"
-                                id="cretepost">
+                                id="create-post">
                         </div>
                     </div>
 

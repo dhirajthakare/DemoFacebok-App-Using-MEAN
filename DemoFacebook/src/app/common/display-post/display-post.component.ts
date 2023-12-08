@@ -122,7 +122,7 @@ export class DisplayPostComponent implements OnInit {
     let formData = {
       post_photo_id: post_id,
       user_id: user_id,
-      userclick_id: this.loginUserDetails._id,
+      userClickId: this.loginUserDetails._id,
     };
     this.post.likeOrUnlike(formData).subscribe((res) => {
       this.isLikeClick = false;
@@ -174,7 +174,7 @@ export class DisplayPostComponent implements OnInit {
       comment: comment.value,
       post_photo_id: item._id,
       user_id: item.user_id,
-      usercomment_id: this.loginUserDetails._id,
+      user_commented_id: this.loginUserDetails._id,
     };
 
     this.post.createComment(FormData).subscribe(
@@ -223,7 +223,7 @@ export class DisplayPostComponent implements OnInit {
     let hasMatch = false;
     for (let index = 0; index < json.length; ++index) {
       let jsonCheck = json[index];
-      if (jsonCheck.userclick_id._id == ids) {
+      if (jsonCheck.userClickId._id == ids) {
         hasMatch = true;
         break;
       }

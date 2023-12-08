@@ -150,7 +150,7 @@ exports.addFriend = (req,res)=>{
     
     // all login  user friends Posts 
     exports.allFriendsPosts = (req,res)=>{
-        postModal.find({postUser:req.body}).populate([{path:"postUser"},{path:"getlikes" , match:{likeStatus:"like"}, populate:([{path:"userclick_id"}]) },{path:"postcomment",populate:("usercomment_id") }]).sort({createdAt:-1}).then(response=>{
+        postModal.find({postUser:req.body}).populate([{path:"postUser"},{path:"getLikes" , match:{likeStatus:"like"}, populate:([{path:"userClickId"}]) },{path:"postComments",populate:("user_commented_id") }]).sort({createdAt:-1}).then(response=>{
             res.json(response);
         })
     }

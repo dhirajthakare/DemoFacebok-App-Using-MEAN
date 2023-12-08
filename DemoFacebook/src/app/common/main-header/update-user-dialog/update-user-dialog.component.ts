@@ -47,7 +47,7 @@ export class UpdateUserDialogComponent implements OnInit {
       if(res){
       this.data = res;
       if (this.data) {
-        this.setupdatevalue();
+        this.setUpdateValue();
       }
       }
     });
@@ -93,7 +93,7 @@ export class UpdateUserDialogComponent implements OnInit {
         this.updateSuccess = 'Update Data Successfully';
         this.updateError = null;
         this.sharedService.updatedUserDetails.next(true);
-        this.toastService.success('Profile Updated SucceesFully ', 'Success!');
+        this.toastService.success('Profile Updated SuccessFully ', 'Success!');
         this.dialogRef.close();
       },
       (err) => {
@@ -108,7 +108,7 @@ export class UpdateUserDialogComponent implements OnInit {
     this.Changebirth = true;
   }
 
-  setupdatevalue() {
+  setUpdateValue() {
     let arr = this.data.name.split('  ');
     this.createAccountForm.patchValue({
       fname: arr[0],

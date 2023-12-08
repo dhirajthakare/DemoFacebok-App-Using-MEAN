@@ -81,11 +81,11 @@ exports.getPost = async (req, res) => {
       .populate([
         { path: "postUser" },
         {
-          path: "getlikes",
+          path: "getLikes",
           match: { likeStatus: "like" },
-          populate: [{ path: "userclick_id" }],
+          populate: [{ path: "userClickId" }],
         },
-        { path: "postcomment", populate: "usercomment_id" },
+        { path: "postComments", populate: "user_commented_id" },
       ]);
     if (response) {
       res.json(response);
@@ -140,7 +140,7 @@ exports.like = async (req, res) => {
     let checkLike = await likeModal.findOne({
       post_photo_id: req.body.post_photo_id,
       user_id: req.body.user_id,
-      userclick_id: req.body.userclick_id,
+      userClickId: req.body.userClickId,
     });
 
     if (checkLike) {
@@ -149,7 +149,7 @@ exports.like = async (req, res) => {
           {
             post_photo_id: req.body.post_photo_id,
             user_id: req.body.user_id,
-            userclick_id: req.body.userclick_id,
+            userClickId: req.body.userClickId,
           },
           {
             $set: {
@@ -179,7 +179,7 @@ exports.like = async (req, res) => {
           {
             post_photo_id: req.body.post_photo_id,
             user_id: req.body.user_id,
-            userclick_id: req.body.userclick_id,
+            userClickId: req.body.userClickId,
           },
           {
             $set: {
@@ -212,7 +212,7 @@ exports.like = async (req, res) => {
         likeStatus: "like",
         post_photo_id: req.body.post_photo_id,
         user_id: req.body.user_id,
-        userclick_id: req.body.userclick_id,
+        userClickId: req.body.userClickId,
       });
 
       let saveLike = await send.save();
@@ -221,7 +221,7 @@ exports.like = async (req, res) => {
           { _id: req.body.post_photo_id },
           {
             $push: {
-              getlikes: saveLike._id,
+              getLikes: saveLike._id,
             },
             $inc: {
               likeCounts: 1,
@@ -249,7 +249,7 @@ exports.createComment = async (req, res) => {
       comment: req.body.comment,
       post_photo_id: req.body.post_photo_id,
       user_id: req.body.user_id,
-      usercomment_id: req.body.usercomment_id,
+      user_commented_id: req.body.user_commented_id,
     });
 
     let createComment = await send.save();
@@ -258,7 +258,7 @@ exports.createComment = async (req, res) => {
         { _id: req.body.post_photo_id },
         {
           $push: {
-            postcomment: createComment._id,
+            postComments: createComment._id,
           },
           $inc: {
             commentCounts: 1,

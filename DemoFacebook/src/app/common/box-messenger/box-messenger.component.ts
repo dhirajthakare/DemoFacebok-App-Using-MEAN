@@ -50,7 +50,7 @@ export class BoxMessengerComponent implements OnInit {
 
   getAllMessage() {
     this.messenger
-      .getmessage(this.data.loginUser_id, this.data.friend_id)
+      .getMessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
         this.allMessage = res;
         if (this.allMessage) {

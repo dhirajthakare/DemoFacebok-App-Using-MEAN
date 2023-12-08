@@ -5,7 +5,7 @@ const likeSchema = mongoose.Schema({
     { type:mongoose.Schema.Types.ObjectId , ref:'post_photos' },
     user_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
-    userclick_id:
+    userClickId:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
 },{ timestamps: true 
 })
