@@ -15,7 +15,7 @@ export class FriendsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.sharedData.changeTitle('Deskbook | Friends');
+    this.sharedData.changeTitle('DeskBook | Friends');
   }
 
   token:any;

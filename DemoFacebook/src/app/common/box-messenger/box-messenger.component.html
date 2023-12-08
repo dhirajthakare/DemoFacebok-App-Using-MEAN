@@ -66,7 +66,7 @@
           </div>
         </div>
         <div *ngIf="friendDetails">
-          <p class="text-center">Deskbook</p>
+          <p class="text-center">DeskBook</p>
           <p class="text-center">
             On deskbook {{ friendDetails.createdAt | date : "medium" }}
           </p>
@@ -79,9 +79,9 @@
           </p>
         </div>
 
-        <div *ngIf="allmessage" class="row">
+        <div *ngIf="allMessage" class="row">
           <!-- Reciever Message-->
-          <div *ngFor="let item of allmessage; trackBy: TrackByFun">
+          <div *ngFor="let item of allMessage; trackBy: TrackByFun">
             <div
               *ngIf="item.sender_id == data.loginUser_id"
               class="media col-8 offset-4 ml-auto"

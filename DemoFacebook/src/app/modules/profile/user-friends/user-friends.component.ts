@@ -20,7 +20,7 @@ export class UserFriendsComponent implements OnInit {
   destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | friends');
+    this.sharedService.changeTitle('DeskBook | friends');
     this.loginuser();
     this.getCurrentVisitedUser();
   }

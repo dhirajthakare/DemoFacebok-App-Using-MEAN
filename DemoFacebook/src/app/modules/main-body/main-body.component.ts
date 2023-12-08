@@ -21,7 +21,7 @@ export class MainBodyComponent implements OnInit {
   data: any;
   private onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
-    this.sharedData.changeTitle('Deskbook | Home');
+    this.sharedData.changeTitle('DeskBook | Home');
     this.userService.currentLoginUser
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res: any) => {

@@ -19,7 +19,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
     private userService:UserService,
     private fb:FormBuilder,
     private toastService:ToastrService,
-    private dialogref:MatDialogRef<EditProfileDetailsDialogComponent>,
+    private dialogRef:MatDialogRef<EditProfileDetailsDialogComponent>,
     private sharedService:SharedDataService
   ) { }
 
@@ -75,8 +75,8 @@ export class EditProfileDetailsDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let croppImgPreview:any = event.base64;
+    let File = base64ToFile(croppImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 
@@ -110,7 +110,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
       this.toastService.success(res, 'Success!');
       this.sharedService.editProfileSave.next(true);
       // this.sharedService.updatedUserDetails.next(true);
-      this.dialogref.close();
+      this.dialogRef.close();
     },err=>{
       console.log(err);
     })

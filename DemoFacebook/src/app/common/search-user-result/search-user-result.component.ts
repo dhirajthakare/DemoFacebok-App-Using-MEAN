@@ -10,9 +10,9 @@ import { UserService } from '../services/user.service';
 })
 export class SearchUserResultComponent implements OnInit {
   data: any;
-  searchbox: any;
-  userdata: any;
-  displaybtn: boolean = false;
+  searchBox: any;
+  userData: any;
+  displayBtn: boolean = false;
   totalLength: any;
 
   searchForm: any;
@@ -32,26 +32,26 @@ export class SearchUserResultComponent implements OnInit {
 
 
   getSearchUserData() {
-     this.friendship.serchbox
+     this.friendship.searchBox
       .pipe(debounceTime(400), distinctUntilChanged() , takeUntil(this.ngonDestroy$))
       .subscribe((res) => {
-        this.searchbox = res;
-        this.friendship.serchUsers(this.searchbox).subscribe(
+        this.searchBox = res;
+        this.friendship.serchUsers(this.searchBox).subscribe(
           (data) => {
             if(data){
-              this.userdata = data;
-              this.totalLength = this.userdata.length;
+              this.userData = data;
+              this.totalLength = this.userData.length;
   
-              this.userdata = data.filter((value: any, index: any) => {
+              this.userData = data.filter((value: any, index: any) => {
                 return index <= 2;
               });
             }else{
-              this.userdata = null;
+              this.userData = null;
               this.totalLength = 0;
             }
           },
           (err) => {
-            this.userdata = null;
+            this.userData = null;
             console.log(err);
           }
         );
@@ -60,7 +60,7 @@ export class SearchUserResultComponent implements OnInit {
 
   searchBoxVisibilityCheck() {
     this.friendship.searchBoxVisibility.pipe(takeUntil(this.ngonDestroy$)).subscribe((res: any) => {
-      this.displaybtn = res;
+      this.displayBtn = res;
     });
   }
 

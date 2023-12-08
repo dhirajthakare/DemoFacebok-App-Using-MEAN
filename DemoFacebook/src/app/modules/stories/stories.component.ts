@@ -12,17 +12,17 @@ export class StoriesComponent implements OnInit {
   constructor(
     private userService: UserService,
     private sharedService: SharedDataService,
-    private authservice: AuthService
+    private authService: AuthService
   ) {}
   data: any;
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | Stories');
-    this.getcurrentuser();
+    this.sharedService.changeTitle('DeskBook | Stories');
+    this.getCurrentUser();
   }
 
   token: any;
-  getcurrentuser() {
-    this.authservice.getUserProfile().subscribe((res) => {
+  getCurrentUser() {
+    this.authService.getUserProfile().subscribe((res) => {
       localStorage.setItem('accountHolder', JSON.stringify(res));
       this.userService.currentLoginUser.next(res);
     });

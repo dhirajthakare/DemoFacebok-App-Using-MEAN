@@ -18,8 +18,8 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   data:any
-  searchbox:any;
-  userdata:any;
+  searchBox:any;
+  userData:any;
   ngOnInit(): void {
     
     this.userService.currentLoginUser.subscribe( (res: any) =>{
@@ -27,12 +27,12 @@ export class SidebarComponent implements OnInit {
       this.data=res;
     });
 
-    // this.friendship.serchbox.pipe( debounceTime(50),distinctUntilChanged()).subscribe(res=>{
-    //   this.searchbox =res;
-    //  if(this.searchbox){
-    //   this.friendship.serchUsers(this.searchbox).subscribe(data=>{  
+    // this.friendship.searchBox.pipe( debounceTime(50),distinctUntilChanged()).subscribe(res=>{
+    //   this.searchBox =res;
+    //  if(this.searchBox){
+    //   this.friendship.serchUsers(this.searchBox).subscribe(data=>{  
     //     console.log(data);
-    //     this.userdata=data;
+    //     this.userData=data;
     //   },err=>{
     //     console.log(err);
     //   })

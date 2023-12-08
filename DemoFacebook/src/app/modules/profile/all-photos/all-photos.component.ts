@@ -21,7 +21,7 @@ allPosts:any;
 destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | Photos');
+    this.sharedService.changeTitle('DeskBook | Photos');
 
     this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
       if(res){

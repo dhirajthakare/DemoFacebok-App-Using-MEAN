@@ -49,8 +49,8 @@ export class CreateStoriesComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let croppImgPreview:any = event.base64;
+    let File = base64ToFile(croppImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 

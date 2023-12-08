@@ -44,7 +44,7 @@ export class BoxMessengerComponent implements OnInit {
     return item._id;
   }
 
-  allmessage: any;
+  allMessage: any;
   @ViewChild('scrollMe')
   private myScrollContainer!: ElementRef;
 
@@ -52,8 +52,8 @@ export class BoxMessengerComponent implements OnInit {
     this.messenger
       .getmessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
-        this.allmessage = res;
-        if (this.allmessage) {
+        this.allMessage = res;
+        if (this.allMessage) {
           setTimeout(() => {
             this.scrollToBottom();
           }, 500);

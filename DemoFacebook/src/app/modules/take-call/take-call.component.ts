@@ -31,7 +31,7 @@ export class TakeCallComponent implements OnInit {
     this.activerouter.queryParams.subscribe((res: any) => {
       if (res) {
         this.friendDetails = JSON.parse(atob(res.frienddetails));
-        this.callUser = atob(res.calluser);
+        this.callUser = atob(res.callUser);
         console.log(this.friendDetails,this.callUser);
         this.LoginUserDetails = JSON.parse(atob(res.frienddetails));
         this.myVideo.muted = true;

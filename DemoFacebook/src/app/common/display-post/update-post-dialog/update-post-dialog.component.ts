@@ -17,7 +17,7 @@ export class UpdatePostDialogComponent implements OnInit {
     private post: PostService,
     private toastService: ToastrService,
     private sharedService: SharedDataService,
-    public dialogref: MatDialogRef<UpdatePostDialogComponent>,
+    public dialogRef: MatDialogRef<UpdatePostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -55,7 +55,7 @@ export class UpdatePostDialogComponent implements OnInit {
         this.updatepostsuccess = res;
         this.updateposterr = null;
         this.toastService.success(this.updatepostsuccess, 'Success!');
-        this.dialogref.close();
+        this.dialogRef.close();
       },
       (err) => {
         this.updateposterr = err.error;
@@ -90,8 +90,8 @@ export class UpdatePostDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let croppImgPreview:any = event.base64;
+    let File = base64ToFile(croppImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 

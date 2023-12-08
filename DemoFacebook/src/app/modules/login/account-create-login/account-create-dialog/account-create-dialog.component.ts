@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { CreateAccountField } from 'src/app/common/interface/user,inteface';
+import { CreateAccountField } from 'src/app/common/interface/user.interface';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 

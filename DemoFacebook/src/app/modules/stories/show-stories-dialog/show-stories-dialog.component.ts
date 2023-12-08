@@ -10,7 +10,7 @@ import { interval, Subject, takeUntil } from 'rxjs';
 export class ShowStoriesDialogComponent implements OnInit {
 
   constructor(
-    private dialogref :MatDialogRef<ShowStoriesDialogComponent>,
+    private dialogRef :MatDialogRef<ShowStoriesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any
   ) { }
 
@@ -37,7 +37,7 @@ export class ShowStoriesDialogComponent implements OnInit {
       if(length > (this.i)){
         this.mysrc = this.data.allstory[this.i]
       }else{
-        this.dialogref.close();
+        this.dialogRef.close();
       }
 
 

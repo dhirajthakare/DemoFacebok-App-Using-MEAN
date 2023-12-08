@@ -18,7 +18,7 @@ export class ProfileStoryArchiveComponent implements OnInit {
   destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | Archive');
+    this.sharedService.changeTitle('DeskBook | Archive');
     this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
       this.currentVisitedUserDetails = res;
   })

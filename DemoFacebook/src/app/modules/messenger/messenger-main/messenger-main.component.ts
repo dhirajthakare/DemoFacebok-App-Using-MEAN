@@ -18,7 +18,7 @@ export class MessengerMainComponent implements OnInit {
   ) {}
 
   data: any;
-  allmessage: any;
+  allMessage: any;
   ngOnDestroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
@@ -80,7 +80,7 @@ export class MessengerMainComponent implements OnInit {
       .getmessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
         if (res) {
-          this.allmessage = res;
+          this.allMessage = res;
           setTimeout(() => {
             this.scrollToBottom();
           }, 100);
@@ -151,7 +151,7 @@ export class MessengerMainComponent implements OnInit {
       loginUserProfileURL:this.currentloginUserDetails.profileUrl,
     }
     window.open(
-      `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginuserDetail=${btoa(JSON.stringify(loginuserDetail))}&&calluser=${btoa('addedCall')}`,
+      `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginuserDetail=${btoa(JSON.stringify(loginuserDetail))}&&callUser=${btoa('addedCall')}`,
       'popup',
       'width=1000,height=1000'
     );

@@ -1,13 +1,13 @@
 <div>
     <div class="card card-body">
-        <form [formGroup]="loginForm" method="post" (submit)="onlogin()" >
+        <form [formGroup]="loginForm" method="post" (submit)="onLogin()" >
                 
-            <div *ngIf="loginerr" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>{{loginerr.message ? loginerr.message :  loginerr}}</strong>
+            <div *ngIf="loginError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{loginError.message ? loginError.message :  loginError}}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-              <div *ngIf="loginsuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{loginsuccess}}</strong>
+              <div *ngIf="loginSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{loginSuccess}}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             <div class="form-group m-3">

@@ -26,7 +26,7 @@ export class UserService {
   }
 
   getCurrentUserPost(cid:any,clickId:any):Observable<any>{
-   return this.http.get(this.BaseUrl+'/getcurrentuserposts/'+cid+'/'+clickId);
+   return this.http.get(this.BaseUrl+'/getCurrentUserposts/'+cid+'/'+clickId);
   }
 
 }

@@ -12,7 +12,7 @@ export class AboutProfileComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.sharedService.changeTitle('Deskbook | About');
+      this.sharedService.changeTitle('DeskBook | About');
     }, 500);
   }
 

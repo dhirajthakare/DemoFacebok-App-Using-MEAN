@@ -14,7 +14,7 @@ export class FriendService {
 
   private BaseUrl: any = environment.ApiURL;
 
-  serchbox = new  BehaviorSubject('');
+  searchBox = new  BehaviorSubject('');
   searchBoxVisibility:any = new BehaviorSubject<any>(false);
   userLoginFriendsId= new BehaviorSubject<any>('');
   

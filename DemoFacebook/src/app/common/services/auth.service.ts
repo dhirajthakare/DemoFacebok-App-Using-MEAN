@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateAccountField, LoginForm } from '../interface/user,inteface';
+import { CreateAccountField, LoginForm } from '../interface/user.interface';
 
 @Injectable({
   providedIn: 'root',

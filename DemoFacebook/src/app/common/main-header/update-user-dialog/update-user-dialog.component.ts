@@ -17,8 +17,8 @@ export class UpdateUserDialogComponent implements OnInit {
 
 
   constructor(
-    private formbuilder: FormBuilder,
-    private Authservice: AuthService,
+    private fb: FormBuilder,
+    private authService: AuthService,
     private userService: UserService,
     private toastService: ToastrService,
     private dialogRef : MatDialogRef<UpdateUserDialogComponent>,
@@ -26,15 +26,15 @@ export class UpdateUserDialogComponent implements OnInit {
   ) {}
 
 
-  updateerr: any;
-  updatesuccess: any;
-  Profilesrc: any;
+  updateError: any;
+  updateSuccess: any;
+  profileSrc: any;
   file: any;
   data: any;
   private onDestroy$: Subject<void> = new Subject<void>();
   imageChangeEvt:any;
 
-  createAccountForm = this.formbuilder.group({
+  createAccountForm = this.fb.group({
     fname: '',
     lname: '',
     profile: '',
@@ -56,12 +56,12 @@ export class UpdateUserDialogComponent implements OnInit {
   onFileChange(e: any) {
     this.imageChangeEvt = e;
     this.file = e.target.files[0];
-    this.Profilesrc = '';
+    this.profileSrc = '';
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let croppImgPreview:any = event.base64;
+    let File = base64ToFile(croppImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 
@@ -77,7 +77,7 @@ export class UpdateUserDialogComponent implements OnInit {
   };
 
   updateUser() {
-    // this.Authservice.
+    // this.authService.
     let formdata = new FormData();
     formdata.append('fname', this.createAccountForm.get('fname')?.value);
     formdata.append('lname', this.createAccountForm.get('lname')?.value);
@@ -88,17 +88,17 @@ export class UpdateUserDialogComponent implements OnInit {
     );
     formdata.append('gender', this.createAccountForm.get('gender')?.value);
 
-    this.Authservice.updateUser(formdata, this.data._id).subscribe(
+    this.authService.updateUser(formdata, this.data._id).subscribe(
       (res) => {
-        this.updatesuccess = 'Update Data Successfully';
-        this.updateerr = null;
+        this.updateSuccess = 'Update Data Successfully';
+        this.updateError = null;
         this.sharedService.updatedUserDetails.next(true);
         this.toastService.success('Profile Updated SucceesFully ', 'Success!');
         this.dialogRef.close();
       },
       (err) => {
-        this.updatesuccess = null;
-        this.updateerr = err.error;
+        this.updateSuccess = null;
+        this.updateError = err.error;
         console.log(err);
       }
     );
@@ -119,9 +119,9 @@ export class UpdateUserDialogComponent implements OnInit {
     });
 
     if (this.data.profileUrl) {
-      this.Profilesrc = 'http://localhost:2000' + this.data.profileUrl;
+      this.profileSrc = 'http://localhost:2000' + this.data.profileUrl;
     } else {
-      this.Profilesrc = 'http://localhost:2000/assets/images/userdefault.png';
+      this.profileSrc = 'http://localhost:2000/assets/images/userdefault.png';
     }
   }
   

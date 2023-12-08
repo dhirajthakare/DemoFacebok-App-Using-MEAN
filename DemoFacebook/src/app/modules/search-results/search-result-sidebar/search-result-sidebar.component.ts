@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SearchResultSidebarComponent implements OnInit {
 
   constructor() { }
-  @Input('searchbox') searchbox :any;
+  @Input('searchBox') searchBox :any;
 
   ngOnInit(): void {
   }

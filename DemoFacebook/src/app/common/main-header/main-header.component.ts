@@ -16,28 +16,28 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
 export class MainHeaderComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
-    private navicateRoute: Router,
+    private navigateRoute: Router,
     private friendship: FriendService,
     private userService: UserService,
-    private authservice:AuthService,
+    private authService:AuthService,
     private sharedService:SharedDataService
   ) {}
 
-  @ViewChild('searcharea') searcharea!: ElementRef;
+  @ViewChild('searchArea') searchArea!: ElementRef;
   @ViewChild('updateModalClose') updateModalClose: any;
 
-  updateerr: any;
-  updatesuccess: any;
-  Profilesrc: any;
+  updateError: any;
+  updateSuccess: any;
+  profileSrc: any;
   file: any;
   loginUserDetails: any;
-  unsubscriptionupdatedUserDetails: Subscription | any;
+  unSubscribeUpdatedUserDetails: Subscription | any;
 
   ngOnInit(): void {
-    this.getcurrentuser();
-    this.unsubscriptionupdatedUserDetails = this.sharedService.updatedUserDetails.subscribe((res: any) => {
+    this.getCurrentUser();
+    this.unSubscribeUpdatedUserDetails = this.sharedService.updatedUserDetails.subscribe((res: any) => {
       if (res) {
-        this.getcurrentuser(true,res);
+        this.getCurrentUser(true,res);
         this.sharedService.updatedUserDetails.next(false);
       }
     });
@@ -54,7 +54,7 @@ export class MainHeaderComponent implements OnInit {
   }
 
   searchFriends(item: any) {
-    this.friendship.serchbox.next(item.value);
+    this.friendship.searchBox.next(item.value);
   }
 
   openUpdateUserDialog() {
@@ -63,20 +63,20 @@ export class MainHeaderComponent implements OnInit {
 
   logout() {
     if (confirm('Are You sure You Want To Logout ? ')) {
-      localStorage.removeItem('loggedin');
+      localStorage.removeItem('loggedIn');
       localStorage.removeItem('accountToken');
-      this.navicateRoute.navigate(['']);
+      this.navigateRoute.navigate(['']);
     }
   }
 
-  getcurrentuser(optionalForUpdateUser:boolean=false,exceptioncase:any = true) {
-    this.authservice.getUserProfile().subscribe((res) => {
+  getCurrentUser(optionalForUpdateUser:boolean=false,exceptions:any = true) {
+    this.authService.getUserProfile().subscribe((res) => {
       if(res){
       this.loginUserDetails = res;
       if(this.loginUserDetails){
       localStorage.setItem('accountHolder', JSON.stringify(this.loginUserDetails));
       this.userService.currentLoginUser.next(this.loginUserDetails);
-      if(!optionalForUpdateUser || typeof(exceptioncase) === "string" ){
+      if(!optionalForUpdateUser || typeof(exceptions) === "string" ){
         this.getAllFriendsId()
       }
       }
@@ -109,9 +109,9 @@ export class MainHeaderComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.unsubscriptionupdatedUserDetails.unsubscribe();
+    this.unSubscribeUpdatedUserDetails.unsubscribe();
     this.userService.currentLoginUser.next('');
     this.friendship.userLoginFriendsId.next('');
-    this.friendship.serchbox.next('');
+    this.friendship.searchBox.next('');
   }
 }

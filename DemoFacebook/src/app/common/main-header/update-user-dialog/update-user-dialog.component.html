@@ -16,15 +16,15 @@
   
             <form [formGroup]="createAccountForm" method="post" id="UpdateUser" (submit)="updateUser()">
   
-              <!-- <div *ngIf="updatesuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+              <!-- <div *ngIf="updateSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                   </button>
-                  <strong>{{updatesuccess}}</strong>
+                  <strong>{{updateSuccess}}</strong>
                 </div> -->
-              <div *ngIf="updateerr" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <div *ngIf="updateError" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                 </button>
-                <strong>{{updateerr.message?updateerr.message:updateerr}}</strong>
+                <strong>{{updateError.message?updateError.message:updateError}}</strong>
               </div>
   
               <div class="mb-3">
@@ -37,8 +37,8 @@
                 <div class="my-3">
                   <label>Profile Photo : </label>
                 </div>
-                <div  *ngIf="Profilesrc">
-                  <img id="profilephoto" style="object-fit: contain;max-height:400px;max-width:500px " [src]="Profilesrc" alt="">
+                <div  *ngIf="profileSrc">
+                  <img id="profilephoto" style="object-fit: contain;max-height:400px;max-width:500px " [src]="profileSrc" alt="">
                 </div>
                 <div>
                   <image-cropper 

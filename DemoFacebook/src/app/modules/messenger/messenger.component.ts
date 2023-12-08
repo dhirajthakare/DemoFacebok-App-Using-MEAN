@@ -11,7 +11,7 @@ export class MessengerComponent implements OnInit {
   constructor(private sharedData:SharedDataService) { }
 
   ngOnInit(): void {
-    this.sharedData.changeTitle('Deskbook | Messenger');
+    this.sharedData.changeTitle('DeskBook | Messenger');
   }
 
 }
