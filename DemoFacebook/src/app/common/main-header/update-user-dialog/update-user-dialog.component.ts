@@ -20,7 +20,7 @@ export class UpdateUserDialogComponent implements OnInit {
     private formbuilder: FormBuilder,
     private Authservice: AuthService,
     private userService: UserService,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private dialogRef : MatDialogRef<UpdateUserDialogComponent>,
     private sharedService:SharedDataService
   ) {}
@@ -93,7 +93,7 @@ export class UpdateUserDialogComponent implements OnInit {
         this.updatesuccess = 'Update Data Successfully';
         this.updateerr = null;
         this.sharedService.updatedUserDetails.next(true);
-        this.toastr.success('Profile Updated SucceesFully ', 'Success!');
+        this.toastService.success('Profile Updated SucceesFully ', 'Success!');
         this.dialogRef.close();
       },
       (err) => {

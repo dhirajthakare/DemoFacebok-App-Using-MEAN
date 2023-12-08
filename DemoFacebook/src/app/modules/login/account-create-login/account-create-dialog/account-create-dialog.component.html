@@ -16,19 +16,19 @@
           id="AddUser"
           (submit)="onSubmit()"
         >
-          <div *ngIf="storeallerrors">
+          <div *ngIf="storeAllErrors">
             <div
               *ngIf="
-                !storeallerrors.fname &&
-                !storeallerrors.lname &&
-                !storeallerrors.email &&
-                !storeallerrors.gender &&
-                !storeallerrors.birthOfDate
+                !storeAllErrors.fname &&
+                !storeAllErrors.lname &&
+                !storeAllErrors.email &&
+                !storeAllErrors.gender &&
+                !storeAllErrors.birthOfDate
               "
               class="alert alert-danger alert-dismissible fade show"
               role="alert"
             >
-              <strong>{{ storeallerrors }}</strong>
+              <strong>{{ storeAllErrors }}</strong>
               <button
                 type="button"
                 class="btn-close"
@@ -49,9 +49,9 @@
                   class="form-control"
                   id="fname"
                 />
-                <p *ngIf="storeallerrors">
-                  <span *ngIf="storeallerrors.fname" class="text-danger"
-                    >{{ storeallerrors.fname }}.</span
+                <p *ngIf="storeAllErrors">
+                  <span *ngIf="storeAllErrors.fname" class="text-danger"
+                    >{{ storeAllErrors.fname }}.</span
                   >
                 </p>
               </div>
@@ -64,9 +64,9 @@
                   class="form-control"
                   id="lname"
                 />
-                <p *ngIf="storeallerrors">
-                  <span *ngIf="storeallerrors.lname" class="text-danger"
-                    >{{ storeallerrors.lname }}.</span
+                <p *ngIf="storeAllErrors">
+                  <span *ngIf="storeAllErrors.lname" class="text-danger"
+                    >{{ storeAllErrors.lname }}.</span
                   >
                 </p>
               </div>
@@ -83,9 +83,9 @@
                   class="form-control"
                   id="email"
                 />
-                <p *ngIf="storeallerrors">
-                  <span *ngIf="storeallerrors.email" class="text-danger">
-                    {{ storeallerrors.email }}
+                <p *ngIf="storeAllErrors">
+                  <span *ngIf="storeAllErrors.email" class="text-danger">
+                    {{ storeAllErrors.email }}
                   </span>
                 </p>
               </div>
@@ -103,9 +103,9 @@
                   class="form-control"
                   id="password"
                 />
-                <p *ngIf="storeallerrors">
-                  <span *ngIf="storeallerrors.password" class="text-danger">
-                    {{ storeallerrors.password }}
+                <p *ngIf="storeAllErrors">
+                  <span *ngIf="storeAllErrors.password" class="text-danger">
+                    {{ storeAllErrors.password }}
                   </span>
                 </p>
               </div>
@@ -128,9 +128,9 @@
               ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <p *ngIf="storeallerrors">
-              <span *ngIf="storeallerrors.birthOfDate" class="text-danger">
-                {{ storeallerrors.birthOfDate }}
+            <p *ngIf="storeAllErrors">
+              <span *ngIf="storeAllErrors.birthOfDate" class="text-danger">
+                {{ storeAllErrors.birthOfDate }}
               </span>
             </p>
           </div>
@@ -172,9 +172,9 @@
                   />
                   <label class="form-check-label" for="Other">Other</label>
                 </div>
-                <p *ngIf="storeallerrors">
-                  <span *ngIf="storeallerrors.gender" class="text-danger">
-                    {{ storeallerrors.gender }}
+                <p *ngIf="storeAllErrors">
+                  <span *ngIf="storeAllErrors.gender" class="text-danger">
+                    {{ storeAllErrors.gender }}
                   </span>
                 </p>
               </div>

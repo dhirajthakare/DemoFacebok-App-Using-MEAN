@@ -14,7 +14,7 @@ export class FriendsRequestsComponent implements OnInit {
   
   constructor(
     private friend:FriendService,
-    private toastr:ToastrService,
+    private toastService:ToastrService,
     private userService:UserService
   ) { }
 
@@ -52,7 +52,7 @@ export class FriendsRequestsComponent implements OnInit {
       if(res){
       this.request=res;
       this.getUserRequest();
-      this.toastr.success('Request Accepted','Success!');
+      this.toastService.success('Request Accepted','Success!');
       }
     },err=>{
       console.log(err);
@@ -64,7 +64,7 @@ export class FriendsRequestsComponent implements OnInit {
        if(res){
         this.request=res;
         this.getUserRequest();
-        this.toastr.success('Request Rejected','Success!');
+        this.toastService.success('Request Rejected','Success!');
        }
       },err=>{
         console.log(err);

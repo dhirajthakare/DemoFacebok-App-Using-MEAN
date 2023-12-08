@@ -18,7 +18,7 @@ export class ProfileHeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private friend: FriendService,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private matDia: MatDialog,
     private route:Router,
     private activeRoute:ActivatedRoute,
@@ -89,7 +89,7 @@ export class ProfileHeaderComponent implements OnInit {
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(
       (res:any) => {
-        this.toastr.success(res);
+        this.toastService.success(res);
       },
       (err) => {
         console.log(err);
@@ -107,7 +107,7 @@ export class ProfileHeaderComponent implements OnInit {
     ) {
       this.friend.unfriend(this.loginUserDetails._id, this.CurrentvisitedUser._id).subscribe(
         (res) => {
-          this.toastr.success(
+          this.toastService.success(
             'Successfully Remove From Your Friend List',
             'Success!'
           );
@@ -120,7 +120,7 @@ export class ProfileHeaderComponent implements OnInit {
     }
   }
 
-  OpenMessangerDia() {
+  OpenMessengerDia() {
     const matDiaref = this.matDia.open(BoxMessengerComponent, {
       width: '500px',
       height: '550px',

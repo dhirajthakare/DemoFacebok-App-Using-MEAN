@@ -17,7 +17,7 @@ export class CreateStoriesComponent implements OnInit {
     private userService: UserService,
     private storymanage: StorieService,
     private router: Router,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private location: Location
   ) {}
   loginUserDetails: any;
@@ -75,7 +75,7 @@ export class CreateStoriesComponent implements OnInit {
       (res) => {
         this.storysrc = '';
         this.file = '';
-        this.toastr.success('Story Created Successfully ', 'Success!');
+        this.toastService.success('Story Created Successfully ', 'Success!');
         this.location.back();
       },
       (err) => {

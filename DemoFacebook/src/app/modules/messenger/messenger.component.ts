@@ -3,15 +3,15 @@ import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
 @Component({
   selector: 'app-messanger',
-  templateUrl: './messanger.component.html',
-  styleUrls: ['./messanger.component.scss']
+  templateUrl: './messenger.component.html',
+  styleUrls: ['./messenger.component.scss']
 })
-export class MessangerComponent implements OnInit {
+export class MessengerComponent implements OnInit {
 
   constructor(private sharedData:SharedDataService) { }
 
   ngOnInit(): void {
-    this.sharedData.changeTitle('Deskbook | Messanger');
+    this.sharedData.changeTitle('Deskbook | Messenger');
   }
 
 }

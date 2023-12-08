@@ -7,7 +7,7 @@ export interface LoginError {
   message?: string;
 }
 
-export interface CreateAccoundField {
+export interface CreateAccountField {
   fname: string;
   lname: string;
   email: string;

@@ -48,7 +48,7 @@
                             class="btn fa fa fa-edit text-dark"></i>Edit Profile</li>
                     <li *ngIf="loginUserDetails._id != CurrentvisitedUser._id && friendsId.includes(CurrentvisitedUser._id)"
                         style="background-color: rgb(228, 222, 230);" class="mx-1 float-end btn list-inline-item"
-                        (click)="OpenMessangerDia()"><i class="btn fa fa-commenting text-dark"> <strong>
+                        (click)="OpenMessengerDia()"><i class="btn fa fa-commenting text-dark"> <strong>
                                 Message</strong></i></li>
                     <li *ngIf="loginUserDetails._id != CurrentvisitedUser._id "
                         (click)="friendsId.includes(CurrentvisitedUser._id) ? '':sendRequest(loginUserDetails._id,CurrentvisitedUser._id)"

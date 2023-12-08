@@ -15,7 +15,7 @@ export class CreatePostDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private post: PostService,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private sharedService: SharedDataService,
     private dialogRef: MatDialogRef<CreatePostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -68,7 +68,7 @@ export class CreatePostDialogComponent implements OnInit {
         this.createPost.reset();
         this.createpostsuccess = res;
         this.posterr = null;
-        this.toastr.success(this.createpostsuccess, 'Success!');
+        this.toastService.success(this.createpostsuccess, 'Success!');
         this.dialogRef.close();
         this.sharedService.postSavedSource.next(true);
       },

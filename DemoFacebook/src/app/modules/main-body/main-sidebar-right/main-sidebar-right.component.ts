@@ -49,7 +49,7 @@ export class MainSidebarRightComponent implements OnInit {
     );
   }
 
-  OpenMessangerDia(item: any) {
+  OpenMessengerDia(item: any) {
     const matDiaref = this.matDia.open(BoxMessengerComponent, {
       width: '500px',
       height: '550px',

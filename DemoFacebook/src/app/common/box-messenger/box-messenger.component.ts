@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { MessengerService } from '../services/messanger.service';
+import { MessengerService } from '../services/messenger.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -102,7 +102,7 @@ export class BoxMessengerComponent implements OnInit {
     });
   }
 
-  addMessangerEmoji(event: any) {
+  addMessengerEmoji(event: any) {
     this.chatMessage = this.chatMessage + event.emoji.native;
   }
 

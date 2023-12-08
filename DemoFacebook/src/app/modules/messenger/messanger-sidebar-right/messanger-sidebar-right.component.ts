@@ -10,7 +10,7 @@ import { UserService } from 'src/app/common/services/user.service';
   templateUrl: './messanger-sidebar-right.component.html',
   styleUrls: ['./messanger-sidebar-right.component.scss'],
 })
-export class MessangerSidebarRightComponent implements OnInit {
+export class MessengerSidebarRightComponent implements OnInit {
   constructor(
     private userService: UserService,
     private friendship: FriendService,
@@ -71,7 +71,7 @@ export class MessangerSidebarRightComponent implements OnInit {
         loginUser_id: this.loginUserDetails._id,
         friend_userToken: this.friends.user_Friends[0].friend_id.userToken,
       };
-      this.userService.currentMessangerUser.next(newdata);
+      this.userService.currentMessengerUser.next(newdata);
     }
   }
 
@@ -81,12 +81,12 @@ export class MessangerSidebarRightComponent implements OnInit {
       loginUser_id: this.loginUserDetails._id,
       friend_userToken: data.userToken,
     };
-    this.userService.currentMessangerUser.next(newdata);
+    this.userService.currentMessengerUser.next(newdata);
   }
 
   ngOnDestroy() {
     this.onDestroy$.next();
-    this.userService.currentMessangerUser.next('');
+    this.userService.currentMessengerUser.next('');
   }
 
   openAcceptCall() {

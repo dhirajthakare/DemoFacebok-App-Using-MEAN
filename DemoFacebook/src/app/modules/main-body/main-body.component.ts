@@ -13,16 +13,16 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class MainBodyComponent implements OnInit {
   constructor(
-    private sharedata: SharedDataService,
+    private sharedData: SharedDataService,
     private socket: TakeCallService,
-    private userSevice: UserService,
+    private userService: UserService,
     private matDialog: MatDialog
   ) {}
   data: any;
   private onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
-    this.sharedata.changeTitle('Deskbook | Home');
-    this.userSevice.currentLoginUser
+    this.sharedData.changeTitle('Deskbook | Home');
+    this.userService.currentLoginUser
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res: any) => {
         this.data = res;

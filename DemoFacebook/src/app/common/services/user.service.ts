@@ -14,7 +14,7 @@ export class UserService {
 
   currentVisitedUser:any = new BehaviorSubject<any>('');
   currentLoginUser:any = new BehaviorSubject<any>('');
-  currentMessangerUser:any = new BehaviorSubject<any>('');
+  currentMessengerUser:any = new BehaviorSubject<any>('');
 
 
   createUserInfo(formdata:any){

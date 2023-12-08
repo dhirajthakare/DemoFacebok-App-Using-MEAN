@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CreateAccoundField, LoginForm } from '../interface/user,inteface';
+import { CreateAccountField, LoginForm } from '../interface/user,inteface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.get(this.BaseUrl + '/getprofile');
   }
 
-  LoginAcc(formdata: CreateAccoundField) {
+  LoginAcc(formdata: CreateAccountField) {
     return this.http.post(this.BaseUrl + '/login', formdata);
   }
 

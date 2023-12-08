@@ -14,7 +14,7 @@ export class ProfileBodyComponent implements OnInit {
   
   constructor(
     private userService: UserService,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private friend: FriendService
   ) { }
 
@@ -66,7 +66,7 @@ export class ProfileBodyComponent implements OnInit {
 
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(res => {
-      this.toastr.success('Request send succeessfully');
+      this.toastService.success('Request send succeessfully');
     }, err => {
       console.log(err);
     })

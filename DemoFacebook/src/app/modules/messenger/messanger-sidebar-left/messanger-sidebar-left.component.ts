@@ -7,7 +7,7 @@ import { UserService } from 'src/app/common/services/user.service';
   templateUrl: './messanger-sidebar-left.component.html',
   styleUrls: ['./messanger-sidebar-left.component.scss'],
 })
-export class MessangerSidebarLeftComponent implements OnInit {
+export class MessengerSidebarLeftComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   data: any;
@@ -15,7 +15,7 @@ export class MessangerSidebarLeftComponent implements OnInit {
   onDestroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.userService.currentMessangerUser
+    this.userService.currentMessengerUser
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res: any) => {
         if (res) {

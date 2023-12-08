@@ -12,8 +12,6 @@ export class MainContentComponent implements OnInit {
     private userService: UserService
       ) {}
 
-  likecounts = 0;
-
   LoginUserDetails: any;
   unSubscribeLoginUser: Subscription | any;
 

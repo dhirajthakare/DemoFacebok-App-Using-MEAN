@@ -11,11 +11,11 @@ export class FriendsComponent implements OnInit {
 
   
   constructor(
-    private sharedata:SharedDataService
+    private sharedData:SharedDataService
     ) { }
 
   ngOnInit(): void {
-    this.sharedata.changeTitle('Deskbook | Friends');
+    this.sharedData.changeTitle('Deskbook | Friends');
   }
 
   token:any;

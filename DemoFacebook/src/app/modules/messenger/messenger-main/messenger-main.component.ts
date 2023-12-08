@@ -1,15 +1,15 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval, pipe, Subject, Subscription, takeUntil } from 'rxjs';
-import { MessengerService } from 'src/app/common/services/messanger.service';
+import { MessengerService } from 'src/app/common/services/messenger.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
   selector: 'app-messanger-main',
-  templateUrl: './messanger-main.component.html',
-  styleUrls: ['./messanger-main.component.scss'],
+  templateUrl: './messenger-main.component.html',
+  styleUrls: ['./messenger-main.component.scss'],
 })
-export class MessangerMainComponent implements OnInit {
+export class MessengerMainComponent implements OnInit {
   constructor(
     private messanger: MessengerService,
     private userService: UserService,
@@ -49,7 +49,7 @@ export class MessangerMainComponent implements OnInit {
   }
 
   getcurrentMessagererUser() {
-    this.userService.currentMessangerUser
+    this.userService.currentMessengerUser
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((res: any) => {
         if (res) {
@@ -112,7 +112,7 @@ export class MessangerMainComponent implements OnInit {
     });
   }
 
-  addMessangerEmoji(event: any) {
+  addMessengerEmoji(event: any) {
     this.chatMessage = this.chatMessage + event.emoji.native;
   }
 

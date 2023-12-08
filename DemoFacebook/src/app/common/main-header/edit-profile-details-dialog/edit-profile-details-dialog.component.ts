@@ -18,7 +18,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
   constructor(
     private userService:UserService,
     private fb:FormBuilder,
-    private toastr:ToastrService,
+    private toastService:ToastrService,
     private dialogref:MatDialogRef<EditProfileDetailsDialogComponent>,
     private sharedService:SharedDataService
   ) { }
@@ -107,7 +107,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
       formdata.append('user_id',this.editProfile.get('user_id').value);
 
     this.userService.createUserInfo(formdata).subscribe((res:any)=>{
-      this.toastr.success(res, 'Success!');
+      this.toastService.success(res, 'Success!');
       this.sharedService.editProfileSave.next(true);
       // this.sharedService.updatedUserDetails.next(true);
       this.dialogref.close();

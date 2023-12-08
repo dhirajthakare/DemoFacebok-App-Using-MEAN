@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MessangerRoutingModule } from './messanger-routing.module';
-import { MessangerComponent } from './messanger.component';
-import { MessangerSidebarRightComponent } from './messanger-sidebar-right/messanger-sidebar-right.component';
-import { MessangerSidebarLeftComponent } from './messanger-sidebar-left/messanger-sidebar-left.component';
-import { MessangerMainComponent } from './messanger-main/messanger-main.component';
+import { MessengerRoutingModule } from './messenger-routing.module';
+import { MessengerComponent } from './messenger.component';
+import { MessengerSidebarRightComponent } from './messanger-sidebar-right/messanger-sidebar-right.component';
+import { MessengerSidebarLeftComponent } from './messanger-sidebar-left/messanger-sidebar-left.component';
+import { MessengerMainComponent } from './messenger-main/messenger-main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainHeaderModule } from 'src/app/common/main-header/main-header.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
@@ -16,14 +16,14 @@ import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module'
 
 @NgModule({
   declarations: [
-    MessangerComponent,
-    MessangerSidebarRightComponent,
-    MessangerSidebarLeftComponent,
-    MessangerMainComponent
+    MessengerComponent,
+    MessengerSidebarRightComponent,
+    MessengerSidebarLeftComponent,
+    MessengerMainComponent
     ],
   imports: [
     CommonModule,
-    MessangerRoutingModule,
+    MessengerRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MainHeaderModule,
@@ -33,4 +33,4 @@ import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module'
     AcceptCallModule
   ]
 })
-export class MessangerModule { }
+export class MessengerModule { }
