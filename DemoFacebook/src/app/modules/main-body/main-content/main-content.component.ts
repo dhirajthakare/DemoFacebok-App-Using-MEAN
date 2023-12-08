@@ -9,7 +9,7 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class MainContentComponent implements OnInit {
   constructor(
-    private userservice: UserService
+    private userService: UserService
       ) {}
 
   likecounts = 0;
@@ -22,7 +22,7 @@ export class MainContentComponent implements OnInit {
   }
 
   getCurrentLoginDetails() {
-    this.unSubscribeLoginUser = this.userservice.currentLoginUser.subscribe(
+    this.unSubscribeLoginUser = this.userService.currentLoginUser.subscribe(
       (res: any) => {
         if (res) {
           this.LoginUserDetails = res;

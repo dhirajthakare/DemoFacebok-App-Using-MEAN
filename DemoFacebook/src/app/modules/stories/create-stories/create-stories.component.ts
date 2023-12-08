@@ -14,7 +14,7 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class CreateStoriesComponent implements OnInit {
   constructor(
-    private userservice: UserService,
+    private userService: UserService,
     private storymanage: StorieService,
     private router: Router,
     private toastr: ToastrService,
@@ -27,7 +27,7 @@ export class CreateStoriesComponent implements OnInit {
   destoy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser
+    this.userService.currentLoginUser
       .pipe(takeUntil(this.destoy$))
       .subscribe((res: any) => {
         if (res) {

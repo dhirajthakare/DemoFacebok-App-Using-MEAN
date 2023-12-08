@@ -56,14 +56,14 @@
           <hr>
           <div class="row">
             <div class="d-flex">
-              <div class="btnPointer mx-md-5" [routerLink]="loginuserDetails?'/profile/'+loginuserDetails.userToken:loginuserDetails">
+              <div class="btnPointer mx-md-5" [routerLink]="loginUserDetails?'/profile/'+loginUserDetails.userToken:loginUserDetails">
                 <div class="d-flex">
                   <div><img class="profileImgResize" height="42" width="42"
-                      [src]="loginuserDetails?loginuserDetails.profileUrl ? 'http://localhost:2000'+loginuserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
+                      [src]="loginUserDetails?loginUserDetails.profileUrl ? 'http://localhost:2000'+loginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
                      >
                   </div>
                   <div class=" mt-2" routerLike="/deskbook">
-                    <p>{{loginuserDetails?loginuserDetails.name.substr(0,16):''}}</p>
+                    <p>{{loginUserDetails?loginUserDetails.name.substr(0,16):''}}</p>
                   </div>
                 </div>
               </div>
@@ -85,7 +85,7 @@
                 <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
                   <li><span class="dropdown-item" routerLink="/deskbook">home</span></li>
                   <li><span class="dropdown-item" (click)="openUpdateUserDialog()">Update Profile</span></li>
-                  <li *ngIf="loginuserDetails" [routerLink]="'//friends'"><a class="dropdown-item">Friends</a></li>
+                  <li *ngIf="loginUserDetails" [routerLink]="'//friends'"><a class="dropdown-item">Friends</a></li>
                   <!-- <li><hr class="dropdown-divider"></li> -->
                   <li><span class="dropdown-item" (click)="logout()">LogOut</span></li>
                 </ul>

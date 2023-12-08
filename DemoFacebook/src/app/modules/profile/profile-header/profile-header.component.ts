@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import { BoxMessangerComponent } from 'src/app/common/box-messanger/box-messanger.component';
+import { BoxMessengerComponent } from 'src/app/common/box-messenger/box-messenger.component';
 import { EditProfileDetailsDialogComponent } from 'src/app/common/main-header/edit-profile-details-dialog/edit-profile-details-dialog.component';
 import { FriendService } from 'src/app/common/services/friend.service';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
@@ -16,7 +16,7 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class ProfileHeaderComponent implements OnInit {
   constructor(
-    private userservice: UserService,
+    private userService: UserService,
     private friend: FriendService,
     private toastr: ToastrService,
     private matDia: MatDialog,
@@ -48,7 +48,7 @@ export class ProfileHeaderComponent implements OnInit {
     this.activeRoute.params.subscribe((res) => {
       let visitedUserToken = res['token'];
       if (visitedUserToken) {
-        this.userservice.getUser(visitedUserToken).subscribe(
+        this.userService.getUser(visitedUserToken).subscribe(
           (res) => {
            if(res){
             this.CurrentvisitedUser = res;
@@ -58,7 +58,7 @@ export class ProfileHeaderComponent implements OnInit {
                   'http://localhost:2000' + this.CurrentvisitedUser.user_info.CoverPhoto;
               }
             }
-            this.userservice.currentVisitedUser.next(res);
+            this.userService.currentVisitedUser.next(res);
            }
           },
           (err) => {
@@ -78,7 +78,7 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   getCurrentLoginUser() {
-    this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
      if(res){
       this.loginUserDetails = res;
      }
@@ -121,7 +121,7 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   OpenMessangerDia() {
-    const matDiaref = this.matDia.open(BoxMessangerComponent, {
+    const matDiaref = this.matDia.open(BoxMessengerComponent, {
       width: '500px',
       height: '550px',
       data: {
@@ -137,7 +137,7 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.userservice.currentVisitedUser.next('');
+    this.userService.currentVisitedUser.next('');
     this.destroy$.next();
   }
 

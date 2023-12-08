@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval, pipe, Subject, Subscription, takeUntil } from 'rxjs';
-import { MessangerService } from 'src/app/common/services/messanger.service';
+import { MessengerService } from 'src/app/common/services/messanger.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class MessangerMainComponent implements OnInit {
   constructor(
-    private messanger: MessangerService,
-    private userservice: UserService,
+    private messanger: MessengerService,
+    private userService: UserService,
     private route: Router,
     private activeRouter: ActivatedRoute
   ) {}
@@ -41,15 +41,15 @@ export class MessangerMainComponent implements OnInit {
     return item._id;
   }
 
-  currentloginuserDetails:any;
+  currentloginUserDetails:any;
   getCurrentLoginuser(){
-    this.userservice.currentLoginUser.subscribe((res:any)=>{
-      this.currentloginuserDetails = res;
+    this.userService.currentLoginUser.subscribe((res:any)=>{
+      this.currentloginUserDetails = res;
     })
   }
 
   getcurrentMessagererUser() {
-    this.userservice.currentMessangerUser
+    this.userService.currentMessangerUser
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((res: any) => {
         if (res) {
@@ -63,7 +63,7 @@ export class MessangerMainComponent implements OnInit {
 
   friendDetails: any;
   oninitgetdata() {
-    this.userservice
+    this.userService
       .getUser(this.data.friend_userToken)
       .subscribe((res: any) => {
         if (res) {
@@ -137,18 +137,18 @@ export class MessangerMainComponent implements OnInit {
     this.ngOnDestroy$.next();
   }
   callFriend(friend: any) {
-    console.log(friend,this.currentloginuserDetails);
+    console.log(friend,this.currentloginUserDetails);
     let frienddetails = {
       friendName:friend.name,
-      callFriendName:this.currentloginuserDetails.name,
+      callFriendName:this.currentloginUserDetails.name,
       friendId:friend._id,
       friendprofileURL:friend.profileUrl
     }
 
     let loginuserDetail = {
-      loginUserName:this.currentloginuserDetails.name,
-      loginUserId:this.currentloginuserDetails._id,
-      loginUserProfileURL:this.currentloginuserDetails.profileUrl,
+      loginUserName:this.currentloginUserDetails.name,
+      loginUserId:this.currentloginUserDetails._id,
+      loginUserProfileURL:this.currentloginUserDetails.profileUrl,
     }
     window.open(
       `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginuserDetail=${btoa(JSON.stringify(loginuserDetail))}&&calluser=${btoa('addedCall')}`,

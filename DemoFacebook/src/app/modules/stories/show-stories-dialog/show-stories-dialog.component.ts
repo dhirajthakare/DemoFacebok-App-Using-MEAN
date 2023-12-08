@@ -20,7 +20,7 @@ export class ShowStoriesDialogComponent implements OnInit {
 
   mysrc:any;
   i:any =0 ;
-  destroye$: Subject<void> = new Subject<void>();
+  destroy$: Subject<void> = new Subject<void>();
 
 
   myobject(){
@@ -31,7 +31,7 @@ export class ShowStoriesDialogComponent implements OnInit {
 
 
     let intervaldata = interval(2000);
-    intervaldata.pipe(takeUntil(this.destroye$)).subscribe((res) => {
+    intervaldata.pipe(takeUntil(this.destroy$)).subscribe((res) => {
       this.i++;
 
       if(length > (this.i)){
@@ -46,7 +46,7 @@ export class ShowStoriesDialogComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.destroye$.next();
+    this.destroy$.next();
   }
 
 }

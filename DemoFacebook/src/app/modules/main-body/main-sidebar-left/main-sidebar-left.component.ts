@@ -11,13 +11,13 @@ import { UserService } from 'src/app/common/services/user.service';
 export class MainSidebarLeftComponent implements OnInit {
   constructor(
     private friendship: FriendService,
-    private userservice: UserService
+    private userService: UserService
   ) {}
 
   LoginUserDetails: any;
   unSubscribeLoginUser: Subscription | any;
   ngOnInit(): void {
-    this.unSubscribeLoginUser = this.userservice.currentLoginUser.subscribe(
+    this.unSubscribeLoginUser = this.userService.currentLoginUser.subscribe(
       (res: any) => {
         if (res) {
           this.LoginUserDetails = res;

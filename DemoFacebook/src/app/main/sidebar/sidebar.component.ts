@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private friendship:FriendrelationshipService,
-    private userservice:UsermiddlewareService
+    private userService:UsermiddlewareService
   ) { }
 
   data:any
@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
   userdata:any;
   ngOnInit(): void {
     
-    this.userservice.currentLoginUser.subscribe( (res: any) =>{
+    this.userService.currentLoginUser.subscribe( (res: any) =>{
       console.log(res);
       this.data=res;
     });

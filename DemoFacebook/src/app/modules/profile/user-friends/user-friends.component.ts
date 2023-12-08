@@ -11,7 +11,7 @@ import { UserService } from 'src/app/common/services/user.service';
 export class UserFriendsComponent implements OnInit {
 
   constructor(
-    private userservice:UserService,
+    private userService:UserService,
     private sharedService:SharedDataService
   ) { }
 
@@ -26,7 +26,7 @@ export class UserFriendsComponent implements OnInit {
   }
 
     loginuser(){
-      this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
+      this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
         if(res){
         this.loginUserDetails=res;
         }
@@ -34,7 +34,7 @@ export class UserFriendsComponent implements OnInit {
     }
     getCurrentVisitedUser(){
 
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
+    this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
       if(res){
         this.currentVisitedUserDetails = res;
       }

@@ -4,17 +4,17 @@
     <div class="card-body">
         <div class="d-flex">
             <div class="col-md-1 col-1">
-                <div [routerLink]="loginuserDetails?'/profile/'+loginuserDetails.userToken:''" class="btnPointer"><img
+                <div [routerLink]="loginUserDetails?'/profile/'+loginUserDetails.userToken:''" class="btnPointer"><img
                         height="50" width="50" style="border-radius: 25px; object-fit: cover;"
-                        [src]="loginuserDetails?loginuserDetails.profileUrl ? 'http://localhost:2000'+loginuserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
+                        [src]="loginUserDetails?loginUserDetails.profileUrl ? 'http://localhost:2000'+loginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"
                        >
             </div>
             </div>
             <div class="col-md-11 col-11 profileSection mt-2 mt-md-2">
                 <form>
                     <div class="input-group d-flex col-md-12">
-                        <input *ngIf="loginuserDetails"  (focus)="onFocus()" style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control " type="text"
-                        placeholder="What's on your mind , {{loginuserDetails.name?loginuserDetails.name.substr(0,7):''}} ?" aria-label="Search" name="addstatus" [(ngModel)]="addstatus">
+                        <input *ngIf="loginUserDetails"  (focus)="onFocus()" style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control " type="text"
+                        placeholder="What's on your mind , {{loginUserDetails.name?loginUserDetails.name.substr(0,7):''}} ?" aria-label="Search" name="addStatus" [(ngModel)]="addStatus">
                         <span (click)="toggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text btnPointer">😀</span>
                     </div>
     

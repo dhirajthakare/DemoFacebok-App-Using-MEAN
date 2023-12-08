@@ -10,14 +10,14 @@ export class GuestGuard implements CanActivate {
 
   constructor(
     private route:Router,
-    private sharedservice:SharedDataService
+    private sharedService:SharedDataService
     ){
 
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!this.sharedservice.isLoginUser()){
+      if(!this.sharedService.isLoginUser()){
         return true;
       }else{
         this.route.navigate(['deskbook']);

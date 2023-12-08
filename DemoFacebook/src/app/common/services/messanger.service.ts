@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MessangerService {
+export class MessengerService {
 
   private socket = io('http://localhost:2000/')
 

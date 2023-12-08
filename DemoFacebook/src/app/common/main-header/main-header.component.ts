@@ -18,7 +18,7 @@ export class MainHeaderComponent implements OnInit {
     private dialog: MatDialog,
     private navicateRoute: Router,
     private friendship: FriendService,
-    private userservice: UserService,
+    private userService: UserService,
     private authservice:AuthService,
     private sharedService:SharedDataService
   ) {}
@@ -30,7 +30,7 @@ export class MainHeaderComponent implements OnInit {
   updatesuccess: any;
   Profilesrc: any;
   file: any;
-  loginuserDetails: any;
+  loginUserDetails: any;
   unsubscriptionupdatedUserDetails: Subscription | any;
 
   ngOnInit(): void {
@@ -72,10 +72,10 @@ export class MainHeaderComponent implements OnInit {
   getcurrentuser(optionalForUpdateUser:boolean=false,exceptioncase:any = true) {
     this.authservice.getUserProfile().subscribe((res) => {
       if(res){
-      this.loginuserDetails = res;
-      if(this.loginuserDetails){
-      localStorage.setItem('accountHolder', JSON.stringify(this.loginuserDetails));
-      this.userservice.currentLoginUser.next(this.loginuserDetails);
+      this.loginUserDetails = res;
+      if(this.loginUserDetails){
+      localStorage.setItem('accountHolder', JSON.stringify(this.loginUserDetails));
+      this.userService.currentLoginUser.next(this.loginUserDetails);
       if(!optionalForUpdateUser || typeof(exceptioncase) === "string" ){
         this.getAllFriendsId()
       }
@@ -89,13 +89,13 @@ export class MainHeaderComponent implements OnInit {
   friendsId: Array<any> = [];
 
   getAllFriendsId() {
-    this.friendship.getUseFriends(this.loginuserDetails._id).subscribe(
+    this.friendship.getUseFriends(this.loginUserDetails._id).subscribe(
       (res) => {
         this.friends = res;
         if (this.friends) {
           this.friendsId=[];
           this.friends = this.friends.user_Friends;
-          this.friendsId.push(this.loginuserDetails._id);
+          this.friendsId.push(this.loginUserDetails._id);
           for (let i = 0; i < this.friends.length; i++) {
             this.friendsId.push(this.friends[i].friend_id._id);
           }
@@ -110,7 +110,7 @@ export class MainHeaderComponent implements OnInit {
 
   ngOnDestroy(){
     this.unsubscriptionupdatedUserDetails.unsubscribe();
-    this.userservice.currentLoginUser.next('');
+    this.userService.currentLoginUser.next('');
     this.friendship.userLoginFriendsId.next('');
     this.friendship.serchbox.next('');
   }

@@ -27,14 +27,14 @@ export class AccountCreateDialogComponent implements OnInit {
     private formbuilder: FormBuilder,
     private toast: ToastrService,
     private dialogRef: MatDialogRef<AccountCreateDialogComponent>,
-    private sharedservice: SharedDataService
+    private sharedService: SharedDataService
   ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
     this.createAccountForm.patchValue({
-      birthOfDate: this.sharedservice.getSelectedDate(
+      birthOfDate: this.sharedService.getSelectedDate(
         this.createAccountForm.value,
         'birthOfDate'
       ),

@@ -19,10 +19,10 @@ export class UpdateUserDialogComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     private Authservice: AuthService,
-    private userservice: UserService,
+    private userService: UserService,
     private toastr: ToastrService,
     private dialogRef : MatDialogRef<UpdateUserDialogComponent>,
-    private sharedservice:SharedDataService
+    private sharedService:SharedDataService
   ) {}
 
 
@@ -43,7 +43,7 @@ export class UpdateUserDialogComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
+    this.userService.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
       if(res){
       this.data = res;
       if (this.data) {
@@ -84,7 +84,7 @@ export class UpdateUserDialogComponent implements OnInit {
     formdata.append('profile', this.file);
     formdata.append(
       'birthOfDate',
-      this.Changebirth?this.sharedservice.getSelectedDate(this.createAccountForm.value,'birthOfDate'):this.data.birthOfDate
+      this.Changebirth?this.sharedService.getSelectedDate(this.createAccountForm.value,'birthOfDate'):this.data.birthOfDate
     );
     formdata.append('gender', this.createAccountForm.get('gender')?.value);
 
@@ -92,7 +92,7 @@ export class UpdateUserDialogComponent implements OnInit {
       (res) => {
         this.updatesuccess = 'Update Data Successfully';
         this.updateerr = null;
-        this.sharedservice.updatedUserDetails.next(true);
+        this.sharedService.updatedUserDetails.next(true);
         this.toastr.success('Profile Updated SucceesFully ', 'Success!');
         this.dialogRef.close();
       },

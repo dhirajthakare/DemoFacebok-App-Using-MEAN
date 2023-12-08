@@ -12,7 +12,7 @@ export class AllFriendsComponent implements OnInit {
 
   
   constructor( 
-    private userservice : UserService,
+    private userService : UserService,
     private friend:FriendService
   ) { }
 
@@ -24,7 +24,7 @@ export class AllFriendsComponent implements OnInit {
   }
 
   getUserLoginDetails(){
-    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
+    this.userService.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
       if(res){
         this.data=res;
         if(this.data){

@@ -7,26 +7,26 @@ import {
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { MessangerService } from '../services/messanger.service';
+import { MessengerService } from '../services/messanger.service';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-box-messanger',
-  templateUrl: './box-messanger.component.html',
-  styleUrls: ['./box-messanger.component.scss'],
+  selector: 'app-box-messenger',
+  templateUrl: './box-messenger.component.html',
+  styleUrls: ['./box-messenger.component.scss'],
 })
-export class BoxMessangerComponent implements OnInit {
+export class BoxMessengerComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private messanger: MessangerService,
-    private userservice: UserService
+    private messenger: MessengerService,
+    private userService: UserService
   ) {}
-  destroye$: Subject<void> = new Subject<void>();
+  destroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.messanger
+    this.messenger
       .getRealtimeChat()
-      .pipe(takeUntil(this.destroye$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
         if (
           res.includes(this.data.loginUser_id) &&
@@ -49,7 +49,7 @@ export class BoxMessangerComponent implements OnInit {
   private myScrollContainer!: ElementRef;
 
   getAllMessage() {
-    this.messanger
+    this.messenger
       .getmessage(this.data.loginUser_id, this.data.friend_id)
       .subscribe((res) => {
         this.allmessage = res;
@@ -68,7 +68,7 @@ export class BoxMessangerComponent implements OnInit {
   }
   friendDetails: any;
   oninitgetdata() {
-    this.userservice
+    this.userService
       .getUser(this.data.friendUsertoken)
       .subscribe((res: any) => {
         if (res) {
@@ -92,8 +92,8 @@ export class BoxMessangerComponent implements OnInit {
       receiver_id: this.data.friend_id,
     };
 
-    this.messanger.sendmessage(dataf).subscribe((res) => {
-      this.messanger.sendRealTimeMessage([
+    this.messenger.sendmessage(dataf).subscribe((res) => {
+      this.messenger.sendRealTimeMessage([
         this.data.loginUser_id,
         this.data.friend_id,
       ]);
@@ -115,6 +115,6 @@ export class BoxMessangerComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.destroye$.next();
+    this.destroy$.next();
   }
 }

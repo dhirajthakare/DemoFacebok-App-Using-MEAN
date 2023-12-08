@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BoxMessangerRoutingModule } from './box-messanger-routing.module';
-import { BoxMessangerComponent } from './box-messanger.component';
+import { BoxMessengerRoutingModule } from './box-messenger-routing.module';
+import { BoxMessengerComponent } from './box-messenger.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
@@ -10,14 +10,14 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
-    BoxMessangerComponent
+    BoxMessengerComponent
   ],
   imports: [
     CommonModule,
-    BoxMessangerRoutingModule,
+    BoxMessengerRoutingModule,
     FormsModule,
     MatDialogModule,
     PickerModule
   ]
 })
-export class BoxMessangerModule { }
+export class BoxMessengerModule { }

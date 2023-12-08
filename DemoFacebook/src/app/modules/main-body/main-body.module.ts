@@ -12,7 +12,7 @@ import { MainHeaderModule } from 'src/app/common/main-header/main-header.module'
 import { StoriesModule } from '../stories/stories.module';
 import { CreatePostModule } from 'src/app/common/create-post/create-post.module';
 import { DisplayPostModule } from 'src/app/common/display-post/display-post.module';
-import { BoxMessangerModule } from 'src/app/common/box-messanger/box-messanger.module';
+import { BoxMessengerModule } from 'src/app/common/box-messenger/box-messenger.module';
 import { FooterModule } from 'src/app/common/footer/footer.module';
 import { AcceptCallModule } from 'src/app/common/accept-call/accept-call.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -34,7 +34,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     StoriesModule,
     CreatePostModule,
     DisplayPostModule,
-    BoxMessangerModule,
+    BoxMessengerModule,
     FooterModule,
     AcceptCallModule,
     InfiniteScrollModule

@@ -24,7 +24,7 @@ export class CreatePostDialogComponent implements OnInit {
   file: any;
   imageChangeEvt: any = '';
   public createPost = this.fb.group({
-    status: this.data.addstatus,
+    status: this.data.addStatus,
     post: '',
     id: '',
   });

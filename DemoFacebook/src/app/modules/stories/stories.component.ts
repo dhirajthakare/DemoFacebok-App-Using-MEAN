@@ -10,7 +10,7 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class StoriesComponent implements OnInit {
   constructor(
-    private userservice: UserService,
+    private userService: UserService,
     private sharedService: SharedDataService,
     private authservice: AuthService
   ) {}
@@ -24,11 +24,11 @@ export class StoriesComponent implements OnInit {
   getcurrentuser() {
     this.authservice.getUserProfile().subscribe((res) => {
       localStorage.setItem('accountHolder', JSON.stringify(res));
-      this.userservice.currentLoginUser.next(res);
+      this.userService.currentLoginUser.next(res);
     });
   }
 
   ngOnDestroy() {
-    this.userservice.currentLoginUser.next('');
+    this.userService.currentLoginUser.next('');
   }
 }

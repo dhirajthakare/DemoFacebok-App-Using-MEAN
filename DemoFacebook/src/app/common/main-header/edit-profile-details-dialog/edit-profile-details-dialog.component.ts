@@ -16,11 +16,11 @@ export class EditProfileDetailsDialogComponent implements OnInit {
 
    
   constructor(
-    private userservice:UserService,
+    private userService:UserService,
     private fb:FormBuilder,
     private toastr:ToastrService,
     private dialogref:MatDialogRef<EditProfileDetailsDialogComponent>,
-    private sharedservice:SharedDataService
+    private sharedService:SharedDataService
   ) { }
 
   
@@ -34,7 +34,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.Destroy$)).subscribe( (res: any) =>{
+    this.userService.currentVisitedUser.pipe(takeUntil(this.Destroy$)).subscribe( (res: any) =>{
       if(res){
       this.currentLoginUserDetails=res;
       if(this.currentLoginUserDetails.user_info){
@@ -106,10 +106,10 @@ export class EditProfileDetailsDialogComponent implements OnInit {
       formdata.append('relation',this.editProfile.get('relation').value);
       formdata.append('user_id',this.editProfile.get('user_id').value);
 
-    this.userservice.createUserInfo(formdata).subscribe((res:any)=>{
+    this.userService.createUserInfo(formdata).subscribe((res:any)=>{
       this.toastr.success(res, 'Success!');
-      this.sharedservice.editProfileSave.next(true);
-      // this.sharedservice.updatedUserDetails.next(true);
+      this.sharedService.editProfileSave.next(true);
+      // this.sharedService.updatedUserDetails.next(true);
       this.dialogref.close();
     },err=>{
       console.log(err);

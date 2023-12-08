@@ -11,7 +11,7 @@ import { UserService } from 'src/app/common/services/user.service';
 export class ProfileStoryArchiveComponent implements OnInit {
 
   constructor(
-    private userservice:UserService,
+    private userService:UserService,
     private sharedService:SharedDataService
   ) { }
   currentVisitedUserDetails:any;
@@ -19,7 +19,7 @@ export class ProfileStoryArchiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedService.changeTitle('Deskbook | Archive');
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
+    this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
       this.currentVisitedUserDetails = res;
   })
 

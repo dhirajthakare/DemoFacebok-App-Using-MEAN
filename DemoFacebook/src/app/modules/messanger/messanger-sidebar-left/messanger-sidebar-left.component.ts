@@ -8,21 +8,21 @@ import { UserService } from 'src/app/common/services/user.service';
   styleUrls: ['./messanger-sidebar-left.component.scss'],
 })
 export class MessangerSidebarLeftComponent implements OnInit {
-  constructor(private userservice: UserService) {}
+  constructor(private userService: UserService) {}
 
   data: any;
   token: any;
   onDestroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.userservice.currentMessangerUser
+    this.userService.currentMessangerUser
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res: any) => {
         if (res) {
           this.token = res.friend_userToken;
 
           if (this.token) {
-            this.userservice.getUser(this.token).subscribe((res) => {
+            this.userService.getUser(this.token).subscribe((res) => {
               this.data = res;
             });
           }
