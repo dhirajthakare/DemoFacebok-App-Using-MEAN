@@ -34,7 +34,7 @@ export class EnterNewPasswordComponent implements OnInit {
       this.toast.success(res,"success")
       this.route.navigate(['']);
     },err=>{
-      this.toast.error(err.error,"Faill")
+      this.toast.error(err.error,"Fails")
       console.log(err);
     })
 

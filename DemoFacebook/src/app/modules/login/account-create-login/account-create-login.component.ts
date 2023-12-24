@@ -9,11 +9,11 @@ import { SharedDataService } from 'src/app/common/services/shared-data.service';
 export class AccountCreateLoginComponent implements OnInit {
 
 constructor(
-  private comman:SharedDataService ,
+  private common:SharedDataService ,
 ) { }
 
 ngOnInit(): void {
-  this.comman.changeTitle('Login Accont');   
+  this.common.changeTitle('Login Account');   
 }
 
 }

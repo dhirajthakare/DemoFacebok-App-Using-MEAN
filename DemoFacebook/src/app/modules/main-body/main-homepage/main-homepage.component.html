@@ -2,12 +2,12 @@
     <div id="header" class="col-12 py-2">
         <app-main-header></app-main-header>
     </div>
-    <div id="main" class="row flex-grow-1 overflow-hidden">
+    <div id="main" class="row flex-grow-1 overflow-hidden" style="padding-bottom: 5px;">
         <div id="sidebar1" style="width:30%" class=" mh-100 overflow-auto py-2">
             <app-main-sidebar-left></app-main-sidebar-left>
         </div>
 
-        <div id="main_container" style="width:40%" class=" mh-100 overflow-auto py-2">
+        <div class="main-container">
             <router-outlet></router-outlet>
         </div>
         <div id="sidebar2" style="width:30%" class=" mh-100 overflow-auto py-2">
@@ -15,5 +15,5 @@
         </div>
 
     </div>
-    <app-footer></app-footer>
 </div>
+<app-footer></app-footer>

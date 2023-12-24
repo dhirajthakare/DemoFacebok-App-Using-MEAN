@@ -14,39 +14,39 @@ export class FriendService {
 
   private BaseUrl: any = environment.ApiURL;
 
-  serchbox = new  BehaviorSubject('');
+  searchBox = new  BehaviorSubject('');
   searchBoxVisibility:any = new BehaviorSubject<any>(false);
   userLoginFriendsId= new BehaviorSubject<any>('');
   
-  serchUsers(name:string):Observable<any>{
-   return this.http.post(this.BaseUrl+'/findfriends/',{"name":name});
+  searchUsers(name:string):Observable<any>{
+   return this.http.post(this.BaseUrl+'/find-friend/',{"name":name});
   }
 
   sendRequest(uid:any,fid:any){
-   return  this.http.get(this.BaseUrl+'/addfriend/'+uid+'/'+fid);
+   return  this.http.get(this.BaseUrl+'/add-friend/'+uid+'/'+fid);
   }
 
   acceptRequest(uid:any,fid:any){
-    return  this.http.get(this.BaseUrl+'/acceptfriendrequest/'+uid+'/'+fid);
+    return  this.http.get(this.BaseUrl+'/accept-friend-request/'+uid+'/'+fid);
    }
 
    rejectRequest(uid:any,fid:any){
-    return  this.http.get(this.BaseUrl+'/rejectfriendrequest/'+uid+'/'+fid);
+    return  this.http.get(this.BaseUrl+'/reject-friend-request/'+uid+'/'+fid);
    }
 
    getUserRequest(id:any){
-    return this.http.get(this.BaseUrl+'/getallrequest/'+id);
+    return this.http.get(this.BaseUrl+'/get-all-request/'+id);
    }
 
    getUseFriends(id:any){
-    return this.http.get(this.BaseUrl+'/getuserfriends/'+id);
+    return this.http.get(this.BaseUrl+'/get-user-friends/'+id);
    }
 
    getUseSerachFriends(id:any,name:string){
-    return this.http.get(this.BaseUrl+'/alluserfriendssearch/'+id+'/'+name);
+    return this.http.get(this.BaseUrl+'/all-user-friends-search/'+id+'/'+name);
    }
    getAllFriendsPost(ids:any){
-    return this.http.post(this.BaseUrl+'/allfriendspost',ids);
+    return this.http.post(this.BaseUrl+'/all-friends-post',ids);
    }
    
    unfriend(uid:number , fid:number){

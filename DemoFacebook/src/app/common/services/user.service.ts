@@ -14,19 +14,19 @@ export class UserService {
 
   currentVisitedUser:any = new BehaviorSubject<any>('');
   currentLoginUser:any = new BehaviorSubject<any>('');
-  currentMessangerUser:any = new BehaviorSubject<any>('');
+  currentMessengerUser:any = new BehaviorSubject<any>('');
 
 
-  createUserInfo(formdata:any){
-    return this.http.post(this.BaseUrl+'/createuserinformation',formdata);
+  createUserInfo(formData:any){
+    return this.http.post(this.BaseUrl+'/create-user-information',formData);
   }
   
   getUser(token:any){
-    return this.http.get(this.BaseUrl+'/getcurrentloginuser/'+token);
+    return this.http.get(this.BaseUrl+'/get-current-login-user/'+token);
   }
 
   getCurrentUserPost(cid:any,clickId:any):Observable<any>{
-   return this.http.get(this.BaseUrl+'/getcurrentuserposts/'+cid+'/'+clickId);
+   return this.http.get(this.BaseUrl+'/get-current-user-posts/'+cid+'/'+clickId);
   }
 
 }

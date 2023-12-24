@@ -15,7 +15,7 @@ export class CreatePostDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private post: PostService,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private sharedService: SharedDataService,
     private dialogRef: MatDialogRef<CreatePostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -24,7 +24,7 @@ export class CreatePostDialogComponent implements OnInit {
   file: any;
   imageChangeEvt: any = '';
   public createPost = this.fb.group({
-    status: this.data.addstatus,
+    status: this.data.addStatus,
     post: '',
     id: '',
   });
@@ -37,8 +37,8 @@ export class CreatePostDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
 
   }
@@ -54,27 +54,27 @@ export class CreatePostDialogComponent implements OnInit {
     );
   };
 
-  createpostsuccess: any;
-  posterr: any;
-  oncreatepost() {
-    let formdata = new FormData();
-    formdata.append('status', this.createPost.get('status')?.value);
-    formdata.append('user_id', this.data._id);
-    formdata.append('postUrl', this.file);
+  createPostSuccess: any;
+  postError: any;
+  onCreatePost() {
+    let formData = new FormData();
+    formData.append('status', this.createPost.get('status')?.value);
+    formData.append('user_id', this.data._id);
+    formData.append('postUrl', this.file);
 
-    this.post.createPost(formdata).subscribe(
+    this.post.createPost(formData).subscribe(
       (res) => {
         this.file = '';
         this.createPost.reset();
-        this.createpostsuccess = res;
-        this.posterr = null;
-        this.toastr.success(this.createpostsuccess, 'Success!');
+        this.createPostSuccess = res;
+        this.postError = null;
+        this.toastService.success(this.createPostSuccess, 'Success!');
         this.dialogRef.close();
         this.sharedService.postSavedSource.next(true);
       },
       (err) => {
-        this.posterr = err.error;
-        this.createpostsuccess = null;
+        this.postError = err.error;
+        this.createPostSuccess = null;
         console.log(err);
       }
     );
@@ -97,7 +97,7 @@ export class CreatePostDialogComponent implements OnInit {
     });
   }
 
-  closedialog(){
+  closeDialog(){
     this.dialogRef.close(this.createPost.get('status')?.value);
   }
   

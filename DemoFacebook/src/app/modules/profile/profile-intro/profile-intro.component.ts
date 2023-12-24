@@ -14,10 +14,10 @@ export class ProfileIntroComponent implements OnInit {
   currentVisitedUserDetails: any;
   destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private userservice: UserService, private dialog: MatDialog) {}
+  constructor(private userService: UserService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser
+    this.userService.currentLoginUser
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
         if(res){
@@ -25,11 +25,11 @@ export class ProfileIntroComponent implements OnInit {
         }
       });
 
-    this.oninitgetdata();
+    this.onInitGetData();
   }
 
-  oninitgetdata() {
-    this.userservice.currentVisitedUser
+  onInitGetData() {
+    this.userService.currentVisitedUser
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
         if(res){
@@ -38,7 +38,7 @@ export class ProfileIntroComponent implements OnInit {
       });
   }
 
-  openeditProfileComponant() {
+  openEditProfileComponent() {
     this.dialog.open(EditProfileDetailsDialogComponent);
   }
 

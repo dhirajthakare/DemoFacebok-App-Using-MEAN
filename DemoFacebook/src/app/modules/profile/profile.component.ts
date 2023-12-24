@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | Profile');
+    this.sharedService.changeTitle('DeskBook | Profile');
   }
 
 }

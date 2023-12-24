@@ -15,9 +15,9 @@ export class UpdatePostDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private post: PostService,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private sharedService: SharedDataService,
-    public dialogref: MatDialogRef<UpdatePostDialogComponent>,
+    public dialogRef: MatDialogRef<UpdatePostDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -33,33 +33,33 @@ export class UpdatePostDialogComponent implements OnInit {
 
   @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
 
-  updatepostsuccess: any;
-  updateposterr: any;
+  updatePostSuccess: any;
+  updatePostError: any;
   imageSrc: any;
-  updatesrc: any;
+  updateSrc: any;
   file: any;
 
-  onUpdatepost() {
-    let formdata = new FormData();
-    formdata.append('status', this.UpdatePost.get('status')?.value);
-    formdata.append('id', this.UpdatePost.get('id')?.value);
+  onUpdatePost() {
+    let formData = new FormData();
+    formData.append('status', this.UpdatePost.get('status')?.value);
+    formData.append('id', this.UpdatePost.get('id')?.value);
     if (this.file) {
-      formdata.append('postUrl', this.file);
+      formData.append('postUrl', this.file);
     }
 
-    this.post.updatePost(formdata).subscribe(
+    this.post.updatePost(formData).subscribe(
       (res) => {
         this.file = '';
         this.UpdatePost.reset();
         this.sharedService.postSavedSource.next(true);
-        this.updatepostsuccess = res;
-        this.updateposterr = null;
-        this.toastr.success(this.updatepostsuccess, 'Success!');
-        this.dialogref.close();
+        this.updatePostSuccess = res;
+        this.updatePostError = null;
+        this.toastService.success(this.updatePostSuccess, 'Success!');
+        this.dialogRef.close();
       },
       (err) => {
-        this.updateposterr = err.error;
-        this.updatepostsuccess = null;
+        this.updatePostError = err.error;
+        this.updatePostSuccess = null;
         console.log(err);
       }
     );
@@ -70,14 +70,14 @@ export class UpdatePostDialogComponent implements OnInit {
       status: item.status,
       id: item._id,
     });
-    this.updatesrc = 'http://localhost:2000' + item.postUrl;
+    this.updateSrc = 'http://localhost:2000' + item.postUrl;
   }
 
   imageChangeEvt:any;
   onFileUpdatePostChange(e: any) {
     this.file = e.target.files[0];
     this.imageChangeEvt = e;
-    this.updatesrc = '';
+    this.updateSrc = '';
 
     //for get selcted Image Source
     // if (e.target.files) {
@@ -90,8 +90,8 @@ export class UpdatePostDialogComponent implements OnInit {
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 

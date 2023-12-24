@@ -14,11 +14,11 @@ export class FriendsRequestsComponent implements OnInit {
   
   constructor(
     private friend:FriendService,
-    private toastr:ToastrService,
-    private userservice:UserService
+    private toastService:ToastrService,
+    private userService:UserService
   ) { }
 
-  loginuserDetails:any;
+  loginUserDetails:any;
   request:any;
   onDestroy$:Subject<void> = new Subject<void>();
 
@@ -27,10 +27,10 @@ export class FriendsRequestsComponent implements OnInit {
   }
 
   getUserLoginDetails(){
-    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
+    this.userService.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe( (res: any) =>{
       if(res){
-      this.loginuserDetails=res;
-      if(this.loginuserDetails){
+      this.loginUserDetails=res;
+      if(this.loginUserDetails){
         this.getUserRequest();
       }
       }
@@ -38,7 +38,7 @@ export class FriendsRequestsComponent implements OnInit {
   }
 
   getUserRequest(){
-    this.friend.getUserRequest(this.loginuserDetails._id).subscribe(res=>{
+    this.friend.getUserRequest(this.loginUserDetails._id).subscribe(res=>{
       if(res){
       this.request=res;
       }
@@ -48,11 +48,11 @@ export class FriendsRequestsComponent implements OnInit {
     })
   }
   acceptRequest(fid:any){
-    this.friend.acceptRequest(this.loginuserDetails._id,fid).subscribe(res=>{
+    this.friend.acceptRequest(this.loginUserDetails._id,fid).subscribe(res=>{
       if(res){
       this.request=res;
       this.getUserRequest();
-      this.toastr.success('Request Accepted','Success!');
+      this.toastService.success('Request Accepted','Success!');
       }
     },err=>{
       console.log(err);
@@ -60,11 +60,11 @@ export class FriendsRequestsComponent implements OnInit {
   }
   rejectRequest(fid:any){
     if(confirm("Are you sure You want to reject Request ?")){
-      this.friend.rejectRequest(this.loginuserDetails._id,fid).subscribe(res=>{
+      this.friend.rejectRequest(this.loginUserDetails._id,fid).subscribe(res=>{
        if(res){
         this.request=res;
         this.getUserRequest();
-        this.toastr.success('Request Rejected','Success!');
+        this.toastService.success('Request Rejected','Success!');
        }
       },err=>{
         console.log(err);

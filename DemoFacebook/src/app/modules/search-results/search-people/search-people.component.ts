@@ -19,15 +19,15 @@ export class SearchPeopleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.friendship.serchbox.pipe(debounceTime(300),distinctUntilChanged(),takeUntil(this.destroy$)).subscribe(res=>{
-      this.getallsearchUser(res)
+    this.friendship.searchBox.pipe(debounceTime(300),distinctUntilChanged(),takeUntil(this.destroy$)).subscribe(res=>{
+      this.getAllSearchUser(res)
     })
   }
 
-  userdata:any;
-  getallsearchUser(search:any){
-    this.friendship.serchUsers(search).pipe(debounceTime(300),distinctUntilChanged()).subscribe(data=>{
-      this.userdata=data;
+  userData:any;
+  getAllSearchUser(search:any){
+    this.friendship.searchUsers(search).pipe(debounceTime(300),distinctUntilChanged()).subscribe(data=>{
+      this.userData=data;
       this.Loader=false;
       
     },err=>{

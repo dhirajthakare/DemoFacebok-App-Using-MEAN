@@ -12,40 +12,40 @@ export class PostService {
   
   private BaseUrl: any = environment.ApiURL;  
 
-  createPost(formdata:any){
-    return this.http.post(this.BaseUrl+'/createpost',formdata)
+  createPost(formData:any){
+    return this.http.post(this.BaseUrl+'/create-post',formData)
   }
 
-  updatePost(formdata:any){
-    return this.http.post(this.BaseUrl+'/updatepost',formdata)
+  updatePost(formData:any){
+    return this.http.post(this.BaseUrl+'/update-post',formData)
   }
 
-  getpostData(id:number){
-    return this.http.get(this.BaseUrl+'/getpostdata/'+id);
+  getPostData(id:number){
+    return this.http.get(this.BaseUrl+'/get-post-data/'+id);
   }
 
-  likeorUnlike(formdata:any){
-   return  this.http.post(this.BaseUrl+'/likedislike',formdata);
+  likeOrUnlike(formData:any){
+   return  this.http.post(this.BaseUrl+'/toggle-like',formData);
   }
-  getlikeUser(id:number):Observable<any>{
-    return this.http.get(this.BaseUrl+'/getpostlke/'+id);
+  getLikeUser(id:number):Observable<any>{
+    return this.http.get(this.BaseUrl+'/get-post-like/'+id);
   }
 
   deletePost(id:number){
-    return this.http.get(this.BaseUrl+'/deletepost/'+id);
+    return this.http.get(this.BaseUrl+'/delete-post/'+id);
   }
 
 
-  createcomment(formdata:any){
-    return this.http.post(this.BaseUrl+'/createcomment/',formdata);
+  createComment(formData:any){
+    return this.http.post(this.BaseUrl+'/create-comment/',formData);
   }
 
-  deletcomment(cid:number,pid:number){
-   return this.http.get(this.BaseUrl+'/deletecomment/'+cid+'/'+pid);
+  deleteComment(cid:number,pid:number){
+   return this.http.get(this.BaseUrl+'/delete-comment/'+cid+'/'+pid);
   }
 
   searchPost(search:any){
-    return this.http.post(this.BaseUrl+'/findpost/',{"search":search});
+    return this.http.post(this.BaseUrl+'/search-post/',{"search":search});
   }
 
 }

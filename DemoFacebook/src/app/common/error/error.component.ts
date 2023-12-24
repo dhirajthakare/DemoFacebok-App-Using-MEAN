@@ -13,7 +13,7 @@ export class ErrorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  locationback(){
+  locationBack(){
     this._location.back();
     // window.history.back();
   }

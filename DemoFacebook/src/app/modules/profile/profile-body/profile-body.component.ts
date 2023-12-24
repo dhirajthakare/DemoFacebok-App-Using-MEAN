@@ -13,16 +13,16 @@ export class ProfileBodyComponent implements OnInit {
 
   
   constructor(
-    private userservice: UserService,
-    private toastr: ToastrService,
+    private userService: UserService,
+    private toastService: ToastrService,
     private friend: FriendService
   ) { }
 
-  prealoader = false;
+  preLoader = false;
   loginUserDetails: any;
 
-  @ViewChild('submitbtn')
-  submitbtn!: ElementRef<HTMLElement>;
+  @ViewChild('submitBtn')
+  submitBtn!: ElementRef<HTMLElement>;
 
   currentVisitedUserDetails: any;
   friendsId: any = [];
@@ -33,12 +33,12 @@ export class ProfileBodyComponent implements OnInit {
   destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.getloginuser();
+    this.getLoginUser();
     this.getAllFriendsId();
   }
 
-  getloginuser(){
-    this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
+  getLoginUser(){
+    this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
       if(res){
         this.loginUserDetails = res;
         this.getCurrentVisitedUser();
@@ -49,7 +49,7 @@ export class ProfileBodyComponent implements OnInit {
 
   getCurrentVisitedUser() {
 
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       if(res){
       this.currentVisitedUserDetails = res;
       if (this.currentVisitedUserDetails.user_Friends) {
@@ -66,7 +66,7 @@ export class ProfileBodyComponent implements OnInit {
 
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(res => {
-      this.toastr.success('Request send succeessfully');
+      this.toastService.success('Request send successfully');
     }, err => {
       console.log(err);
     })
@@ -81,7 +81,7 @@ export class ProfileBodyComponent implements OnInit {
   }
   
   getpost() {
-    this.userservice.getCurrentUserPost(this.currentVisitedUserDetails._id, this.loginUserDetails._id).subscribe((res: any) => {
+    this.userService.getCurrentUserPost(this.currentVisitedUserDetails._id, this.loginUserDetails._id).subscribe((res: any) => {
 
       if(res){
         this.AllCurrentUserPost = res.filter((value: any, index: number) => {

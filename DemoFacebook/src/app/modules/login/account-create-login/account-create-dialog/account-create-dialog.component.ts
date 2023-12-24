@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { CreateAccoundField } from 'src/app/common/interface/user,inteface';
+import { CreateAccountField } from 'src/app/common/interface/user.interface';
 import { AuthService } from 'src/app/common/services/auth.service';
 import { SharedDataService } from 'src/app/common/services/shared-data.service';
 
@@ -12,9 +12,9 @@ import { SharedDataService } from 'src/app/common/services/shared-data.service';
   styleUrls: ['./account-create-dialog.component.scss'],
 })
 export class AccountCreateDialogComponent implements OnInit {
-  storeallerrors!: CreateAccoundField | null;
+  storeAllErrors!: CreateAccountField | null;
   // onSubmit
-  createAccountForm = this.formbuilder.group({
+  createAccountForm = this.fb.group({
     fname: '',
     lname: '',
     email: '',
@@ -24,31 +24,31 @@ export class AccountCreateDialogComponent implements OnInit {
   });
   constructor(
     public service: AuthService,
-    private formbuilder: FormBuilder,
+    private fb: FormBuilder,
     private toast: ToastrService,
     private dialogRef: MatDialogRef<AccountCreateDialogComponent>,
-    private sharedservice: SharedDataService
+    private sharedService: SharedDataService
   ) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
     this.createAccountForm.patchValue({
-      birthOfDate: this.sharedservice.getSelectedDate(
+      birthOfDate: this.sharedService.getSelectedDate(
         this.createAccountForm.value,
         'birthOfDate'
       ),
     });
     this.service.createAcc(this.createAccountForm.value).subscribe(
       (res) => {
-        this.toast.success('Successfully Created Acoount', 'Success!');
-        this.storeallerrors = null;
+        this.toast.success('Successfully Created Account', 'Success!');
+        this.storeAllErrors = null;
         this.createAccountForm.reset();
         this.dialogRef.close();
       },
       (err) => {
         console.log(err);
-        this.storeallerrors = err.error;
+        this.storeAllErrors = err.error;
       }
     );
   }

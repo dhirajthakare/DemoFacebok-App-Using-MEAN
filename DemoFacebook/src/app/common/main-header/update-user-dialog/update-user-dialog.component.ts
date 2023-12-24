@@ -17,24 +17,24 @@ export class UpdateUserDialogComponent implements OnInit {
 
 
   constructor(
-    private formbuilder: FormBuilder,
-    private Authservice: AuthService,
-    private userservice: UserService,
-    private toastr: ToastrService,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private userService: UserService,
+    private toastService: ToastrService,
     private dialogRef : MatDialogRef<UpdateUserDialogComponent>,
-    private sharedservice:SharedDataService
+    private sharedService:SharedDataService
   ) {}
 
 
-  updateerr: any;
-  updatesuccess: any;
-  Profilesrc: any;
+  updateError: any;
+  updateSuccess: any;
+  profileSrc: any;
   file: any;
   data: any;
   private onDestroy$: Subject<void> = new Subject<void>();
   imageChangeEvt:any;
 
-  createAccountForm = this.formbuilder.group({
+  createAccountForm = this.fb.group({
     fname: '',
     lname: '',
     profile: '',
@@ -43,11 +43,11 @@ export class UpdateUserDialogComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
+    this.userService.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
       if(res){
       this.data = res;
       if (this.data) {
-        this.setupdatevalue();
+        this.setUpdateValue();
       }
       }
     });
@@ -56,12 +56,12 @@ export class UpdateUserDialogComponent implements OnInit {
   onFileChange(e: any) {
     this.imageChangeEvt = e;
     this.file = e.target.files[0];
-    this.Profilesrc = '';
+    this.profileSrc = '';
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 
@@ -77,28 +77,28 @@ export class UpdateUserDialogComponent implements OnInit {
   };
 
   updateUser() {
-    // this.Authservice.
-    let formdata = new FormData();
-    formdata.append('fname', this.createAccountForm.get('fname')?.value);
-    formdata.append('lname', this.createAccountForm.get('lname')?.value);
-    formdata.append('profile', this.file);
-    formdata.append(
+    // this.authService.
+    let formData = new FormData();
+    formData.append('fname', this.createAccountForm.get('fname')?.value);
+    formData.append('lname', this.createAccountForm.get('lname')?.value);
+    formData.append('profile', this.file);
+    formData.append(
       'birthOfDate',
-      this.Changebirth?this.sharedservice.getSelectedDate(this.createAccountForm.value,'birthOfDate'):this.data.birthOfDate
+      this.Changebirth?this.sharedService.getSelectedDate(this.createAccountForm.value,'birthOfDate'):this.data.birthOfDate
     );
-    formdata.append('gender', this.createAccountForm.get('gender')?.value);
+    formData.append('gender', this.createAccountForm.get('gender')?.value);
 
-    this.Authservice.updateUser(formdata, this.data._id).subscribe(
+    this.authService.updateUser(formData, this.data._id).subscribe(
       (res) => {
-        this.updatesuccess = 'Update Data Successfully';
-        this.updateerr = null;
-        this.sharedservice.updatedUserDetails.next(true);
-        this.toastr.success('Profile Updated SucceesFully ', 'Success!');
+        this.updateSuccess = 'Update Data Successfully';
+        this.updateError = null;
+        this.sharedService.updatedUserDetails.next(true);
+        this.toastService.success('Profile Updated SuccessFully ', 'Success!');
         this.dialogRef.close();
       },
       (err) => {
-        this.updatesuccess = null;
-        this.updateerr = err.error;
+        this.updateSuccess = null;
+        this.updateError = err.error;
         console.log(err);
       }
     );
@@ -108,7 +108,7 @@ export class UpdateUserDialogComponent implements OnInit {
     this.Changebirth = true;
   }
 
-  setupdatevalue() {
+  setUpdateValue() {
     let arr = this.data.name.split('  ');
     this.createAccountForm.patchValue({
       fname: arr[0],
@@ -119,9 +119,9 @@ export class UpdateUserDialogComponent implements OnInit {
     });
 
     if (this.data.profileUrl) {
-      this.Profilesrc = 'http://localhost:2000' + this.data.profileUrl;
+      this.profileSrc = 'http://localhost:2000' + this.data.profileUrl;
     } else {
-      this.Profilesrc = 'http://localhost:2000/assets/images/userdefault.png';
+      this.profileSrc = 'http://localhost:2000/assets/images/userdefault.png';
     }
   }
   

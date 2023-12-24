@@ -8,14 +8,14 @@ import { SharedDataService } from '../services/shared-data.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor( private sharedservice : SharedDataService , private toast:ToastrService , private route:Router ){
+  constructor( private sharedService : SharedDataService , private toast:ToastrService , private route:Router ){
 
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if(this.sharedservice.isLoginUser()){
+      if(this.sharedService.isLoginUser()){
         return true;
       }else{
         this.toast.error('You Need To Login First','Error!');

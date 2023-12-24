@@ -2,24 +2,24 @@
 <div>
     <div class="">
         <div class="">
-            <div *ngIf="moderdata" class="modal-header">
-                <p> <span class="m-3"> <strong> All </strong> {{moderdata.likeCounts}} </span> <span class="m-3"><i
-                            class="fa fa-thumbs-up text-primary" aria-hidden="true"></i>{{moderdata.likeCounts}} </span>
+            <div *ngIf="modelData" class="modal-header">
+                <p> <span class="m-3"> <strong> All </strong> {{modelData.likeCounts}} </span> <span class="m-3"><i
+                            class="fa fa-thumbs-up text-primary" aria-hidden="true"></i>{{modelData.likeCounts}} </span>
                 </p>
                 <button type="button" class="btn-close"  mat-dialog-close aria-label="Close"></button>
             </div>
             <!-- {{item.user|json}} -->
-            <div *ngIf="moderdata" class="modal-body"  style="max-height: 350px; overflow-y: auto;">
-                <ul *ngFor="let user of moderdata.getlikes" class="list-group list-group-flush">
+            <div *ngIf="modelData" class="modal-body"  style="max-height: 350px; overflow-y: auto;">
+                <ul *ngFor="let user of modelData.getLikes" class="list-group list-group-flush">
                     <li  class="list-group-item">
-                        <div (click)="navicateUser(user.userclick_id.userToken)" class="d-flex btnPointer">
+                        <div (click)="navigateUser(user.userClickId.userToken)" class="d-flex btnPointer">
                             <div><img
                                     height="38" width="38" style="border-radius: 19px;object-fit: cover;"
-                                    [src]="user.userclick_id.profileUrl ? 'http://localhost:2000'+user.userclick_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
+                                    [src]="user.userClickId.profileUrl ? 'http://localhost:2000'+user.userClickId.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
                                    ></div>
                             <i class="fa fa-thumbs-up text-primary mt-4" aria-hidden="true"></i>
                             <div style="text-decoration: none; color: black;" class=" mt-2 mx-3">
-                                <p class=""> {{user.userclick_id.name}}</p>
+                                <p class=""> {{user.userClickId.name}}</p>
                             </div>
                         </div>
                     </li>

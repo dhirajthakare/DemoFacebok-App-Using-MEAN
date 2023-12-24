@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const usersechma = mongoose.Schema({
+const likeSchema = mongoose.Schema({
     likeStatus:{type:String},
     post_photo_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'post_photos' },
     user_id:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
-    userclick_id:
+    userClickId:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' },
 },{ timestamps: true 
 })
 
-module.exports = mongoose.model('likes',usersechma);
+module.exports = mongoose.model('likes',likeSchema);

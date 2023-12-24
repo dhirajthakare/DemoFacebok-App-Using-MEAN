@@ -11,7 +11,7 @@ import { UserService } from 'src/app/common/services/user.service';
 export class AllPhotosComponent implements OnInit {
   
   constructor(
-    private userservice:UserService,
+    private userService:UserService,
     private sharedService:SharedDataService
   ) { }
 
@@ -21,13 +21,13 @@ allPosts:any;
 destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | Photos');
+    this.sharedService.changeTitle('DeskBook | Photos');
 
-    this.userservice.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
+    this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
       if(res){
       this.loginUserDetails=res;  
       if(this.loginUserDetails){
-        this.oninitgetdata();
+        this.onInitGetData();
       }
       }
 
@@ -35,9 +35,9 @@ destroy$:Subject<void> = new Subject<void>();
 
   }
 
-  oninitgetdata(){
+  onInitGetData(){
 
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
+    this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
       if(res){
         this.currentVisitedUserDetails = res;
       if(this.currentVisitedUserDetails){
@@ -48,7 +48,7 @@ destroy$:Subject<void> = new Subject<void>();
   }
 
   getpost(){
-    this.userservice.getCurrentUserPost(this.currentVisitedUserDetails._id,this.loginUserDetails._id).subscribe((res: any)=>{ 
+    this.userService.getCurrentUserPost(this.currentVisitedUserDetails._id,this.loginUserDetails._id).subscribe((res: any)=>{ 
       if(res){
       this.allPosts=res;
       }

@@ -2,7 +2,7 @@
     <div class="card-body">
         <h4>Intro</h4>
         <div>
-            <button *ngIf="(loginUserDetails && currentVisitedUserDetails) && (loginUserDetails._id==currentVisitedUserDetails._id)"  class="form-control  " (click)="openeditProfileComponant()">Edit Profile Details</button><br>
+            <button *ngIf="(loginUserDetails && currentVisitedUserDetails) && (loginUserDetails._id==currentVisitedUserDetails._id)"  class="form-control  " (click)="openEditProfileComponent()">Edit Profile Details</button><br>
         </div>
         <div *ngIf="currentVisitedUserDetails && currentVisitedUserDetails.user_info">
         <p *ngIf="currentVisitedUserDetails.user_info.workplace"> <span><i class="fa fa-briefcase"></i></span> {{ currentVisitedUserDetails.user_info.workplace}}<p>

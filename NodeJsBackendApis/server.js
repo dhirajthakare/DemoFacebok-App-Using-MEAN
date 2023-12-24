@@ -14,9 +14,9 @@ const port = 2000 || process.env.PORT;
 
 app.use("/assets", express.static("assets"));
 
-const connect = require("./server/database/dbconfig");
+const connect = require("./server/database/db-config");
 
-const Mailconnect = require("./server/database/mailConnection");
+const mailConnect = require("./server/database/mail-connection");
 
 const router = require("./server/routes/routes");
 app.use(router);
@@ -34,8 +34,8 @@ const options = {
 
 app.use("/peerjs", ExpressPeerServer(httpServer, options));
 
-const socketio = require("./server/controller/socketIoController");
-socketio.io(io);
+const socketIo = require("./server/controller/socket-Io.controller");
+socketIo.io(io);
 
 httpServer.listen(port, () => {
   console.log(`server Running on http://localhost:${port}`);

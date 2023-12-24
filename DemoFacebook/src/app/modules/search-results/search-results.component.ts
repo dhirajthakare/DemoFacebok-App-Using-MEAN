@@ -17,16 +17,16 @@ export class SearchResultsComponent implements OnInit {
     private sharedService:SharedDataService
   
     ) { }
-    searchbox:any;
+    searchBox:any;
     ngOnInit(): void {
-      this.sharedService.changeTitle('Deskbook | Search');
+      this.sharedService.changeTitle('DeskBook | Search');
   
       this.router.queryParams.subscribe(res=>{
         if(res){
-        this.searchbox = res;
-        this.searchbox = this.searchbox.q;
-        if(this.searchbox){
-          this.friendship.serchbox.next(this.searchbox);
+        this.searchBox = res;
+        this.searchBox = this.searchBox.q;
+        if(this.searchBox){
+          this.friendship.searchBox.next(this.searchBox);
         }
         }
   

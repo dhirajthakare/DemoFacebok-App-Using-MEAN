@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import { StorieService } from 'src/app/common/services/storie.service';
+import { StoriesService } from 'src/app/common/services/stories.service';
 import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
@@ -14,21 +14,21 @@ import { UserService } from 'src/app/common/services/user.service';
 })
 export class CreateStoriesComponent implements OnInit {
   constructor(
-    private userservice: UserService,
-    private storymanage: StorieService,
+    private userService: UserService,
+    private storyManage: StoriesService,
     private router: Router,
-    private toastr: ToastrService,
+    private toastService: ToastrService,
     private location: Location
   ) {}
   loginUserDetails: any;
-  storysrc: any;
+  storySrc: any;
   file: any;
   imageChangeEvt:any;
-  destoy$: Subject<void> = new Subject<void>();
+  destroySubject: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.userservice.currentLoginUser
-      .pipe(takeUntil(this.destoy$))
+    this.userService.currentLoginUser
+      .pipe(takeUntil(this.destroySubject))
       .subscribe((res: any) => {
         if (res) {
           this.loginUserDetails = res;
@@ -36,21 +36,21 @@ export class CreateStoriesComponent implements OnInit {
       });
   }
 
-  onFilechangestory(e: any) {
+  onFileChangeStory(e: any) {
     this.imageChangeEvt = e;
     this.file = e.target.files[0];
     if (e.target.files) {
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
-        this.storysrc = event.target.result;
+        this.storySrc = event.target.result;
       };
     }
   }
 
   cropImg(event: ImageCroppedEvent) {
-    let croppImgPriview:any = event.base64;
-    let File = base64ToFile(croppImgPriview);
+    let cropsImgPreview:any = event.base64;
+    let File = base64ToFile(cropsImgPreview);
     this.file = this.blobToFile(File, this.file.name);
   }
 
@@ -66,16 +66,16 @@ export class CreateStoriesComponent implements OnInit {
   };
 
 
-  oncreatestory() {
-    let formdata = new FormData();
-    formdata.append('user_id', this.loginUserDetails._id);
-    formdata.append('storyUrl', this.file);
+  onCreateStory() {
+    let formData = new FormData();
+    formData.append('user_id', this.loginUserDetails._id);
+    formData.append('storyUrl', this.file);
 
-    this.storymanage.createstory(formdata).subscribe(
+    this.storyManage.createStory(formData).subscribe(
       (res) => {
-        this.storysrc = '';
+        this.storySrc = '';
         this.file = '';
-        this.toastr.success('Story Created Successfully ', 'Success!');
+        this.toastService.success('Story Created Successfully ', 'Success!');
         this.location.back();
       },
       (err) => {
@@ -85,6 +85,6 @@ export class CreateStoriesComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.destoy$.next();
+    this.destroySubject.next();
   }
 }

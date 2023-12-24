@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { FriendService } from 'src/app/common/services/friend.service';
-import { StorieService } from 'src/app/common/services/storie.service';
+import { StoriesService } from 'src/app/common/services/stories.service';
 import { UserService } from 'src/app/common/services/user.service';
 import { ShowStoriesDialogComponent } from '../show-stories-dialog/show-stories-dialog.component';
 
@@ -13,10 +13,10 @@ import { ShowStoriesDialogComponent } from '../show-stories-dialog/show-stories-
 })
 export class ShowStoriesComponent implements OnInit {
   constructor(
-    private userservice: UserService,
-    private storymanage: StorieService,
+    private userService: UserService,
+    private storyManage: StoriesService,
     private friend: FriendService,
-    private matdialog : MatDialog
+    private matDialogRef : MatDialog
   ) {}
 
   @Input('loginUserId') loginUserId: any;
@@ -24,16 +24,16 @@ export class ShowStoriesComponent implements OnInit {
   unSubscribeLoginUser: Subscription | any;
 
   ngOnInit(): void {
-    this.getcurrentLoginUser();
+    this.getCurrentLoginUser();
     this.getAllUserId(this.loginUserId);
   }
 
-  allstory: any;
-  userstory: any;
-  userFriensStory: any;
+  allStories: any;
+  userStories: any;
+  userFriendsStory: any;
 
-  getcurrentLoginUser() {
-    this.unSubscribeLoginUser = this.userservice.currentLoginUser.subscribe(
+  getCurrentLoginUser() {
+    this.unSubscribeLoginUser = this.userService.currentLoginUser.subscribe(
       (res: any) => {
         if (res) {
           this.LoginUserDetails = res;
@@ -42,12 +42,12 @@ export class ShowStoriesComponent implements OnInit {
     );
   }
 
-  getstories() {
-    this.storymanage.getstory(this.loginUserId, this.friendsId).subscribe(
+  getStories() {
+    this.storyManage.getStories(this.loginUserId, this.friendsId).subscribe(
       (res) => {
-        this.allstory = res;
-        this.userstory = this.allstory[0].userstories;
-        this.userFriensStory = this.allstory[1].userFriendStories;
+        this.allStories = res;
+        this.userStories = this.allStories[0].userStories;
+        this.userFriendsStory = this.allStories[1].userFriendStories;
       },
       (err) => {
         console.log(err);
@@ -71,7 +71,7 @@ export class ShowStoriesComponent implements OnInit {
             }
             // this.friend.userLoginFriendsId.next(this.friendsId);
             if(this.friendsId){
-              this.getstories();
+              this.getStories();
             }
           }
         }
@@ -82,9 +82,9 @@ export class ShowStoriesComponent implements OnInit {
     );
   }
 
-  openSilder(allstory:any,selctedIndex:any){
+  openSilder(allStories:any,selectedIndex:any){
 
-    this.matdialog.open(ShowStoriesDialogComponent,
+    this.matDialogRef.open(ShowStoriesDialogComponent,
      {
        maxWidth: '600px',
        maxHeight: '600px',
@@ -93,8 +93,8 @@ export class ShowStoriesComponent implements OnInit {
 
        panelClass: 'custom-modalbox',
        data: {
-        allstory: allstory,
-        selctedIndex: selctedIndex
+        allStories: allStories,
+        selectedIndex: selectedIndex
       }
      });
  

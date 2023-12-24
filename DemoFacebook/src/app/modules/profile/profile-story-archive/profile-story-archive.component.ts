@@ -11,15 +11,15 @@ import { UserService } from 'src/app/common/services/user.service';
 export class ProfileStoryArchiveComponent implements OnInit {
 
   constructor(
-    private userservice:UserService,
+    private userService:UserService,
     private sharedService:SharedDataService
   ) { }
   currentVisitedUserDetails:any;
   destroy$:Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.sharedService.changeTitle('Deskbook | Archive');
-    this.userservice.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
+    this.sharedService.changeTitle('DeskBook | Archive');
+    this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any)=>{
       this.currentVisitedUserDetails = res;
   })
 

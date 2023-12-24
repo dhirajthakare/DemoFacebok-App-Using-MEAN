@@ -13,7 +13,7 @@ export class CreatePostComponent implements OnInit {
 
   
   constructor(private dialog: MatDialog , private service : UserService) { }
-  loginuserDetails: any;
+  loginUserDetails: any;
   unSubscribeLoginUser: Subscription | any;
 
   ngOnInit(): void {
@@ -23,7 +23,7 @@ export class CreatePostComponent implements OnInit {
   getLoginUser(){
     this.unSubscribeLoginUser = this.service.currentLoginUser.subscribe((res: any)=>{
       if(res){
-        this.loginuserDetails = res;
+        this.loginUserDetails = res;
       }
     })
   }
@@ -35,12 +35,12 @@ export class CreatePostComponent implements OnInit {
 
 
   addEmoji(event: any) {
-   this.addstatus =  this.addstatus + event.emoji.native;
+   this.addStatus =  this.addStatus + event.emoji.native;
     
   }
 
     //Emoji for Create Post 
-    addstatus: any = "";
+    addStatus: any = "";
     createPostEmojiPicker: boolean = false;
   
     toggleEmojiPicker() {
@@ -52,11 +52,11 @@ export class CreatePostComponent implements OnInit {
     this.createPostEmojiPicker = false;
     let dialogRef = this.dialog.open(CreatePostDialogComponent , {
       width: '600px',
-      data: {...this.loginuserDetails , ...{addstatus:this.addstatus}}
+      data: {...this.loginUserDetails , ...{addStatus:this.addStatus}}
     });
 
     dialogRef.afterClosed().subscribe((res:any) => {
-      this.addstatus=res;
+      this.addStatus=res;
     });
   }
 

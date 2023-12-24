@@ -12,7 +12,7 @@ declare var Peer: any;
 export class TakeCallComponent implements OnInit {
   constructor(
     private socket: TakeCallService,
-    private activerouter: ActivatedRoute,
+    private activeRouter: ActivatedRoute,
     private route: Router
   ) {}
 
@@ -28,10 +28,10 @@ export class TakeCallComponent implements OnInit {
   callUser: any;
   private onDestroy$: Subject<void> = new Subject<void>();
   ngOnInit(): void {
-    this.activerouter.queryParams.subscribe((res: any) => {
+    this.activeRouter.queryParams.subscribe((res: any) => {
       if (res) {
         this.friendDetails = JSON.parse(atob(res.frienddetails));
-        this.callUser = atob(res.calluser);
+        this.callUser = atob(res.callUser);
         console.log(this.friendDetails,this.callUser);
         this.LoginUserDetails = JSON.parse(atob(res.frienddetails));
         this.myVideo.muted = true;
@@ -47,7 +47,7 @@ export class TakeCallComponent implements OnInit {
 
   getLatestConnectedUser() {
     this.socket
-      .getConnecteduser()
+      .getConnectedUser()
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res) => {
         if (res) {
@@ -84,7 +84,7 @@ export class TakeCallComponent implements OnInit {
       .then((stream: any) => {
         this.myVideoStream = stream;
 
-        this.addVideoStream(this.myVideo, stream, 'loginuser');
+        this.addVideoStream(this.myVideo, stream, 'loginUser');
 
         this.peer.on('call', (call: any) => {
           console.log(call);
@@ -101,13 +101,13 @@ export class TakeCallComponent implements OnInit {
       });
   }
 
-  addVideoStream(myVideo: any, stream: any, loginuser: any = '') {
+  addVideoStream(myVideo: any, stream: any, loginUser: any = '') {
     myVideo.srcObject = stream;
-    if (loginuser == 'loginuser') {
+    if (loginUser == 'loginUser') {
       myVideo.setAttribute('id', 'currentUser');
     }
-    if (loginuser && loginuser != 'loginuser') {
-      myVideo.setAttribute('id', loginuser);
+    if (loginUser && loginUser != 'loginUser') {
+      myVideo.setAttribute('id', loginUser);
     }
     myVideo.addEventListener('loadedmetadata', () => {
       myVideo.play();
@@ -160,7 +160,7 @@ export class TakeCallComponent implements OnInit {
   textMessage: any;
   sendMessage() {
     if (this.textMessage) {
-      this.socket.sendmessage(this.textMessage);
+      this.socket.sendMessage(this.textMessage);
       this.textMessage = '';
     }
   }

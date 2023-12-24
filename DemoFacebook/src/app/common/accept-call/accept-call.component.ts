@@ -9,18 +9,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class AcceptCallComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private matdiaref: MatDialogRef<AcceptCallComponent>
+    private matDiaRef: MatDialogRef<AcceptCallComponent>
   ) {}
 
   ngOnInit(): void {}
 
   acceptCall() {
-    let newUrl = this.data.chatURL.split('&')[0] + `&&calluser=${btoa('receivedCall')}`;
+    let newUrl = this.data.chatURL.split('&')[0] + `&&callUser=${btoa('receivedCall')}`;
     window.open(`${newUrl}`, 'popup', 'width=1000,height=1000');
-    this.matdiaref.close();
+    this.matDiaRef.close();
   }
 
   rejectCall() {
-    this.matdiaref.close();
+    this.matDiaRef.close();
   }
 }
