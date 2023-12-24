@@ -1,14 +1,14 @@
 // All modal imported
 var userModel = require('../model/users');
 var postModal = require("../model/post-photos");
-var friendsModal = require('../model/friends-users');
+var friendsModal = require('../model/user_friend_mapping');
 
 
 // Add friends 
 exports.addFriend = (req,res)=>{
 
-    friendsModal.findOne({user_id:req.params.uid,friend_id:req.params.fid,friendStatus:'Pending'}).then(responce=>{
-        if(responce){
+    friendsModal.findOne({user_id:req.params.uid,friend_id:req.params.fid,friendStatus:'Pending'}).then(response=>{
+        if(response){
             res.json(" Already send request  ");
         }else{
             // res.json("wrong")
@@ -40,7 +40,7 @@ exports.addFriend = (req,res)=>{
     //Accept Friend Request
     exports.acceptFriendRequest = (req,res)=>{
     
-         var finduser = friendsModal.findOne({user_id:req.params.uid,friend_id:req.params.fid , friendStatus:'Accepted'}).then(response=>{
+         var findUser = friendsModal.findOne({user_id:req.params.uid,friend_id:req.params.fid , friendStatus:'Accepted'}).then(response=>{
                 // res.json(response);
     
                 if(response){

@@ -34,7 +34,9 @@ export class DisplayPostComponent implements OnInit {
   private onDestroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
-    this.sharedService.postSavedSource.pipe(takeUntil(this.onDestroy$)).subscribe((res) => {
+    this.sharedService.postSavedSource
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res) => {
         if (res) {
           this.getCurrentUserPost();
           this.sharedService.postSavedSource.next(false);
@@ -46,28 +48,30 @@ export class DisplayPostComponent implements OnInit {
 
   getLoginUserDetails() {
     this.Loader = true;
-    this.userService.currentLoginUser.pipe(takeUntil(this.onDestroy$)).subscribe(
-      (res: any) => {
+    this.userService.currentLoginUser
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res: any) => {
         if (res) {
           this.loginUserDetails = res;
           if (this.loginUserDetails) {
             if (this.PostLocation == 'Profile') {
               this.initializeData();
-            }else if (this.PostLocation == 'Main'){
+            } else if (this.PostLocation == 'Main') {
               this.getAllFriendsPost();
             }
           }
         }
-      }
-    );
+      });
   }
 
   currentUser: any;
   initializeData() {
-    this.userService.currentVisitedUser.pipe(takeUntil(this.onDestroy$)).subscribe((res: any) => {
-        if(res){
-        this.currentUser = res;
-        this.getCurrentUserPost();
+    this.userService.currentVisitedUser
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res: any) => {
+        if (res) {
+          this.currentUser = res;
+          this.getCurrentUserPost();
         }
       });
   }
@@ -75,14 +79,13 @@ export class DisplayPostComponent implements OnInit {
   dataSubtitle: any;
   getCurrentUserPost() {
     if (this.PostLocation == 'Profile') {
-      
       this.dataSubtitle = this.userService
         .getCurrentUserPost(this.currentUser._id, this.loginUserDetails._id)
         .subscribe(
           (res) => {
-            if(res){
-            this.Loader = false;
-            this.allPosts = res;
+            if (res) {
+              this.Loader = false;
+              this.allPosts = res;
             }
           },
           (err) => {
@@ -97,23 +100,25 @@ export class DisplayPostComponent implements OnInit {
 
   friendsId: any;
   getAllFriendsPost() {
-    this.friend.userLoginFriendsId.pipe(takeUntil(this.onDestroy$)).subscribe((res) => {
-      if(res){
-        this.friendsId = res;
-      if (this.friendsId) {
-        this.friend.getAllFriendsPost(this.friendsId).subscribe(
-          (res) => {
-            this.Loader = false;
-            this.allPosts = res;
-          },
-          (err) => {
-            this.Loader = false;
-            console.log(err);
+    this.friend.userLoginFriendsId
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((res) => {
+        if (res) {
+          this.friendsId = res;
+          if (this.friendsId) {
+            this.friend.getAllFriendsPost(this.friendsId).subscribe(
+              (res) => {
+                this.Loader = false;
+                this.allPosts = res;
+              },
+              (err) => {
+                this.Loader = false;
+                console.log(err);
+              }
+            );
           }
-        );
-      }
-      }
-    });
+        }
+      });
   }
 
   isLikeClick: boolean = false;
@@ -141,7 +146,6 @@ export class DisplayPostComponent implements OnInit {
   comment: any = [];
   checkPostId: any;
   onComments(item: any) {
-
     if (this.comment.includes(item._id)) {
       this.comment.forEach((value: number, index: any) => {
         if (value == item._id) this.comment.splice(index, 1);
@@ -165,11 +169,9 @@ export class DisplayPostComponent implements OnInit {
     setTimeout(() => {
       this.commentFocus.nativeElement.focus();
     }, 0);
-
   }
 
   createComment(comment: any, item: any) {
-
     let FormData = {
       comment: comment.value,
       post_photo_id: item._id,
@@ -245,7 +247,7 @@ export class DisplayPostComponent implements OnInit {
     });
   }
 
-  TrackByFunc(index:number,item:any){
+  TrackByFunc(index: number, item: any) {
     return item._id;
   }
 

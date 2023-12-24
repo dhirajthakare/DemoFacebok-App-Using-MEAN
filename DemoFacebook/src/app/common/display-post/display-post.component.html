@@ -1,146 +1,253 @@
-
-<div style="margin-top: 5%;" *ngIf="Loader" class=" text-center">
-    <img  src="../../assets/loader.gif" alt="">
+<div style="margin-top: 5%" *ngIf="Loader" class="text-center">
+  <img src="../../assets/loader.gif" alt="" />
 </div>
-<!-- <app-createpost></app-createpost> -->
 <div *ngIf="!Loader && allPosts">
-    <div *ngFor=" let item of allPosts;trackBy:TrackByFunc" class="row mt-md-2">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class=" col-1">
-                        <div [routerLink]="'/profile/'+item.postUser.userToken" class="btnPointer">
-                            <img
-                                height="50" width="50" style="border-radius: 25px;object-fit: cover;"
-                                [src]="item.postUser.profileUrl ? 'http://localhost:2000'+item.postUser.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                >
-                        </div>
-                    </div>
-                    <div class="col-6 profileSection">
-                        <span [routerLink]="'/profile/'+item.postUser.userToken" class="btnPointer"><span class="">
-                                {{item.postUser.name}}</span></span>
-                        <p title="Public">{{item.createdAt | date:'medium'}} <i class="fa fa-firefox"
-                                aria-hidden="true"></i>
-                        </p>
-                    </div>
-                    <div *ngIf="loginUserDetails._id == item.postUser._id" class="col-1 offset-3">
-    
-                        <div class="nav-item  dropstart mx-md-2">
-                            <a style="font-size: 19px;" class="nav-link active text-dark" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu btnPointer" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item"  (click)="UpdatePostDialog(item)">Edit Post</a></li>
-                                <li><a class="dropdown-item" (click)="deletePost(item)">Delete Post</a></li>
-    
-                            </ul>
-                        </div>
-    
-    
-                    </div>
-                </div>
-                <div class="row">
-    
-                    <div class="col-md-12">
-                        <p title="Public">{{item.status}}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div (dblclick)="likePost(item._id,item.postUser._id)" class="btnPointer"><img height="460" width="100%"
-                            style=" object-fit: contain;" src="http://localhost:2000{{item.postUrl}}"></div>
-    
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createLike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getLikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getLikes =='' ">{{item.likeCounts}}</span> </p> -->
-                        <p (click)="likeDialog(item)"> <i
-                                class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> {{ CheckUserLike(item.getLikes,loginUserDetails._id) &&
-                            item.likeCounts ==1 ? 'You' : CheckUserLike(item.getLikes,loginUserDetails._id) && item.likeCounts > 1 ? 'You And
-                            '+(item.likeCounts - 1)+' Others ' : item.likeCounts }} </p>
-    
-                    </div>
-                    <div class="col-md-3 offset-md-3">
-                        <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createLike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getLikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getLikes =='' ">{{item.likeCounts}}</span> </p> -->
-                        <p (click)="onComments(item)"> <span *ngIf=" item.commentCounts > 0 ">{{item.commentCounts}}
-                                Comments</span> </p>
-    
-                    </div>
-    
-                </div>
-    
-                <hr>
-                <div class="row">
-                    <button [disabled]="isLikeClick" (click)="likePost(item._id,item.postUser._id)" [class.text-primary]="CheckUserLike(item.getLikes,loginUserDetails._id) "
-                        class=" btn col"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
-                    <button (click)="addComment(item)" class="btn col"><i class="fa fa-comment" aria-hidden="true"></i>
-                        Comment</button>
-                    <button class="btn col"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</button>
-    
-    
-                </div>
-                <hr>
-                <div style="max-height:110px" *ngIf="comment.includes(item._id)" class="row overflow-auto ">
-    
-                    <div *ngFor="let comments of item.postComments" class="row">
-                        <div style="font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;"
-                            class="d-flex">
-                            <div class="mt-3 mx-2">
-                                <div><img
-                                        height="35" width="35" style="border-radius: 17px; object-fit: cover;"
-                                        [src]="comments.user_commented_id.profileUrl ? 'http://localhost:2000'+comments.user_commented_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                       >
-                            </div>
-                            </div>
-                            <div  style="background-color: rgb(245, 242, 246); border-radius: 18px;height: 56px;"
-                                class="px-2 mt-md-2">
-                                <div style="justify-content: center;" class="d-flex ">
-                                    <div class="p-1"> <span style="font-weight: bold;">{{comments.user_commented_id.name}}
-                                        </span> <span *ngIf="loginUserDetails._id==comments.user_commented_id._id"
-                                            (click)="deleteComment(comments._id,item._id)" class="ms-2 btnPointer"><i
-                                                class="fa fa-times" aria-hidden="true"></i></span>
-                                        <br>
-                                        <span class="">{{comments.comment}} </span>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
-                    </div>
-                    <div  *ngIf="checkPostId==item._id"  class="row">
-                        <div class="d-flex">
-                            <div class=" mx-2 mt-2">
-                                <div>
-                                    <img
-                                        height="37" width="37" style="border-radius: 18px; object-fit: cover;"
-                                        [src]="loginUserDetails.profileUrl ? 'http://localhost:2000'+loginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'"
-                                       >
-                            </div>
-                            </div>
-                            <div  class="col-md-11 mt-md-2">
-                                <div class="d-flex col-md-12">
-                                    <div class="input-group m-1">
-                                        <input  (focus)="onFocus()" #comment (keyup.enter)="createComment(comment,item)"
-                                        style="border-top-left-radius:  23px; border-bottom-left-radius:  23px;" class="form-control" type="search"
-                                        placeholder="Write a Comment..."  [(ngModel)]="addComments">
-                                        <span (click)="commentToggleEmojiPicker()" style="border-top-right-radius:  23px; border-bottom-right-radius:  23px;" class=" input-group-text btnPointer">😀</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <emoji-mart *ngIf="commentEmojiPicker" (emojiSelect)="addEmojiUPOnComment($event)"  class="emoji-mart"  set="twitter" emoji="point_up"  title="Add Your Emojis" [style]="{ position: 'absolute', bottom: '8%', right: '5%' }"></emoji-mart>
-    
-    
-                </div>
+  <div *ngFor="let item of allPosts; trackBy: TrackByFunc" class="row mt-md-2">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-1">
+            <div
+              [routerLink]="'/profile/' + item.postUser.userToken"
+              class="btnPointer"
+            >
+              <img
+                height="50"
+                width="50"
+                style="border-radius: 25px; object-fit: cover"
+                [src]="
+                  item.postUser.profileUrl
+                    ? 'http://localhost:2000' + item.postUser.profileUrl
+                    : 'http://localhost:2000/assets/images/userdefault.png'
+                "
+              />
             </div>
+          </div>
+          <div class="col-6 profileSection">
+            <span
+              [routerLink]="'/profile/' + item.postUser.userToken"
+              class="btnPointer"
+              ><span class=""> {{ item.postUser.name }}</span></span
+            >
+            <p title="Public">
+              {{ item.createdAt | date : "medium" }}
+              <i class="fa fa-firefox" aria-hidden="true"></i>
+            </p>
+          </div>
+          <div
+            *ngIf="loginUserDetails._id == item.postUser._id"
+            class="col-1 offset-3"
+          >
+            <div class="nav-item dropstart mx-md-2">
+              <a
+                style="font-size: 19px"
+                class="nav-link active text-dark"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </a>
+              <ul
+                class="dropdown-menu btnPointer"
+                aria-labelledby="navbarDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" (click)="UpdatePostDialog(item)"
+                    >Edit Post</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="deletePost(item)"
+                    >Delete Post</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div>
-    
+        <div class="row">
+          <div class="col-md-12">
+            <p title="Public">{{ item.status }}</p>
+          </div>
         </div>
-    
-    
-    </div>
-</div>
+        <div class="row">
+          <div
+            (dblclick)="likePost(item._id, item.postUser._id)"
+            class="btnPointer"
+          >
+            <img
+              height="460"
+              width="100%"
+              style="object-fit: contain"
+              src="http://localhost:2000{{ item.postUrl }}"
+            />
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createLike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getLikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getLikes =='' ">{{item.likeCounts}}</span> </p> -->
+            <p (click)="likeDialog(item)">
+              <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i>
+              {{
+                CheckUserLike(item.getLikes, loginUserDetails._id) &&
+                item.likeCounts == 1
+                  ? "You"
+                  : CheckUserLike(item.getLikes, loginUserDetails._id) &&
+                    item.likeCounts > 1
+                  ? "You And
+                            " +
+                    (item.likeCounts - 1) +
+                    " Others "
+                  : item.likeCounts
+              }}
+            </p>
+          </div>
+          <div class="col-md-3 offset-md-3">
+            <!-- <p (click)="onclick(item)"  data-bs-toggle="modal" data-bs-target="#createLike"> <i class="fa fa-thumbs-up text-primary" aria-hidden="true"></i> <span *ngIf="item.getLikes !='' " > You And {{item.likeCounts - 1}} Others  </span> <span *ngIf="item.getLikes =='' ">{{item.likeCounts}}</span> </p> -->
+            <p (click)="onComments(item)">
+              <span *ngIf="item.commentCounts > 0"
+                >{{ item.commentCounts }} Comments</span
+              >
+            </p>
+          </div>
+        </div>
 
+        <hr />
+        <div class="row">
+          <button
+            [disabled]="isLikeClick"
+            (click)="likePost(item._id, item.postUser._id)"
+            [class.text-primary]="
+              CheckUserLike(item.getLikes, loginUserDetails._id)
+            "
+            class="btn col"
+          >
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like
+          </button>
+          <button (click)="addComment(item)" class="btn col">
+            <i class="fa fa-comment" aria-hidden="true"></i> Comment
+          </button>
+          <button class="btn col">
+            <i class="fa fa-share-alt" aria-hidden="true"></i> Share
+          </button>
+        </div>
+        <hr />
+        <div
+          style="max-height: 110px"
+          *ngIf="comment.includes(item._id)"
+          class="row overflow-auto"
+        >
+          <div *ngFor="let comments of item.postComments" class="row">
+            <div
+              style="
+                font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial,
+                  sans-serif;
+              "
+              class="d-flex"
+            >
+              <div class="mt-3 mx-2">
+                <div>
+                  <img
+                    height="35"
+                    width="35"
+                    style="border-radius: 17px; object-fit: cover"
+                    [src]="
+                      comments.user_commented_id.profileUrl
+                        ? 'http://localhost:2000' +
+                          comments.user_commented_id.profileUrl
+                        : 'http://localhost:2000/assets/images/userdefault.png'
+                    "
+                  />
+                </div>
+              </div>
+              <div
+                style="
+                  background-color: rgb(245, 242, 246);
+                  border-radius: 18px;
+                  height: 56px;
+                "
+                class="px-2 mt-md-2"
+              >
+                <div style="justify-content: center" class="d-flex">
+                  <div class="p-1">
+                    <span style="font-weight: bold"
+                      >{{ comments.user_commented_id.name }}
+                    </span>
+                    <span
+                      *ngIf="
+                        loginUserDetails._id == comments.user_commented_id._id
+                      "
+                      (click)="deleteComment(comments._id, item._id)"
+                      class="ms-2 btnPointer"
+                      ><i class="fa fa-times" aria-hidden="true"></i
+                    ></span>
+                    <br />
+                    <span class="">{{ comments.comment }} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="checkPostId == item._id" class="row">
+            <div class="d-flex">
+              <div class="mx-2 mt-2">
+                <div>
+                  <img
+                    height="37"
+                    width="37"
+                    style="border-radius: 18px; object-fit: cover"
+                    [src]="
+                      loginUserDetails.profileUrl
+                        ? 'http://localhost:2000' + loginUserDetails.profileUrl
+                        : 'http://localhost:2000/assets/images/userdefault.png'
+                    "
+                  />
+                </div>
+              </div>
+              <div class="col-md-11 mt-md-2">
+                <div class="d-flex col-md-12">
+                  <div class="input-group m-1">
+                    <input
+                      (focus)="onFocus()"
+                      #comment
+                      (keyup.enter)="createComment(comment, item)"
+                      style="
+                        border-top-left-radius: 23px;
+                        border-bottom-left-radius: 23px;
+                      "
+                      class="form-control"
+                      type="search"
+                      placeholder="Write a Comment..."
+                      [(ngModel)]="addComments"
+                    />
+                    <span
+                      (click)="commentToggleEmojiPicker()"
+                      style="
+                        border-top-right-radius: 23px;
+                        border-bottom-right-radius: 23px;
+                      "
+                      class="input-group-text btnPointer"
+                      >😀</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <emoji-mart
+            *ngIf="commentEmojiPicker"
+            (emojiSelect)="addEmojiUPOnComment($event)"
+            class="emoji-mart"
+            set="twitter"
+            emoji="point_up"
+            title="Add Your Emojis"
+            [style]="{ position: 'absolute', bottom: '8%', right: '5%' }"
+          ></emoji-mart>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>

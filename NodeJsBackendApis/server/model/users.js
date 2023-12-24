@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
     user_stories:[
         { type:mongoose.Schema.Types.ObjectId , ref:'stories' }],
     user_Friends:[
-        { type:mongoose.Schema.Types.ObjectId , ref:'friends_users' }],
+        { type:mongoose.Schema.Types.ObjectId , ref:'user_friend_mapping' }],
 
 },{ timestamps: true 
 })

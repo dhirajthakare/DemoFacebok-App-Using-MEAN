@@ -8,4 +8,4 @@ const userSchema = mongoose.Schema({
 },{ timestamps: true 
 })
 
-module.exports = mongoose.model('friends_users',userSchema);
+module.exports = mongoose.model('user_friend_mapping',userSchema);

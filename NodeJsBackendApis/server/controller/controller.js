@@ -6,7 +6,7 @@ var postModal = require("../model/post-photos");
 var likeModal = require('../model/likes');
 var commentModal = require('../model/comments');
 var storyModal = require('../model/stories');
-var friendsModal = require('../model/friends-users');
+var friendsModal = require('../model/user_friend_mapping');
 var messengerModal = require('../model/messenger');
 var transport = require('../database/mail-connection')
 
