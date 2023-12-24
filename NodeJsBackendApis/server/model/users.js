@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     profileUrl:{type:String},
     userToken:{type:String},
     user_info:
-    { type:mongoose.Schema.Types.ObjectId , ref:'userinformations' },
+    { type:mongoose.Schema.Types.ObjectId , ref:'user-details' },
     user_post:[
     { type:mongoose.Schema.Types.ObjectId , ref:'post_photos' }],
     user_stories:[
