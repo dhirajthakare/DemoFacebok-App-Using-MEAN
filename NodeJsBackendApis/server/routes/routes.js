@@ -25,7 +25,7 @@ route.post('/api/update-account/:id' ,verify ,fileUploadController.ProfilePhotoU
 
 // Forget Password
 route.post('/api/test-mail' ,service.sendTestMail);
-route.post('/api/sendmail' ,SendMailController.sendTestMail);
+route.post('/api/sendmail' ,SendMailController.sendForgotPasswordMail);
 route.post('/api/check-opt' ,SendMailController.checkOtpCode);
 route.post('/api/change-password' ,SendMailController.changePassword);
 
@@ -73,5 +73,5 @@ route.get('/api/get-message/:uid/:fid' ,verify ,MessageController.getUserMessage
 
 
 route.get('/api/all-user' ,verify ,UserController.findAllUsers);
-route.get('/api/all-userinfo' ,verify ,UserController.allUserinfo);
+route.get('/api/all-userinfo' ,verify ,UserController.allUserInfo);
 module.exports = route;

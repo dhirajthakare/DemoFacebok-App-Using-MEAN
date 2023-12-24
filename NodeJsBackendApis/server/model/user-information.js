@@ -8,7 +8,7 @@ const userInfoSchema = mongoose.Schema({
     homeTown:{type:String},
     relation:{type:String},
     website:{type:String},
-    Sociallinks:{type:String},
+    SocialLinks:{type:String},
     user:
     { type:mongoose.Schema.Types.ObjectId , ref:'users' }
 

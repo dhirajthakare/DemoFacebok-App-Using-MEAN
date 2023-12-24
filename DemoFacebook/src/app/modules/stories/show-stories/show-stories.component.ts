@@ -46,7 +46,7 @@ export class ShowStoriesComponent implements OnInit {
     this.storyManage.getStories(this.loginUserId, this.friendsId).subscribe(
       (res) => {
         this.allStories = res;
-        this.userStories = this.allStories[0].userstories;
+        this.userStories = this.allStories[0].userStories;
         this.userFriendsStory = this.allStories[1].userFriendStories;
       },
       (err) => {

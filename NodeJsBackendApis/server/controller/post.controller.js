@@ -4,78 +4,71 @@ var postModal = require("../model/post-photos");
 var likeModal = require("../model/likes");
 var commentModal = require("../model/comments");
 
-//create Post
+// create Post
 exports.createPost = async (req, res) => {
   try {
-    var file = req.file;
+    const file = req.file;
 
     if (!file) {
-      res.status(400).json("Photo Should be selected");
+      return res.status(400).json("Photo should be selected");
     }
 
-    var send = new postModal({
+    const newPost = new postModal({
       status: req.body.status,
       postUrl: "/assets/postStorage/" + file.filename,
       postUser: req.body.user_id,
     });
 
-    let createPost = await send.save();
+    const createdPost = await newPost.save();
 
-    if (createPost) {
-      let updatedUserPostId = await userModel.updateOne(
+    if (createdPost) {
+      const updatedUser = await userModel.updateOne(
         { _id: req.body.user_id },
-        {
-          $push: {
-            user_post: createPost._id,
-          },
-        }
+        { $push: { user_post: createdPost._id } }
       );
 
-      if (updatedUserPostId) {
-        res.json("Post Created  Successfully");
+      if (updatedUser) {
+        return res.json("Post created successfully");
       } else {
-        res.status(400).json("something wrong while update User Post");
+        return res
+          .status(400)
+          .json("Something went wrong while updating user post");
       }
     } else {
-      res.status(400).json(err + "Post Updated Failed ");
+      return res.status(400).json("Post creation failed");
     }
   } catch (err) {
-    res.status(400).json("something wrong while update User Post");
+    return res
+      .status(400)
+      .json("Something went wrong while updating user post");
   }
 };
 
-//Update Post
+// Update Post
 exports.updatePost = async (req, res) => {
   try {
-    var file = req.file;
-    var filename;
-    if (file) {
-      filename = "/assets/postStorage/" + file.filename;
-    }
+    const file = req.file;
+    const filename = file ? `/assets/postStorage/${file.filename}` : undefined;
 
-    let updatedPost = await postModal.updateOne(
+    const updatedPost = await postModal.updateOne(
       { _id: req.body.id },
-      {
-        $set: {
-          status: req.body.status,
-          postUrl: filename,
-        },
-      }
+      { $set: { status: req.body.status, postUrl: filename } }
     );
-    if (updatedPost.modifiedCount) {
-      res.json(" Post Updated Successfully ");
-    } else {
-      res.status(400).json(" Post updated Failed ");
-    }
+
+    res.json(
+      updatedPost.modifiedCount
+        ? "Post Updated Successfully"
+        : "Post Update Failed"
+    );
   } catch (err) {
-    res.status(400).json(" Post updated Failed ");
+    res.status(400).json("Post Update Failed");
   }
 };
 
-//Get Posts
+// Get Posts
 exports.getPost = async (req, res) => {
   try {
-    let response = await postModal
+    const response = await postModal
       .find()
       .sort({ createdAt: -1 })
       .populate([
@@ -87,174 +80,122 @@ exports.getPost = async (req, res) => {
         },
         { path: "postComments", populate: "user_commented_id" },
       ]);
-    if (response) {
-      res.json(response);
-    } else {
-      res.status(400).json("something wrong");
-    }
+
+    res.json(response || []);
   } catch (err) {
-    res.status(400).json("something wrong");
+    res.status(400).json("Something went wrong");
   }
 };
 
 //Delete Posts
 exports.deletePost = async (req, res) => {
   try {
-    let deletedPost = await postModal.deleteOne({ _id: req.params.id });
+    const deletedPost = await postModal.deleteOne({ _id: req.params.id });
     if (deletedPost.deletedCount) {
-      res.json("deleted successfully ");
+      res.json("Deleted Post ");
     } else {
-      res.status(400).json("This post is not available");
+      res.status(400).json("Post not found");
     }
   } catch (err) {
     res.status(400).json("Something Wrong Please try again ");
   }
 };
 
-//search Post
+// Search Post
 exports.searchPost = async (req, res) => {
   try {
     if (req.body.search) {
-      regex = new RegExp(req.body.search, "i");
-      let response = await postModal
-        .find({ $or: [{ status: regex }] })
+      const regex = new RegExp(req.body.search, "i");
+      const response = await postModal
+        .find({ status: regex })
         .populate("postUser");
 
-      if (response) {
-        res.json(response);
-      } else {
-        res.status(400).json(" Not found ");
-      }
+      res.json(response || []);
     } else {
-      res.json();
+      res.json([]);
     }
-  } catch {
-    res.status(400).json(" Not found ");
+  } catch (err) {
+    res.status(400).json("Not found");
   }
 };
 
-//like and dislike
-
 exports.like = async (req, res) => {
   try {
+    const { post_photo_id, user_id, userClickId } = req.body;
+
     let checkLike = await likeModal.findOne({
-      post_photo_id: req.body.post_photo_id,
-      user_id: req.body.user_id,
-      userClickId: req.body.userClickId,
+      post_photo_id,
+      user_id,
+      userClickId,
     });
 
     if (checkLike) {
-      if (checkLike.likeStatus == "like") {
-        let updateLike = await likeModal.updateOne(
-          {
-            post_photo_id: req.body.post_photo_id,
-            user_id: req.body.user_id,
-            userClickId: req.body.userClickId,
-          },
-          {
-            $set: {
-              likeStatus: "unlike",
-            },
-          }
+      const updateStatus = checkLike.likeStatus === "like" ? "unlike" : "like";
+
+      const updateLike = await likeModal.updateOne(
+        { post_photo_id, user_id, userClickId },
+        { $set: { likeStatus: updateStatus } }
+      );
+
+      if (updateLike.modifiedCount) {
+        const incValue = updateStatus === "like" ? 1 : -1;
+
+        const updatePost = await postModal.updateOne(
+          { _id: post_photo_id },
+          { $inc: { likeCounts: incValue } }
         );
-        if (updateLike.modifiedCount) {
-          let postUpdate = await postModal.updateOne(
-            { _id: req.body.post_photo_id },
-            {
-              $inc: {
-                likeCounts: -1,
-              },
-            }
-          );
-          if (postUpdate.modifiedCount) {
-            res.json("update to unlike");
-          } else {
-            res.status(400).json("error comes while update unlike count");
-          }
-        } else {
-          res.status(400).json("error come while remove like ");
-        }
-      } else if (checkLike.likeStatus == "unlike") {
-        let updateLike = await likeModal.updateOne(
-          {
-            post_photo_id: req.body.post_photo_id,
-            user_id: req.body.user_id,
-            userClickId: req.body.userClickId,
-          },
-          {
-            $set: {
-              likeStatus: "like",
-            },
-          }
-        );
-        if (updateLike.modifiedCount) {
-          let updatePost = await postModal.updateOne(
-            { _id: req.body.post_photo_id },
-            {
-              $inc: {
-                likeCounts: 1,
-              },
-            }
-          );
-          if (updatePost) {
-            res.json("update to like");
-          } else {
-            res.status(400).json("error comes while update like count");
-          }
-        } else {
-          res.status(400).json("error come while add like ");
-        }
+
+        return updatePost
+          ? res.json(`Updated to ${updateStatus}`)
+          : res
+              .status(400)
+              .json(`Error occurred while updating ${updateStatus} count`);
       } else {
-        res.status(400).json("Something Wrong");
+        return res
+          .status(400)
+          .json(`Error occurred while updating ${updateStatus}`);
       }
     } else {
-      var send = new likeModal({
+      const newLike = new likeModal({
         likeStatus: "like",
-        post_photo_id: req.body.post_photo_id,
-        user_id: req.body.user_id,
-        userClickId: req.body.userClickId,
+        post_photo_id,
+        user_id,
+        userClickId,
       });
 
-      let saveLike = await send.save();
+      const saveLike = await newLike.save();
+
       if (saveLike) {
-        let updatePost = await postModal.updateOne(
-          { _id: req.body.post_photo_id },
-          {
-            $push: {
-              getLikes: saveLike._id,
-            },
-            $inc: {
-              likeCounts: 1,
-            },
-          }
+        const updatePost = await postModal.updateOne(
+          { _id: post_photo_id },
+          { $push: { getLikes: saveLike._id }, $inc: { likeCounts: 1 } }
         );
-        if (updatePost.modifiedCount) {
-          res.json("Created like ");
-        } else {
-          res.status(400).json("Something Wrong While Update Post Like");
-        }
+
+        return updatePost.modifiedCount
+          ? res.json("Created like")
+          : res.status(400).json("Error occurred while updating Post Like");
       } else {
-        res.status(400).json("something wrong Please try Again 1");
+        return res.status(400).json("Something went wrong. Please try again");
       }
     }
   } catch (err) {
-    res.status(400).json("something wrong Please try Again 2");
+    return res.status(400).json("Something went wrong. Please try again");
   }
 };
 
 // create Comments
 exports.createComment = async (req, res) => {
   try {
-    var send = new commentModal({
+    const send = new commentModal({
       comment: req.body.comment,
       post_photo_id: req.body.post_photo_id,
       user_id: req.body.user_id,
       user_commented_id: req.body.user_commented_id,
     });
 
-    let createComment = await send.save();
+    const createComment = await send.save();
     if (createComment) {
-      let postUpdate = await postModal.updateOne(
+      const postUpdate = await postModal.updateOne(
         { _id: req.body.post_photo_id },
         {
           $push: {
@@ -265,11 +206,9 @@ exports.createComment = async (req, res) => {
           },
         }
       );
-      if (postUpdate) {
-        res.json(" Comment Added Successfully ");
-      } else {
-        res.status(400).json("Something wrong while update post comment");
-      }
+      return postUpdate
+        ? res.json(" Comment Added Successfully ")
+        : res.status(400).json("Something wrong while update post comment");
     } else {
       res.status(400).json("Something wrong please try again");
     }
@@ -278,28 +217,27 @@ exports.createComment = async (req, res) => {
   }
 };
 
-//deleteComments
 exports.deleteComment = async (req, res) => {
   try {
-    let deleteComment = await commentModal.deleteOne({ _id: req.params.cid });
-    if (deleteComment.deletedCount) {
-      let postUpdate = await postModal.updateOne(
+    const deleteCommentResult = await commentModal.deleteOne({
+      _id: req.params.cid,
+    });
+
+    if (deleteCommentResult.deletedCount) {
+      const postUpdateResult = await postModal.updateOne(
         { _id: req.params.pid },
-        {
-          $inc: {
-            commentCounts: -1,
-          },
-        }
+        { $inc: { commentCounts: -1 } }
       );
-      if (postUpdate) {
-        res.json("Deleted Comment");
-      } else {
-        res.status(400).json("error comes while update comment count");
-      }
+
+      return postUpdateResult
+        ? res.json("Deleted Comment")
+        : res.status(400).json("Error occurred while updating comment count");
     } else {
-      res.status(400).json("Something wrong while delete Comment");
+      return res
+        .status(400)
+        .json("Something went wrong while deleting Comment");
     }
   } catch (err) {
-    res.status(400).json("Something wrong");
+    return res.status(400).json("Something went wrong");
   }
 };
