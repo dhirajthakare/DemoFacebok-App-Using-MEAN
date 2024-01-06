@@ -51,4 +51,13 @@ ng update @angular/material@15
 ##### note 
 Make sure you are using node.js versions: v16 and v18.
 
+## angular update from 15 to 16
+use following command 
+
+```
+ng update @angular/core@16 @angular/cli@16
+ng update @angular/material@16
+```
+
+
 
