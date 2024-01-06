@@ -1,5 +1,8 @@
 <div
   class="main-container"
+  infiniteScroll
+  (scrolled)="onScroll()"
+  [scrollWindow]="false"
 >
   <div>
     <ul class="list-inline">
