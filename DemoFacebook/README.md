@@ -31,6 +31,16 @@ use following command
 
 ```
 ng update @angular/core@14 @angular/cli@14
+ng update @angular/material@14
+
+```
+
+## angular update from 13 to 14 
+use following command 
+
+```
+ng update @angular/core@15 @angular/cli@15
+ng update @angular/material@15
 
 ```
 
