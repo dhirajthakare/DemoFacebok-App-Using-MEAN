@@ -34,7 +34,6 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     ReactiveFormsModule,
     LoginCardModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule
