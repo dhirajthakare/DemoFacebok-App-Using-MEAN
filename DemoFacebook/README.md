@@ -35,7 +35,12 @@ ng update @angular/material@14
 
 ```
 
-## angular update from 13 to 14 
+
+##### note 
+Make sure you are using Node 14.15.0 or later
+
+
+## angular update from 14 to 15 
 use following command 
 
 ```
@@ -43,6 +48,7 @@ ng update @angular/core@15 @angular/cli@15
 ng update @angular/material@15
 
 ```
-
 ##### note 
-Make sure you are using Node 14.15.0 or later
+Make sure you are using node.js versions: v16 and v18.
+
+
