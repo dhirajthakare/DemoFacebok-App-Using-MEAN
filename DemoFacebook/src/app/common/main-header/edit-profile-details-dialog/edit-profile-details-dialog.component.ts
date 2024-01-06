@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +17,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
    
   constructor(
     private userService:UserService,
-    private fb:FormBuilder,
+    private fb:UntypedFormBuilder,
     private toastService:ToastrService,
     private dialogRef:MatDialogRef<EditProfileDetailsDialogComponent>,
     private sharedService:SharedDataService
