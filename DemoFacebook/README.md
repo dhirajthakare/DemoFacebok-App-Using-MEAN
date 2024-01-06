@@ -62,8 +62,3 @@ ng update @angular/material@16
 
 ##### note 
 1. updated package which is not supported this angular version
-
-
-
-
-
