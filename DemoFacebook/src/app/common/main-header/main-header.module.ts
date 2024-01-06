@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditProfileDetailsDialogComponent } from './edit-profile-details-dialog/edit-profile-details-dialog.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatDialogModule,
     ImageCropperModule,
+    MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule

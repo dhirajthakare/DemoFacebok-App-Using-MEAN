@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginCardModule } from 'src/app/common/login-card/login-card.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -33,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     ReactiveFormsModule,
     LoginCardModule,
+    MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule
