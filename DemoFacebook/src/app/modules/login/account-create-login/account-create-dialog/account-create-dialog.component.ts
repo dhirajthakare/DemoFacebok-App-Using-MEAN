@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { CreateAccountField } from 'src/app/common/interface/user.interface';
@@ -24,7 +24,7 @@ export class AccountCreateDialogComponent implements OnInit {
   });
   constructor(
     public service: AuthService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private toast: ToastrService,
     private dialogRef: MatDialogRef<AccountCreateDialogComponent>,
     private sharedService: SharedDataService

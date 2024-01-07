@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountCreateDialogComponent } from 'src/app/modules/login/account-create-login/account-create-dialog/account-create-dialog.component';
@@ -21,7 +21,7 @@ export class LoginCardComponent implements OnInit {
   });
   constructor(
     public service: AuthService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private dialog: MatDialog
   ) {}

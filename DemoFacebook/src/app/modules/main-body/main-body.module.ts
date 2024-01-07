@@ -36,7 +36,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     DisplayPostModule,
     BoxMessengerModule,
     FooterModule,
-    AcceptCallModule,
+    AcceptCallModule,  
     InfiniteScrollModule
   ]
 })

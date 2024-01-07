@@ -25,3 +25,40 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## angular update from 13 to 14 
+use following command 
+
+```
+ng update @angular/core@14 @angular/cli@14
+ng update @angular/material@14
+
+```
+
+##### note 
+1. Make sure you are using Node 14.15.0 or later
+2. updated package which is not supported this angular version
+
+## angular update from 14 to 15 
+use following command 
+
+```
+ng update @angular/core@15 @angular/cli@15
+ng update @angular/material@15
+
+```
+##### note 
+1. Make sure you are using node.js versions: v16 and v18.
+2. updated package which is not supported this angular version
+
+## angular update from 15 to 16
+use following command 
+
+```
+ng update @angular/core@16 @angular/cli@16
+ng update @angular/material@16
+```
+
+##### note 
+1. updated package which is not supported this angular version

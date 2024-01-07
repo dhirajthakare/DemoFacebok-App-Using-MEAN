@@ -1,6 +1,8 @@
 .modal-content{
 border: none;
 }
-.mat-form-field {
-    width: 100% !important;
+::ng-deep{
+    .mat-mdc-form-field{
+        width: 100% !important;
+    }
 }
