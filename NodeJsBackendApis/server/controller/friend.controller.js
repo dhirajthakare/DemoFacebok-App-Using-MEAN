@@ -1,7 +1,8 @@
 // All modal imported
-var userModel = require("../model/users");
-var postModal = require("../model/post-photos");
-var friendsModal = require("../model/user_friend_mapping");
+const userModel = require("../model/users");
+const postModal = require("../model/post-photos");
+const friendsModal = require("../model/user_friend_mapping");
+const mongoose = require('mongoose');
 
 // Add friends
 exports.addFriend = async (req, res) => {
@@ -202,6 +203,84 @@ exports.allFriendsPosts = async (req, res) => {
 
     res.json(posts);
   } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+exports.allFriendsPostsUsingLookup = async (req, res) => {
+  try {
+  const posts = await postModal.aggregate([
+      {
+        $match: {
+          postUser: {
+            $in: req.body.map((userId) => mongoose.Types.ObjectId(userId)),
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "postUser",
+          foreignField: "_id",
+          as: "postUser",
+        },
+      },
+      { $unwind: "$postUser" },
+      {
+        $lookup: {
+          from: "likes",
+          localField: "getLikes",
+          foreignField: "_id",
+          as: "likeDetails",
+          pipeline: [
+            {
+              $match: { likeStatus: "like" },
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "userClickId",
+                foreignField: "_id",
+                as: "likeUser",
+              },
+            },
+            { $unwind: "$likeUser" },
+            { $unset: "likeUser._id" },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          let: { commentIds: "$postComments" },
+          pipeline: [
+            {
+              $match: { $expr: { $in: ["$_id", "$$commentIds"] } },
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "user_commented_id",
+                foreignField: "_id",
+                as: "userCommented",
+              },
+            },
+            { $unset: "userCommented._id" },
+          ],
+          as: "postComments",
+        },
+      },
+      { $sort: { createdAt: -1 } },
+    ]);
+    
+    posts.forEach(element => {
+      element.allLikeUsers = (element.likeDetails).map(e=>e.likeUser);
+    });
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
