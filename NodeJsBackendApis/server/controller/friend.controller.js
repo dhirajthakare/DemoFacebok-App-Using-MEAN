@@ -189,7 +189,7 @@ exports.allRequest = async (req, res) => {
 exports.allFriendsPosts = async (req, res) => {
   try {
     const posts = await postModal
-      .find({ postUser: req.body })
+      .find({ postUser: req.body.friendsIds })
       .populate([
         { path: "postUser" },
         {
@@ -213,7 +213,7 @@ exports.allFriendsPostsUsingLookup = async (req, res) => {
       {
         $match: {
           postUser: {
-            $in: req.body.map((userId) => mongoose.Types.ObjectId(userId)),
+            $in: req.body.friendsIds.map((userId) => mongoose.Types.ObjectId(userId)),
           },
         },
       },

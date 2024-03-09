@@ -106,7 +106,11 @@ export class DisplayPostComponent implements OnInit {
         if (res) {
           this.friendsId = res;
           if (this.friendsId) {
-            this.friend.getAllFriendsPost(this.friendsId).subscribe(
+            const payload  = {
+              friendsIds:this.friendsId,
+              offset:10
+            }
+            this.friend.getAllFriendsPost(payload).subscribe(
               (res) => {
                 this.Loader = false;
                 this.allPosts = res;

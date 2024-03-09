@@ -45,8 +45,8 @@ export class FriendService {
    getUseSerachFriends(id:any,name:string){
     return this.http.get(this.BaseUrl+'/all-user-friends-search/'+id+'/'+name);
    }
-   getAllFriendsPost(ids:any){
-    return this.http.post(this.BaseUrl+'/all-friends-post',ids);
+   getAllFriendsPost(payload:any){
+    return this.http.post(this.BaseUrl+'/all-friends-post',payload);
    }
    
    unfriend(uid:number , fid:number){
