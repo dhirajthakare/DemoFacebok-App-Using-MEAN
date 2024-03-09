@@ -108,7 +108,7 @@ export class DisplayPostComponent implements OnInit {
           if (this.friendsId) {
             const payload  = {
               friendsIds:this.friendsId,
-              offset:10
+              offset:0
             }
             this.friend.getAllFriendsPost(payload).subscribe(
               (res) => {
@@ -225,16 +225,8 @@ export class DisplayPostComponent implements OnInit {
     this.addComments = text;
   }
 
-  CheckUserLike(json: any, ids: any) {
-    let hasMatch = false;
-    for (let index = 0; index < json.length; ++index) {
-      let jsonCheck = json[index];
-      if (jsonCheck.userClickId._id == ids) {
-        hasMatch = true;
-        break;
-      }
-    }
-    return hasMatch;
+  CheckUserLike(json: any, id: any) {
+    return json.find((e:any)=>e._id===id);
   }
 
   likeDialog(item: any) {

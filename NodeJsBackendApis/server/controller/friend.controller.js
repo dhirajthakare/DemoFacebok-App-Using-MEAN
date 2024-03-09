@@ -218,6 +218,12 @@ exports.allFriendsPostsUsingLookup = async (req, res) => {
         },
       },
       {
+        $skip:req.body.offset
+      },
+      {
+        $limit:10
+      },
+      {
         $lookup: {
           from: "users",
           localField: "postUser",
@@ -245,7 +251,6 @@ exports.allFriendsPostsUsingLookup = async (req, res) => {
               },
             },
             { $unwind: "$likeUser" },
-            { $unset: "likeUser._id" },
           ],
         },
       },
@@ -265,7 +270,7 @@ exports.allFriendsPostsUsingLookup = async (req, res) => {
                 as: "userCommented",
               },
             },
-            { $unset: "userCommented._id" },
+            { $unwind: "$userCommented" }
           ],
           as: "postComments",
         },
