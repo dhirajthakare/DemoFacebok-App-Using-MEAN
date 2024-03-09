@@ -64,7 +64,7 @@ route.get('/api/getAddFriend/:id' ,verify ,FriendController.allFriends);
 route.get('/api/get-all-request/:id' ,verify ,FriendController.allRequest);
 route.get('/api/get-user-friends/:id' ,verify ,FriendController.allFriends);
 route.get('/api/all-user-friends-search/:id/:name' ,verify ,FriendController.allFriendSearch);
-route.post('/api/all-friends-post' ,verify ,FriendController.allFriendsPosts);
+route.post('/api/all-friends-post' ,verify ,FriendController.allFriendsPostsUsingLookup);
 
 
 //Send and get message 
