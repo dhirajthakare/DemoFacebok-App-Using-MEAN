@@ -14,7 +14,18 @@ import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dial
   styleUrls: ['./display-post.component.scss'],
 })
 export class DisplayPostComponent implements OnInit {
-  @Input('PostLocation') PostLocation: any;
+  offsetValue = 0;
+  @Input('PostLocation') PostLocation!: string;
+  @Input() set offset(value: number) {
+    if (value) {
+      this.offsetValue = value;
+      if (this.PostLocation == 'Profile') {
+        this.getAllFriendsPost();
+      } else if (this.PostLocation == 'Main') {
+        this.getAllFriendsPost();
+      }
+    }
+  }
 
   constructor(
     private post: PostService,
@@ -25,7 +36,7 @@ export class DisplayPostComponent implements OnInit {
   ) {}
 
   Loader = true;
-  allPosts: any;
+  allPosts: any = [];
   loginUserDetails: any;
 
   @ViewChild('comment') commentFocus: ElementRef | any;
@@ -38,7 +49,7 @@ export class DisplayPostComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res) => {
         if (res) {
-          this.getCurrentUserPost();
+          this.getAllFriendsPost();
           this.sharedService.postSavedSource.next(false);
         }
       });
@@ -71,49 +82,31 @@ export class DisplayPostComponent implements OnInit {
       .subscribe((res: any) => {
         if (res) {
           this.currentUser = res;
-          this.getCurrentUserPost();
+          this.getAllFriendsPost();
         }
       });
   }
 
-  dataSubtitle: any;
-  getCurrentUserPost() {
-    if (this.PostLocation == 'Profile') {
-      this.dataSubtitle = this.userService
-        .getCurrentUserPost(this.currentUser._id, this.loginUserDetails._id)
-        .subscribe(
-          (res) => {
-            if (res) {
-              this.Loader = false;
-              this.allPosts = res;
-            }
-          },
-          (err) => {
-            this.Loader = false;
-            console.log(err);
-          }
-        );
-    } else if (this.PostLocation == 'Main') {
-      this.getAllFriendsPost();
-    }
-  }
-
   friendsId: any;
   getAllFriendsPost() {
-    this.friend.userLoginFriendsId
+
+    if(this.PostLocation== 'Main'){
+      this.friend.userLoginFriendsId
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((res) => {
         if (res) {
           this.friendsId = res;
           if (this.friendsId) {
-            const payload  = {
-              friendsIds:this.friendsId,
-              offset:0
-            }
+            const payload = {
+              friendsIds: this.friendsId,
+              offset: this.offsetValue,
+            };
             this.friend.getAllFriendsPost(payload).subscribe(
-              (res) => {
-                this.Loader = false;
-                this.allPosts = res;
+              (res: any) => {
+                if (res) {
+                  this.Loader = false;
+                  this.allPosts = [...this.allPosts, ...res];
+                }
               },
               (err) => {
                 this.Loader = false;
@@ -123,26 +116,56 @@ export class DisplayPostComponent implements OnInit {
           }
         }
       });
+    }else if (this.PostLocation == 'Profile'){
+      const payload = {
+        friendsIds: [this.currentUser._id],
+        offset: this.offsetValue,
+      };
+      this.friend.getAllFriendsPost(payload).subscribe(
+        (res: any) => {
+          if (res) {
+            this.Loader = false;
+            this.allPosts = [...this.allPosts, ...res];
+          }
+        },
+        (err) => {
+          this.Loader = false;
+          console.log(err);
+        }
+      );
+
+    }
   }
 
   isLikeClick: boolean = false;
-  likePost(post_id: any, user_id: any) {
+  likePost(post: any, user_id: any) {
     this.isLikeClick = true;
     let formData = {
-      post_photo_id: post_id,
+      post_photo_id: post._id,
       user_id: user_id,
       userClickId: this.loginUserDetails._id,
     };
     this.post.likeOrUnlike(formData).subscribe((res) => {
       this.isLikeClick = false;
-      this.getCurrentUserPost();
+      if (res) {
+        post.allLikeUsers.push(this.loginUserDetails);
+        post.likeCounts += 1;
+      } else {
+        post.allLikeUsers = post.allLikeUsers.filter(
+          (e: any) => e._id !== this.loginUserDetails._id
+        );
+        post.likeCounts -= 1;
+      }
+
+      // this.getCurrentUserPost();
     });
   }
 
   deletePost(item: any) {
     if (confirm('are you sure to Delete Post?')) {
       this.post.deletePost(item._id).subscribe((res) => {
-        this.getCurrentUserPost();
+        this.allPosts = this.allPosts.filter((e:any)=>e._id !== item._id);
+        
       });
     }
   }
@@ -184,10 +207,13 @@ export class DisplayPostComponent implements OnInit {
     };
 
     this.post.createComment(FormData).subscribe(
-      (res) => {
+      (res: any) => {
         comment.value = '';
         this.addComments = '';
-        this.getCurrentUserPost();
+        res.userCommented = this.loginUserDetails;
+        item.commentCounts += 1;
+
+        item.postComments.push(res);
       },
       (err) => {
         console.log(err);
@@ -195,11 +221,11 @@ export class DisplayPostComponent implements OnInit {
     );
   }
 
-  deleteComment(cid: number, pid: number) {
+  deleteComment(commentId: string, post:any) {
     if (confirm('Are You Sure You Want to Delete Comment ?')) {
-      this.post.deleteComment(cid, pid).subscribe(
+      this.post.deleteComment(commentId, post._id).subscribe(
         (res) => {
-          this.getCurrentUserPost();
+          post.postComments = post.postComments.filter((e:any)=>e._id !== commentId)
         },
         (err) => {
           console.log(err);
@@ -226,7 +252,7 @@ export class DisplayPostComponent implements OnInit {
   }
 
   CheckUserLike(json: any, id: any) {
-    return json.find((e:any)=>e._id===id);
+    return json.find((e: any) => e._id === id);
   }
 
   likeDialog(item: any) {

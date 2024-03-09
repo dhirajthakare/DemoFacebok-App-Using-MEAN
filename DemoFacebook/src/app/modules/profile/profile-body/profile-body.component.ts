@@ -7,16 +7,14 @@ import { UserService } from 'src/app/common/services/user.service';
 @Component({
   selector: 'app-profile-body',
   templateUrl: './profile-body.component.html',
-  styleUrls: ['./profile-body.component.scss']
+  styleUrls: ['./profile-body.component.scss'],
 })
 export class ProfileBodyComponent implements OnInit {
-
-  
   constructor(
     private userService: UserService,
     private toastService: ToastrService,
     private friend: FriendService
-  ) { }
+  ) {}
 
   preLoader = false;
   loginUserDetails: any;
@@ -27,73 +25,81 @@ export class ProfileBodyComponent implements OnInit {
   currentVisitedUserDetails: any;
   friendsId: any = [];
   currentVisitedUserFriends: any;
-  
+
   friends: any;
   AllCurrentUserPost: any;
-  destroy$:Subject<void> = new Subject<void>();
+  destroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
     this.getLoginUser();
     this.getAllFriendsId();
   }
 
-  getLoginUser(){
-    this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe( (res: any) =>{
-      if(res){
-        this.loginUserDetails = res;
-        this.getCurrentVisitedUser();
-      }
-    });
+  getLoginUser() {
+    this.userService.currentLoginUser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        if (res) {
+          this.loginUserDetails = res;
+          this.getCurrentVisitedUser();
+        }
+      });
   }
-
 
   getCurrentVisitedUser() {
-
-    this.userService.currentVisitedUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      if(res){
-      this.currentVisitedUserDetails = res;
-      if (this.currentVisitedUserDetails.user_Friends) {
-        this.currentVisitedUserFriends = this.currentVisitedUserDetails.user_Friends.filter((value: any, index: number) => {
-          return index <= 8;
-        })
-      }
-      this.getpost();
-      }
-
-    })
+    this.userService.currentVisitedUser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        if (res) {
+          this.currentVisitedUserDetails = res;
+          if (this.currentVisitedUserDetails.user_Friends) {
+            this.currentVisitedUserFriends =
+              this.currentVisitedUserDetails.user_Friends.filter(
+                (value: any, index: number) => {
+                  return index <= 8;
+                }
+              );
+          }
+          this.getPost();
+        }
+      });
   }
 
-
   sendRequest(uid: any, fid: any) {
-    this.friend.sendRequest(uid, fid).subscribe(res => {
-      this.toastService.success('Request send successfully');
-    }, err => {
-      console.log(err);
-    })
+    this.friend.sendRequest(uid, fid).subscribe(
+      (res) => {
+        this.toastService.success('Request send successfully');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   getAllFriendsId() {
-
-    this.friend.userLoginFriendsId.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      this.friendsId = res;
-    })
-
+    this.friend.userLoginFriendsId
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => {
+        this.friendsId = res;
+      });
   }
-  
-  getpost() {
-    this.userService.getCurrentUserPost(this.currentVisitedUserDetails._id, this.loginUserDetails._id).subscribe((res: any) => {
 
-      if(res){
+  getPost() {
+    const payload = {
+      friendsIds: [this.currentVisitedUserDetails._id],
+      offset: 0,
+    };
+
+    this.friend.getAllFriendsPost(payload).subscribe((res: any) => {
+      if (res) {
         this.AllCurrentUserPost = res.filter((value: any, index: number) => {
           return index <= 8;
-        })
+        });
       }
-    })
-
+    });
   }
 
   ngOnDestroy() {
     this.destroy$.next();
   }
-
 }

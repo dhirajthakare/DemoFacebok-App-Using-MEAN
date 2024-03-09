@@ -74,7 +74,7 @@
         </div>
         <div class="row">
           <div
-            (dblclick)="likePost(item._id, item.postUser._id)"
+            (dblclick)="likePost(item, item.postUser._id)"
             class="btnPointer"
           >
             <img
@@ -116,7 +116,7 @@
         <div class="row">
           <button
             [disabled]="isLikeClick"
-            (click)="likePost(item._id, item.postUser._id)"
+            (click)="likePost(item, item.postUser._id)"
             [class.text-primary]="
               CheckUserLike(item.allLikeUsers, loginUserDetails._id)
             "
@@ -177,7 +177,7 @@
                       *ngIf="
                         loginUserDetails._id == comments.userCommented._id
                       "
-                      (click)="deleteComment(comments._id, item._id)"
+                      (click)="deleteComment(comments._id, item)"
                       class="ms-2 btnPointer"
                       ><i class="fa fa-times" aria-hidden="true"></i
                     ></span>

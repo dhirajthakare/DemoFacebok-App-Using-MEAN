@@ -91,23 +91,6 @@ exports.getCurrentUser = async (req, res) => {
     }
 };
 
-
-// Get Current Login User Post
-exports.getCurrentUserPost = async (req, res) => {
-    try {
-        const response = await postModal.find({ postUser: req.params.cid }).sort({ createdAt: -1 })
-            .populate([
-                { path: "postUser" },
-                { path: "getLikes", match: { likeStatus: "like" }, populate: [{ path: "userClickId" }] },
-                { path: "postComments", populate: "user_commented_id" }
-            ]);
-
-        res.json(response);
-    } catch (err) {
-        res.status(400).json("Something Wrong: " + err);
-    }
-};
-
 // Find All Users
 exports.findAllUsers = async (req, res) => {
     try {

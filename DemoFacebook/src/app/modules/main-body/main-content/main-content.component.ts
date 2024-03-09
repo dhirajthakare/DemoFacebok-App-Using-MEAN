@@ -14,6 +14,7 @@ export class MainContentComponent implements OnInit {
 
   LoginUserDetails: any;
   unSubscribeLoginUser: Subscription | any;
+  offset = 0;
 
   ngOnInit(): void {
     this.getCurrentLoginDetails();
@@ -33,6 +34,7 @@ export class MainContentComponent implements OnInit {
     this.unSubscribeLoginUser.unsubscribe();
   }
   onScroll() {
+    this.offset +=5;
     console.log("scrolled!!");
   }
 

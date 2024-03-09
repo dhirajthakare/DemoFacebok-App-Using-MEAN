@@ -146,7 +146,7 @@ exports.like = async (req, res) => {
         );
 
         return updatePost
-          ? res.json(`Updated to ${updateStatus}`)
+          ? res.json(updateStatus === "like" ? true : false)
           : res
               .status(400)
               .json(`Error occurred while updating ${updateStatus} count`);
@@ -207,7 +207,7 @@ exports.createComment = async (req, res) => {
         }
       );
       return postUpdate
-        ? res.json(" Comment Added Successfully ")
+        ? res.json(createComment)
         : res.status(400).json("Something wrong while update post comment");
     } else {
       res.status(400).json("Something wrong please try again");

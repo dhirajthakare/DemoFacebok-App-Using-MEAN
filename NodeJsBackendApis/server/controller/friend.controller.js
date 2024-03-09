@@ -2,7 +2,7 @@
 const userModel = require("../model/users");
 const postModal = require("../model/post-photos");
 const friendsModal = require("../model/user_friend_mapping");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Add friends
 exports.addFriend = async (req, res) => {
@@ -209,19 +209,26 @@ exports.allFriendsPosts = async (req, res) => {
 
 exports.allFriendsPostsUsingLookup = async (req, res) => {
   try {
-  const posts = await postModal.aggregate([
+    const posts = await postModal.aggregate([
       {
         $match: {
           postUser: {
-            $in: req.body.friendsIds.map((userId) => mongoose.Types.ObjectId(userId)),
+            $in: req.body.friendsIds.map((userId) =>
+              mongoose.Types.ObjectId(userId)
+            ),
           },
         },
       },
       {
-        $skip:req.body.offset
+        $sort: {
+          createdAt: -1,
+        },
       },
       {
-        $limit:10
+        $skip: req.body.offset,
+      },
+      {
+        $limit: 10,
       },
       {
         $lookup: {
@@ -270,22 +277,20 @@ exports.allFriendsPostsUsingLookup = async (req, res) => {
                 as: "userCommented",
               },
             },
-            { $unwind: "$userCommented" }
+            { $unwind: "$userCommented" },
           ],
           as: "postComments",
         },
       },
       { $sort: { createdAt: -1 } },
     ]);
-    
-    posts.forEach(element => {
-      element.allLikeUsers = (element.likeDetails).map(e=>e.likeUser);
+
+    posts.forEach((element) => {
+      element.allLikeUsers = element.likeDetails.map((e) => e.likeUser);
     });
 
     res.json(posts);
   } catch (error) {
-    console.log(error);
-
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

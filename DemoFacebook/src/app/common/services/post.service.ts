@@ -40,7 +40,7 @@ export class PostService {
     return this.http.post(this.BaseUrl+'/create-comment/',formData);
   }
 
-  deleteComment(cid:number,pid:number){
+  deleteComment(cid:string,pid:string){
    return this.http.get(this.BaseUrl+'/delete-comment/'+cid+'/'+pid);
   }
 
