@@ -25,6 +25,7 @@ export class ProfileBodyComponent implements OnInit {
   currentVisitedUserDetails: any;
   friendsId: any = [];
   currentVisitedUserFriends: any;
+  offset = 0;
 
   friends: any;
   AllCurrentUserPost: any;
@@ -60,6 +61,7 @@ export class ProfileBodyComponent implements OnInit {
                 }
               );
           }
+          this.offset = 0;
           this.getPost();
         }
       });
@@ -101,5 +103,11 @@ export class ProfileBodyComponent implements OnInit {
 
   ngOnDestroy() {
     this.destroy$.next();
+  }
+
+
+
+  onScroll(){
+    this.offset += 5;
   }
 }

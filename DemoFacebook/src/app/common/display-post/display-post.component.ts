@@ -17,13 +17,12 @@ export class DisplayPostComponent implements OnInit {
   offsetValue = 0;
   @Input('PostLocation') PostLocation!: string;
   @Input() set offset(value: number) {
-    if (value) {
       this.offsetValue = value;
       if (this.PostLocation == 'Profile') {
         this.getAllFriendsPost();
       } else if (this.PostLocation == 'Main') {
         this.getAllFriendsPost();
-      }
+      
     }
   }
 
@@ -67,8 +66,6 @@ export class DisplayPostComponent implements OnInit {
           if (this.loginUserDetails) {
             if (this.PostLocation == 'Profile') {
               this.initializeData();
-            } else if (this.PostLocation == 'Main') {
-              this.getAllFriendsPost();
             }
           }
         }
@@ -82,6 +79,7 @@ export class DisplayPostComponent implements OnInit {
       .subscribe((res: any) => {
         if (res) {
           this.currentUser = res;
+          this.allPosts =[];
           this.getAllFriendsPost();
         }
       });
@@ -89,7 +87,6 @@ export class DisplayPostComponent implements OnInit {
 
   friendsId: any;
   getAllFriendsPost() {
-
     if(this.PostLocation== 'Main'){
       this.friend.userLoginFriendsId
       .pipe(takeUntil(this.onDestroy$))

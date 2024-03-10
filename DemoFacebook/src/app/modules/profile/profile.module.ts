@@ -17,6 +17,7 @@ import { CreatePostModule } from 'src/app/common/create-post/create-post.module'
 import { StoriesModule } from '../stories/stories.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterModule } from 'src/app/common/footer/footer.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { FooterModule } from 'src/app/common/footer/footer.module';
     CreatePostModule,
     StoriesModule,
     ReactiveFormsModule,
-    FooterModule
+    FooterModule,
+    InfiniteScrollModule
   ]
 })
 export class ProfileModule { }

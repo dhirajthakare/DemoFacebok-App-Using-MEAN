@@ -228,7 +228,7 @@ exports.allFriendsPostsUsingLookup = async (req, res) => {
         $skip: req.body.offset,
       },
       {
-        $limit: 10,
+        $limit: 5,
       },
       {
         $lookup: {
