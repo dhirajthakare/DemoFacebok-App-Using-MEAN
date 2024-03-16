@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CreateAccountField, LoginForm } from '../interface/user.interface';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +28,8 @@ export class AuthService {
     return this.http.post(this.BaseUrl + '/update-account/' + id, formData);
   }
 
-  sendRecoveryMail(data: any) {
-    return this.http.post(this.BaseUrl + '/sendmail', data);
+  async sendRecoveryMail(data: any) {
+    return await lastValueFrom(this.http.post(this.BaseUrl + '/sendmail', data));
   }
 
   checkOtp(data: any) {

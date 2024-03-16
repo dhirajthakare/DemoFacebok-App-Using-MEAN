@@ -19,17 +19,18 @@ export class FindYourAccountPageComponent implements OnInit {
 
   hashEmail!: string;
   SendMail = false;
-  sendrecoveryMail(email: any) {
-    this.SendMail = true;
-    this.hashEmail = btoa(email);
+  async sendRecoveryMail(email: any) {
+    try {
+      this.SendMail = true;
+      this.hashEmail = btoa(email);
 
-    let formData = {
-      emails: email,
-      hashEmails: this.hashEmail,
-    };
-    this.service.sendRecoveryMail(formData).subscribe(
-      (res: any) => {
-        this.SendMail = false;
+      let formData = {
+        emails: email,
+        hashEmails: this.hashEmail,
+      };
+      const res: any = await this.service.sendRecoveryMail(formData);
+      this.SendMail = false;
+      if (res) {
         this.toast.success(res.message, 'Success!');
         this.route.navigate(['recover/code'], {
           queryParams: {
@@ -37,14 +38,11 @@ export class FindYourAccountPageComponent implements OnInit {
             Email: btoa(email),
           },
         });
-      },
-      (err) => {
-        this.SendMail = false;
-
-        let errp: any = err;
-        this.toast.error(errp.error, 'Fail!');
-        console.log(err);
       }
-    );
+    } catch (err: any) {
+      this.SendMail = false;
+      this.toast.error(err.error.message, 'Fail!');
+      console.log(err);
+    }
   }
 }
