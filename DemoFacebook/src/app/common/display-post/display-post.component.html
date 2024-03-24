@@ -115,7 +115,6 @@
         <hr />
         <div class="row">
           <button
-            [disabled]="isLikeClick"
             (click)="likePost(item, item.postUser._id)"
             [class.text-primary]="
               CheckUserLike(item.allLikeUsers, loginUserDetails._id)

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -24,8 +24,8 @@ export class PostService {
     return this.http.get(this.BaseUrl+'/get-post-data/'+id);
   }
 
-  likeOrUnlike(formData:any){
-   return  this.http.post(this.BaseUrl+'/toggle-like',formData);
+  async likeOrUnlike(formData:any){
+   return  await lastValueFrom(this.http.post(this.BaseUrl+'/toggle-like',formData)); 
   }
   getLikeUser(id:number):Observable<any>{
     return this.http.get(this.BaseUrl+'/get-post-like/'+id);

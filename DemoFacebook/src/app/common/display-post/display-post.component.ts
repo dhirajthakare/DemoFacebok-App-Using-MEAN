@@ -134,28 +134,27 @@ export class DisplayPostComponent implements OnInit {
     }
   }
 
-  isLikeClick: boolean = false;
-  likePost(post: any, user_id: any) {
-    this.isLikeClick = true;
+  async likePost(post: any, user_id: any) {
     let formData = {
       post_photo_id: post._id,
       user_id: user_id,
       userClickId: this.loginUserDetails._id,
     };
-    this.post.likeOrUnlike(formData).subscribe((res) => {
-      this.isLikeClick = false;
-      if (res) {
-        post.allLikeUsers.push(this.loginUserDetails);
-        post.likeCounts += 1;
-      } else {
-        post.allLikeUsers = post.allLikeUsers.filter(
-          (e: any) => e._id !== this.loginUserDetails._id
-        );
-        post.likeCounts -= 1;
-      }
+    
+    const isUserLike  = post.allLikeUsers.find(
+      (e: any) => e._id === this.loginUserDetails._id
+    );
 
-      // this.getCurrentUserPost();
-    });
+    if(isUserLike){
+      post.allLikeUsers = post.allLikeUsers.filter(
+        (e: any) => e._id !== this.loginUserDetails._id
+      );
+      post.likeCounts -= 1;
+    }else{
+      post.allLikeUsers.push(this.loginUserDetails);
+        post.likeCounts += 1;
+    }
+    this.post.likeOrUnlike(formData)
   }
 
   deletePost(item: any) {
