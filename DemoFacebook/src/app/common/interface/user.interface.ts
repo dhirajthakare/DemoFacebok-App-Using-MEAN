@@ -16,8 +16,9 @@ export interface CreateAccountField {
   gender: string;
 }
 
-export interface user {
-  _id:string,
+
+export interface User {
+  _id:string;
   birthOfDate: string;
   createdAt: string;
   email: string;
@@ -27,16 +28,18 @@ export interface user {
   profileUrl: string;
   updatedAt: string;
   userToken: string;
+  user_info:UserInformation;
 }
 
-export interface userInformation {
-  coverPhoto:string,
-  createdAt:string,
-  currentCity:string,
-  highSchool:string,
-  homeTown:string,
-  relation:string,
-  university:string,
-  updatedAt:string,
-  workplace:string
+export interface UserInformation {
+  _id:string;
+  coverPhoto:string;
+  createdAt:string;
+  currentCity:string;
+  highSchool:string;
+  homeTown:string;
+  relation:string;
+  university:string;
+  updatedAt:string;
+  workplace:string;
 }

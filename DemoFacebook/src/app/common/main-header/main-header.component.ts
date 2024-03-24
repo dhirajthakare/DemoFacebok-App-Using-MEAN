@@ -7,6 +7,7 @@ import { FriendService } from '../services/friend.service';
 import { SharedDataService } from '../services/shared-data.service';
 import { UserService } from '../services/user.service';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
+import { User } from '../interface/user.interface';
 
 @Component({
   selector: 'app-main-header',
@@ -14,6 +15,9 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
   styleUrls: ['./main-header.component.scss'],
 })
 export class MainHeaderComponent implements OnInit {
+  friends: any;
+  friendsId: string[] = [];
+
   constructor(
     private dialog: MatDialog,
     private navigateRoute: Router,
@@ -24,21 +28,16 @@ export class MainHeaderComponent implements OnInit {
   ) {}
 
   @ViewChild('searchArea') searchArea!: ElementRef;
-  @ViewChild('updateModalClose') updateModalClose: any;
 
-  updateError: any;
-  updateSuccess: any;
-  profileSrc: any;
-  file: any;
-  loginUserDetails: any;
-  unSubscribeUpdatedUserDetails: Subscription | any;
+  loginUserDetails!: User;
+  unSubscribeUpdatedUserDetails!: Subscription;
 
   ngOnInit(): void {
     this.getCurrentUser();
     this.unSubscribeUpdatedUserDetails =
-      this.sharedService.updatedUserDetails.subscribe((res: any) => {
+      this.sharedService.updatedUserDetails.subscribe((res: boolean) => {
         if (res) {
-          this.getCurrentUser(true, res);
+          this.getCurrentUser(res);
           this.sharedService.updatedUserDetails.next(false);
         }
       });
@@ -54,8 +53,8 @@ export class MainHeaderComponent implements OnInit {
     }, 400);
   }
 
-  searchFriends(item: any) {
-    this.friendship.searchBox.next(item.value);
+  searchFriends(item: string) {
+    this.friendship.searchBox.next(item);
   }
 
   openUpdateUserDialog() {
@@ -70,30 +69,19 @@ export class MainHeaderComponent implements OnInit {
     }
   }
 
-  async getCurrentUser(
-    optionalForUpdateUser: boolean = false,
-    exceptions: any = true
-  ) {
+  async getCurrentUser(optionalForUpdateUser: boolean = false) {
     const res = await this.authService.getUserProfile();
-    console.log(res);
 
-    if (res) {
-      this.loginUserDetails = res;
-      if (this.loginUserDetails) {
-        localStorage.setItem(
-          'accountHolder',
-          JSON.stringify(this.loginUserDetails)
-        );
-        this.userService.currentLoginUser.next(this.loginUserDetails);
-        if (!optionalForUpdateUser || typeof exceptions === 'string') {
-          this.getAllFriendsId();
-        }
-      }
+    this.loginUserDetails = res;
+    localStorage.setItem(
+      'accountHolder',
+      JSON.stringify(this.loginUserDetails)
+    );
+    this.userService.currentLoginUser.next(this.loginUserDetails);
+    if (!optionalForUpdateUser) {
+      this.getAllFriendsId();
     }
   }
-
-  friends: any;
-  friendsId: Array<any> = [];
 
   getAllFriendsId() {
     this.friendship.getUseFriends(this.loginUserDetails._id).subscribe(
@@ -118,7 +106,7 @@ export class MainHeaderComponent implements OnInit {
   ngOnDestroy() {
     this.unSubscribeUpdatedUserDetails.unsubscribe();
     this.userService.currentLoginUser.next('');
-    this.friendship.userLoginFriendsId.next('');
+    this.friendship.userLoginFriendsId.next([]);
     this.friendship.searchBox.next('');
   }
 }

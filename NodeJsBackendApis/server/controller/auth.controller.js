@@ -105,7 +105,7 @@ exports.getUserProfile = async (req, res) => {
       .findOne({ userToken: userData.userToken })
       .populate({ path: "user_info" });
 
-    res.json(response);
+    res.json({ data: response });
   } catch (err) {
     res.status(400).json(`Something went wrong: ${err}`);
   }

@@ -3,22 +3,21 @@ import { Title } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedDataService {
-
-  constructor(private setTitle:Title) { }
+  constructor(private setTitle: Title) {}
 
   ActiveAccountHolder = new BehaviorSubject('');
   public postSavedSource = new BehaviorSubject<boolean>(false);
   public editProfileSave = new BehaviorSubject<boolean>(false);
-  public updatedUserDetails = new BehaviorSubject<any>(false);
+  public updatedUserDetails = new BehaviorSubject<boolean>(false);
 
-  changeTitle(StringTitle:string){
+  changeTitle(StringTitle: string) {
     this.setTitle.setTitle(StringTitle);
   }
 
-  isLoginUser(){
+  isLoginUser() {
     return !!localStorage.getItem('accountToken');
   }
   getSelectedDate(obj: any, field: string) {
@@ -36,5 +35,4 @@ export class SharedDataService {
         : obj[field] || obj[field] || '';
     return scheduleDate;
   }
-
 }

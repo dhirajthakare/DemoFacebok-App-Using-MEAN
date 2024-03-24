@@ -18,7 +18,7 @@ export class DisplayPostComponent implements OnInit {
   allPosts: any = [];
   loginUserDetails: any;
   currentUser: any;
-  friendsId: any;
+  friendsId!: string[];
 
   comment: string[] = [];
   checkPostId!: string;
@@ -96,7 +96,7 @@ export class DisplayPostComponent implements OnInit {
         .subscribe((res) => {
           if (res) {
             this.friendsId = res;
-            if (this.friendsId) {
+            if (this.friendsId && this.friendsId.length) {
               const payload = {
                 friendsIds: this.friendsId,
                 offset: this.offsetValue,

@@ -118,7 +118,7 @@ export class ProfileHeaderComponent implements OnInit {
               'Successfully Remove From Your Friend List',
               'Success!'
             );
-            this.sharedService.updatedUserDetails.next('true');
+            this.sharedService.updatedUserDetails.next(true);
           },
           (err) => {
             console.log(err);
