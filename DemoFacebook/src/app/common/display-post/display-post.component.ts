@@ -14,6 +14,21 @@ import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dial
   styleUrls: ['./display-post.component.scss'],
 })
 export class DisplayPostComponent implements OnInit {
+  Loader = true;
+  allPosts: any = [];
+  loginUserDetails: any;
+  currentUser: any;
+  friendsId: any;
+
+  comment: string[] = [];
+  checkPostId!: string;
+
+  //Emoji for comments
+  addComments: string = '';
+  commentEmojiPicker: boolean = false;
+  private onDestroy$: Subject<void> = new Subject<void>();
+
+  @ViewChild('comment') commentFocus!: ElementRef;
   offsetValue = 0;
   @Input('PostLocation') PostLocation!: string;
   @Input() set offset(value: number) {
@@ -32,15 +47,6 @@ export class DisplayPostComponent implements OnInit {
     private friend: FriendService,
     private sharedService: SharedDataService
   ) {}
-
-  Loader = true;
-  allPosts: any = [];
-  loginUserDetails: any;
-
-  @ViewChild('comment') commentFocus: ElementRef | any;
-  @ViewChild('postUpdateModalClose') postUpdateModalClose: any;
-
-  private onDestroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
     this.sharedService.postSavedSource
@@ -71,7 +77,6 @@ export class DisplayPostComponent implements OnInit {
       });
   }
 
-  currentUser: any;
   initializeData() {
     this.userService.currentVisitedUser
       .pipe(takeUntil(this.onDestroy$))
@@ -84,7 +89,6 @@ export class DisplayPostComponent implements OnInit {
       });
   }
 
-  friendsId: any;
   getAllFriendsPost() {
     if (this.PostLocation == 'Main') {
       this.friend.userLoginFriendsId
@@ -133,8 +137,6 @@ export class DisplayPostComponent implements OnInit {
   }
 
   async likePost(post: any, user_id: any) {
-   
-
     const isUserLike = post.allLikeUsers.find(
       (e: any) => e._id === this.loginUserDetails._id
     );
@@ -145,7 +147,7 @@ export class DisplayPostComponent implements OnInit {
         (e: any) => e._id !== this.loginUserDetails._id
       );
       post.likeCounts -= 1;
-      isLike = false
+      isLike = false;
     } else {
       post.allLikeUsers.push(this.loginUserDetails);
       post.likeCounts += 1;
@@ -156,7 +158,7 @@ export class DisplayPostComponent implements OnInit {
       post_photo_id: post._id,
       user_id: user_id,
       userClickId: this.loginUserDetails._id,
-      isLike:isLike
+      isLike: isLike,
     };
 
     await this.post.likeOrUnlike(formData);
@@ -170,16 +172,14 @@ export class DisplayPostComponent implements OnInit {
     }
   }
 
-  comment: any = [];
-  checkPostId: any;
-  onComments(item: any) {
-    if (this.comment.includes(item._id)) {
-      this.comment.forEach((value: number, index: any) => {
-        if (value == item._id) this.comment.splice(index, 1);
+  onComments(id: string) {
+    if (this.comment.includes(id)) {
+      this.comment.forEach((value: string, index: number) => {
+        if (value === id) this.comment.splice(index, 1);
       });
     } else {
-      this.comment.push(item._id);
-      this.checkPostId = item._id;
+      this.comment.push(id);
+      this.checkPostId = id;
     }
 
     this.addComments = '';
@@ -198,21 +198,21 @@ export class DisplayPostComponent implements OnInit {
     }, 0);
   }
 
-  async createComment(comment: any, item: any) {
-    let FormData = {
-      comment: comment.value,
-      post_photo_id: item._id,
-      user_id: item.user_id,
-      user_commented_id: this.loginUserDetails._id,
-    };
-
+  async createComment(item: any) {
     try {
-      const res: any = await this.post.createComment(FormData);
-      comment.value = '';
-      this.addComments = '';
-      res.userCommented = this.loginUserDetails;
-      item.commentCounts += 1;
-      item.postComments.push(res);
+      if (this.addComments) {
+        let FormData = {
+          comment: this.addComments,
+          post_photo_id: item._id,
+          user_id: item.user_id,
+          user_commented_id: this.loginUserDetails._id,
+        };
+        const res: any = await this.post.createComment(FormData);
+        this.addComments = '';
+        res.userCommented = this.loginUserDetails;
+        item.commentCounts += 1;
+        item.postComments.push(res);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -236,10 +236,6 @@ export class DisplayPostComponent implements OnInit {
   onFocus() {
     this.commentEmojiPicker = false;
   }
-
-  //Emoji for comments
-  addComments: any = '';
-  commentEmojiPicker: boolean = false;
 
   commentToggleEmojiPicker() {
     this.commentEmojiPicker = !this.commentEmojiPicker;

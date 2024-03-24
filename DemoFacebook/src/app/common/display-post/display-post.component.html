@@ -104,7 +104,7 @@
             </p>
           </div>
           <div class="col-md-3 offset-md-3">
-            <p (click)="onComments(item)">
+            <p (click)="onComments(item._id)">
               <span *ngIf="item.commentCounts > 0"
                 >{{ item.commentCounts }} Comments</span
               >
@@ -173,9 +173,7 @@
                       >{{ comments.userCommented.name }}
                     </span>
                     <span
-                      *ngIf="
-                        loginUserDetails._id == comments.userCommented._id
-                      "
+                      *ngIf="loginUserDetails._id == comments.userCommented._id"
                       (click)="deleteComment(comments._id, item)"
                       class="ms-2 btnPointer"
                       ><i class="fa fa-times" aria-hidden="true"></i
@@ -209,7 +207,7 @@
                     <input
                       (focus)="onFocus()"
                       #comment
-                      (keyup.enter)="createComment(comment, item)"
+                      (keyup.enter)="createComment(item)"
                       style="
                         border-top-left-radius: 23px;
                         border-bottom-left-radius: 23px;
@@ -217,7 +215,7 @@
                       class="form-control"
                       type="search"
                       placeholder="Write a Comment..."
-                      [ngModel]="addComments"
+                      [(ngModel)]="addComments"
                     />
                     <span
                       (click)="commentToggleEmojiPicker()"
