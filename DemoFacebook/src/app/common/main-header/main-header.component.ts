@@ -19,8 +19,8 @@ export class MainHeaderComponent implements OnInit {
     private navigateRoute: Router,
     private friendship: FriendService,
     private userService: UserService,
-    private authService:AuthService,
-    private sharedService:SharedDataService
+    private authService: AuthService,
+    private sharedService: SharedDataService
   ) {}
 
   @ViewChild('searchArea') searchArea!: ElementRef;
@@ -35,12 +35,13 @@ export class MainHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
-    this.unSubscribeUpdatedUserDetails = this.sharedService.updatedUserDetails.subscribe((res: any) => {
-      if (res) {
-        this.getCurrentUser(true,res);
-        this.sharedService.updatedUserDetails.next(false);
-      }
-    });
+    this.unSubscribeUpdatedUserDetails =
+      this.sharedService.updatedUserDetails.subscribe((res: any) => {
+        if (res) {
+          this.getCurrentUser(true, res);
+          this.sharedService.updatedUserDetails.next(false);
+        }
+      });
   }
 
   onFocus() {
@@ -69,22 +70,28 @@ export class MainHeaderComponent implements OnInit {
     }
   }
 
-  getCurrentUser(optionalForUpdateUser:boolean=false,exceptions:any = true) {
-    this.authService.getUserProfile().subscribe((res) => {
-      if(res){
+  async getCurrentUser(
+    optionalForUpdateUser: boolean = false,
+    exceptions: any = true
+  ) {
+    const res = await this.authService.getUserProfile();
+    console.log(res);
+
+    if (res) {
       this.loginUserDetails = res;
-      if(this.loginUserDetails){
-      localStorage.setItem('accountHolder', JSON.stringify(this.loginUserDetails));
-      this.userService.currentLoginUser.next(this.loginUserDetails);
-      if(!optionalForUpdateUser || typeof(exceptions) === "string" ){
-        this.getAllFriendsId()
+      if (this.loginUserDetails) {
+        localStorage.setItem(
+          'accountHolder',
+          JSON.stringify(this.loginUserDetails)
+        );
+        this.userService.currentLoginUser.next(this.loginUserDetails);
+        if (!optionalForUpdateUser || typeof exceptions === 'string') {
+          this.getAllFriendsId();
+        }
       }
-      }
-      }
-    });
+    }
   }
 
-  
   friends: any;
   friendsId: Array<any> = [];
 
@@ -93,7 +100,7 @@ export class MainHeaderComponent implements OnInit {
       (res) => {
         this.friends = res;
         if (this.friends) {
-          this.friendsId=[];
+          this.friendsId = [];
           this.friends = this.friends.user_Friends;
           this.friendsId.push(this.loginUserDetails._id);
           for (let i = 0; i < this.friends.length; i++) {
@@ -108,7 +115,7 @@ export class MainHeaderComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.unSubscribeUpdatedUserDetails.unsubscribe();
     this.userService.currentLoginUser.next('');
     this.friendship.userLoginFriendsId.next('');

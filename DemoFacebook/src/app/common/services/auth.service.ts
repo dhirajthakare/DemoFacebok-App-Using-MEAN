@@ -16,8 +16,8 @@ export class AuthService {
     return this.http.post(this.BaseUrl + '/create-account', formData);
   }
 
-  getUserProfile() {
-    return this.http.get(this.BaseUrl + '/get-profile');
+  async getUserProfile() {
+    return await lastValueFrom(this.http.get(this.BaseUrl + '/get-profile'));
   }
 
   LoginAcc(formData: CreateAccountField) {
@@ -29,7 +29,9 @@ export class AuthService {
   }
 
   async sendRecoveryMail(data: any) {
-    return await lastValueFrom(this.http.post(this.BaseUrl + '/sendmail', data));
+    return await lastValueFrom(
+      this.http.post(this.BaseUrl + '/sendmail', data)
+    );
   }
 
   checkOtp(data: any) {

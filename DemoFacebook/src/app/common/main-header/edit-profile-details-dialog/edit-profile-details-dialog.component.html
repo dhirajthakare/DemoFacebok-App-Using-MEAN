@@ -1,125 +1,186 @@
-    <form [formGroup]='editProfile' method="POST" id="edit" (submit)='onEditProfile()'>
-
-    <div class="modal-dialog modal-dialog-scrollable  modal-lg" >
-        <div class="modal-content" >
-            <div class="card-header">
-                <div class="text-end">
-                    <a class="text-secondary btn-close" mat-dialog-close></a>
-                </div>
-                <h2 class="text-center "> Edit  Details </h2><br>
-    
-            </div>
-            <div class="modal-body" style="height: 450px;"> 
-                <div class="card-body p-3">
-                        <div>
-                            <h2>Customize your Intro</h2>
-                            <p>Details that you select will be public and won't be posted to News Feed.</p>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="row">
-                                <h2 for="workplace"> Work</h2><br>
-                                <input formControlName='workplace'  class="form-control p-md-3"
-                                    type="text" name="workplace" id="workplace"
-                                    placeholder="Add a WorkPlace" aria-label="Search">
-                                    <input type="hidden" name="user_id" id="user_id" formControlName='user_id' value="" >
-                            </div>
-
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                <h2 for="highSchool"> Education</h2><br>
-                                <input formControlName='highSchool'  class="form-control p-md-3"
-                                    type="text" name="highSchool" id="highSchool"
-                                    placeholder="Add a high School" >
-                                
-                            </div>
-
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="row">
-                
-                                    <input formControlName='university'  class="form-control p-md-3"
-                                    type="text" name="university" id="university"
-                                    placeholder="Add a University" >
-                            </div>
-
-                        </div>
-                        <div class="my-3">
-                            <label for="">Cover Photo :</label>
-                        </div>
-                        <div>
-                            <div class="justify-content-centerm" *ngIf="CoverPhoto">
-                                <img style="object-fit: cover;max-height:400px;max-width:100%" [src]="CoverPhoto" alt="">
-                            </div>
-                            <div>
-                                <image-cropper 
-                                [imageChangedEvent]="imageChangeEvt"
-                                [aspectRatio]="4/2"
-                                [maintainAspectRatio]="true"
-                                format="jpeg"
-                                (imageCropped) = "cropImg($event)"
-                                >
-                                </image-cropper>
-                            </div>
-                            <div class="mb-3">
-                                <div class="row">
-                                    <input formControlName='CoverPhoto'  (change)="onChangeCoverPhoto($event)" accept='image/*'
-                                        type="file" capture="capture" name="CoverPhoto" class="form-control p-md-3 col" id="CoverPhoto">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                <h2 for="currentCity">Current town/city</h2><br>
-                                <input formControlName='currentCity'  class="form-control p-md-3"
-                                    type="text" name="currentCity" id="currentCity"
-                                    placeholder="Add a Current City" ><br>
-                                    
-                            </div>
-
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="row">
-                                <h2 for="homeTown">Home town</h2><br>
-                                <input formControlName='homeTown'  class="form-control p-md-3"
-                                    type="text" name="homeTown" id="homeTown"
-                                    placeholder="Add Home Town" ><br>  
-                            </div>
-
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                <h2 for="relationship">RelationShip</h2><br>
-                                <select formControlName='relation'  name="relation" class="form-select p-md-3" id="relation">
-                                    <option  value="">status</option>
-                                    <option value="single">single</option>
-                                    <option value="in a relationship">in a relationship</option>
-                                    <option value="engaged">engaged</option>
-                                    <option value="married">married</option>
-                                    <option value="it's complicated">it's complicated</option>
-
-                                </select>
-                                    
-                            </div>
-
-                        </div>
-
-                </div>
-            </div>
-            <div class=" modal-footer">
-                    <div>
-                        <ul class="list-inline">
-                            <li style="margin-right: 400px;" class="text-primary  list-inline-item" routerLike="/deskbook">Update You information</li>
-                            <li style="background-color: rgb(228, 222, 230);" class="mx-2 float-end btn list-inline-item" mat-dialog-close> <strong> Cancel</strong></li>
-                            <li  class="mx-2  float-end  list-inline-item"><button type="submit" class="btn btn-primary" >save</button></li>
-                    </ul>
-                    
-                    </div>
-            </div>
-
+<form
+  [formGroup]="editProfile"
+  method="POST"
+  id="edit"
+  (submit)="onEditProfile()"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="card-header">
+        <div class="text-end">
+          <a class="text-secondary btn-close" mat-dialog-close></a>
         </div>
+        <h2 class="text-center">Edit Details</h2>
+        <br />
+      </div>
+      <div class="modal-body" style="height: 450px">
+        <div class="card-body p-3">
+          <div>
+            <h2>Customize your Intro</h2>
+            <p>
+              Details that you select will be public and won't be posted to News
+              Feed.
+            </p>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <h2 for="workplace">Work</h2>
+              <br />
+              <input
+                formControlName="workplace"
+                class="form-control p-md-3"
+                type="text"
+                name="workplace"
+                id="workplace"
+                placeholder="Add a WorkPlace"
+                aria-label="Search"
+              />
+              <input
+                type="hidden"
+                name="user_id"
+                id="user_id"
+                formControlName="user_id"
+                value=""
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <h2 for="highSchool">Education</h2>
+              <br />
+              <input
+                formControlName="highSchool"
+                class="form-control p-md-3"
+                type="text"
+                name="highSchool"
+                id="highSchool"
+                placeholder="Add a high School"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <input
+                formControlName="university"
+                class="form-control p-md-3"
+                type="text"
+                name="university"
+                id="university"
+                placeholder="Add a University"
+              />
+            </div>
+          </div>
+          <div class="my-3">
+            <label for="">Cover Photo :</label>
+          </div>
+          <div>
+            <div class="justify-content-centerm" *ngIf="coverPhoto">
+              <img
+                style="object-fit: cover; max-height: 400px; max-width: 100%"
+                [src]="coverPhoto"
+                alt=""
+              />
+            </div>
+            <div>
+              <image-cropper
+                [imageChangedEvent]="imageChangeEvt"
+                [aspectRatio]="4 / 2"
+                [maintainAspectRatio]="true"
+                format="jpeg"
+                (imageCropped)="cropImg($event)"
+              >
+              </image-cropper>
+            </div>
+            <div class="mb-3">
+              <div class="row">
+                <input
+                  formControlName="coverPhoto"
+                  (change)="onChangeCoverPhoto($event)"
+                  accept="image/*"
+                  type="file"
+                  capture="capture"
+                  name="coverPhoto"
+                  class="form-control p-md-3 col"
+                  id="coverPhoto"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <h2 for="currentCity">Current town/city</h2>
+              <br />
+              <input
+                formControlName="currentCity"
+                class="form-control p-md-3"
+                type="text"
+                name="currentCity"
+                id="currentCity"
+                placeholder="Add a Current City"
+              /><br />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <h2 for="homeTown">Home town</h2>
+              <br />
+              <input
+                formControlName="homeTown"
+                class="form-control p-md-3"
+                type="text"
+                name="homeTown"
+                id="homeTown"
+                placeholder="Add Home Town"
+              /><br />
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <h2 for="relationship">RelationShip</h2>
+              <br />
+              <select
+                formControlName="relation"
+                name="relation"
+                class="form-select p-md-3"
+                id="relation"
+              >
+                <option value="">status</option>
+                <option value="single">single</option>
+                <option value="in a relationship">in a relationship</option>
+                <option value="engaged">engaged</option>
+                <option value="married">married</option>
+                <option value="it's complicated">it's complicated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div>
+          <ul class="list-inline">
+            <li
+              style="margin-right: 400px"
+              class="text-primary list-inline-item"
+              routerLike="/deskbook"
+            >
+              Update You information
+            </li>
+            <li
+              style="background-color: rgb(228, 222, 230)"
+              class="mx-2 float-end btn list-inline-item"
+              mat-dialog-close
+            >
+              <strong> Cancel</strong>
+            </li>
+            <li class="mx-2 float-end list-inline-item">
+              <button type="submit" class="btn btn-primary">save</button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </form>

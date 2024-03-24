@@ -20,26 +20,27 @@ export class ProfileHeaderComponent implements OnInit {
     private friend: FriendService,
     private toastService: ToastrService,
     private matDia: MatDialog,
-    private route:Router,
-    private activeRoute:ActivatedRoute,
-    private sharedService:SharedDataService
+    private route: Router,
+    private activeRoute: ActivatedRoute,
+    private sharedService: SharedDataService
   ) {}
 
   loginUserDetails: any;
-  CoverPhoto: any;
+  coverPhoto: any;
   CurrentVisitedUser: any;
   friendsId: any = [];
-  destroy$:Subject<void> = new Subject<void>();
-
+  destroy$: Subject<void> = new Subject<void>();
 
   ngOnInit(): void {
     this.getCurrentVisitedUserData();
-    this.sharedService.editProfileSave.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      if (res) {
-        this.getCurrentVisitedUserData();
-        this.sharedService.editProfileSave.next(false);
-      }
-    });
+    this.sharedService.editProfileSave
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        if (res) {
+          this.getCurrentVisitedUserData();
+          this.sharedService.editProfileSave.next(false);
+        }
+      });
     this.getAllFriendsId();
     this.getCurrentLoginUser();
   }
@@ -50,16 +51,17 @@ export class ProfileHeaderComponent implements OnInit {
       if (visitedUserToken) {
         this.userService.getUser(visitedUserToken).subscribe(
           (res) => {
-           if(res){
-            this.CurrentVisitedUser = res;
-            if (this.CurrentVisitedUser.user_info) {
-              if (this.CurrentVisitedUser.user_info.CoverPhoto) {
-                this.CoverPhoto =
-                  'http://localhost:2000' + this.CurrentVisitedUser.user_info.CoverPhoto;
+            if (res) {
+              this.CurrentVisitedUser = res;
+              if (this.CurrentVisitedUser.user_info) {
+                if (this.CurrentVisitedUser.user_info.coverPhoto) {
+                  this.coverPhoto =
+                    'http://localhost:2000' +
+                    this.CurrentVisitedUser.user_info.coverPhoto;
+                }
               }
+              this.userService.currentVisitedUser.next(res);
             }
-            this.userService.currentVisitedUser.next(res);
-           }
           },
           (err) => {
             this.route.navigate(['error']);
@@ -70,25 +72,28 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   getAllFriendsId() {
-    this.friend.userLoginFriendsId.pipe(takeUntil(this.destroy$)).subscribe((res) => {
-      if(res){
-        this.friendsId = res;
-      }
-    });
+    this.friend.userLoginFriendsId
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => {
+        if (res) {
+          this.friendsId = res;
+        }
+      });
   }
 
   getCurrentLoginUser() {
-    this.userService.currentLoginUser.pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-     if(res){
-      this.loginUserDetails = res;
-     }
-    });
+    this.userService.currentLoginUser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: any) => {
+        if (res) {
+          this.loginUserDetails = res;
+        }
+      });
   }
 
- 
   sendRequest(uid: any, fid: any) {
     this.friend.sendRequest(uid, fid).subscribe(
-      (res:any) => {
+      (res: any) => {
         this.toastService.success(res);
       },
       (err) => {
@@ -105,18 +110,20 @@ export class ProfileHeaderComponent implements OnInit {
           ' as your friend?'
       )
     ) {
-      this.friend.unfriend(this.loginUserDetails._id, this.CurrentVisitedUser._id).subscribe(
-        (res) => {
-          this.toastService.success(
-            'Successfully Remove From Your Friend List',
-            'Success!'
-          );
-          this.sharedService.updatedUserDetails.next("true");
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      this.friend
+        .unfriend(this.loginUserDetails._id, this.CurrentVisitedUser._id)
+        .subscribe(
+          (res) => {
+            this.toastService.success(
+              'Successfully Remove From Your Friend List',
+              'Success!'
+            );
+            this.sharedService.updatedUserDetails.next('true');
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
     }
   }
 
@@ -140,5 +147,4 @@ export class ProfileHeaderComponent implements OnInit {
     this.userService.currentVisitedUser.next('');
     this.destroy$.next();
   }
-
 }
