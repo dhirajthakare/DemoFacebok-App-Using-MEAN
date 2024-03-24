@@ -17,12 +17,11 @@ export class DisplayPostComponent implements OnInit {
   offsetValue = 0;
   @Input('PostLocation') PostLocation!: string;
   @Input() set offset(value: number) {
-      this.offsetValue = value;
-      if (this.PostLocation == 'Profile') {
-        this.getAllFriendsPost();
-      } else if (this.PostLocation == 'Main') {
-        this.getAllFriendsPost();
-      
+    this.offsetValue = value;
+    if (this.PostLocation == 'Profile') {
+      this.getAllFriendsPost();
+    } else if (this.PostLocation == 'Main') {
+      this.getAllFriendsPost();
     }
   }
 
@@ -79,7 +78,7 @@ export class DisplayPostComponent implements OnInit {
       .subscribe((res: any) => {
         if (res) {
           this.currentUser = res;
-          this.allPosts =[];
+          this.allPosts = [];
           this.getAllFriendsPost();
         }
       });
@@ -87,33 +86,33 @@ export class DisplayPostComponent implements OnInit {
 
   friendsId: any;
   getAllFriendsPost() {
-    if(this.PostLocation== 'Main'){
+    if (this.PostLocation == 'Main') {
       this.friend.userLoginFriendsId
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe((res) => {
-        if (res) {
-          this.friendsId = res;
-          if (this.friendsId) {
-            const payload = {
-              friendsIds: this.friendsId,
-              offset: this.offsetValue,
-            };
-            this.friend.getAllFriendsPost(payload).subscribe(
-              (res: any) => {
-                if (res) {
+        .pipe(takeUntil(this.onDestroy$))
+        .subscribe((res) => {
+          if (res) {
+            this.friendsId = res;
+            if (this.friendsId) {
+              const payload = {
+                friendsIds: this.friendsId,
+                offset: this.offsetValue,
+              };
+              this.friend.getAllFriendsPost(payload).subscribe(
+                (res: any) => {
+                  if (res) {
+                    this.Loader = false;
+                    this.allPosts = [...this.allPosts, ...res];
+                  }
+                },
+                (err) => {
                   this.Loader = false;
-                  this.allPosts = [...this.allPosts, ...res];
+                  console.log(err);
                 }
-              },
-              (err) => {
-                this.Loader = false;
-                console.log(err);
-              }
-            );
+              );
+            }
           }
-        }
-      });
-    }else if (this.PostLocation == 'Profile'){
+        });
+    } else if (this.PostLocation == 'Profile') {
       const payload = {
         friendsIds: [this.currentUser._id],
         offset: this.offsetValue,
@@ -130,38 +129,43 @@ export class DisplayPostComponent implements OnInit {
           console.log(err);
         }
       );
-
     }
   }
 
   async likePost(post: any, user_id: any) {
-    let formData = {
-      post_photo_id: post._id,
-      user_id: user_id,
-      userClickId: this.loginUserDetails._id,
-    };
-    
-    const isUserLike  = post.allLikeUsers.find(
+   
+
+    const isUserLike = post.allLikeUsers.find(
       (e: any) => e._id === this.loginUserDetails._id
     );
 
-    if(isUserLike){
+    let isLike = false;
+    if (isUserLike) {
       post.allLikeUsers = post.allLikeUsers.filter(
         (e: any) => e._id !== this.loginUserDetails._id
       );
       post.likeCounts -= 1;
-    }else{
+      isLike = false
+    } else {
       post.allLikeUsers.push(this.loginUserDetails);
-        post.likeCounts += 1;
+      post.likeCounts += 1;
+      isLike = true;
     }
-    this.post.likeOrUnlike(formData)
+
+    let formData = {
+      post_photo_id: post._id,
+      user_id: user_id,
+      userClickId: this.loginUserDetails._id,
+      isLike:isLike
+    };
+
+    await this.post.likeOrUnlike(formData);
   }
 
   deletePost(item: any) {
     if (confirm('are you sure to Delete Post?')) {
       this.post.deletePost(item._id).subscribe((res) => {
-        this.allPosts = this.allPosts.filter((e:any)=>e._id !== item._id);
-        
+        this.allPosts = this.allPosts.filter((e: any) => e._id !== item._id);
       });
     }
   }
@@ -194,7 +198,7 @@ export class DisplayPostComponent implements OnInit {
     }, 0);
   }
 
-  createComment(comment: any, item: any) {
+  async createComment(comment: any, item: any) {
     let FormData = {
       comment: comment.value,
       post_photo_id: item._id,
@@ -202,26 +206,25 @@ export class DisplayPostComponent implements OnInit {
       user_commented_id: this.loginUserDetails._id,
     };
 
-    this.post.createComment(FormData).subscribe(
-      (res: any) => {
-        comment.value = '';
-        this.addComments = '';
-        res.userCommented = this.loginUserDetails;
-        item.commentCounts += 1;
-
-        item.postComments.push(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    try {
+      const res: any = await this.post.createComment(FormData);
+      comment.value = '';
+      this.addComments = '';
+      res.userCommented = this.loginUserDetails;
+      item.commentCounts += 1;
+      item.postComments.push(res);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  deleteComment(commentId: string, post:any) {
+  deleteComment(commentId: string, post: any) {
     if (confirm('Are You Sure You Want to Delete Comment ?')) {
       this.post.deleteComment(commentId, post._id).subscribe(
         (res) => {
-          post.postComments = post.postComments.filter((e:any)=>e._id !== commentId)
+          post.postComments = post.postComments.filter(
+            (e: any) => e._id !== commentId
+          );
         },
         (err) => {
           console.log(err);

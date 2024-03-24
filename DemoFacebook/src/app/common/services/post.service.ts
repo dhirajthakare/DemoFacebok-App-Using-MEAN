@@ -36,8 +36,8 @@ export class PostService {
   }
 
 
-  createComment(formData:any){
-    return this.http.post(this.BaseUrl+'/create-comment/',formData);
+  async createComment(formData:any){
+    return await lastValueFrom(this.http.post(this.BaseUrl+'/create-comment/',formData));
   }
 
   deleteComment(cid:string,pid:string){
