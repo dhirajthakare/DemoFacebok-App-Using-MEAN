@@ -1,6 +1,5 @@
 .dragger-container {
   border: 1px solid transparent;
-  border-bottom-color: #ebecef;
   padding: 0px;
   list-style-type: none;
   position: relative;
@@ -31,13 +30,13 @@
 }
 
 .list-item-wrap:hover {
-  border: 1px dashed #0a66c2 !important;
+  border: 1px dashed var(--third-border-color) !important;
 }
 
 .cdk-drag-preview {
   box-sizing: border-box;
   background-color: #ffffff;
-  border: 1px solid #213f80;
+  border: 1px solid var(--secondary-border-color);
   border-style: dashed;
   border-radius: 2px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
