@@ -135,15 +135,12 @@ exports.findFriends = async (req, res) => {
 // All friends of visited user
 exports.allFriends = async (req, res) => {
   try {
-    const friends = await userModel
-      .findOne({ _id: req.params.id })
-      .populate([{ path: "user_info" }])
-      .populate({
-        path: "user_Friends",
-        match: { user_id: req.params.id, friendStatus: "Accepted" },
-        populate: [{ path: "friend_id" }, { path: "user_id" }],
-      });
-    res.json(friends);
+    const friends = await userModel.findOne({ _id: req.params.id }).populate({
+      path: "user_Friends",
+      match: { user_id: req.params.id, friendStatus: "Accepted" },
+      populate: [{ path: "friend_id" }, { path: "user_id" }],
+    });
+    res.json({ data: friends.user_Friends });
   } catch (error) {
     res.status(500).json({ error: "Something wrong while retrieve friends" });
   }

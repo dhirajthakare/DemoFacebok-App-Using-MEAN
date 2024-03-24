@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IResponse } from '../interface/comman.interface';
+import { User } from '../interface/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,9 +41,15 @@ export class FriendService {
     return this.http.get(this.BaseUrl + '/get-all-request/' + id);
   }
 
-  getUseFriends(id: any) {
-    return this.http.get(this.BaseUrl + '/get-user-friends/' + id);
+  async getUseFriends(id: any) {
+    console.log(id)
+    const response = await lastValueFrom(
+      this.http.get<IResponse<User[]>>(this.BaseUrl + '/get-user-friends/' + id)
+    );
+    return response.data;  
   }
+
+
 
   getUseSerachFriends(id: any, name: string) {
     return this.http.get(

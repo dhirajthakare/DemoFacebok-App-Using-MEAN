@@ -83,24 +83,18 @@ export class MainHeaderComponent implements OnInit {
     }
   }
 
-  getAllFriendsId() {
-    this.friendship.getUseFriends(this.loginUserDetails._id).subscribe(
-      (res) => {
-        this.friends = res;
-        if (this.friends) {
-          this.friendsId = [];
-          this.friends = this.friends.user_Friends;
-          this.friendsId.push(this.loginUserDetails._id);
-          for (let i = 0; i < this.friends.length; i++) {
-            this.friendsId.push(this.friends[i].friend_id._id);
-          }
-          this.friendship.userLoginFriendsId.next(this.friendsId);
-        }
-      },
-      (err) => {
-        console.log(err);
+  async getAllFriendsId() {
+    const res = await this.friendship.getUseFriends(this.loginUserDetails._id);
+    if (res) {
+      this.friends = res;
+      console.log(this.friends)
+      this.friendsId = [];
+      this.friendsId.push(this.loginUserDetails._id);
+      for (let i = 0; i < this.friends.length; i++) {
+        this.friendsId.push(this.friends[i].friend_id._id);
       }
-    );
+      this.friendship.userLoginFriendsId.next(this.friendsId);
+    }
   }
 
   ngOnDestroy() {

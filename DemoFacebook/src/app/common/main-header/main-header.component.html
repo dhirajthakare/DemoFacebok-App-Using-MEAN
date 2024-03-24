@@ -25,17 +25,17 @@
       </div>
     </div>
     <div class="section-container">
-      <div routerLink="/deskbook" class=" home-button btnPointer">
+      <div routerLink="/deskbook" class="home-button btnPointer">
         <div class="nav-link text-primary iconDiv" aria-current="page">
           <i class="fa fa-home fa-lg" aria-hidden="true"></i>
         </div>
       </div>
-      <div class=" btnPointer">
+      <div class="btnPointer">
         <div class="nav-link text-primary iconDiv" aria-current="page">
           <i class="fa fa-caret-square-o-right fa-lg" aria-hidden="true"></i>
         </div>
       </div>
-      <div class=" btnPointer">
+      <div class="btnPointer">
         <div class="nav-link text-primary iconDiv" aria-current="page">
           <i class="fa fa-gamepad fa-lg" aria-hidden="true"></i>
         </div>
@@ -54,42 +54,50 @@
           <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
         </div>
       </div>
-      <div class=" btnPointer iconDiv">
+      <div class="btnPointer iconDiv">
         <div class="nav-link text-primary" aria-current="page">
           <i class="fa fa-briefcase fa-lg" aria-hidden="true"></i>
         </div>
       </div>
     </div>
     <div class="section-container">
-        <div class="btnPointer"
+      <div
+        class="btnPointer"
         [routerLink]="
           loginUserDetails
             ? '/profile/' + loginUserDetails.userToken
             : loginUserDetails
-        ">
-          <img
-            class="profileImgResize"
-            height="42"
-            width="42"
-            [src]="
-              loginUserDetails
-                ? loginUserDetails.profileUrl
-                  ? 'http://localhost:2000' + loginUserDetails.profileUrl
-                  : 'http://localhost:2000/assets/images/userdefault.png'
+        "
+      >
+        <img
+          class="profileImgResize"
+          height="42"
+          width="42"
+          [src]="
+            loginUserDetails
+              ? loginUserDetails.profileUrl
+                ? 'http://localhost:2000' + loginUserDetails.profileUrl
                 : 'http://localhost:2000/assets/images/userdefault.png'
-            "
-          />
-        </div>
-        <div class="btnPointer profile-name"
+              : 'http://localhost:2000/assets/images/userdefault.png'
+          "
+        />
+      </div>
+      <div
+        class="btnPointer profile-name"
         [routerLink]="
           loginUserDetails
             ? '/profile/' + loginUserDetails.userToken
             : loginUserDetails
-        " routerLike="/deskbook">
-          <p>
-            {{ (loginUserDetails ? loginUserDetails.name.substr(0, 16) : "" ) |uppercase}}
-          </p>
-        </div>
+        "
+        routerLike="/deskbook"
+      >
+        <p>
+          {{
+            (loginUserDetails ? loginUserDetails.name.substr(0, 16) : "")
+              | uppercase
+          }}
+        </p>
+      </div>
       <div class="mx-2 btnPointer">
         <div
           style="color: black !important"
@@ -128,7 +136,7 @@
               >Update Profile</span
             >
           </li>
-          <li *ngIf="loginUserDetails" [routerLink]="'//friends'">
+          <li *ngIf="loginUserDetails" [routerLink]="'/friends'">
             <a class="dropdown-item">Friends</a>
           </li>
           <!-- <li><hr class="dropdown-divider"></li> -->

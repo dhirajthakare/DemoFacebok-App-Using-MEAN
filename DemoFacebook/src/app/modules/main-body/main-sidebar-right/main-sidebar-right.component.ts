@@ -38,15 +38,9 @@ export class MainSidebarRightComponent implements OnInit {
     );
   }
 
-  getUserFriends() {
-    this.friendship.getUseFriends(this.LoginUserDetails._id).subscribe(
-      (res) => {
-        this.friends = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  async getUserFriends() {
+    const res = await this.friendship.getUseFriends(this.LoginUserDetails._id);
+    this.friends = res;
   }
 
   OpenMessengerDia(item: any) {

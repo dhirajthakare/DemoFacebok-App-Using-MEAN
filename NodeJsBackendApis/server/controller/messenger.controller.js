@@ -11,17 +11,15 @@ exports.sendMsg = async (req, res) => {
     });
     send.save();
     res.json("Successfully sended message");
-
   } catch (error) {
     res.status(400).json("Something wrong while send message");
   }
 };
 
 //get messages
-exports.getUserMessage = (req, res) => {
+exports.getUserMessage = async (req, res) => {
   try {
-    const chatMessages = await;
-    messengerModel.find({
+    const chatMessages = await messengerModel.find({
       $or: [
         { sender_id: req.params.fid, receiver_id: req.params.uid },
         { sender_id: req.params.uid, receiver_id: req.params.fid },
@@ -29,6 +27,7 @@ exports.getUserMessage = (req, res) => {
     });
     res.json(chatMessages);
   } catch (error) {
+    console.log(error);
     res.status(400).json("Something wrong while get message");
   }
 };
