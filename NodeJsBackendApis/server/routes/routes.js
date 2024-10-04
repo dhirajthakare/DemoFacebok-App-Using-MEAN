@@ -51,7 +51,6 @@ route.post('/api/create-user-information' , fileUploadController.ProfileCoverPho
 
 // Visited User
 route.get('/api/get-current-login-user/:token' ,verify ,UserController.getCurrentUser);
-route.get('/api/get-current-user-posts/:cid/:id' ,verify ,UserController.getCurrentUserPost);
 
 route.get('/api/add-friend/:uid/:fid' ,verify ,FriendController.addFriend);
 route.get('/api/accept-friend-request/:uid/:fid' ,verify ,FriendController.acceptFriendRequest);
@@ -64,7 +63,7 @@ route.get('/api/getAddFriend/:id' ,verify ,FriendController.allFriends);
 route.get('/api/get-all-request/:id' ,verify ,FriendController.allRequest);
 route.get('/api/get-user-friends/:id' ,verify ,FriendController.allFriends);
 route.get('/api/all-user-friends-search/:id/:name' ,verify ,FriendController.allFriendSearch);
-route.post('/api/all-friends-post' ,verify ,FriendController.allFriendsPosts);
+route.post('/api/all-friends-post' ,verify ,FriendController.allFriendsPostsUsingLookup);
 
 
 //Send and get message 

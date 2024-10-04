@@ -8,7 +8,7 @@ import { FriendsComponent } from './friends.component';
 const routes: Routes = [{ path: '', component: FriendsComponent ,children:[
   {path:'' , component:FriendHomeComponent},
   {path:'friend-request',component:FriendsRequestsComponent },
-  {path:'allfriends' , component:AllFriendsComponent}
+  {path:'all-friends' , component:AllFriendsComponent}
 ] }];
 
 @NgModule({

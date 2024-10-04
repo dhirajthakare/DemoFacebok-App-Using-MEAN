@@ -1,0 +1,44 @@
+.dragger-container {
+  border: 1px solid transparent;
+  padding: 0px;
+  list-style-type: none;
+  position: relative;
+}
+
+.list-item-wrap {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  .list-view-container {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    height: 60px;
+    padding: 8px;
+    .title {
+      font-size: large;
+      padding-top: 10px;
+    }
+    .img-icon {
+      height: 42px;
+      width: 42px;
+      border-radius: 21px;
+      object-fit: cover;
+    }
+  }
+  
+}
+
+.list-item-wrap:hover {
+  border: 1px dashed var(--third-border-color) !important;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: 1px solid var(--secondary-border-color);
+  border-style: dashed;
+  border-radius: 2px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}

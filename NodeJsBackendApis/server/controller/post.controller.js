@@ -121,7 +121,7 @@ exports.searchPost = async (req, res) => {
 
 exports.like = async (req, res) => {
   try {
-    const { post_photo_id, user_id, userClickId } = req.body;
+    const { post_photo_id, user_id, userClickId,isLike } = req.body;
 
     let checkLike = await likeModal.findOne({
       post_photo_id,
@@ -130,7 +130,7 @@ exports.like = async (req, res) => {
     });
 
     if (checkLike) {
-      const updateStatus = checkLike.likeStatus === "like" ? "unlike" : "like";
+      const updateStatus = isLike  ? "like" : "unlike";
 
       const updateLike = await likeModal.updateOne(
         { post_photo_id, user_id, userClickId },
@@ -146,7 +146,7 @@ exports.like = async (req, res) => {
         );
 
         return updatePost
-          ? res.json(`Updated to ${updateStatus}`)
+          ? res.json(updateStatus === "like" ? true : false)
           : res
               .status(400)
               .json(`Error occurred while updating ${updateStatus} count`);
@@ -207,7 +207,7 @@ exports.createComment = async (req, res) => {
         }
       );
       return postUpdate
-        ? res.json(" Comment Added Successfully ")
+        ? res.json(createComment)
         : res.status(400).json("Something wrong while update post comment");
     } else {
       res.status(400).json("Something wrong please try again");

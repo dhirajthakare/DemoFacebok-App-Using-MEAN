@@ -1,7 +1,8 @@
 // All modal imported
-var userModel = require("../model/users");
-var postModal = require("../model/post-photos");
-var friendsModal = require("../model/user_friend_mapping");
+const userModel = require("../model/users");
+const postModal = require("../model/post-photos");
+const friendsModal = require("../model/user_friend_mapping");
+const mongoose = require("mongoose");
 
 // Add friends
 exports.addFriend = async (req, res) => {
@@ -134,15 +135,12 @@ exports.findFriends = async (req, res) => {
 // All friends of visited user
 exports.allFriends = async (req, res) => {
   try {
-    const friends = await userModel
-      .findOne({ _id: req.params.id })
-      .populate([{ path: "user_info" }])
-      .populate({
-        path: "user_Friends",
-        match: { user_id: req.params.id, friendStatus: "Accepted" },
-        populate: [{ path: "friend_id" }, { path: "user_id" }],
-      });
-    res.json(friends);
+    const friends = await userModel.findOne({ _id: req.params.id }).populate({
+      path: "user_Friends",
+      match: { user_id: req.params.id, friendStatus: "Accepted" },
+      populate: [{ path: "friend_id" }, { path: "user_id" }],
+    });
+    res.json({ data: friends.user_Friends });
   } catch (error) {
     res.status(500).json({ error: "Something wrong while retrieve friends" });
   }
@@ -188,7 +186,7 @@ exports.allRequest = async (req, res) => {
 exports.allFriendsPosts = async (req, res) => {
   try {
     const posts = await postModal
-      .find({ postUser: req.body })
+      .find({ postUser: req.body.friendsIds })
       .populate([
         { path: "postUser" },
         {
@@ -199,6 +197,94 @@ exports.allFriendsPosts = async (req, res) => {
         { path: "postComments", populate: "user_commented_id" },
       ])
       .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+exports.allFriendsPostsUsingLookup = async (req, res) => {
+  try {
+    const posts = await postModal.aggregate([
+      {
+        $match: {
+          postUser: {
+            $in: req.body.friendsIds.map((userId) =>
+              mongoose.Types.ObjectId(userId)
+            ),
+          },
+        },
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
+      {
+        $skip: req.body.offset,
+      },
+      {
+        $limit: 5,
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "postUser",
+          foreignField: "_id",
+          as: "postUser",
+        },
+      },
+      { $unwind: "$postUser" },
+      {
+        $lookup: {
+          from: "likes",
+          localField: "getLikes",
+          foreignField: "_id",
+          as: "likeDetails",
+          pipeline: [
+            {
+              $match: { likeStatus: "like" },
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "userClickId",
+                foreignField: "_id",
+                as: "likeUser",
+              },
+            },
+            { $unwind: "$likeUser" },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          let: { commentIds: "$postComments" },
+          pipeline: [
+            {
+              $match: { $expr: { $in: ["$_id", "$$commentIds"] } },
+            },
+            {
+              $lookup: {
+                from: "users",
+                localField: "user_commented_id",
+                foreignField: "_id",
+                as: "userCommented",
+              },
+            },
+            { $unwind: "$userCommented" },
+          ],
+          as: "postComments",
+        },
+      },
+      { $sort: { createdAt: -1 } },
+    ]);
+
+    posts.forEach((element) => {
+      element.allLikeUsers = element.likeDetails.map((e) => e.likeUser);
+    });
 
     res.json(posts);
   } catch (error) {

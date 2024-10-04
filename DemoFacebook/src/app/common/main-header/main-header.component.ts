@@ -7,6 +7,7 @@ import { FriendService } from '../services/friend.service';
 import { SharedDataService } from '../services/shared-data.service';
 import { UserService } from '../services/user.service';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
+import { User } from '../interface/user.interface';
 
 @Component({
   selector: 'app-main-header',
@@ -14,33 +15,32 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
   styleUrls: ['./main-header.component.scss'],
 })
 export class MainHeaderComponent implements OnInit {
+  friends: any;
+  friendsId: string[] = [];
+
   constructor(
     private dialog: MatDialog,
     private navigateRoute: Router,
     private friendship: FriendService,
     private userService: UserService,
-    private authService:AuthService,
-    private sharedService:SharedDataService
+    private authService: AuthService,
+    private sharedService: SharedDataService
   ) {}
 
   @ViewChild('searchArea') searchArea!: ElementRef;
-  @ViewChild('updateModalClose') updateModalClose: any;
 
-  updateError: any;
-  updateSuccess: any;
-  profileSrc: any;
-  file: any;
-  loginUserDetails: any;
-  unSubscribeUpdatedUserDetails: Subscription | any;
+  loginUserDetails!: User;
+  unSubscribeUpdatedUserDetails!: Subscription;
 
   ngOnInit(): void {
     this.getCurrentUser();
-    this.unSubscribeUpdatedUserDetails = this.sharedService.updatedUserDetails.subscribe((res: any) => {
-      if (res) {
-        this.getCurrentUser(true,res);
-        this.sharedService.updatedUserDetails.next(false);
-      }
-    });
+    this.unSubscribeUpdatedUserDetails =
+      this.sharedService.updatedUserDetails.subscribe((res: boolean) => {
+        if (res) {
+          this.getCurrentUser(res);
+          this.sharedService.updatedUserDetails.next(false);
+        }
+      });
   }
 
   onFocus() {
@@ -53,8 +53,8 @@ export class MainHeaderComponent implements OnInit {
     }, 400);
   }
 
-  searchFriends(item: any) {
-    this.friendship.searchBox.next(item.value);
+  searchFriends(item: string) {
+    this.friendship.searchBox.next(item);
   }
 
   openUpdateUserDialog() {
@@ -69,49 +69,38 @@ export class MainHeaderComponent implements OnInit {
     }
   }
 
-  getCurrentUser(optionalForUpdateUser:boolean=false,exceptions:any = true) {
-    this.authService.getUserProfile().subscribe((res) => {
-      if(res){
-      this.loginUserDetails = res;
-      if(this.loginUserDetails){
-      localStorage.setItem('accountHolder', JSON.stringify(this.loginUserDetails));
-      this.userService.currentLoginUser.next(this.loginUserDetails);
-      if(!optionalForUpdateUser || typeof(exceptions) === "string" ){
-        this.getAllFriendsId()
-      }
-      }
-      }
-    });
-  }
+  async getCurrentUser(optionalForUpdateUser: boolean = false) {
+    const res = await this.authService.getUserProfile();
 
-  
-  friends: any;
-  friendsId: Array<any> = [];
-
-  getAllFriendsId() {
-    this.friendship.getUseFriends(this.loginUserDetails._id).subscribe(
-      (res) => {
-        this.friends = res;
-        if (this.friends) {
-          this.friendsId=[];
-          this.friends = this.friends.user_Friends;
-          this.friendsId.push(this.loginUserDetails._id);
-          for (let i = 0; i < this.friends.length; i++) {
-            this.friendsId.push(this.friends[i].friend_id._id);
-          }
-          this.friendship.userLoginFriendsId.next(this.friendsId);
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
+    this.loginUserDetails = res;
+    localStorage.setItem(
+      'accountHolder',
+      JSON.stringify(this.loginUserDetails)
     );
+    this.userService.currentLoginUser.next(this.loginUserDetails);
+    if (!optionalForUpdateUser) {
+      this.getAllFriendsId();
+    }
   }
 
-  ngOnDestroy(){
+  async getAllFriendsId() {
+    const res = await this.friendship.getUseFriends(this.loginUserDetails._id);
+    if (res) {
+      this.friends = res;
+      console.log(this.friends)
+      this.friendsId = [];
+      this.friendsId.push(this.loginUserDetails._id);
+      for (let i = 0; i < this.friends.length; i++) {
+        this.friendsId.push(this.friends[i].friend_id._id);
+      }
+      this.friendship.userLoginFriendsId.next(this.friendsId);
+    }
+  }
+
+  ngOnDestroy() {
     this.unSubscribeUpdatedUserDetails.unsubscribe();
     this.userService.currentLoginUser.next('');
-    this.friendship.userLoginFriendsId.next('');
+    this.friendship.userLoginFriendsId.next([]);
     this.friendship.searchBox.next('');
   }
 }

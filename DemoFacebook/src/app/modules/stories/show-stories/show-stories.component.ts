@@ -16,7 +16,7 @@ export class ShowStoriesComponent implements OnInit {
     private userService: UserService,
     private storyManage: StoriesService,
     private friend: FriendService,
-    private matDialogRef : MatDialog
+    private matDialogRef: MatDialog
   ) {}
 
   @Input('loginUserId') loginUserId: any;
@@ -58,48 +58,39 @@ export class ShowStoriesComponent implements OnInit {
   friends: any;
   friendsId: any = [];
   getAllUserId(id: any) {
-    this.friend.getUseFriends(id).subscribe(
-      (res) => {
-        if (res) {
-          this.friends = res;
+    const res = this.friend.getUseFriends(id);
 
-          if (this.friends) {
-            this.friends = this.friends.user_Friends;
-            // this.friendsId.push(this.id);
-            for (let i = 0; i < this.friends.length; i++) {
-              this.friendsId.push(this.friends[i].friend_id._id);
-            }
-            // this.friend.userLoginFriendsId.next(this.friendsId);
-            if(this.friendsId){
-              this.getStories();
-            }
-          }
+    if (res) {
+      this.friends = res;
+
+      if (this.friends) {
+        // this.friendsId.push(this.id);
+        for (let i = 0; i < this.friends.length; i++) {
+          this.friendsId.push(this.friends[i].friend_id._id);
         }
-      },
-      (err) => {
-        console.log(err);
+        // this.friend.userLoginFriendsId.next(this.friendsId);
+        if (this.friendsId) {
+          this.getStories();
+        }
       }
-    );
+    }
   }
 
-  openSilder(allStories:any,selectedIndex:any){
+  openSilder(allStories: any, selectedIndex: any) {
+    this.matDialogRef.open(ShowStoriesDialogComponent, {
+      maxWidth: '600px',
+      maxHeight: '600px',
+      minWidth: '550px',
+      minHeight: '550px',
 
-    this.matDialogRef.open(ShowStoriesDialogComponent,
-     {
-       maxWidth: '600px',
-       maxHeight: '600px',
-       minWidth: '550px',
-       minHeight: '550px',
-
-       panelClass: 'custom-modalbox',
-       data: {
+      panelClass: 'custom-modalbox',
+      data: {
         allStories: allStories,
-        selectedIndex: selectedIndex
-      }
-     });
- 
-   }
-   
+        selectedIndex: selectedIndex,
+      },
+    });
+  }
+
   ngOnDestroy() {
     this.unSubscribeLoginUser.unsubscribe();
   }

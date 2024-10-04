@@ -1,11 +1,11 @@
 // All modal imported
-const userModel = require('../model/users');
-const commandService = require('../services/common.Service');
-const accountValidation = require('../validation/create-account-validator');
+const userModel = require("../model/users");
+const commandService = require("../services/common.Service");
+const accountValidation = require("../validation/create-account-validator");
 
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const jwtKey = 'dtdtdtdtdtdtdtdtdtdt';
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const jwtKey = "dtdtdtdtdtdtdtdtdtdt";
 
 // Create Account
 exports.createAcc = async (req, res) => {
@@ -25,16 +25,18 @@ exports.createAcc = async (req, res) => {
         birthOfDate: req.body.birthOfDate,
         gender: req.body.gender,
         profileUrl: req.body.profileUrl,
-        userToken: `${req.body.fname}.${req.body.lname}${commandService.randomNum(100000, 999999)}`,
+        userToken: `${req.body.fname}.${
+          req.body.lname
+        }${commandService.randomNum(100000, 999999)}`,
       }).save();
 
       if (newUser) {
-        res.json('Account Created Successfully');
+        res.json("Account Created Successfully");
       } else {
-        res.status.json('Something wrong while Create Account');
+        res.status.json("Something wrong while Create Account");
       }
     } else {
-      res.status(400).json('User Already Available');
+      res.status(400).json("User Already Available");
     }
   } catch (err) {
     res.status(400).json(err);
@@ -45,7 +47,9 @@ exports.createAcc = async (req, res) => {
 exports.updateAccount = async (req, res) => {
   try {
     const file = req.file;
-    const filename = file ? `/assets/profileUpload/${file.filename}` : undefined;
+    const filename = file
+      ? `/assets/profileUpload/${file.filename}`
+      : undefined;
 
     const updatedAcc = await userModel.updateOne(
       { _id: req.params.id },
@@ -80,13 +84,13 @@ exports.loginUser = async (req, res) => {
           _id: data._id,
         };
 
-        const jwtToken = jwt.sign(payload, jwtKey, { expiresIn: '48h' });
+        const jwtToken = jwt.sign(payload, jwtKey, { expiresIn: "48h" });
         res.json(jwtToken);
       } else {
-        throw 'Password Is Invalid. Please Try Again';
+        throw "Password Is Invalid. Please Try Again";
       }
     } else {
-      throw 'Username Is Invalid';
+      throw "Username Is Invalid";
     }
   } catch (err) {
     res.status(400).json(err);
@@ -99,25 +103,9 @@ exports.getUserProfile = async (req, res) => {
 
     const response = await userModel
       .findOne({ userToken: userData.userToken })
-      .populate({ path: 'user_info' })
-      .populate({
-        path: 'user_Friends',
-        match: { user_id: userData._id, friendStatus: 'Accepted' },
-        populate: [{ path: 'friend_id' }, { path: 'user_id' }],
-      })
-      .populate({
-        path: 'user_post',
-        populate: [
-          {
-            path: 'getLikes',
-            match: { likeStatus: 'like' },
-            populate: [{ path: 'user_id' }, { path: 'userClickId' }],
-          },
-          { path: 'postComments', populate: [{ path: 'user_commented_id' }] },
-        ],
-      });
+      .populate({ path: "user_info" });
 
-    res.json(response);
+    res.json({ data: response });
   } catch (err) {
     res.status(400).json(`Something went wrong: ${err}`);
   }

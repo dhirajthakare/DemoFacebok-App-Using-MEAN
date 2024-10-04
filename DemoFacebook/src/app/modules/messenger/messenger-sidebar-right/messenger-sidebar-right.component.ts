@@ -38,18 +38,10 @@ export class MessengerSidebarRightComponent implements OnInit {
       });
   }
 
-  getUserFriends() {
-    this.friendship.getUseFriends(this.loginUserDetails._id).subscribe(
-      (res) => {
-        if (res) {
-          this.friends = res;
-          this.assignRecentChat();
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  async getUserFriends() {
+    const res = await this.friendship.getUseFriends(this.loginUserDetails._id);
+    this.friends = res;
+    this.assignRecentChat();
   }
   getUserSearchFriends(searchfrd: any) {
     this.friendship
@@ -65,17 +57,17 @@ export class MessengerSidebarRightComponent implements OnInit {
   }
 
   assignRecentChat() {
-    if (this.friends.user_Friends.length) {
+    if (this.friends.length) {
       let newdata = {
-        friend_id: this.friends.user_Friends[0].friend_id._id,
+        friend_id: this.friends[0].friend_id._id,
         loginUser_id: this.loginUserDetails._id,
-        friend_userToken: this.friends.user_Friends[0].friend_id.userToken,
+        friend_userToken: this.friends[0].friend_id.userToken,
       };
       this.userService.currentMessengerUser.next(newdata);
     }
   }
 
-  Opemessenger(data: any) {
+  opneMessanger(data: any) {
     let newdata = {
       friend_id: data._id,
       loginUser_id: this.loginUserDetails._id,
@@ -91,7 +83,7 @@ export class MessengerSidebarRightComponent implements OnInit {
 
   openAcceptCall() {
     this.matDialogRef.open(AcceptCallComponent, {
-      disableClose:false
+      disableClose: false,
     });
   }
 }

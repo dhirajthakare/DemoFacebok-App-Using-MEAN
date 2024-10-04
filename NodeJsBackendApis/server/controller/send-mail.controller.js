@@ -71,11 +71,11 @@ exports.sendForgotPasswordMail = async (req, res) => {
       const result = await sendRecoveryEmail(userDetail, req.body.emails, req.body.hashEmails);
       res.json(result);
     } else {
-      res.status(400).json("User not found. Please try again with valid information");
+      res.status(400).json({message:"User not found. Please try again with valid information"});
     }
   } catch (error) {
-    res.status(400).json("Something went wrong while sending the email. Please try again");
-  }
+    res.status(400).json({message:"Something went wrong while sending the email. Please try again"});
+  }"Something went wrong while sending the email. Please try again"
 };
 
 
@@ -101,9 +101,9 @@ exports.changePassword = async (req, res) => {
 
       res.json("Password Updated Successfully");
     } else {
-      res.status(400).json("Token Expired. You Can't Change Password");
+      res.status(400).json({message:"Token Expired. You Can't Change Password"})
     }
   } catch (err) {
-    res.status(400).json("Something went wrong while updating the password");
+    res.status(400).json({message:"Something went wrong while updating the password"});
   }
 };

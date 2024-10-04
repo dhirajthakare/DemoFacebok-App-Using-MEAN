@@ -83,7 +83,11 @@
            <div *ngIf="loginUserDetails && currentVisitedUserDetails">
             <app-create-post *ngIf="loginUserDetails._id==currentVisitedUserDetails._id"></app-create-post>
            </div>
-            <app-display-post [PostLocation]="'Profile'"></app-display-post>
+           <div  infiniteScroll  class="profile-container"
+           (scrolled)="onScroll()"
+           [scrollWindow]="false">
+           <app-display-post [offset]="offset" [PostLocation]="'Profile'"></app-display-post>
+           </div>
         </div>
         
        

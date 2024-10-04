@@ -10,6 +10,7 @@ import { AllFriendsComponent } from './all-friends/all-friends.component';
 import { SearchUserResultModule } from 'src/app/common/search-user-result/search-user-result.module';
 import { MainHeaderModule } from 'src/app/common/main-header/main-header.module';
 import { FooterModule } from 'src/app/common/footer/footer.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FooterModule } from 'src/app/common/footer/footer.module';
     FriendsRoutingModule,
     SearchUserResultModule,
     MainHeaderModule,
-    FooterModule
+    FooterModule,
+    DragDropModule
   ]
 })
 export class FriendsModule { }

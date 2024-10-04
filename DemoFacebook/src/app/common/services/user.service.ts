@@ -25,8 +25,4 @@ export class UserService {
     return this.http.get(this.BaseUrl+'/get-current-login-user/'+token);
   }
 
-  getCurrentUserPost(cid:any,clickId:any):Observable<any>{
-   return this.http.get(this.BaseUrl+'/get-current-user-posts/'+cid+'/'+clickId);
-  }
-
 }

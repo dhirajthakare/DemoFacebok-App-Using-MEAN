@@ -21,11 +21,10 @@ export class StoriesComponent implements OnInit {
   }
 
   token: any;
-  getCurrentUser() {
-    this.authService.getUserProfile().subscribe((res) => {
-      localStorage.setItem('accountHolder', JSON.stringify(res));
-      this.userService.currentLoginUser.next(res);
-    });
+  async getCurrentUser() {
+    const res = await this.authService.getUserProfile();
+    localStorage.setItem('accountHolder', JSON.stringify(res));
+    this.userService.currentLoginUser.next(res);
   }
 
   ngOnDestroy() {
