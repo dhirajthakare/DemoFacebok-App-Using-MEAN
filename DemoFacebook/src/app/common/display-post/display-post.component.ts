@@ -225,6 +225,7 @@ export class DisplayPostComponent implements OnInit {
           post.postComments = post.postComments.filter(
             (e: any) => e._id !== commentId
           );
+          post.commentCounts -= 1
         },
         (err) => {
           console.log(err);
