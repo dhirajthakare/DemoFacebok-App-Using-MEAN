@@ -179,9 +179,8 @@ export class TakeCallComponent implements OnInit {
   }
 
   leaveRoom() {
-    // this.route.navigate(['chat']);
     this.socket.leaveRoom();
-    this.route.navigate(['']);
+    window.close();
   }
   getleaveroomData() {
     this.socket
@@ -191,7 +190,7 @@ export class TakeCallComponent implements OnInit {
         console.log(res);
         const element = document.getElementById(res.userId);
         element?.remove();
-        this.route.navigate(['']);
+        window.close();
       });
   }
 

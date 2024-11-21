@@ -137,7 +137,6 @@ export class MessengerMainComponent implements OnInit {
     this.ngOnDestroy$.next();
   }
   callFriend(friend: any) {
-    console.log(friend,this.currentloginUserDetails);
     let frienddetails = {
       friendName:friend.name,
       callFriendName:this.currentloginUserDetails.name,
@@ -150,6 +149,8 @@ export class MessengerMainComponent implements OnInit {
       loginUserId:this.currentloginUserDetails._id,
       loginUserProfileURL:this.currentloginUserDetails.profileUrl,
     }
+    console.log('===frienddetails',frienddetails)
+    console.log('===loginUserDetail',loginUserDetail)
     window.open(
       `/takecall/?frienddetails=${btoa(JSON.stringify(frienddetails))}&&&loginUserDetail=${btoa(JSON.stringify(loginUserDetail))}&&callUser=${btoa('addedCall')}`,
       'popup',
