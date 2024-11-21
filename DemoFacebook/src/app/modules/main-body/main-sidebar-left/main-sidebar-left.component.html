@@ -7,7 +7,7 @@
             </div>
         </li>
         <li class="list-group-item">
-            <div class="d-flex btnPointer">
+            <div (click)="openLink('https://www.who.int/health-topics/coronavirus')" class="d-flex btnPointer">
                 <div><img height="42" width="42" src="http://localhost:2000/assets/images/covid.png"></div>
                 <div  class=" mt-2"><p class="">COVID-19 Information Center</p></div>
             </div>
@@ -18,48 +18,7 @@
                 <div  class=" mt-2"><p class="">Friends</p></div>
             </div>
         </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/groups.png"></div>
-                <div  class=" mt-2"><p class="">Groups</p></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/marketplace.png"></div>
-                <div  class=" mt-2"><p class="">MarketPlace</p></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/watch.png"></div>
-                <div  class=" mt-2"><p class="">Watch</p></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/event.png"></div>
-                <div  class=" mt-2"><p class="">Events</p></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/memories.png"></div>
-                <div  class=" mt-2"><p class="">Memories</p></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/saved.png"></div>
-                <div  class=" mt-2"><p class="">Saved</p></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/pages.png"></div>
-                <div  class=" mt-2"><p class="">Pages</p></div>
-            </div>
-        </li>
+        
         <li class="list-group-item">
             <div routerLink="/messenger" class="d-flex btnPointer">
                 <div><img height="42" width="42" src="http://localhost:2000/assets/images/messenger.png"></div>
@@ -67,22 +26,64 @@
             </div>
         </li>
         <li class="list-group-item">
-            <div class="d-flex btnPointer">
+            <div (click)="openLink('https://www.accuweather.com/en/world-weather')" class="d-flex btnPointer">
                 <div><img height="42" width="42" src="http://localhost:2000/assets/images/weather.png"></div>
                 <div  class=" mt-2"><p class="">Whether</p></div>
             </div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/groups.png"></div>
+                <div  class=" mt-2"><p class="">Groups</p></div>
+            </div>
+        </li>
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/marketplace.png"></div>
+                <div  class=" mt-2"><p class="">MarketPlace</p></div>
+            </div>
+        </li>
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/watch.png"></div>
+                <div  class=" mt-2"><p class="">Watch</p></div>
+            </div>
+        </li>
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/event.png"></div>
+                <div  class=" mt-2"><p class="">Events</p></div>
+            </div>
+        </li>
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/memories.png"></div>
+                <div  class=" mt-2"><p class="">Memories</p></div>
+            </div>
+        </li>
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/saved.png"></div>
+                <div  class=" mt-2"><p class="">Saved</p></div>
+            </div>
+        </li>
+        <li class="list-group-item progress-div">
+            <div class="d-flex btnPointer">
+                <div><img height="42" width="42" src="http://localhost:2000/assets/images/pages.png"></div>
+                <div  class=" mt-2"><p class="">Pages</p></div>
+            </div>
+        </li>
+        <li class="list-group-item  progress-div">
             <div class="d-flex btnPointer">
                 <div><img height="42" width="42" src="http://localhost:2000/assets/images/blood.png"></div>
                 <div  class=" mt-2"><p class="">Blood Donations</p></div>
             </div>
         </li>
-        <li class="list-group-item"><div class="d-flex btnPointer">
+        <li class="list-group-item  progress-div"><div class="d-flex btnPointer">
             <div><img height="42" width="42" src="http://localhost:2000/assets/images/friendlist.png"></div>
             <div  class=" mt-2"><p class="">Friend List</p></div>
         </div></li>
-        <li class="list-group-item">
+        <li class="list-group-item  progress-div">
             <div class="d-flex btnPointer">
                 <div><img height="42" width="42" src="http://localhost:2000/assets/images/recendf.png"></div>
                 <div  class=" mt-2"><p class="">Recend & Favorites</p></div>

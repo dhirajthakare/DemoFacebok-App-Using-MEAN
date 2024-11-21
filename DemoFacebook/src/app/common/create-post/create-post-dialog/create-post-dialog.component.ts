@@ -70,7 +70,6 @@ export class CreatePostDialogComponent implements OnInit {
         this.postError = null;
         this.toastService.success(this.createPostSuccess, 'Success!');
         this.dialogRef.close();
-        this.sharedService.postSavedSource.next(true);
       },
       (err) => {
         this.postError = err.error;

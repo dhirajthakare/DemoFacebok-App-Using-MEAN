@@ -27,4 +27,7 @@ export class MainSidebarLeftComponent implements OnInit {
   ngOnDestroy() {
     this.unSubscribeLoginUser.unsubscribe();
   }
+  openLink(link:string){
+    window.open(link,'_balnk')
+  }
 }

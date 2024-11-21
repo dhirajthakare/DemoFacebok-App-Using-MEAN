@@ -1,6 +1,9 @@
 .main-container {
   width: 40%;
 }
+#sidebar1{
+  padding-right: unset;
+}
 @media (max-width: 769px) {
   #sidebar1 {
     display: none;

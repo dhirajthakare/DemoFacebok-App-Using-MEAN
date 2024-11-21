@@ -112,3 +112,9 @@ mat-form-field .mat-form-field-wrapper {
   width: 100%;
   object-fit: cover;
 }
+
+.progress-div{
+  pointer-events: none !important;
+    opacity: 0.4  !important;
+    border-right: none  !important;
+}
