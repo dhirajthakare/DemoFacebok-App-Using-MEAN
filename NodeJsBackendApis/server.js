@@ -10,7 +10,7 @@ app.use(cors());
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const port = 2000 || process.env.PORT;
+const port = process.env.PORT || 2000;;
 
 app.use("/assets", express.static("assets"));
 
