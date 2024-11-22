@@ -8,7 +8,7 @@ import { io } from 'socket.io-client';
 export class TakeCallService {
 
   constructor() { }
-  socket = io("https://demo-facebok-app-using-mean-9034epae1-dhiraj-thakares-projects.vercel.app");
+  socket = io("https://demofacebok-app-using-mean.onrender.com");
 
   createRoom(ROOM_ID: any, userName: any, userId: any,friendDetail:any,videochatUrl:any) {
     this.socket.emit('join-room', ROOM_ID, userName, userId,friendDetail,videochatUrl);
