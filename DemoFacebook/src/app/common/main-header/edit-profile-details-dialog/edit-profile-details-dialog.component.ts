@@ -59,7 +59,7 @@ export class EditProfileDetailsDialogComponent implements OnInit {
             });
             if (this.currentLoginUserDetails.user_info.coverPhoto) {
               this.coverPhoto =
-                'http://localhost:2000' +
+                'https://demofacebok-app-using-mean.onrender.com' +
                 this.currentLoginUserDetails.user_info.coverPhoto;
             }
           } else {

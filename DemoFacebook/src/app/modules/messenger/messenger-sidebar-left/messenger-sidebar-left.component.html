@@ -2,7 +2,7 @@
     <div *ngIf="data">
         <div class="row">
             <div class="col-4 offset-4">
-                <img [routerLink]="'/profile/'+data.userToken" style="border-radius: 50%;object-fit: cover;"  class= "btnPointer" height="100" width="100" [src]="data.profileUrl ? 'http://localhost:2000'+data.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                <img [routerLink]="'/profile/'+data.userToken" style="border-radius: 50%;object-fit: cover;"  class= "btnPointer" height="100" width="100" [src]="data.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+data.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" alt="">
                 <span [routerLink]="'/profile/'+data.userToken" style="font-size: 120%;" class="center btnPointer">{{data.name}}</span><br>
                 <span>Active</span><br>
             </div>

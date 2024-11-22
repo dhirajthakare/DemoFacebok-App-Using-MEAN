@@ -43,7 +43,7 @@
                         </div>
                        <div class="row">
                                 <div class="col-md-4 mt-2" *ngFor="let item of AllCurrentUserPost" >
-                                    <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.postUrl ? 'http://localhost:2000'+item.postUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                                    <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.postUrl ? 'https://demofacebok-app-using-mean.onrender.com'+item.postUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" alt="">
     
                                 </div>
                         </div>
@@ -59,7 +59,7 @@
                        <div *ngIf="currentVisitedUserFriends" class="row">
                            <div *ngFor="let item of currentVisitedUserFriends"  class="col-md-4 mt-2">
                             <a style="text-decoration: none;color: black;" [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-12">
-                                <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt=""><br>
+                                <img style="object-fit: contain; height: 110px;" class="col-md-12 mt-2" [src]="item.friend_id.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+item.friend_id.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" alt=""><br>
                                 <p>{{item.friend_id.name}}</p>
                             </a>
                            </div>

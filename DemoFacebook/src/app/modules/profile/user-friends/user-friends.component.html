@@ -45,7 +45,7 @@
                             <div class="card-body">
                                <div class="row">
                                 <div [routerLink]="'/profile/'+item.friend_id.userToken" style="height: 80px;" class="col-md-3">
-                                    <img style="object-fit: cover;border-radius: 5px;" height="100%" width="100%" [src]="item.friend_id.profileUrl ? 'http://localhost:2000'+item.friend_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                                    <img style="object-fit: cover;border-radius: 5px;" height="100%" width="100%" [src]="item.friend_id.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+item.friend_id.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" alt="">
                                 </div>
                                 <div [routerLink]="'/profile/'+item.friend_id.userToken" class="col-md-8 mt-2">
                                     <h5>{{item.friend_id.name}}</h5>

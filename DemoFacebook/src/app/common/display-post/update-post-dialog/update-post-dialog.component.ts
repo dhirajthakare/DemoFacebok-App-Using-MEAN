@@ -70,7 +70,7 @@ export class UpdatePostDialogComponent implements OnInit {
       status: item.status,
       id: item._id,
     });
-    this.updateSrc = 'http://localhost:2000' + item.postUrl;
+    this.updateSrc = 'https://demofacebok-app-using-mean.onrender.com' + item.postUrl;
   }
 
   imageChangeEvt:any;

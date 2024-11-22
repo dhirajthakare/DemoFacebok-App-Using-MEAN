@@ -19,7 +19,7 @@
                          <div>
                             <div class="row">
                              <div [routerLink]="'/profile/'+item.userToken" style="height: 80px;" class="col-md-1">
-                                 <img style="object-fit: cover;border-radius: 30px;" height="60" width="60" [src]="item.profileUrl ?  'http://localhost:2000'+item.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                                 <img style="object-fit: cover;border-radius: 30px;" height="60" width="60" [src]="item.profileUrl ?  'https://demofacebok-app-using-mean.onrender.com'+item.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" alt="">
                              </div>
                              <div [routerLink]="'/profile/'+item.userToken"  class="col-md-8 offset-md-1 mt-2">
                                  <h5>{{item.name}}</h5>

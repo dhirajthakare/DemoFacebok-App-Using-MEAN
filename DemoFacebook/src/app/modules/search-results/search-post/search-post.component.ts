@@ -19,7 +19,7 @@ export class SearchPostComponent implements OnInit {
   box:any;
   allpost:any;
   Loader:boolean = true
-  style=`height: 240px; background-image: url('http://localhost:2000/assets/images/userdefault.png');background-size: cover; background-position: center;`;
+  style=`height: 240px; background-image: url('https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png');background-size: cover; background-position: center;`;
   destroy$ : Subject<void> = new Subject<void>();
 
   ngOnInit(): void {

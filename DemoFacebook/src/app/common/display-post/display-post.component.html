@@ -17,8 +17,8 @@
                 style="border-radius: 25px; object-fit: cover"
                 [src]="
                   item.postUser.profileUrl
-                    ? 'http://localhost:2000' + item.postUser.profileUrl
-                    : 'http://localhost:2000/assets/images/userdefault.png'
+                    ? 'https://demofacebok-app-using-mean.onrender.com' + item.postUser.profileUrl
+                    : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'
                 "
               />
             </div>
@@ -81,7 +81,7 @@
               height="460"
               width="100%"
               style="object-fit: contain"
-              src="http://localhost:2000{{ item.postUrl }}"
+              src="https://demofacebok-app-using-mean.onrender.com{{ item.postUrl }}"
             />
           </div>
         </div>
@@ -152,9 +152,9 @@
                     style="border-radius: 17px; object-fit: cover"
                     [src]="
                       comments.userCommented.profileUrl
-                        ? 'http://localhost:2000' +
+                        ? 'https://demofacebok-app-using-mean.onrender.com' +
                           comments.userCommented.profileUrl
-                        : 'http://localhost:2000/assets/images/userdefault.png'
+                        : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'
                     "
                   />
                 </div>
@@ -195,8 +195,8 @@
                     style="border-radius: 18px; object-fit: cover"
                     [src]="
                       loginUserDetails.profileUrl
-                        ? 'http://localhost:2000' + loginUserDetails.profileUrl
-                        : 'http://localhost:2000/assets/images/userdefault.png'
+                        ? 'https://demofacebok-app-using-mean.onrender.com' + loginUserDetails.profileUrl
+                        : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'
                     "
                   />
                 </div>

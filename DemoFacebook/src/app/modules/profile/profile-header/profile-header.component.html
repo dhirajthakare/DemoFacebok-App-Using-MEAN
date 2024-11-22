@@ -12,7 +12,7 @@
         [style]="
           CurrentVisitedUser.user_info
             ? 'background-image: url(' +
-              'http://localhost:2000' +
+              'https://demofacebok-app-using-mean.onrender.com' +
               CurrentVisitedUser.user_info.coverPhoto +
               ')'
             : 'background-color: white;'
@@ -28,8 +28,8 @@
             style="text-decoration: none"
             [href]="
               CurrentVisitedUser.profileUrl
-                ? 'http://localhost:2000' + CurrentVisitedUser.profileUrl
-                : 'http://localhost:2000/assets/images/userdefault.png'
+                ? 'https://demofacebok-app-using-mean.onrender.com' + CurrentVisitedUser.profileUrl
+                : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'
             "
             ><img
               style="border-radius: 80px; object-fit: cover"
@@ -37,8 +37,8 @@
               width="160"
               [src]="
                 CurrentVisitedUser.profileUrl
-                  ? 'http://localhost:2000' + CurrentVisitedUser.profileUrl
-                  : 'http://localhost:2000/assets/images/userdefault.png'
+                  ? 'https://demofacebok-app-using-mean.onrender.com' + CurrentVisitedUser.profileUrl
+                  : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'
               "
               alt=""
             />

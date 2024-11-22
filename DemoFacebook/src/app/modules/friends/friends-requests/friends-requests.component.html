@@ -5,7 +5,7 @@
             <div  *ngFor="let item of request.user_Friends" class="col-md-3 card" >
                 <div>
                     <div  [routerLink]="'/profile/'+item.user_id.userToken" style="height: 220px;" class="col-md-12 btnPointer">
-                        <img class="col-md-12" style="object-fit: contain;height: 220px;" [src]="item.user_id.profileUrl ? 'http://localhost:2000'+item.user_id.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" alt="">
+                        <img class="col-md-12" style="object-fit: contain;height: 220px;" [src]="item.user_id.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+item.user_id.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" alt="">
                     </div>
                     <hr>
                     <div  [routerLink]="'/profile/'+item.user_id.userToken" class="col-md-12 btnPointer">
@@ -28,7 +28,7 @@
     </div>
     <div *ngIf="request.user_Friends == '' " >
 
-            <img style="height: 510px;width: 100%;" src="http://localhost:2000/assets/images/null_states_people_gray_wash.svg" alt="">
+            <img style="height: 510px;width: 100%;" src="https://demofacebok-app-using-mean.onrender.com/assets/images/null_states_people_gray_wash.svg" alt="">
             <p class="text-center">You Dont Have Requests</p>
     </div>
 </div>

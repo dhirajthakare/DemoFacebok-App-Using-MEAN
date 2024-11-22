@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ApiURL:"http://localhost:2000/api",
+  ApiURL:"https://demofacebok-app-using-mean.onrender.com/api",
   AppEnv:"UAT"
 };
 

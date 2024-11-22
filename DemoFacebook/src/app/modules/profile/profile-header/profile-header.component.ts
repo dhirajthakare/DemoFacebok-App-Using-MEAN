@@ -56,7 +56,7 @@ export class ProfileHeaderComponent implements OnInit {
               if (this.CurrentVisitedUser.user_info) {
                 if (this.CurrentVisitedUser.user_info.coverPhoto) {
                   this.coverPhoto =
-                    'http://localhost:2000' +
+                    'https://demofacebok-app-using-mean.onrender.com' +
                     this.CurrentVisitedUser.user_info.coverPhoto;
                 }
               }

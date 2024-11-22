@@ -2,90 +2,90 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
             <div  [routerLink]="LoginUserDetails?'/profile/'+LoginUserDetails.userToken:''"   class="d-flex btnPointer">
-                <div><img height="42" width="42" class="profileImgResize" [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div><img height="42" width="42" class="profileImgResize" [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+LoginUserDetails.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png':'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'"></div>
                 <div class=" mt-2"><p class=""> {{LoginUserDetails?LoginUserDetails.name:''}}</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div (click)="openLink('https://www.who.int/health-topics/coronavirus')" class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/covid.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/covid.png"></div>
                 <div  class=" mt-2"><p class="">COVID-19 Information Center</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div routerLink="/friends" class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/user.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/user.png"></div>
                 <div  class=" mt-2"><p class="">Friends</p></div>
             </div>
         </li>
         
         <li class="list-group-item">
             <div routerLink="/messenger" class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/messenger.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/messenger.png"></div>
                 <div  class=" mt-2" ><p class="">Messenger</p></div>
             </div>
         </li>
         <li class="list-group-item">
             <div (click)="openLink('https://www.accuweather.com/en/world-weather')" class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/weather.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/weather.png"></div>
                 <div  class=" mt-2"><p class="">Whether</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/groups.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/groups.png"></div>
                 <div  class=" mt-2"><p class="">Groups</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/marketplace.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/marketplace.png"></div>
                 <div  class=" mt-2"><p class="">MarketPlace</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/watch.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/watch.png"></div>
                 <div  class=" mt-2"><p class="">Watch</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/event.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/event.png"></div>
                 <div  class=" mt-2"><p class="">Events</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/memories.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/memories.png"></div>
                 <div  class=" mt-2"><p class="">Memories</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/saved.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/saved.png"></div>
                 <div  class=" mt-2"><p class="">Saved</p></div>
             </div>
         </li>
         <li class="list-group-item progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/pages.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/pages.png"></div>
                 <div  class=" mt-2"><p class="">Pages</p></div>
             </div>
         </li>
         <li class="list-group-item  progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/blood.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/blood.png"></div>
                 <div  class=" mt-2"><p class="">Blood Donations</p></div>
             </div>
         </li>
         <li class="list-group-item  progress-div"><div class="d-flex btnPointer">
-            <div><img height="42" width="42" src="http://localhost:2000/assets/images/friendlist.png"></div>
+            <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/friendlist.png"></div>
             <div  class=" mt-2"><p class="">Friend List</p></div>
         </div></li>
         <li class="list-group-item  progress-div">
             <div class="d-flex btnPointer">
-                <div><img height="42" width="42" src="http://localhost:2000/assets/images/recendf.png"></div>
+                <div><img height="42" width="42" src="https://demofacebok-app-using-mean.onrender.com/assets/images/recendf.png"></div>
                 <div  class=" mt-2"><p class="">Recend & Favorites</p></div>
             </div>
         </li>
@@ -93,7 +93,7 @@
         <h4 class="text-secondary">Your ShortCuts</h4>
         <li class="list-group-item">
             <div  [routerLink]="LoginUserDetails?'/profile/'+LoginUserDetails.userToken:''" class="d-flex btnPointer">
-                <div><img height="42"class="profileImgResize"  [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png':'http://localhost:2000/assets/images/userdefault.png'"></div>
+                <div><img height="42"class="profileImgResize"  [src]="LoginUserDetails?LoginUserDetails.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+LoginUserDetails.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png':'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'"></div>
                 <div class=" mt-2"><p class=""> {{LoginUserDetails?LoginUserDetails.name:''}}</p></div>
             </div>
         </li>

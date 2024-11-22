@@ -119,9 +119,9 @@ export class UpdateUserDialogComponent implements OnInit {
     });
 
     if (this.data.profileUrl) {
-      this.profileSrc = 'http://localhost:2000' + this.data.profileUrl;
+      this.profileSrc = 'https://demofacebok-app-using-mean.onrender.com' + this.data.profileUrl;
     } else {
-      this.profileSrc = 'http://localhost:2000/assets/images/userdefault.png';
+      this.profileSrc = 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png';
     }
   }
   

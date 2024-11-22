@@ -1,6 +1,6 @@
 <div *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  style="cursor: pointer;"  routerLink="/stories/create" class=" card col-3 ">
     <a class=""><img style=" object-fit: contain; "
-        height="200" width="100%" [src]="LoginUserDetails.profileUrl ? 'http://localhost:2000'+LoginUserDetails.profileUrl : 'http://localhost:2000/assets/images/userdefault.png'" ></a>
+        height="200" width="100%" [src]="LoginUserDetails.profileUrl ? 'https://demofacebok-app-using-mean.onrender.com'+LoginUserDetails.profileUrl : 'https://demofacebok-app-using-mean.onrender.com/assets/images/userdefault.png'" ></a>
     <div class="card-footer">
         <p class=" text-primary text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>
        <p class="text-center"> create Story</p>
@@ -10,7 +10,7 @@
 <div *ngIf="userStories && userStories[0]" class=" col-3">
     <div (click)="openSilder(userStories,0)" class=" card">
         <a class=""><img style=" object-fit: contain; "
-            height="200" width="100%" [src]="'http://localhost:2000'+userStories[0].storyUrl" alt=""></a>
+            height="200" width="100%" [src]="'https://demofacebok-app-using-mean.onrender.com'+userStories[0].storyUrl" alt=""></a>
     <div  class="card-footer">
         <p style="color: white" class=" text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>
        <p class="text-center"> {{userStories[0].user_id.name }}</p>
@@ -20,7 +20,7 @@
 <div *ngFor="let item of userFriendsStory;let index = index" class=" col-3">
     <div  (click)="openSilder(userFriendsStory,index)" *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
         <a class="" ><img style=" object-fit: contain; "
-            height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
+            height="200" width="100%" [src]="'https://demofacebok-app-using-mean.onrender.com'+item.storyUrl" alt=""></a>
     <div  class="card-footer">
         <p style="color: white" class=" text-center"><i class=" fa fa-plus-circle fa-lg" aria-hidden="true"></i></p>
        <p class="text-center"> {{item.user_id.name }}</p>

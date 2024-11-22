@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MessengerService {
 
-  private socket = io('http://localhost:2000/')
+  private socket = io('https://demofacebok-app-using-mean.onrender.com/')
 
   private BaseUrl: any = environment.ApiURL;
 
