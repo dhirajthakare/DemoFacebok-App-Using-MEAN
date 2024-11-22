@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ApiURL:"/api",
+  ApiURL:"https://demofacebok-app-using-mean.onrender.com/api",
   AppEnv:"Development"
 };
 
