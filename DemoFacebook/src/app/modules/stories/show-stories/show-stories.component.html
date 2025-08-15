@@ -8,7 +8,7 @@
 </div>
 
 <div *ngIf="userStories && userStories[0]" class=" col-3">
-    <div (click)="openSilder(userStories,0)" class=" card">
+    <div (click)="openSlider(userStories,0)" class=" card">
         <a class=""><img style=" object-fit: contain; "
             height="200" width="100%" [src]="'http://localhost:2000'+userStories[0].storyUrl" alt=""></a>
     <div  class="card-footer">
@@ -18,7 +18,7 @@
     </div>
 </div>
 <div *ngFor="let item of userFriendsStory;let index = index" class=" col-3">
-    <div  (click)="openSilder(userFriendsStory,index)" *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
+    <div  (click)="openSlider(userFriendsStory,index)" *ngIf="LoginUserDetails && LoginUserDetails._id == loginUserId"  class="card">
         <a class="" ><img style=" object-fit: contain; "
             height="200" width="100%" [src]="'http://localhost:2000'+item.storyUrl" alt=""></a>
     <div  class="card-footer">

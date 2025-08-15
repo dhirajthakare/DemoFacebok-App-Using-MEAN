@@ -23,9 +23,9 @@ export class ShowStoriesComponent implements OnInit {
   LoginUserDetails: any;
   unSubscribeLoginUser: Subscription | any;
 
-  ngOnInit(): void {
-    this.getCurrentLoginUser();
-    this.getAllUserId(this.loginUserId);
+  async ngOnInit() {
+    await this.getCurrentLoginUser();
+    this.getStories();
   }
 
   allStories: any;
@@ -43,11 +43,11 @@ export class ShowStoriesComponent implements OnInit {
   }
 
   getStories() {
-    this.storyManage.getStories(this.loginUserId, this.friendsId).subscribe(
-      (res) => {
-        this.allStories = res;
-        this.userStories = this.allStories[0].userStories;
-        this.userFriendsStory = this.allStories[1].userFriendStories;
+    this.storyManage.getStories(this.loginUserId).subscribe(
+      (res:any) => {
+        // this.allStories = res;
+        this.userStories = res.userStories;
+        this.userFriendsStory = res.userFriendStories;
       },
       (err) => {
         console.log(err);
@@ -55,28 +55,7 @@ export class ShowStoriesComponent implements OnInit {
     );
   }
 
-  friends: any;
-  friendsId: any = [];
-  getAllUserId(id: any) {
-    const res = this.friend.getUseFriends(id);
-
-    if (res) {
-      this.friends = res;
-
-      if (this.friends) {
-        // this.friendsId.push(this.id);
-        for (let i = 0; i < this.friends.length; i++) {
-          this.friendsId.push(this.friends[i].friend_id._id);
-        }
-        // this.friend.userLoginFriendsId.next(this.friendsId);
-        if (this.friendsId) {
-          this.getStories();
-        }
-      }
-    }
-  }
-
-  openSilder(allStories: any, selectedIndex: any) {
+  openSlider(allStories: any, selectedIndex: any) {
     this.matDialogRef.open(ShowStoriesDialogComponent, {
       maxWidth: '600px',
       maxHeight: '600px',

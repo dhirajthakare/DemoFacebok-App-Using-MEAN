@@ -15,7 +15,7 @@ export class StoriesService {
     return this.http.post(this.BaseUrl+'/create-story',formData);
   }
 
-  getStories(id:number,ids:any){
-    return this.http.post(this.BaseUrl+'/get-story/'+id,ids);
+  getStories(id:number){
+    return this.http.get(this.BaseUrl+'/get-story/'+id);
   }
 }

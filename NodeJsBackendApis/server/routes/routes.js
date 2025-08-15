@@ -44,7 +44,7 @@ route.get('/api/delete-comment/:cid/:pid',verify ,PostController.deleteComment);
 
 // Story Management 
 route.post('/api/create-story',fileUploadController.StoryPhotoUpload ,verify , StoryController.createStory);
-route.post('/api/get-story/:id' ,verify ,StoryController.getStory);
+route.get('/api/get-story/:id' ,verify ,StoryController.getStory);
 
 
 route.post('/api/create-user-information' , fileUploadController.ProfileCoverPhotoUpload ,verify ,UserController.addUserInfo);
